@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.astrologer.activity.AddTimeSlotActivity">
+
+    <LinearLayout
+        android:id="@+id/toolBarAddTimeSlot"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/astrologer_blue_theme"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_10ssp"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/_10sdp"
+            android:src="@mipmap/back" />
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/fontSemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/time_slot"
+                android:textColor="@color/white"
+                android:textSize="@dimen/header_font_size" />
+
+
+            <TextView
+                android:id="@+id/txtSave"
+                style="@style/fontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:paddingStart="@dimen/_10sdp"
+                android:paddingEnd="@dimen/_10sdp"
+                android:text="@string/save"
+                android:textColor="@color/white"
+                android:textSize="@dimen/header_font_size" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedscroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolBarAddTimeSlot"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/_20sdp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/activity_horizontal_start_end_margin" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/activity_horizontal_start_end_margin" />
+
+            <ImageView
+                android:id="@+id/imgMode"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="?attr/actionBarItemBackground"
+                android:src="@drawable/ic_calender"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvMode"
+                style="@style/fontRegular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text="@string/repeat"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toStartOf="@+id/imgDown"
+                app:layout_constraintStart_toEndOf="@+id/imgMode"
+                app:layout_constraintTop_toTopOf="@id/imgMode" />
+
+            <ImageView
+                android:id="@+id/imgDown"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignParentEnd="true"
+                android:padding="@dimen/_5sdp"
+                android:src="@drawable/ic_down_arrow"
+                app:layout_constraintBottom_toBottomOf="@+id/tvMode"
+                app:layout_constraintEnd_toEndOf="@id/guideline2"
+                app:layout_constraintTop_toTopOf="@+id/tvMode"
+                app:tint="@color/text_gray" />
+
+            <View
+                android:id="@+id/viewMode"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/border_gray"
+                app:layout_constraintTop_toBottomOf="@id/tvMode" />
+
+            <LinearLayout
+                android:id="@+id/llWeekDays"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/viewMode">
+
+                <TextView
+                    android:id="@+id/legendText1"
+                    style="@style/fontRegular"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:contentDescription="@string/sunday"
+                    android:gravity="center"
+                    android:maxLength="2"
+                    android:onClick="manageDaySelection"
+                    android:padding="@dimen/_5sdp"
+                    android:text="S"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/_14ssp"
+                    tools:background="@drawable/calendar_selected_bg" />
+
+                <TextView
+                    android:id="@+id/legendText2"
+                    style="@style/fontRegular"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:contentDescription="@string/monday"
+                    android:gravity="center"
+                    android:maxLength="2"
+                    android:onClick="manageDaySelection"
+                    android:text="M"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/_14ssp"
+                    tools:background="@drawable/calendar_selected_bg" />
+
+                <TextView
+                    android:id="@+id/legendText3"
+                    style="@style/fontRegular"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:contentDescription="@string/tuesday"
+                    android:gravity="center"
+                    android:maxLength="2"
+                    android:onClick="manageDaySelection"
+                    android:text="T"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/_14ssp"
+                    tools:background="@drawable/calendar_selected_bg" />
+
+                <TextView
+                    android:id="@+id/legendText4"
+                    style="@style/fontRegular"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:contentDescription="@string/wednesday"
+                    android:gravity="center"
+                    android:maxLength="2"
+                    android:onClick="manageDaySelection"
+                    android:text="W"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/_14ssp"
+                    tools:background="@drawable/calendar_selected_bg" />
+
+                <TextView
+                    android:id="@+id/legendText5"
+                    style="@style/fontRegular"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:contentDescription="@string/thursday"
+                    android:gravity="center"
+                    android:onClick="manageDaySelection"
+                    android:text="T"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/_14ssp"
+                    tools:background="@drawable/calendar_selected_bg" />
+
+                <TextView
+                    android:id="@+id/legendText6"
+                    style="@style/fontRegular"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:contentDescription="@string/friday"
+                    android:gravity="center"
+                    android:maxLength="2"
+                    android:onClick="manageDaySelection"
+                    android:text="F"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/_14ssp"
+                    tools:background="@drawable/calendar_selected_bg" />
+
+                <TextView
+                    android:id="@+id/legendText7"
+                    style="@style/fontRegular"
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:contentDescription="@string/saturday"
+                    android:gravity="center"
+                    android:maxLength="2"
+                    android:text="S"
+                    android:textColor="@color/text_gray"
+                    android:textSize="@dimen/_14ssp"
+                    tools:background="@drawable/calendar_selected_bg" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/viewDays"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/border_gray"
+                app:layout_constraintTop_toBottomOf="@+id/llWeekDays" />
+
+            <ImageView
+                android:id="@+id/imgDate"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="?attr/actionBarItemBackground"
+                android:src="@drawable/ic_calender"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/viewDays" />
+
+            <TextView
+                android:id="@+id/tvStartDateLabel"
+                style="@style/fontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text="@string/start_date"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toEndOf="@+id/imgDate"
+                app:layout_constraintTop_toTopOf="@id/imgDate" />
+
+            <TextView
+                android:id="@+id/tvStartDate"
+                style="@style/fontRegular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:hint="@string/select_date"
+                android:paddingTop="@dimen/_10sdp"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toStartOf="@+id/tvEndDate"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@id/tvStartDateLabel"
+                app:layout_constraintTop_toBottomOf="@id/tvStartDateLabel" />
+
+            <TextView
+                android:id="@+id/tvEndDateLabel"
+                style="@style/fontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/end_date"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="@+id/tvEndDate"
+                app:layout_constraintTop_toTopOf="@id/imgDate" />
+
+            <TextView
+                android:id="@+id/tvEndDate"
+                style="@style/fontRegular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:hint="@string/select_date"
+                android:paddingTop="@dimen/_10sdp"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="@id/guideline2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvStartDate"
+                app:layout_constraintTop_toTopOf="@id/tvStartDate" />
+
+            <View
+                android:id="@+id/viewDate"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/border_gray"
+                app:layout_constraintTop_toBottomOf="@+id/tvStartDate" />
+
+
+            <ImageView
+                android:id="@+id/imgTime"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="?attr/actionBarItemBackground"
+                android:src="@mipmap/birth_time_inactive"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/viewDate" />
+
+            <TextView
+                android:id="@+id/tvStartTimeLabel"
+                style="@style/fontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text="@string/start_time"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toEndOf="@+id/imgTime"
+                app:layout_constraintTop_toTopOf="@id/imgTime" />
+
+            <TextView
+                android:id="@+id/tvFromTime"
+                style="@style/fontRegular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:hint="@string/select_time"
+                android:paddingTop="@dimen/_10sdp"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toStartOf="@+id/tvToTime"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@id/tvStartTimeLabel"
+                app:layout_constraintTop_toBottomOf="@id/tvStartTimeLabel" />
+
+            <TextView
+                android:id="@+id/tvEndTimeLabel"
+                style="@style/fontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/end_time"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="@+id/tvToTime"
+                app:layout_constraintTop_toTopOf="@id/imgTime" />
+
+            <TextView
+                android:id="@+id/tvToTime"
+                style="@style/fontRegular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:hint="@string/select_time"
+                android:paddingTop="@dimen/_10sdp"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="@id/guideline2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvFromTime"
+                app:layout_constraintTop_toTopOf="@id/tvFromTime" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/groupDays"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="llWeekDays,viewDays" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/groupStartDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="imgDate,tvStartDateLabel,tvStartDate" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/groupEndDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="tvEndDateLabel,tvEndDate" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

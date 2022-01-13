@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_10sdp">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/activity_horizontal_start_end_margin" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/activity_horizontal_start_end_margin" />
+
+    <ImageView
+        android:id="@+id/imgRupee"
+        android:layout_width="@dimen/_45sdp"
+        android:layout_height="@dimen/_45sdp"
+        android:background="@drawable/circle_border"
+        android:padding="@dimen/_10sdp"
+        android:src="@drawable/ic_add_money"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTransaction"
+        style="@style/fontRegular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Paid to Castro chat"
+        android:textColor="@color/grey_dark"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintBottom_toTopOf="@+id/tvTime"
+        app:layout_constraintEnd_toEndOf="@+id/barrier"
+        app:layout_constraintStart_toEndOf="@+id/imgRupee"
+        app:layout_constraintTop_toTopOf="@id/imgRupee"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        style="@style/fontRegular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="06 Nov, 5:10 PM"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintBottom_toBottomOf="@id/imgRupee"
+        app:layout_constraintEnd_toEndOf="@id/tvTransaction"
+        app:layout_constraintStart_toStartOf="@+id/tvTransaction"
+        app:layout_constraintTop_toBottomOf="@+id/tvTransaction" />
+
+    <TextView
+        android:id="@+id/tvOperand"
+        style="@style/fontRegular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        android:textColor="@color/grey_dark"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintEnd_toStartOf="@+id/imgRupeeAmount"
+        app:layout_constraintTop_toTopOf="@id/tvTransaction" />
+
+    <ImageView
+        android:id="@+id/imgRupeeAmount"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
+        android:src="@drawable/ic_rupee_sign"
+        app:layout_constraintBottom_toBottomOf="@+id/tvAmount"
+        app:layout_constraintEnd_toStartOf="@+id/tvAmount"
+        app:layout_constraintTop_toTopOf="@id/tvAmount" />
+
+    <TextView
+        android:id="@+id/tvAmount"
+        style="@style/fontRegular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="21"
+        android:textColor="@color/grey_dark"
+        android:textSize="@dimen/_12ssp"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintTop_toTopOf="@id/tvTransaction" />
+
+    <ImageView
+        android:id="@+id/imgPaymentBy"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
+        android:src="@drawable/ic_wallet"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTime"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintTop_toTopOf="@id/tvTime"
+        app:tint="@color/text_gray" />
+
+    <TextView
+        android:id="@+id/tvPaymentBy"
+        style="@style/fontRegular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:text="@string/receive_in"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintBottom_toBottomOf="@id/tvTime"
+        app:layout_constraintEnd_toStartOf="@+id/imgPaymentBy"
+        app:layout_constraintTop_toTopOf="@+id/tvTime" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@color/border_gray"
+        app:layout_constraintTop_toBottomOf="@+id/imgRupee" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="imgRupeeAmount,tvOperand,tvAmount,tvPaymentBy,imgPaymentBy" />
+</androidx.constraintlayout.widget.ConstraintLayout>

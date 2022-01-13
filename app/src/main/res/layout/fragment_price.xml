@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/screen_background"
+    tools:context=".ui.astrologer.fragment.PriceFragment">
+
+    <LinearLayout
+        android:id="@+id/rlActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/purple_700"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_10ssp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_back" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtUserName"
+                style="@style/fontSemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_profile"
+                android:textColor="@color/white"
+                android:textSize="@dimen/header_font_size" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rlActionBar"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/_20sdp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/activity_horizontal_start_end_margin" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/activity_horizontal_start_end_margin" />
+
+        <EditText
+            android:id="@+id/edFifteenMin"
+            style="@style/fontRegular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:background="@drawable/background_edit_text_black_line_background"
+            android:hint="@string/_15_min_charges_in_rs"
+            android:inputType="number"
+            android:padding="@dimen/_8sdp"
+            android:textColor="@color/edittext_text_color"
+            android:textColorHint="@color/edittext_hint_color"
+            android:textSize="@dimen/edittext_font_size"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edThirtyMin"
+            style="@style/fontRegular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/background_edit_text_black_line_background"
+            android:hint="@string/_30_min_charges_in_rs"
+            android:inputType="number"
+            android:padding="@dimen/_8sdp"
+            android:textColor="@color/edittext_text_color"
+            android:textColorHint="@color/edittext_hint_color"
+            android:textSize="@dimen/edittext_font_size"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/edFifteenMin" />
+
+        <EditText
+            android:id="@+id/edFortyFiveMin"
+            style="@style/fontRegular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/background_edit_text_black_line_background"
+            android:hint="@string/_45_min_charges_in_rs"
+            android:inputType="number"
+            android:padding="@dimen/_8sdp"
+            android:textColor="@color/edittext_text_color"
+            android:textColorHint="@color/edittext_hint_color"
+            android:textSize="@dimen/edittext_font_size"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/edThirtyMin" />
+
+        <EditText
+            android:id="@+id/edSixtyMin"
+            style="@style/fontRegular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@drawable/background_edit_text_black_line_background"
+            android:hint="@string/_60_min_charges_in_rs"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:padding="@dimen/_8sdp"
+            android:textColor="@color/edittext_text_color"
+            android:textColorHint="@color/edittext_hint_color"
+            android:textSize="@dimen/edittext_font_size"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/edFortyFiveMin" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSubmit"
+            style="@style/fontBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:backgroundTint="@color/button_background_color"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:letterSpacing="0"
+            android:padding="@dimen/_9sdp"
+            android:text="@string/submit"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text_color"
+            android:textSize="@dimen/button_text_size"
+            app:cornerRadius="@dimen/_1sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/edSixtyMin"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

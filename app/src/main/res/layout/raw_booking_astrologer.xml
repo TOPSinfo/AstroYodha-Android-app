@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:layout_marginBottom="@dimen/_5sdp"
+    android:elevation="@dimen/_10sdp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/_10sdp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/activity_horizontal_start_end_margin" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/activity_horizontal_start_end_margin" />
+
+        <ImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/avatar" />
+
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/fontSemiBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/text_grey_dark"
+            android:textSize="@dimen/_11ssp"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/imgAvatar"
+            app:layout_constraintEnd_toEndOf="@+id/guideline2"
+            tools:text="Prasanta" />
+
+        <TextView
+            android:id="@+id/tvBirthDate"
+            style="@style/fontSemiBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Numerology, Face Read..."
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@id/tvName" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/tvBirthDate">
+
+            <TextView
+                android:id="@+id/btnAccept"
+                style="@style/fontRegular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_accept_button"
+                android:includeFontPadding="false"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/accept"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10ssp"
+
+                 />
+
+
+            <TextView
+                android:id="@+id/btnReject"
+                style="@style/fontRegular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_reject_button"
+                android:includeFontPadding="false"
+                android:padding="@dimen/_5sdp"
+                android:text="@string/reject"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10ssp"
+
+                />
+
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

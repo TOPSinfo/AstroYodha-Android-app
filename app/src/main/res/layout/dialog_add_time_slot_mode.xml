@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_30sdp"
+    android:layout_marginEnd="@dimen/_30sdp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/round_corner_dialog">
+
+        <RadioGroup
+            android:id="@+id/rgTimeMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rbRepeat"
+                style="@style/fontRegular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/_10sdp"
+                android:text="@string/repeat"
+                android:textColor="@color/grey_dark"
+                android:textSize="@dimen/_12ssp" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rbWeekly"
+                style="@style/fontRegular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/_10sdp"
+                android:text="@string/weekly"
+                android:textColor="@color/grey_dark"
+                android:textSize="@dimen/_12ssp" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rbCustom"
+                style="@style/fontRegular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/_10sdp"
+                android:text="@string/custom"
+                android:textColor="@color/grey_dark"
+                android:textSize="@dimen/_12ssp" />
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

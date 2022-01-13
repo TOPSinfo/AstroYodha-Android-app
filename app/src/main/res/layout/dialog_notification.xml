@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_30sdp"
+    android:layout_marginEnd="@dimen/_30sdp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        android:background="@drawable/round_corner_dialog">
+
+        <RadioGroup
+            android:id="@+id/rgNotification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_10sdp" >
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rbNoNotification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/no_notification"
+                style="@style/fontRegular"
+                android:textSize="@dimen/_12ssp"
+                android:paddingStart="@dimen/_10sdp"
+                android:textColor="@color/grey_dark"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb5MinNotification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/_5_minutes_before"
+                style="@style/fontRegular"
+                android:textSize="@dimen/_12ssp"
+                android:paddingStart="@dimen/_10sdp"
+                android:textColor="@color/grey_dark"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb10MinNotification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/_10_minutes_before"
+                style="@style/fontRegular"
+                android:textSize="@dimen/_12ssp"
+                android:paddingStart="@dimen/_10sdp"
+                android:textColor="@color/grey_dark"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb15MinNotification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/_15_minutes_before"
+                style="@style/fontRegular"
+                android:textSize="@dimen/_12ssp"
+                android:paddingStart="@dimen/_10sdp"
+                android:textColor="@color/grey_dark"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb30MinNotification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/_30_minutes_before"
+                style="@style/fontRegular"
+                android:textSize="@dimen/_12ssp"
+                android:paddingStart="@dimen/_10sdp"
+                android:textColor="@color/grey_dark"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb1HourNotification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/_1_hour_before"
+                style="@style/fontRegular"
+                android:textSize="@dimen/_12ssp"
+                android:paddingStart="@dimen/_10sdp"
+                android:textColor="@color/grey_dark"/>
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb1DatNotification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/_1_day_before"
+                style="@style/fontRegular"
+                android:textSize="@dimen/_12ssp"
+                android:paddingStart="@dimen/_10sdp"
+                android:textColor="@color/grey_dark"/>
+        </RadioGroup>
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

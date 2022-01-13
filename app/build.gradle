@@ -1,0 +1,140 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+    id 'com.google.gms.google-services'
+    id 'dagger.hilt.android.plugin'
+    id 'com.google.firebase.crashlytics'
+}
+
+
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.astroyodha"
+        minSdk 23
+        targetSdk 30
+        versionCode 1
+        versionName "1.0"
+
+        multiDexEnabled true
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            shrinkResources true
+            minifyEnabled true
+            manifestPlaceholders = [crashlyticsEnabled: true]
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        /*debug {
+            shrinkResources true
+            minifyEnabled true
+            manifestPlaceholders = [crashlyticsEnabled: true]
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }*/
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    dataBinding {
+        enabled true
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'com.android.support:multidex:1.0.3' //Multidex Support
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    implementation 'com.annimon:stream:1.1.2'
+
+    implementation 'com.github.kizitonwose:CalendarView:1.0.4'
+
+
+
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'//design dp in all screen
+    implementation 'com.intuit.ssp:ssp-android:1.0.6' //for text view size
+
+    //Coroutine
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2"
+
+    //Dagger
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
+    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+    implementation 'com.google.dagger:hilt-android:2.37'
+    kapt 'com.google.dagger:hilt-android-compiler:2.37'
+
+    // ViewModel and LiveData
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation 'androidx.activity:activity-ktx:1.4.0'
+    implementation 'androidx.fragment:fragment-ktx:1.4.0'
+
+    // Firebase Authentication and Cloud Firestore
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:29.0.3')
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-storage-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    //gson
+    implementation 'com.google.code.gson:gson:2.8.9'
+    //Country picker
+    implementation 'com.github.joielechong:countrycodepicker:2.4.2'
+    //otpview
+    implementation 'com.github.aabhasr1:OtpView:v1.1.2-ktx'
+    //Runtime permission
+    implementation 'gun0912.ted:tedpermission:2.2.3'
+    //image picker
+    implementation 'com.droidninja:filepicker:2.2.5'
+    //image crop
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+    //popup dialog
+    implementation "com.github.skydoves:balloon:1.4.0"
+    //video trimmer
+    implementation 'com.github.a914-gowtham:android-video-trimmer:1.7.0'
+    // Jitsi Meet
+    implementation ('org.jitsi.react:jitsi-meet-sdk:3.10.2') { transitive = true }
+
+    implementation 'com.github.simformsolutions:SSCustomBottomNavigation:3.2'
+
+    implementation 'com.facebook.android:facebook-android-sdk:12.0.0'
+    implementation 'com.google.android.libraries.places:places:2.5.0'
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
+
+    //razorpay
+    implementation 'com.razorpay:checkout:1.6.15'
+
+}

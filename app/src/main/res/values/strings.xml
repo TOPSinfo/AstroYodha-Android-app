@@ -1,0 +1,370 @@
+<resources>
+    <string name="app_name">AstroYodha</string>
+
+    <!--    Facebook cred from personal account-->
+    <!--<string name="facebook_app_id">664276307891537</string>
+    <string name="fb_login_protocol_scheme">fb664276307891537</string>-->
+    <!--    Facebook cred from production company account-->
+    <string name="facebook_app_id">646058850176585</string>
+    <string name="fb_login_protocol_scheme">fb646058850176585</string>
+
+    <!--Google Web Client ID-->
+    <string name="web_client_id">755412056972-mct9c8tvvfjf2ljovm3bepj1fsck3dsi.apps.googleusercontent.com</string>
+
+    <!--For google places -->
+    <string name="google_maps_key">AIzaSyD3aYlkgyHzdkQUi4JuH0SIJ1GevvABJMc</string>
+
+    <string name="title_activity_login">LoginActivity</string>
+
+    <string name="please_check_internet">Please check your connection and try again.</string>
+
+    <string name="enter_mobile_number">Enter your mobile number</string>
+    <string name="create_account_desc">Enter your mobile number to create an \naccount or sign in.</string>
+    <string name="phone_number">Phone number</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="verify_your_mobile_number">OTP Verification</string>
+    <string name="resend_code">Resend OTP available in %ss</string>
+    <string name="resend_otp_available">Resend OTP available</string>
+    <string name="one">1:00</string>
+    <string name="verify">Verify</string>
+
+    <string name="edit_profile">Profile</string>
+    <string name="upload_your_profile_picture">Upload your profile picture</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="update">Update</string>
+
+    <string name="please_select_profile_picture">Please select profile picture</string>
+    <string name="please_enter_first_name">Please enter full name</string>
+    <string name="please_enter_last_name">Please enter last name</string>
+    <string name="please_enter_email_address">Please enter e-mail address</string>
+    <string name="please_enter_valid_email_address">Please enter valid e-mail address</string>
+    <string name="please_accept_terms_and_condition">Please accept terms &amp; conditions and privacy policy</string>
+    <string name="please_enter_title">Please enter title</string>
+    <string name="please_enter_details">Please enter details</string>
+    <string name="please_select_date">Please select date</string>
+    <string name="please_select_start_time">Please select start time</string>
+    <string name="please_select_end_time">Please select end time</string>
+    <string name="please_select_payment_mode">Please select payment mode</string>
+    <string name="user_not_registered">User not registered.</string>
+    <string name="please_enter_birth_date">Please enter date of birth</string>
+    <string name="please_enter_birth_time">Please enter time of birth</string>
+    <string name="please_enter_birth_place">Please enter place of birth</string>
+
+    <string name="please_select_language">Please select language</string>
+    <string name="please_select_astro_type">Please select astrology type</string>
+    <string name="please_enter_price_per_min">Please enter price per minute</string>
+    <string name="please_enter_experience">Please enter experience</string>
+    <string name="please_enter_about">Please enter about yourself</string>
+
+    <string name="please_select_from_time">Please select from time</string>
+    <string name="please_select_to_time">Please select to time</string>
+
+    <string name="please_select_to_time_greater_than_from_time">Please select To time grater than From time</string>
+    <string name="please_select_end_date_greater_than_start_date">Please select end date grater than start date</string>
+    <string name="please_select_days">Please select days</string>
+    <string name="selected_time_alerady_available">selected time already available in time slot, Please select another time. </string>
+
+    <string name="permission_denied">If you reject permission,you can not use this service Please turn on permissions at
+        [Setting] > [Permission]
+    </string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_bookings">Booking</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_wallet">Wallet</string>
+    <string name="title_profile">Profile</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Drawer menu Label -->
+    <string name="menu_dashboard">Dashboard</string>
+    <string name="menu_booking">Booking</string>
+    <string name="menu_wallet">Wallet</string>
+    <string name="menu_price">Price</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_logout">Logout</string>
+
+    <!-- TODO: Booking Label -->
+    <string name="my_bookings">My Bookings</string>
+    <string name="booking_past">Past</string>
+    <string name="booking_ongoing">Ongoing</string>
+    <string name="booking_upcoming">Upcoming</string>
+
+    <string name="with_astro_user">with Astro %1$s</string>
+    <string name="time_user_time">Time: %1$s to %2$s</string>
+    <string name="rate_user_charge">Rate: %1$s/min</string>
+    <string name="status_user_booking">Status:</string>
+    <string name="completed">Completed</string>
+    <string name="approved">Approved</string>
+    <string name="waiting">Waiting</string>
+    <!--    <string name="deleted">Deleted</string>-->
+    <string name="deleted">Cancelled</string>
+    <string name="view">View</string>
+
+    <string name="calendar">Calendar</string>
+    <string name="your_appointment_with_user">Your Appointment with %1$s</string>
+    <string name="example_3_input_dialog_title">Enter event title</string>
+    <string name="example_3_empty_input_text">Text is empty</string>
+    <string name="example_3_dialog_delete_confirmation">Delete this event?</string>
+    <string name="delete">Delete</string>
+    <string name="close">Close</string>
+
+    <string name="select_astrologers">Select Astrologers</string>
+    <string name="book_now">Book Now</string>
+    <string name="sort_and_filter"><![CDATA[Sort & filter]]></string>
+    <string name="sort_by">Sort by</string>
+    <string name="skill">Skill</string>
+    <string name="reset">Reset</string>
+    <string name="apply">Apply</string>
+    <string name="experience_high_to_low">Experience: High to Low</string>
+    <string name="experience_low_to_high">Experience: Low to High</string>
+    <string name="price_high_to_low">Price: High to Low</string>
+    <string name="price_low_to_high">Price: Low to High</string>
+
+    <string name="add_event">Add Event</string>
+    <string name="edit_event">Edit Event</string>
+    <string name="view_event">View Event</string>
+    <string name="save">Save</string>
+    <string name="title">Title</string>
+    <string name="astrologer_name">Astrologer Name</string>
+    <string name="description">Add details…</string>
+    <string name="select_date">Select Date</string>
+    <string name="all_day">All Day</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
+    <string name="select_time">Select Time</string>
+    <string name="no_notification">No notification</string>
+    <string name="_5_minutes_before">5 minutes before</string>
+    <string name="_10_minutes_before">10 minutes before</string>
+    <string name="_15_minutes_before">15 minutes before</string>
+    <string name="_30_minutes_before">30 minutes before</string>
+    <string name="_1_hour_before">1 hour before</string>
+    <string name="_1_day_before">1 day before</string>
+    <string name="event_status">Event Status</string>
+    <string name="select_payment_mode">Select payment mode</string>
+    <string name="pay_with_wallet">Pay with wallet</string>
+    <!--    <string name="pay_with_other">Pay with other</string>-->
+    <string name="pay_with_other">Pay with online</string>
+    <string name="submit">Submit</string>
+    <string name="from_time">From Time</string>
+    <string name="to_time">To Time</string>
+    <string name="please_select_valid_start_time">Please select valid start time</string>
+    <string name="please_select_valid_end_time">Please select valid end time</string>
+    <string name="please_select_valid_time">Please select valid time</string>
+    <string name="astrologer_not_available">Astrologer not available</string>
+    <string name="astrologer_price_validation">Astrologer price is not valid</string>
+    <string name="astrologer_profile_not_completed">Astrologer profile not completed</string>
+    <string name="call">Call</string>
+    <string name="chat">Chat</string>
+
+    <string name="time_slot">Time Slot</string>
+    <string name="repeat">Repeat</string>
+    <string name="weekly">Weekly</string>
+    <string name="custom">Custom</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+
+    <string name="sunday">sunday</string>
+    <string name="monday">monday</string>
+    <string name="tuesday">tuesday</string>
+    <string name="wednesday">wednesday</string>
+    <string name="thursday">thursday</string>
+    <string name="friday">friday</string>
+    <string name="saturday">saturday</string>
+
+    <string name="no_data_found">No Data Found</string>
+
+    <string name="_15_min_charges_in_rs">15 min charges in rs</string>
+    <string name="_30_min_charges_in_rs">30 min charges in rs</string>
+    <string name="_45_min_charges_in_rs">45 min charges in rs</string>
+    <string name="_60_min_charges_in_rs">60 min charges in rs</string>
+
+    <string name="please_enter_15_min_charges">Please enter 15 min charges</string>
+    <string name="please_enter_30_min_charges">Please enter 30 min charges</string>
+    <string name="please_enter_45_min_charges">Please enter 45 min charges</string>
+    <string name="please_enter_60_min_charges">Please enter 60 min charges</string>
+
+    <string name="title_value">Title : %1$s</string>
+    <string name="description_value">Description : %1$s</string>
+    <string name="time_value">Time : %1$s</string>
+    <string name="status_value">Status : %1$s</string>
+    <string name="birth_Date_value">Birth date : %1$s</string>
+    <string name="accept">Accept</string>
+    <string name="reject">Reject</string>
+    <string name="accepted">Accepted</string>
+    <string name="rejected">Rejected</string>
+
+    <string name="no_chat_found">No chat Found</string>
+    <string name="type_message">Type message..</string>
+    <string name="write_something_for_user">Write something for %1$s</string>
+    <string name="online">Online</string>
+    <string name="offline">Offline</string>
+    <string name="please_enter_message">Please enter message</string>
+    <string name="empty_value">empty</string>
+    <string name="end">End</string>
+    <string name="end_chat">End Chat</string>
+    <string name="are_you_sure_you_want_to_end_the_chat">Are you sure you want to end the chat?</string>
+
+    <string name="give_feedback">Give feedback</string>
+    <string name="rate_your_experience_with_astrologer">Rate your experience with astrologer?</string>
+    <string name="do_you_have_any_thoughts_you_d_like_to_share">Do you have any thoughts you’d like to share?</string>
+    <string name="your_feedback">Your feedback</string>
+
+    <string name="invalid_srver_url">Invalid server URL!</string>
+    <!--  <string name="server_url">https://jitsi.topsdemo.in/</string>-->
+    <string name="server_url">https://meet.jit.si</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_up">Sign up</string>
+    <string name="create_account">Create Account</string>
+    <string name="not_registered_yet">Not Registered yet?</string>
+    <string name="sign_up_with_google">Login with Google</string>
+    <string name="sign_up_with_facebook">Login with Facebook</string>
+    <string name="full_name">Full Name</string>
+    <string name="i_agree_to_the">I agree to the</string>
+    <string name="terms_condition"><![CDATA[terms & conditions]]></string>
+    <string name="text_and">and</string>
+    <string name="privacy_policy">privacy policy</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="enter_otp_code_sent_to">Enter OTP code sent to %s</string>
+    <string name="resend_otp_on_sms">Resend OTP on SMS</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="sunsign">Sunsign</string>
+    <string name="booking_history">Booking History</string>
+    <string name="transaction_history">Transaction History</string>
+    <string name="help_faq">Help / FAQ</string>
+    <string name="rate_app">Rate app</string>
+    <string name="share_app">Share app</string>
+    <string name="time_of_birth">Time of Birth</string>
+    <string name="place_of_birth">Place of Birth</string>
+
+    <string name="share_using">Share via</string>
+    <string name="share_app_message">Hi, check out %1$s at: https://play.google.com/store/apps/details?id=%2$s"</string>
+    <string name="rating_package_name">https://play.google.com/store/apps/details?id=%1$s"</string>
+
+    <string name="money_added_to_wallet">Money added to wallet</string>
+    <string name="paid_to_user">Paid to %1$s</string>
+    <string name="get_refund_user">Get Refund from %1$s</string>
+    <string name="sent_from">Sent from</string>
+    <string name="receive_in">Receive in</string>
+    <string name="received_from_user">Received from %1$s</string>
+    <string name="send_refund_user">Refund to %1$s</string>
+
+    <string name="namaste">Namaste, %s!</string>
+    <string name="welcome">Welcome!!</string>
+    <string name="astrologers">Astrologers</string>
+    <string name="appointment">Appointment</string>
+    <string name="connect_with_astrologer_by_booking_an_appointment">Connect with astrologer by\nbooking an appointment.</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="view_all">View All</string>
+    <string name="book_appointment">Book Appointment</string>
+    <string name="daily_horoscope">Daily Horoscope</string>
+    <string name="free_kundali">Free Kundali</string>
+    <string name="horoscope_matching">Horoscope Matching</string>
+    <string name="sign_up_to_astrologer">Login to Astrologer</string>
+    <string name="sign_up_to_user">Login to User</string>
+
+    <string name="launching_soon">Launching soon</string>
+    <string name="our_engineers_are_polishing_the_app_to_make_sure_you_will_have_a_delightful_experience_hang_in_there">Our engineers are polishing the app to make sure you will have a delightful experience...Hang in there!</string>
+
+    <string name="notification">Notification</string>
+
+    <string name="topup_wallet">Topup wallet</string>
+    <string name="add_money_in_your_walled">Add money in your walled</string>
+    <string name="enter_amount">Enter amount</string>
+    <string name="recommended">Recommended</string>
+    <string name="_10">₹ 10</string>
+    <string name="_15">₹ 15</string>
+    <string name="_20">₹ 20</string>
+    <string name="_50">₹ 50</string>
+    <string name="_100">₹ 100</string>
+    <string name="_500">₹ 500</string>
+    <string name="_5000">₹ 5000</string>
+    <string name="proceed_to_topup">Proceed to topup</string>
+    <string name="please_add_or_select_amount">Please add or select amount</string>
+    <string name="no_bookings_available">There is not any pending invitation from user.</string>
+    <string name="thank_you">Thank you</string>
+    <string name="thank_you_for_connect_with_astroyodha_your_booking_with_astrologer_has_been_confirmed">Thank you for connect with astroyodha. Your booking with astrologer has been confirmed.</string>
+    <string name="go_to_home">Go To Home</string>
+    <string name="only_waiting_requests_are_editable">Only waiting requests are editable.</string>
+
+    <string name="astrologer">Astrologer</string>
+    <string name="per_min_price">₹ %1$s/min</string>
+    <string name="experience">Experience</string>
+    <string name="rating">Rating</string>
+    <string name="consults">Consults</string>
+    <string name="book_an_appointment">Book an appointment</string>
+    <string name="about_me">About Me</string>
+    <string name="per_of_customers_recommend_astrologer_based_on_review_count_reviews">%1$s%% of customers recommend %2$s, based on %3$s reviews.</string><!--%% to show % after value-->
+    <string name="reviews">Reviews</string>
+    <string name="_5_star">5 star</string>
+    <string name="_4_star">4 star</string>
+    <string name="_3_star">3 star</string>
+    <string name="_2_star">2 star</string>
+    <string name="_1_star">1 star</string>
+
+
+    <string name="basic_detail">Basic Detail</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="other_detail">Other Detail</string>
+    <string name="price_per_min">Price per min</string>
+    <string name="about_you">About You</string>
+    <string name="language">Language</string>
+    <string name="astrology_type">Astrology Type</string>
+    <string name="appointment_slot">Appointment Slot</string>
+    <string name="appointment_slot_user">Appointment Slot %1$s</string>
+    <string name="every_day">Every %1$s</string>
+
+
+    <string-array name="language_array">
+        <item>Hindi</item>
+        <item>Gujarati</item>
+        <item>English</item>
+        <item>Marathi</item>
+        <item>Punjabi</item>
+        <item>Tamil</item>
+        <item>Telugu</item>
+    </string-array>
+
+    <string-array name="astrlogy_type_array">
+        <item>Vedic</item>
+        <item>Vastu</item>
+        <item>Tarot</item>
+        <item>Numerology</item>
+        <item>Psychic</item>
+        <item>Life Coach</item>
+        <item>Face Reading</item>
+    </string-array>
+
+    <string name="no_time_slot_availabe">Time slot not added.</string>
+    <string name="pending_invitation">Pending Invitation</string>
+
+    <string name="appointment_with">Your Appointment with %1$s</string>
+    <string name="name">Name</string>
+    <string name="about_">About %1$s</string>
+    <string name="booking_detail">Booking Detail</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="event_description">Description</string>
+    <string name="details">Details</string>
+    <string name="total_earning">Total Earning :</string>
+    <string name="meeting_time_over">Your Meeting time is over</string>
+    <string name="your_call_is_completed_in_next_5_min">Your call will end in next 5 min. Would you like to extend?</string>
+    <string name="call_will_end_in_5_min">Your call will end in next 5 min.</string>
+    <string name="call_over">Your call time is over..</string>
+    <string name="ok">Ok</string>
+
+
+</resources>

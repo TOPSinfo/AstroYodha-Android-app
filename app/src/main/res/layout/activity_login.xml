@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.user.authentication.activity.LoginActivity">
+
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedscroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/_20sdp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/activity_horizontal_start_end_margin" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/activity_horizontal_start_end_margin" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.02" />
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/facebook_login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/guideline3"
+                app:layout_constraintEnd_toEndOf="@id/guideline2"
+                />
+
+            <ImageView
+                android:id="@+id/imgBack"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:src="@drawable/ic_back"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/guideline3" />
+
+            <ImageView
+                android:id="@+id/imgLoginLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_130sdp"
+                android:src="@drawable/ic_mobile_number_logo"
+                app:layout_constraintEnd_toEndOf="@id/guideline2"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/imgBack" />
+
+
+            <TextView
+                android:id="@+id/tvMobile"
+                style="@style/fontBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/login"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18sdp"
+                app:layout_constraintEnd_toEndOf="@id/guideline2"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/imgLoginLogo" />
+
+            <TextView
+                android:id="@+id/tvComingSoonDesc"
+                style="@style/fontRegular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:text="@string/create_account_desc"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/_14ssp"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="@id/guideline2"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/tvMobile" />
+
+            <LinearLayout
+                android:id="@+id/lnMobile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/background_edit_text_grey_line_background"
+                app:layout_constraintEnd_toEndOf="@id/guideline2"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/tvComingSoonDesc">
+
+                <ImageView
+                    android:id="@+id/imgMobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:src="@mipmap/mobile_inactive" />
+
+                <com.rilixtech.widget.countrycodepicker.CountryCodePicker
+                    android:id="@+id/countryPicker"
+                    style="@style/fontRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/_5sdp"
+                    app:ccp_arrowSize="@dimen/_20sdp"
+                    app:ccp_enablePhoneAutoFormatter="true"
+                    app:ccp_hideNameCode="true"
+                    app:ccp_showFlag="false"
+                    app:ccp_showFullName="false"
+                    app:ccp_textColor="@color/grey"
+                    app:ccp_textFont="@style/fontRegular"
+                    app:ccp_textSize="@dimen/_14ssp" />
+
+                <EditText
+                    android:id="@+id/edPhoneNumber"
+                    style="@style/fontRegular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="@string/phone_number"
+                    android:inputType="phone"
+                    android:maxLength="15"
+                    android:padding="@dimen/_9sdp"
+                    android:textColor="@color/edittext_text_color"
+                    android:textColorHint="@color/edittext_hint_color"
+                    android:textSize="@dimen/edittext_font_size" />
+
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnLogin"
+                style="@style/fontBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/round_orange_bg"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:letterSpacing="0"
+                android:padding="@dimen/_9sdp"
+                android:text="@string/login"
+                android:textAllCaps="false"
+                android:textColor="@color/button_text_color"
+                android:textSize="@dimen/button_text_size"
+                app:cornerRadius="@dimen/_1sdp"
+                app:layout_constraintEnd_toEndOf="@id/guideline2"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/lnMobile"
+                app:layout_constraintVertical_bias="1.0" />
+
+
+            <LinearLayout
+                android:id="@+id/lnSocialLogin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@id/guideline2"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/btnLogin">
+
+                <LinearLayout
+                    android:id="@+id/layouLoginWithGoogle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_edit_text_grey_line_background"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="@id/guideline2"
+                    app:layout_constraintStart_toStartOf="@id/guideline"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/ic_google" />
+
+                    <TextView
+                        style="@style/fontRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:text="@string/sign_up_with_google"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/_12ssp"
+                        android:visibility="visible" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/layouLoginWithFacebook"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/background_edit_text_grey_line_background"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="@id/guideline2"
+                    app:layout_constraintStart_toStartOf="@id/guideline"
+                    android:padding="@dimen/_10sdp">
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:src="@drawable/ic_facebook" />
+
+                    <TextView
+                        style="@style/fontRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:text="@string/sign_up_with_facebook"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/_12ssp"
+                        android:visibility="visible" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvNotRegisterd"
+                        style="@style/fontRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:text="@string/not_registered_yet"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/_12ssp"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="@id/guideline2"
+                        app:layout_constraintStart_toStartOf="@id/guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/tvMobile" />
+
+                    <TextView
+                        android:id="@+id/tvSignup"
+                        style="@style/fontBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_3sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:text="@string/sign_up"
+                        android:textColor="@color/orange_theme"
+                        android:textSize="@dimen/_14ssp"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="@id/guideline2"
+                        app:layout_constraintStart_toStartOf="@id/guideline"
+                        app:layout_constraintTop_toBottomOf="@+id/tvMobile" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

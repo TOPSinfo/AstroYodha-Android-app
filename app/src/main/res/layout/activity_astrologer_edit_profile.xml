@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.astrologer.activity.AstrologerEditProfileActivity">
+
+    <LinearLayout
+        android:id="@+id/toolBarEditProfile"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/astrologer_blue_theme"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_10ssp"
+            android:contentDescription="@string/app_name"
+            android:padding="@dimen/_10sdp"
+            android:src="@mipmap/back" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/fontSemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_profile"
+                android:textColor="@color/white"
+                android:textSize="@dimen/header_font_size" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolBarEditProfile"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal">
+
+                    <ImageView
+                        android:id="@+id/imgUser"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_80sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/ic_placeholder_user" />
+
+
+                    <ImageView
+                        android:id="@+id/imgEdit"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_gravity="bottom|end"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@mipmap/edit_profile_astrologer" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/txtUserName"
+                    style="@style/fontBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sdp" />
+
+                <TextView
+                    android:id="@+id/txtBirthPlace"
+                    style="@style/fontRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="@color/border_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/_25sdp">
+
+                <TextView
+                    style="@style/fontMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/basic_detail"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_18sdp" />
+
+                <EditText
+                    android:id="@+id/edFullName"
+                    style="@style/fontRegular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15ssp"
+                    android:background="@drawable/background_edit_text_grey_line_background"
+                    android:drawableStart="@mipmap/user_inactive"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="@string/full_name"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="@dimen/_8sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/edittext_text_color"
+                    android:textColorHint="@color/edittext_hint_color"
+                    android:textSize="@dimen/edittext_font_size" />
+
+
+                <EditText
+                    android:id="@+id/edPhoneNumber"
+                    style="@style/fontRegular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15ssp"
+                    android:background="@drawable/background_edit_text_grey_line_background"
+                    android:drawableStart="@mipmap/mobile_inactive"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/mobile_number"
+                    android:imeOptions="actionDone"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:padding="@dimen/_10sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/amp_light_gray_2"
+                    android:textColorHint="@color/edittext_hint_color"
+                    android:textSize="@dimen/edittext_font_size"
+                    tools:text="+919978899885" />
+
+                <EditText
+                    android:id="@+id/edEmail"
+                    style="@style/fontRegular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15ssp"
+                    android:background="@drawable/background_edit_text_grey_line_background"
+                    android:drawableStart="@mipmap/mail_inactive"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="@string/email"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:padding="@dimen/_8sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/edittext_text_color"
+                    android:textColorHint="@color/edittext_hint_color"
+                    android:textSize="@dimen/edittext_font_size" />
+
+
+                <EditText
+                    android:id="@+id/edDateOfBirth"
+                    style="@style/fontRegular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15ssp"
+                    android:background="@drawable/background_edit_text_grey_line_background"
+                    android:drawableStart="@mipmap/birthdate_inactive"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/date_of_birth"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="@dimen/_8sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/edittext_text_color"
+                    android:textColorHint="@color/edittext_hint_color"
+                    android:textSize="@dimen/edittext_font_size" />
+
+
+                <TextView
+                    style="@style/fontMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/other_detail"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_18sdp" />
+
+
+                <EditText
+                    android:id="@+id/edLanguage"
+                    style="@style/fontRegular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15ssp"
+                    android:background="@drawable/background_edit_text_grey_line_background"
+                    android:drawableStart="@mipmap/language"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/language"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="@dimen/_8sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/edittext_text_color"
+                    android:textColorHint="@color/edittext_hint_color"
+                    android:textSize="@dimen/edittext_font_size" />
+
+                <EditText
+                    android:id="@+id/edAstroType"
+                    style="@style/fontRegular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15ssp"
+                    android:background="@drawable/background_edit_text_grey_line_background"
+                    android:drawableStart="@mipmap/astro_type"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:hint="@string/astrology_type"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:padding="@dimen/_8sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/edittext_text_color"
+                    android:textColorHint="@color/edittext_hint_color"
+                    android:textSize="@dimen/edittext_font_size" />
+
+                <EditText
+                    android:id="@+id/edPricePerMin"
+                    style="@style/fontRegular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15ssp"
+                    android:background="@drawable/background_edit_text_grey_line_background"
+                    android:drawableStart="@mipmap/rs"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="@string/price_per_min"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="4"
+                    android:digits="0123456789"
+                    android:padding="@dimen/_8sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/edittext_text_color"
+                    android:textColorHint="@color/edittext_hint_color"
+                    android:textSize="@dimen/edittext_font_size" />
+
+                <EditText
+                    android:id="@+id/edExperience"
+                    style="@style/fontRegular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15ssp"
+                    android:background="@drawable/background_edit_text_grey_line_background"
+                    android:drawableStart="@mipmap/experience"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:hint="@string/experience"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="2"
+                    android:digits="0123456789"
+                    android:padding="@dimen/_8sdp"
+                    android:singleLine="true"
+                    android:textColor="@color/edittext_text_color"
+                    android:textColorHint="@color/edittext_hint_color"
+                    android:textSize="@dimen/edittext_font_size" />
+
+                <EditText
+                    android:id="@+id/edAbout"
+                    style="@style/fontRegular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15ssp"
+                    android:background="@drawable/background_edit_text_grey_line_background"
+                    android:drawableStart="@mipmap/about_you"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:gravity="start|top"
+                    android:hint="@string/about_you"
+                    android:inputType="textMultiLine"
+                    android:lines="5"
+                    android:padding="@dimen/_8sdp"
+                    android:textColor="@color/edittext_text_color"
+                    android:textColorHint="@color/edittext_hint_color"
+                    android:textSize="@dimen/edittext_font_size" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        style="@style/fontMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:text="@string/appointment_slot"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_18sdp" />
+
+                    <ImageView
+                        android:id="@+id/imgAddTimeSlot"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="bottom|end"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@mipmap/add_time_slot" />
+                </RelativeLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerTimeSoltList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/_45sdp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="5"
+                        tools:listitem="@layout/raw_timeslot" />
+
+                    <TextView
+                        android:id="@+id/tvNoDataFound"
+                        style="@style/fontRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/no_time_slot_availabe"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/_14sdp"
+                        android:visibility="gone" />
+
+                </FrameLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSave"
+                    style="@style/fontBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="@dimen/_15ssp"
+                    android:layout_marginBottom="@dimen/_10ssp"
+                    android:background="@drawable/round_blue_bg"
+                    android:text="@string/save"
+                    android:textAllCaps="false"
+                    android:textColor="@color/button_text_color"
+                    android:textSize="@dimen/button_text_size" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

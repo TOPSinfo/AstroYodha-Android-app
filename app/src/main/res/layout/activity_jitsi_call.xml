@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.user.activity.JitsiCallActivity">
+    <FrameLayout
+        android:id="@+id/layoutJitsi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txtRemainingTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent_bg"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:textColor="@color/white"
+            android:padding="@dimen/_5sdp"
+            tools:text="00:00"
+            android:layout_gravity="center_horizontal"
+            />
+
+<!--        android:paddingStart="@dimen/_5sdp"-->
+<!--        android:paddingEnd="@dimen/_5sdp"-->
+    </FrameLayout>
+
+</LinearLayout>

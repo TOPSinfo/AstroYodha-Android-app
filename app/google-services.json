@@ -1,0 +1,108 @@
+{
+  "project_info": {
+    "project_number": "755412056972",
+    "project_id": "astrology-app-7a812",
+    "storage_bucket": "astrology-app-7a812.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755412056972:android:faefeb4471e1b7839cf4a9",
+        "android_client_info": {
+          "package_name": "com.astroyodha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755412056972-9vjf2i1096bv2btekn1kjmajr8plugds.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.astroyodha",
+            "certificate_hash": "d59e8f7111679a4152179289f304f7f79d353f90"
+          }
+        },
+        {
+          "client_id": "755412056972-1dfgrtvepcctpltu4i72pjbbcvqkpp87.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3aYlkgyHzdkQUi4JuH0SIJ1GevvABJMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755412056972-1dfgrtvepcctpltu4i72pjbbcvqkpp87.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755412056972:android:025a8d26c0162d429cf4a9",
+        "android_client_info": {
+          "package_name": "com.tops.astrologyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "755412056972-3kpjho8uqajoeneu8f1gg0bspmpiq2fg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tops.astrologyapp",
+            "certificate_hash": "e40d994f9fac1882e20addd5a60d6f6e581f4860"
+          }
+        },
+        {
+          "client_id": "755412056972-5b3b1npg74vastd2tbhrtq3u5svgofd0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tops.astrologyapp",
+            "certificate_hash": "d59e8f7111679a4152179289f304f7f79d353f90"
+          }
+        },
+        {
+          "client_id": "755412056972-7kc7ffvjd9sfjt6upd59q5o9nl97oai9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tops.astrologyapp",
+            "certificate_hash": "edd0a206674f64d4bfd13cd80d0d8ced02347f61"
+          }
+        },
+        {
+          "client_id": "755412056972-bd430atit03bi475bjmcu6gk3j4uljv8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tops.astrologyapp",
+            "certificate_hash": "422bf277d85bd86d8bafd8f89e05174e9e9fe449"
+          }
+        },
+        {
+          "client_id": "755412056972-1dfgrtvepcctpltu4i72pjbbcvqkpp87.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3aYlkgyHzdkQUi4JuH0SIJ1GevvABJMc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "755412056972-1dfgrtvepcctpltu4i72pjbbcvqkpp87.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

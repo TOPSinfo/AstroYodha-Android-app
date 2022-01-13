@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/screen_background"
+    tools:context=".ui.user.activity.AstrologerProfileViewActivity">
+
+    <RelativeLayout
+        android:id="@+id/lnActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/orange_theme">
+
+        <ImageView
+            android:id="@+id/imgClose"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/actionBarItemBackground"
+            android:clickable="true"
+            android:padding="@dimen/_10sdp"
+            android:src="@drawable/ic_back_arrow" />
+
+        <TextView
+            android:id="@+id/tvtitle"
+            style="@style/fontRegular"
+            android:layout_width="wrap_content"
+            android:layout_height="?android:attr/actionBarSize"
+            android:layout_toEndOf="@+id/imgClose"
+            android:gravity="center_vertical"
+            android:text="@string/astrologer"
+            android:textColor="@color/white"
+            android:textSize="@dimen/header_font_size" />
+
+        <ImageView
+            android:id="@+id/imgAdd"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/actionBarItemBackground"
+            android:clickable="true"
+            android:padding="@dimen/_9sdp"
+            android:src="@drawable/ic_add_event"
+            android:visibility="gone"
+            app:tint="@color/white"
+            tools:visibility="visible" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/tvtitle"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedscroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/lnActionBar"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/_20sdp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/activity_horizontal_start_end_margin" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/activity_horizontal_start_end_margin" />
+
+            <ImageView
+                android:id="@+id/imgAvatar"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_150sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/avatar" />
+
+            <TextView
+                android:id="@+id/tvAstrologerName"
+                style="@style/fontBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:textSize="@dimen/header_font_size"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/imgAvatar"
+                tools:text="Prasanta" />
+
+            <ImageView
+                android:id="@+id/imgVerified"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_verified"
+                app:layout_constraintBottom_toBottomOf="@+id/tvAstrologerName"
+                app:layout_constraintStart_toEndOf="@+id/tvAstrologerName"
+                app:layout_constraintTop_toTopOf="@id/tvAstrologerName" />
+
+            <TextView
+                android:id="@+id/tvPrice"
+                style="@style/fontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_orange_bg"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingTop="@dimen/_3sdp"
+                android:paddingEnd="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_2sdp"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="@id/guideline2"
+                app:layout_constraintTop_toTopOf="@id/tvAstrologerName"
+                tools:text="@string/per_min_price" />
+
+            <TextView
+                android:id="@+id/tvLanguage"
+                style="@style/fontRegular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:drawablePadding="@dimen/_5sdp"
+                android:ellipsize="end"
+                android:maxWidth="@dimen/_150sdp"
+                android:text="English, Hindi"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_10ssp"
+                app:drawableStartCompat="@drawable/ic_language"
+                app:layout_constraintEnd_toEndOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/tvAstrologerName" />
+
+            <TextView
+                android:id="@+id/tvSpeciality"
+                style="@style/fontRegular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:drawablePadding="@dimen/_5sdp"
+                android:ellipsize="end"
+                android:text="Numerology, Face Reading"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_10ssp"
+                app:drawableStartCompat="@drawable/ic_speciality"
+                app:layout_constraintEnd_toEndOf="@+id/guideline2"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/tvLanguage" />
+
+            <LinearLayout
+                android:id="@+id/lnExperience"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@drawable/round_gray_border_5dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/_7sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                app:layout_constraintEnd_toStartOf="@+id/lnRating"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/tvSpeciality">
+
+                <TextView
+                    android:id="@+id/tvExperience"
+                    style="@style/fontRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2yr+"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp" />
+
+                <TextView
+                    style="@style/fontRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/experience"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/_10ssp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lnRating"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_gray_border_5dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/_7sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                app:layout_constraintEnd_toStartOf="@+id/lnConsults"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/lnExperience"
+                app:layout_constraintTop_toTopOf="@+id/lnExperience">
+
+                <TextView
+                    android:id="@+id/tvRating"
+                    style="@style/fontRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp"
+                    tools:text="4.5" />
+
+                <TextView
+                    style="@style/fontRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rating"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/_10ssp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lnConsults"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_gray_border_5dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/_7sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                app:layout_constraintEnd_toEndOf="@id/guideline2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/lnRating"
+                app:layout_constraintTop_toTopOf="@+id/lnExperience">
+
+                <TextView
+                    android:id="@+id/tvConsults"
+                    style="@style/fontRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1000+"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_10ssp"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toBottomOf="@id/tvAstrologerName" />
+
+                <TextView
+                    style="@style/fontRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/consults"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/_10ssp"
+                    app:layout_constraintStart_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toBottomOf="@id/tvAstrologerName" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/viewTop"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/border_gray"
+                app:layout_constraintTop_toBottomOf="@+id/lnExperience" />
+
+            <!--<TextView
+                android:id="@+id/tvBookAnAppointment"
+                style="@style/fontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center_vertical"
+                android:text="@string/book_an_appointment"
+                android:textColor="@color/black"
+                android:textSize="@dimen/header_font_size"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/viewTop" />-->
+
+            <TextView
+                android:id="@+id/tvAbout"
+                style="@style/fontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="@string/about_me"
+                android:textColor="@color/black"
+                android:textSize="@dimen/header_font_size"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/viewTop" />
+
+            <TextView
+                android:id="@+id/tvAboutDesc"
+                style="@style/fontRegular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. At urna sit massa sagittis, euismod. Pellentesque ac felis tempor nulla sed netus at ac, lacus. Mi risus sagittis sed mi urna donec non luctus. Quam gravida orci et scelerisque nulla. Gravida nulla sapien vitae dictum commodo senectus"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="@id/guideline2"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/tvAbout" />
+
+            <View
+                android:id="@+id/viewAbout"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/border_gray"
+                app:layout_constraintTop_toBottomOf="@+id/tvAboutDesc" />
+
+            <TextView
+                android:id="@+id/tvReviews"
+                style="@style/fontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center_vertical"
+                android:text="@string/reviews"
+                android:textColor="@color/black"
+                android:textSize="@dimen/header_font_size"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/viewAbout" />
+
+            <TextView
+                android:id="@+id/tvRecommended"
+                style="@style/fontRegular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/per_of_customers_recommend_astrologer_based_on_review_count_reviews"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintEnd_toEndOf="@id/guideline2"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/tvReviews" />
+
+            <ImageView
+                android:id="@+id/imgRatingCircle"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_120sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/circle"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/tvRecommended" />
+
+            <TextView
+                android:id="@+id/tvRate"
+                style="@style/fontBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="4.5"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18ssp"
+                app:layout_constraintBottom_toTopOf="@+id/tvOfFive"
+                app:layout_constraintEnd_toEndOf="@id/imgRatingCircle"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/imgRatingCircle"
+                app:layout_constraintTop_toTopOf="@+id/imgRatingCircle"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/tvOfFive"
+                style="@style/fontRegular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="of 5"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgRatingCircle"
+                app:layout_constraintEnd_toEndOf="@id/imgRatingCircle"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="@+id/imgRatingCircle"
+                app:layout_constraintTop_toBottomOf="@+id/tvRate" />
+
+            <TextView
+                android:id="@+id/tv5Star"
+                style="@style/fontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:text="@string/_5_star"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toTopOf="@+id/tv4Star"
+                app:layout_constraintStart_toEndOf="@+id/imgRatingCircle"
+                app:layout_constraintTop_toTopOf="@+id/imgRatingCircle"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progressBar5Star"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:max="100"
+                app:indicatorColor="@color/orange_theme"
+                app:layout_constraintBottom_toBottomOf="@+id/tv5Star"
+                app:layout_constraintEnd_toStartOf="@+id/barrier2"
+                app:layout_constraintStart_toEndOf="@id/barrier1"
+                app:layout_constraintTop_toTopOf="@+id/tv5Star"
+                app:trackColor="@color/border_gray"
+                app:trackCornerRadius="@dimen/_10sdp"
+                tools:progress="98" />
+
+            <TextView
+                android:id="@+id/tv5StarPercentage"
+                style="@style/fontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="98%"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="@id/tv5Star"
+                app:layout_constraintEnd_toEndOf="@+id/guideline2"
+                app:layout_constraintTop_toTopOf="@id/tv5Star" />
+
+            <TextView
+                android:id="@+id/tv4Star"
+                style="@style/fontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/_4_star"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toTopOf="@+id/tv3Star"
+                app:layout_constraintStart_toStartOf="@+id/tv5Star"
+                app:layout_constraintTop_toBottomOf="@+id/tv5Star" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progressBar4Star"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:max="100"
+                app:indicatorColor="@color/orange_theme"
+                app:layout_constraintBottom_toBottomOf="@+id/tv4Star"
+                app:layout_constraintEnd_toStartOf="@+id/barrier2"
+                app:layout_constraintStart_toEndOf="@id/barrier1"
+                app:layout_constraintTop_toTopOf="@+id/tv4Star"
+                app:trackColor="@color/border_gray"
+                app:trackCornerRadius="@dimen/_10sdp"
+                tools:progress="2" />
+
+            <TextView
+                android:id="@+id/tv4StarPercentage"
+                style="@style/fontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2%"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="@id/tv4Star"
+                app:layout_constraintEnd_toEndOf="@+id/tv5StarPercentage"
+                app:layout_constraintTop_toTopOf="@id/tv4Star" />
+
+            <TextView
+                android:id="@+id/tv3Star"
+                style="@style/fontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/_3_star"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toTopOf="@+id/tv2Star"
+                app:layout_constraintStart_toStartOf="@+id/tv5Star"
+                app:layout_constraintTop_toBottomOf="@+id/tv4Star" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progressBar3Star"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:max="100"
+                app:indicatorColor="@color/orange_theme"
+                app:layout_constraintBottom_toBottomOf="@+id/tv3Star"
+                app:layout_constraintEnd_toStartOf="@+id/barrier2"
+                app:layout_constraintStart_toEndOf="@id/barrier1"
+                app:layout_constraintTop_toTopOf="@+id/tv3Star"
+                app:trackColor="@color/border_gray"
+                app:trackCornerRadius="@dimen/_10sdp"
+                tools:progress="0" />
+
+            <TextView
+                android:id="@+id/tv3StarPercentage"
+                style="@style/fontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0%"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="@id/tv3Star"
+                app:layout_constraintEnd_toEndOf="@+id/tv5StarPercentage"
+                app:layout_constraintTop_toTopOf="@id/tv3Star" />
+
+            <TextView
+                android:id="@+id/tv2Star"
+                style="@style/fontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/_2_star"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toTopOf="@+id/tv1Star"
+                app:layout_constraintStart_toStartOf="@+id/tv5Star"
+                app:layout_constraintTop_toBottomOf="@+id/tv3Star" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progressBar2Star"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:max="100"
+                app:indicatorColor="@color/orange_theme"
+                app:layout_constraintBottom_toBottomOf="@+id/tv2Star"
+                app:layout_constraintEnd_toStartOf="@+id/barrier2"
+                app:layout_constraintStart_toEndOf="@id/barrier1"
+                app:layout_constraintTop_toTopOf="@+id/tv2Star"
+                app:trackColor="@color/border_gray"
+                app:trackCornerRadius="@dimen/_10sdp"
+                tools:progress="0" />
+
+            <TextView
+                android:id="@+id/tv2StarPercentage"
+                style="@style/fontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0%"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="@id/tv2Star"
+                app:layout_constraintEnd_toEndOf="@+id/tv5StarPercentage"
+                app:layout_constraintTop_toTopOf="@id/tv2Star" />
+
+            <TextView
+                android:id="@+id/tv1Star"
+                style="@style/fontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/_1_star"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="@id/imgRatingCircle"
+                app:layout_constraintStart_toStartOf="@+id/tv5Star"
+                app:layout_constraintTop_toBottomOf="@+id/tv2Star" />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progressBar1Star"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:max="100"
+                app:indicatorColor="@color/orange_theme"
+                app:layout_constraintBottom_toBottomOf="@+id/tv1Star"
+                app:layout_constraintEnd_toStartOf="@+id/barrier2"
+                app:layout_constraintStart_toEndOf="@id/barrier1"
+                app:layout_constraintTop_toTopOf="@+id/tv1Star"
+                app:trackColor="@color/border_gray"
+                app:trackCornerRadius="@dimen/_10sdp"
+                tools:progress="0" />
+
+            <TextView
+                android:id="@+id/tv1StarPercentage"
+                style="@style/fontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0%"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="@id/tv1Star"
+                app:layout_constraintEnd_toEndOf="@+id/tv5StarPercentage"
+                app:layout_constraintTop_toTopOf="@id/tv1Star" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvReview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="true"
+                android:contentDescription="@string/please_select_valid_time"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                android:paddingBottom="@dimen/_20sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/imgRatingCircle"
+                tools:itemCount="6"
+                tools:listitem="@layout/raw_review" />
+
+            <!--<com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBookNow"
+                style="@style/fontBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:backgroundTint="@color/button_background_color"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:letterSpacing="0"
+                android:padding="@dimen/_9sdp"
+                android:text="@string/book_now"
+                android:textAllCaps="false"
+                android:textColor="@color/button_text_color"
+                android:textSize="@dimen/button_text_size"
+                app:cornerRadius="@dimen/edittext_radious"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guideline2"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/rvReview"
+                app:layout_constraintVertical_bias="1.0" />
+-->
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="end"
+                app:constraint_referenced_ids="tv5Star,tv4Star,tv3Star,tv2Star,tv1Star" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="start"
+                app:constraint_referenced_ids="tv5StarPercentage,tv4StarPercentage,tv3StarPercentage,tv2StarPercentage,tv1StarPercentage" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/groupAbout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="tvAbout,tvAboutDesc,viewAbout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnBookNow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:backgroundTint="@color/orange_theme"
+        android:src="@drawable/ic_round_add_24"
+        app:tint="@android:color/white"
+        tools:visibility="visible" />
+
+</RelativeLayout>

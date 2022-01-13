@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FFF06649</color>
+    <color name="purple_700">#FFF06649</color>
+    <color name="teal_200">#FFF06649</color>
+    <color name="teal_700">#FFF06649</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="orange_theme">#FFF06649</color>
+
+    <color name="green">#FF018786</color>
+    <color name="red">#FF0000</color>
+    <color name="light_green">#35C759</color>
+
+    <color name="chat_my_color">#E1FFC7</color>
+    <color name="screen_background">#F3F3F3</color>
+
+    <color name="unselected_tab_text_color">#D1D1D1</color>
+    <color name="edittext_bg">#E4E4E4</color>
+    <color name="grey">#7B7A7C</color>
+    <color name="grey_dark">#242424</color>
+    <color name="grey_disable">#D1D1D1</color>
+
+    <color name="gray_edittext_border">#EBEBEB</color>
+    <color name="edittext_text_color">#000000</color>
+    <color name="edittext_hint_color">#D3D3D3</color>
+    <color name="button_text_color">#FFFFFFFF</color>
+    <color name="button_background_color">#FFF06649</color>
+    <color name="ripple_color">#2f424242</color>
+    <color name="shadow_color">#1f212121</color>
+
+    <color name="text_gray">#999999</color>
+    <color name="text_grey_dark">#333333</color>
+    <color name="border_gray">#DCDCDC</color>
+    <color name="border_blue">#27AAE1</color>
+    <color name="otp_back_blue">#E1F3FF</color>
+    <color name="green_text">#80C181</color>
+    <color name="yellow">#F1A341</color>
+
+    <color name="astrologer_blue_theme">#27AAE1</color>
+    <color name="light_orange">#FFE6E0</color>
+    <color name="completed_color">#80C181</color>
+    <color name="approved_color">#27AAE1</color>
+    <color name="pending_color">#F1A341</color>
+    <color name="delete_color">#BC2626</color>
+    <color name="booking_listing_card">#FAFAFA</color>
+    <color name="lighter_gray">#F7F5F5</color>
+    <color name="transparent_bg">#94000000</color>
+
+</resources>

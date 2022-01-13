@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_dashboard">
+
+    <fragment
+        android:id="@+id/nav_dashboard"
+        android:name="com.astroyodha.ui.user.fragment.DashboardFragment"
+        android:label="@string/menu_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/nav_booking"
+        android:name="com.astroyodha.ui.user.fragment.BookingFragment"
+        android:label="@string/menu_booking"
+        tools:layout="@layout/fragment_booking" />
+
+    <fragment
+        android:id="@+id/nav_wallet"
+        android:name="com.astroyodha.ui.user.fragment.WalletFragment"
+        android:label="@string/menu_wallet"
+        tools:layout="@layout/fragment_wallet" />
+
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.astroyodha.ui.user.fragment.ProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>

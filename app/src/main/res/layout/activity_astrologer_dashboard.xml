@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <!--Below fragment is for NavController Navigation-->
+        <fragment
+            android:id="@+id/nav_host_fragment_astrologer"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navGraph="@navigation/astrologer_navigation" />
+
+
+        <com.simform.custombottomnavigation.SSCustomBottomNavigation
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:ss_backgroundBottomColor="@color/white"
+            app:ss_backgroundBottomDrawable="@drawable/bottom_drawable"
+            app:ss_circleColor="@color/astrologer_blue_theme"
+            app:ss_countBackgroundColor="@color/astrologer_blue_theme"
+            app:ss_countTextColor="@color/white"
+            app:ss_defaultIconColor="@color/grey"
+            app:ss_iconTextColor="@color/grey"
+            app:ss_iconTextSize="12sp"
+            app:ss_iconTextTypeface=""
+            app:ss_rippleColor="@color/ripple_color"
+            app:ss_selectedIconColor="@color/astrologer_blue_theme"
+            app:ss_selectedIconTextColor="@color/astrologer_blue_theme"
+            app:ss_shadowColor="@color/shadow_color"
+            app:ss_waveHeight="8" />
+
+    </RelativeLayout>
+
+    <data>
+
+    </data>
+</layout>

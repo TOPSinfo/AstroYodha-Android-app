@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_corner_dialog"
+    android:layout_marginStart="@dimen/_30sdp"
+    android:layout_marginEnd="@dimen/_30sdp"
+    android:padding="@dimen/_15sdp">
+
+    <RadioGroup
+        android:id="@+id/rgrequestStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/rbAccept"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/accept"
+            android:buttonTint="@color/astrologer_blue_theme"/>
+
+        <RadioButton
+            android:id="@+id/rbReject"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reject"
+            android:buttonTint="@color/astrologer_blue_theme"/>
+
+    </RadioGroup>
+
+</RelativeLayout>

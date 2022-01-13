@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/screen_background"
+    tools:context=".ui.astrologer.fragment.ProfileAstrologerFragment">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/_35sdp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_30sdp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_10sdp">
+
+                    <ImageView
+                        android:id="@+id/imgUser"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_80sdp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/ic_placeholder_user" />
+
+
+                    <ImageView
+                        android:id="@+id/imgEdit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|end"
+                        android:padding="@dimen/_5sdp"
+                        android:src="@mipmap/edit_profile_astrologer" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/txtUserName"
+                    style="@style/fontBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sdp" />
+
+                <TextView
+                    android:id="@+id/txtBirthDate"
+                    style="@style/fontRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp">
+
+
+                    <TextView
+                        android:id="@+id/txtRating"
+                        style="@style/fontRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:text="0.0"
+                        android:maxLines="1"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sdp" />
+
+                    <TextView
+                        style="@style/fontRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@string/rating"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/_10sdp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_5sdp"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/txtConsults"
+                        style="@style/fontRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:text="1000+"
+                        android:maxLines="1"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sdp"/>
+
+                    <TextView
+
+                        style="@style/fontRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="@string/consults"
+                        android:textColor="@color/text_gray"
+                        android:textSize="@dimen/_10sdp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+
+                android:background="@color/white"
+                app:cardCornerRadius="@dimen/_10sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtBookingHistory"
+                        style="@style/fontRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/_15sdp"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/booking_history"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone"
+                        android:drawableTint="@color/astrologer_blue_theme"
+                        app:drawableStartCompat="@mipmap/booking_history" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:visibility="gone"
+                        android:background="@color/border_gray" />
+
+                    <TextView
+                        android:id="@+id/txtTransactionHistory"
+                        style="@style/fontRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/_15sdp"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/transaction_history"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:drawableTint="@color/astrologer_blue_theme"
+                        app:drawableStartCompat="@mipmap/transiction_history" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/border_gray" />
+
+
+
+                    <TextView
+                        android:id="@+id/txtHelp"
+                        style="@style/fontRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/_15sdp"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/help_faq"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:drawableTint="@color/astrologer_blue_theme"
+                        app:drawableStartCompat="@mipmap/faq" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/border_gray" />
+
+                    <TextView
+                        android:id="@+id/txtRateApp"
+                        style="@style/fontRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/_15sdp"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/rate_app"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:drawableTint="@color/astrologer_blue_theme"
+                        app:drawableStartCompat="@mipmap/rating" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@color/white"
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:cardCornerRadius="@dimen/_10sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtShareApp"
+                        style="@style/fontRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/_15sdp"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/share_app"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:drawableTint="@color/astrologer_blue_theme"
+                        app:drawableStartCompat="@mipmap/share" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:background="@color/border_gray" />
+
+                    <TextView
+                        android:id="@+id/txtLogout"
+                        style="@style/fontRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="@dimen/_15sdp"
+                        android:padding="@dimen/_10sdp"
+                        android:text="@string/menu_logout"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12sdp"
+                        android:drawableTint="@color/astrologer_blue_theme"
+                        app:drawableStartCompat="@mipmap/logout" />
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnUpdate"
+        style="@style/fontBold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/_15ssp"
+        android:layout_marginTop="@dimen/_15ssp"
+        android:layout_marginEnd="@dimen/_15ssp"
+        android:layout_marginBottom="@dimen/_15ssp"
+        android:background="@color/button_background_color"
+        android:padding="@dimen/_10sdp"
+        android:text="@string/update"
+        android:textColor="@color/button_text_color"
+        android:visibility="gone"
+        android:textSize="@dimen/_12sdp" />
+
+</RelativeLayout>

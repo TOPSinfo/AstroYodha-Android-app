@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_20sdp"
+    android:layout_marginEnd="@dimen/_20sdp"
+    android:padding="@dimen/_10sdp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/activity_horizontal_start_end_margin" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/activity_horizontal_start_end_margin" />
+
+        <ImageView
+            android:id="@+id/imgClose"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:background="?attr/actionBarItemBackground"
+            android:clickable="true"
+            android:padding="@dimen/_11sdp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/text_gray" />
+
+        <TextView
+            android:id="@+id/tvFeedBack"
+            style="@style/fontSemiBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/give_feedback"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/imgClose" />
+
+        <TextView
+            android:id="@+id/tvFeedBackDesc"
+            style="@style/fontRegular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/rate_your_experience_with_astrologer"
+            android:textColor="@color/grey_dark"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/tvFeedBack" />
+
+        <!--<RatingBar
+            android:id="@+id/rbRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:rating="1"
+            android:stepSize="1"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/tvFeedBackDesc" />-->
+
+        <ImageView
+            android:id="@+id/imgStar1"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:src="@mipmap/star_one_unselected"
+            app:layout_constraintEnd_toStartOf="@+id/imgStar2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/tvFeedBackDesc" />
+
+        <ImageView
+            android:id="@+id/imgStar2"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:src="@mipmap/star_two_unselected"
+            app:layout_constraintEnd_toStartOf="@+id/imgStar3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imgStar1"
+            app:layout_constraintTop_toTopOf="@+id/imgStar1" />
+
+        <ImageView
+            android:id="@+id/imgStar3"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:src="@mipmap/star_three_selected"
+            app:layout_constraintEnd_toStartOf="@+id/imgStar4"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imgStar2"
+            app:layout_constraintTop_toTopOf="@+id/imgStar1" />
+
+        <ImageView
+            android:id="@+id/imgStar4"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:src="@mipmap/star_four_unselected"
+            app:layout_constraintEnd_toStartOf="@+id/imgStar5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imgStar3"
+            app:layout_constraintTop_toTopOf="@+id/imgStar1" />
+
+        <ImageView
+            android:id="@+id/imgStar5"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:src="@mipmap/star_five_unselected"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/imgStar4"
+            app:layout_constraintTop_toTopOf="@+id/imgStar1" />
+
+        <TextView
+            android:id="@+id/tvThought"
+            style="@style/fontRegular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="center_vertical"
+            android:text="@string/do_you_have_any_thoughts_you_d_like_to_share"
+            android:textColor="@color/grey_dark"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@id/imgStar1" />
+
+        <EditText
+            android:id="@+id/edFeedBack"
+            style="@style/fontRegular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10ssp"
+            android:background="@drawable/background_edit_text_grey_line_background"
+            android:gravity="start|top"
+            android:hint="@string/your_feedback"
+            android:inputType="textMultiLine"
+            android:lines="4"
+            android:padding="@dimen/_8sdp"
+            android:textColor="@color/edittext_text_color"
+            android:textColorHint="@color/edittext_hint_color"
+            android:textSize="@dimen/edittext_font_size"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/tvThought" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSubmit"
+            style="@style/fontBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:backgroundTint="@color/button_background_color"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:letterSpacing="0"
+            android:padding="@dimen/_9sdp"
+            android:text="@string/submit"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text_color"
+            android:textSize="@dimen/button_text_size"
+            app:cornerRadius="@dimen/edittext_radious"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/edFeedBack" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="imgStar1,imgStar2,imgStar3,imgStar4,imgStar5"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

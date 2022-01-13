@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_15sdp"
+    android:background="@drawable/round_corner_dialog"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txtDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:background="@android:color/transparent"
+        android:cursorVisible="true"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="@dimen/_2sdp"
+        android:text="@string/call_will_end_in_5_min"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/txtTimeValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:hint="Add minute"
+        android:textSize="@dimen/_14sdp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/llBtnOk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/round_blue_bg"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:text="@string/ok"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            android:textAllCaps="false"
+            android:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/llCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/_20sdp"
+            android:background="@color/astrologer_blue_theme"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:text="@string/txt_cancel"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/llEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/_20sdp"
+            android:background="@color/astrologer_blue_theme"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:text="Edit"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            android:visibility="gone"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
