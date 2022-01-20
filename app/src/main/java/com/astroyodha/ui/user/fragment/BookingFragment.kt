@@ -52,6 +52,7 @@ class BookingFragment : BaseFragment() {
                 init()
             }
         }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -65,7 +66,6 @@ class BookingFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
         setClickListener()
-//        setUpViewPager()
         setObserver()
     }
 
@@ -94,7 +94,6 @@ class BookingFragment : BaseFragment() {
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 //tab selected
-//                MyLog.e(TAG, "Selected ${tab?.text}")
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -116,7 +115,6 @@ class BookingFragment : BaseFragment() {
             when (it.status) {
                 Status.LOADING -> {
                     binding.tabLayout.makeGone()
-//                    showProgress(requireContext())
                 }
                 Status.SUCCESS -> {
                     binding.tabLayout.makeVisible()
@@ -136,7 +134,6 @@ class BookingFragment : BaseFragment() {
                         onGoingList.addAll(resultList.filter { resultData ->
                             resultData.startTime!!.before(mCurrentTime) && resultData.endTime!!.after(mCurrentTime) && resultData.status == Constants.APPROVE_STATUS
                         })
-//                        onGoingList.addAll(resultList.filter { resultData -> resultData.status != Constants.PENDING_STATUS })
                         setUpViewPager()
                     }
                 }

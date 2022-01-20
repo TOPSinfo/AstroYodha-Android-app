@@ -54,7 +54,6 @@ class AstrologerVerificationViewModel @Inject constructor(private val userReposi
         // auth.firebaseAuthSettings.setAppVerificationDisabledForTesting(true)
         //Auth.auth().settings.isAppVerificationDisabledForTesting = TRUE
 
-
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                 // This callback will be invoked in two situations:
@@ -115,15 +114,11 @@ class AstrologerVerificationViewModel @Inject constructor(private val userReposi
 
         verificationNavigator?.showDialog()
 
-//        var userRef = auth.signInWithCredential(credential)
-
         var userRef: Task<AuthResult>
 //
         if (isSocialLogin) {
-            MyLog.e("Social Login==", "true")
             userRef = auth.currentUser!!.linkWithCredential(credential)
         } else {
-            MyLog.e("Social Login==", "false")
             userRef = auth.signInWithCredential(credential)
         }
 

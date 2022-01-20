@@ -119,7 +119,6 @@ class SelectAstrologerActivity : BaseActivity() {
                         } else {
                             binding.tvNoDataFound.makeGone()
                         }
-//                        viewModel.getSpeciality()
                     }
                 }
                 Status.ERROR -> {
@@ -129,26 +128,11 @@ class SelectAstrologerActivity : BaseActivity() {
             }
         })
 
-//        viewModel.specialityResponse.observe(this, {
-//            when (it.status) {
-//                Status.LOADING -> {
-//                    showProgress(this)
-//                }
-//                Status.SUCCESS -> {
-//                    hideProgress()
-//                    it.data?.let { result ->
-//                        mSpeciality.clear()
-//                        mSpeciality.addAll(result)
-//                    }
-//                }
-//                Status.ERROR -> {
-//                    hideProgress()
-//                    it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
-//                }
-//            }
-//        })
     }
 
+    /**
+     * set result
+     */
     private fun setResult() {
         setResult(Activity.RESULT_OK, Intent())
         onBackPressed()
@@ -174,7 +158,6 @@ class SelectAstrologerActivity : BaseActivity() {
                         sortBy: String,
                         speciality: ArrayList<LanguageAndSpecialityModel>
                     ) {
-                        MyLog.e(TAG, "data == $sortBy, Speciality == $speciality")
                         selectedSortBy = sortBy
                         mSelectedSpeciality = speciality
                         val mList = mSelectedSpeciality.map { it.id }

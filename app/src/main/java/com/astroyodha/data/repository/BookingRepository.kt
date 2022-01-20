@@ -14,15 +14,11 @@ class BookingRepository @Inject constructor() {
     private var firestoreDB = FirebaseFirestore.getInstance()
 
     //booking
-    fun getBookingAll(
-//        userId: String
-    ): CollectionReference {
+    fun getBookingAll(): CollectionReference {
         return firestoreDB.collection(Constants.TABLE_BOOKING)
     }
 
-    fun getBookingAddRepository(
-//        userId: String
-    ): DocumentReference {
+    fun getBookingAddRepository(): DocumentReference {
         return firestoreDB.collection(Constants.TABLE_BOOKING).document()
     }
 

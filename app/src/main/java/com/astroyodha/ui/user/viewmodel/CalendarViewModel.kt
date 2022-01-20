@@ -45,6 +45,9 @@ class CalendarViewModel @Inject constructor(
             }
     }
 
+    /**
+     * set month wise booking event
+     */
     fun getMonthWiseBookingEventRequest(userId: String, month: String) {
 
         _monthWiseBookingEventResponse.value = Resource.loading(null)

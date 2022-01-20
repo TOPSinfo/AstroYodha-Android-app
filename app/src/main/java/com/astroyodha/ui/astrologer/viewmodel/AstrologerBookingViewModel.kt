@@ -181,7 +181,6 @@ class AstrologerBookingViewModel @Inject constructor(
         }
     }
 
-
     /**
      * Get all pending booking info  for normal user in firebase
      */
@@ -193,7 +192,6 @@ class AstrologerBookingViewModel @Inject constructor(
                 userId, Constants.PENDING_STATUS
             ).addSnapshotListener { value, error ->
                 if (error != null) {
-                    MyLog.e("Error List==View model=", "====" + error.message)
                     _getBookingListDataResponse.postValue(
                         Resource.error(
                             error.message.toString(),
@@ -203,7 +201,6 @@ class AstrologerBookingViewModel @Inject constructor(
                 } else {
                     if (value != null) {
                         val mList = BookingList.getAstrologerBookingArrayList(value, userId)
-                        MyLog.e("Booking List==View model=", "====" + mList.size)
                         _getBookingListDataResponse.postValue(
                             Resource.success(
                                 mList
@@ -261,8 +258,7 @@ class AstrologerBookingViewModel @Inject constructor(
                     if (error != null) {
                         return
                     }
-                    val mList = BookingList.getUserBookingArrayList(value!!, userId)
-
+                    val mList = BookingList.getAstrologerBookingArrayList(value!!, userId)
                     bookingList.value = mList
                 }
             })
@@ -272,8 +268,6 @@ class AstrologerBookingViewModel @Inject constructor(
     /**
      * Get all pending booking info
      */
-
-
     fun getBookingDetail(bookingId: String) {
         if (networkHelper.isNetworkConnected()) {
             _getBookingDetailResponse.value = Resource.loading(null)

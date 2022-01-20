@@ -60,16 +60,6 @@ class CustomPopupAdapter(
         )
     }
 
-    /*override fun getItemViewType(position: Int): Int {
-        when (customItems[position].viewType) {
-            1 -> return RADIO_TYPE
-            2 -> return TEXTVIEW_TYPE
-            3 -> return CHECKBOX_TYPE
-            4 -> return CUSTOM_TYPE
-        }
-        return RADIO_TYPE
-    }*/
-
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val model = this.customItems[position]
         //for default check in first item
@@ -79,19 +69,6 @@ class CustomPopupAdapter(
         } else if (holder is CustomViewHolder) {
             holder.tvTitle.text = model
 
-            // don't know but divider was not showing on second item show added this logic
-            /*if (position == customItems.size - 1) {
-                holder.view2.makeGone()
-            } else {
-                holder.view2.makeVisible()
-            }
-
-            if (position == 0) {
-                holder.view.makeGone()
-            } else {
-                holder.view.makeVisible()
-            }
-*/
             holder.itemView.setOnClickListener {
                 delegate.onCustomItemClick(model, position)
             }

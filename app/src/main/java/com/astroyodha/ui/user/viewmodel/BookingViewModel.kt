@@ -25,6 +25,9 @@ class BookingViewModel @Inject constructor(
     private val _bookingAddUpdateResponse: MutableLiveData<Resource<String>> = MutableLiveData()
     val bookingAddUpdateResponse: LiveData<Resource<String>> get() = _bookingAddUpdateResponse
 
+    private val _bookingExtendResponse: MutableLiveData<Resource<String>> = MutableLiveData()
+    val bookingExtendResponse: LiveData<Resource<String>> get() = _bookingExtendResponse
+
     private val _bookingDeleteResponse: MutableLiveData<Resource<String>> = MutableLiveData()
     val bookingDeleteResponse: LiveData<Resource<String>> get() = _bookingDeleteResponse
 
@@ -150,6 +153,45 @@ class BookingViewModel @Inject constructor(
     }
 
     /**
+     * Updating booking info in firebase
+     */
+    fun extendBookingMinute(user: BookingModel) {
+
+        _bookingExtendResponse.value = Resource.loading(null)
+        user.createdAt = Timestamp.now()
+
+        var data1 = HashMap<String, Any>()
+        user.description.let { data1.put(Constants.FIELD_DESCRIPTION, it) }
+        user.date.let { data1.put(Constants.FIELD_DATE, it) }
+        user.month.let { data1.put(Constants.FIELD_MONTH, it) }
+        user.year.let { data1.put(Constants.FIELD_YEAR, it) }
+        user.startTime.let { data1.put(Constants.FIELD_START_TIME, it!!) }
+        user.endTime.let { data1.put(Constants.FIELD_END_TIME, it!!) }
+        user.status.let { data1.put(Constants.FIELD_STATUS, it) }
+        user.notify.let { data1.put(Constants.FIELD_NOTIFY, it) }
+        user.notificationMin.let { data1.put(Constants.FIELD_NOTIFICATION_MIN, it) }
+
+        bookingRepository.getBookingUpdateRepository(user)
+            .update(data1)
+            .addOnCompleteListener {
+                if(it.isSuccessful) {
+                    _bookingExtendResponse.postValue(
+                        Resource.success(
+                            "update ${Constants.MSG_BOOKING_UPDATE_SUCCESSFUL}",
+                        )
+                    )
+                }
+            }.addOnFailureListener {
+                _bookingExtendResponse.postValue(
+                    Resource.error(
+                        Constants.VALIDATION_ERROR,
+                        null
+                    )
+                )
+            }
+    }
+
+    /**
      * delete time slot
      */
     fun deleteBooking(bookingId: String) {
@@ -242,25 +284,6 @@ class BookingViewModel @Inject constructor(
                     )
                 )
             }
-        //snapshot
-        /*bookingRepository.getAllUserBookingRequestWithDate(userId, eventDate)
-            .addSnapshotListener { value, error ->
-                if (error != null) {
-                    _getBookingListDataResponse.postValue(
-                        Resource.error(
-                            Constants.VALIDATION_ERROR,
-                            null
-                        )
-                    )
-                }
-
-                val mList = BookingList.getUserBookingArrayList(value!!, userId)
-                _getBookingListDataResponse.postValue(
-                    Resource.success(
-                        mList
-                    )
-                )
-            }*/
     }
 
     /**
@@ -370,8 +393,6 @@ class BookingViewModel @Inject constructor(
     /**
      * Get all pending booking info
      */
-
-
     fun getBookingDetail(bookingId: String) {
         if (networkHelper.isNetworkConnected()) {
             _getBookingDetailResponse.value = Resource.loading(null)

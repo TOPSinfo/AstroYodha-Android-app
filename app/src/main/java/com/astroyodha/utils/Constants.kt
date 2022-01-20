@@ -176,7 +176,7 @@ object Constants {
     const val FIELD_PAYMENT_TYPE = "paymenttype"
     const val FIELD_PAYMENT_STATUS = "paymentstatus"
     const val FIELD_REFUND = "refund"
-    const val FIELD_MONEY_ADDED_IN_WALLET = "ismoneyaddedinwallet"
+    const val FIELD_SET_CAPTURED_GATEWAY = "setcapturedgateway"
 
     const val FIELD_MESSAGE_NOTIFICATION = "message"
 
@@ -190,25 +190,8 @@ object Constants {
 
     /*******Pref Key********/
     const val PREF_FILE = "pref_astrology"
-    const val TOKEN = "token"
-    const val IS_LOGIN = "is_login"
-    const val USER_TYPE = "user_type"   //0:normal user, 1: content creator
-    const val SIGNUP_WITH = "signup_with"   //1: email, 2:phone
-    const val USER_ID = "user_id"
-    const val FIRST_NAME = "first_name"
-    const val LAST_NAME = "last_name"
-    const val EMAIL = "email"
-    const val COUNTRY_CODE = "country_code"
-    const val PHONE = "phone"
-    const val USER_PROFILE = "user_profile"
-    const val COUNTRY = "country"
-    const val SOCIAL_USER_TYPE = "social_user_type" //0:no, 1:yes
-    const val SOCIAL_TYPE = "social_type"   //1-Google, 2-Facebook, 3-Apple
-    const val SOCIAL_ID = "social_id"
-    const val IS_USER_ACTIVE = "is_user_active"
-    const val FIREBASE_ANDROID_ID = "firebase_id"
-    const val UNREAD_NOTIFICATION_COUNT = "unread_Notification_count"
-    const val UNREAD_MESSAGE_COUNT = "unread_message_count"
+    const val PREF_FCM_TOKEN="fcmtoken"
+    const val REMAINING_TIME = "remainingtime"
 
 
     const val ERROR_CODE_401 = 401
@@ -266,11 +249,5 @@ object Constants {
 
     var USER_NAME = ""
     var USER_PROFILE_IMAGE = ""
-
-
-    //Preference Key
-
-    const val PREF_FCM_TOKEN="fcmtoken"
-    const val REMAINING_TIME = "remainingtime"
 
 }

@@ -21,7 +21,6 @@ import com.astroyodha.utils.Constants
 import com.astroyodha.utils.Utility
 import com.astroyodha.utils.showSnackBarToast
 
-
 class AstrologerRegistrationActivity : BaseActivity() {
 
     private lateinit var binding: ActivityAstrologerRegistrationBinding
@@ -72,10 +71,9 @@ class AstrologerRegistrationActivity : BaseActivity() {
         setObserver()
     }
 
-    /*
-   * change layout borders color based on view focus
-   * */
-
+    /**
+     * change layout borders color based on view focus
+     */
     private fun manageFocus() {
 
         binding.edFName.setOnFocusChangeListener { view, b ->
@@ -133,7 +131,7 @@ class AstrologerRegistrationActivity : BaseActivity() {
                 binding.icEmail.setColorFilter(
                     ContextCompat.getColor(this, R.color.text_gray),
                     android.graphics.PorterDuff.Mode.SRC_IN
-                );
+                )
                 binding.layoutEmail.setBackgroundResource(R.drawable.background_edit_text_grey_line_background)
                 binding.edEmail.setTextColor(ContextCompat.getColor(this, R.color.black))
             }
@@ -150,12 +148,10 @@ class AstrologerRegistrationActivity : BaseActivity() {
         binding.btnRegister.setOnClickListener {
 
             if (checkValidation()) {
-
                 viewModel.checkMobieNuberRegisterdOrNotWithUserType(
                     "+" + binding.countryPicker.selectedCountryCode + binding.edPhoneNumber.text.toString()
                         .trim()
                 ,userType)
-
             }
         }
 
@@ -179,11 +175,12 @@ class AstrologerRegistrationActivity : BaseActivity() {
             if(!loginType.equals("")) {
                 logoutSocialMedia()
             }
-            startActivity(
+            onBackPressed()
+            /*startActivity(
                 Intent(this, AstrologerLoginActivity::class.java)
                     .putExtra(Constants.INTENT_USER_TYPE, Constants.USER_ASTROLOGER)
             )
-            finish()
+            finish()*/
         }
 
         binding.imgBack.setOnClickListener {
@@ -194,15 +191,14 @@ class AstrologerRegistrationActivity : BaseActivity() {
         }
     }
 
-    fun logoutSocialMedia()
-    {
+    /**
+     * logout social media
+     */
+    fun logoutSocialMedia() {
         Firebase.auth.signOut()
-        if(loginType.equals(Constants.SOCIAL_TYPE_FACEBOOK))
-        {
+        if (loginType.equals(Constants.SOCIAL_TYPE_FACEBOOK)) {
             LoginManager.getInstance().logOut();
-        }
-        else if(loginType.equals(Constants.SOCIAL_TYPE_GOOGLE))
-        {
+        } else if (loginType.equals(Constants.SOCIAL_TYPE_GOOGLE)) {
             val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.web_client_id))
                 .requestEmail()
@@ -238,7 +234,6 @@ class AstrologerRegistrationActivity : BaseActivity() {
             }
         })
 
-
         viewModel.mobileValidationCheckWithoutUserType.observe(this, {
             when (it.status) {
                 Status.LOADING -> {
@@ -270,7 +265,6 @@ class AstrologerRegistrationActivity : BaseActivity() {
 
 
     }
-
 
     /**
      * Checking validation

@@ -11,7 +11,6 @@ object SpecialityList {
     /**
      * make array list of order from firestore snapshot
      */
-
     fun getSpecialityArrayList(
         querySnapshot: QuerySnapshot,
         userId: String
@@ -35,6 +34,9 @@ object SpecialityList {
         return ratingArrayList
     }
 
+    /**
+     * set single model item
+     */
     fun getSpecialityModel(
         querySnapshot: QueryDocumentSnapshot
     ): SpecialityModel {
@@ -55,7 +57,9 @@ object SpecialityList {
         return specialityModel
     }
 
-
+    /**
+     * set single model item
+     */
     fun getSpecialityDetail(
         querySnapshot: DocumentSnapshot
     ): SpecialityModel {

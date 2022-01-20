@@ -56,16 +56,6 @@ class AstrologerTransactionAdapter(
                 if (model.paymentType == Constants.PAYMENT_TYPE_RAZOR_PAY) {
                     holder.imgPaymentBy.setImageResource(R.drawable.ic__credit_card)
                 }
-//                mImage = R.drawable.ic_add_money
-//                mTranscation = mContext.getString(
-//                    R.string.send_refund_user,
-//                    model.astrologerName.substringBefore(" ")
-//                )
-//                holder.tvOperand.text = "+"
-//                holder.tvPaymentBy.text = mContext.getString(R.string.receive_in)
-//                if (model.paymentType == Constants.PAYMENT_TYPE_RAZOR_PAY) {
-//                    holder.imgPaymentBy.setImageResource(R.drawable.ic__credit_card)
-//                }
             } else{
                 mImage = R.drawable.ic_add_money
                 mTranscation = mContext.getString(
@@ -75,19 +65,6 @@ class AstrologerTransactionAdapter(
                 holder.tvOperand.text = "+"
                 holder.tvPaymentBy.text = mContext.getString(R.string.receive_in)
             }
-//            if (model.trancationType == Constants.TRANSACTION_TYPE_CREDIT)
-//            else {
-//                mImage = R.drawable.ic_paid_money
-//                mTranscation = mContext.getString(
-//                    R.string.received_from_user,
-//                    model.astrologerName.substringBefore(" ")
-//                )
-//                holder.tvOperand.text = "-"
-//                holder.tvPaymentBy.text = mContext.getString(R.string.sent_from)
-//                if (model.paymentType == Constants.PAYMENT_TYPE_RAZOR_PAY) {
-//                    holder.imgPaymentBy.setImageResource(R.drawable.ic__credit_card)
-//                }
-//            }
             holder.imgRupee.setImageResource(mImage)
             holder.tvTransaction.text = mTranscation
             holder.tvTime.text = model.createdAt?.toDate()?.dateToStringFormat(mDateFormat)

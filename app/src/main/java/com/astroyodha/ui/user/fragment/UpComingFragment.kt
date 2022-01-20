@@ -58,6 +58,7 @@ class UpComingFragment : BaseFragment() {
 
             }
         }
+
     companion object {
         @JvmStatic
         fun newInstance(param1: String,param2: ArrayList<BookingModel>) =
@@ -109,22 +110,17 @@ class UpComingFragment : BaseFragment() {
                         bookingModel = model
                         mPositionEdit = position
                         profileAstrologerViewModel.getUserDetail(model.astrologerID)
-                        /*if (model.status == Constants.PENDING_STATUS) {
-                            bookingModel = model
-                            mPositionEdit = position
-                            profileAstrologerViewModel.getUserDetail(model.astrologerID)
-                        } else {
-                            binding.root.showSnackBarToast(context.getString(R.string.only_waiting_requests_are_editable))
-                        }*/
                     }
                 }
             )
         }
 
-//        bookingViewModel.getUpComingUserBookingRequest(userId)
         bookingViewModel.getStatusUpdateListener(userId)
     }
 
+    /**
+     * manage recyclerview visibility
+     */
     private fun showHideNoDataFound() {
         if (mList.isEmpty()) {
             binding.rvBooking.makeGone()
@@ -144,9 +140,11 @@ class UpComingFragment : BaseFragment() {
             updatedData.forEach {
                 mList.mapIndexed { index, mBookingModel ->
                     if (mBookingModel.id == it.id /*&& mBookingModel.status != it.status*/) {
-                        mBookingModel.status = it.status
-                        mBookingModel.paymentStatus = it.paymentStatus
-                        binding.rvBooking.adapter?.notifyItemChanged(index, mBookingModel)
+//                        mBookingModel.status = it.status
+//                        mBookingModel.paymentStatus = it.paymentStatus
+//                        binding.rvBooking.adapter?.notifyItemChanged(index, mBookingModel)
+                        mList[index] = it
+                        binding.rvBooking.adapter?.notifyItemChanged(index)
                         return@forEach
                     }
                 }
@@ -161,7 +159,6 @@ class UpComingFragment : BaseFragment() {
                 Status.SUCCESS -> {
                     hideProgress()
                     it.data?.let { resultList ->
-//                        mList.addAll(resultList.filter { resultData -> resultData.status != Constants.PENDING_STATUS })
                         mList.addAll(resultList)
                         binding.rvBooking.adapter?.notifyDataSetChanged()
 

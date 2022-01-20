@@ -32,6 +32,7 @@ import com.astroyodha.network.Status
 import com.astroyodha.ui.user.adapter.CalendarEventAdapter
 import com.astroyodha.ui.user.model.booking.BookingModel
 import com.astroyodha.ui.user.viewmodel.CalendarViewModel
+import com.astroyodha.utils.MyLog
 import com.astroyodha.utils.dateFormat
 import com.astroyodha.utils.showSnackBarToast
 import java.time.DayOfWeek
@@ -64,6 +65,7 @@ class CalendarActivity : BaseActivity() {
     private val selectionFormatter = DateTimeFormatter.ofPattern("d MMMM")
 
     private val userId: String by lazy { FirebaseAuth.getInstance().currentUser!!.uid }
+    var dateDBFormat: String = "dd - MMM - yyyy"
 
     private val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -105,11 +107,6 @@ class CalendarActivity : BaseActivity() {
                 }
             )
         }
-/*
-        binding.exThreeAddButton.setOnClickListener {
-            inputDialog.show()
-        }
-*/
 
     }
 
@@ -132,7 +129,6 @@ class CalendarActivity : BaseActivity() {
         }
 
         binding.exThreeCalendar.monthScrollListener = {
-            Log.e("MONTH_LISTENER", it.month.toString())
 
             // Select the first day of the month when
             // we scroll to a new month.
@@ -152,7 +148,6 @@ class CalendarActivity : BaseActivity() {
                 }
             }
             selectedMonth = mmonth.toString()
-            Log.e("MONTH_LISTENER_1", selectedMonth)
 
             selectDate(it.yearMonth.atDay(1), "Init")
         }
@@ -177,14 +172,6 @@ class CalendarActivity : BaseActivity() {
                 view.setOnClickListener {
                     if (day.owner == DayOwner.THIS_MONTH) {
                         selectDate(day.date, "")
-                        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            calendarViewModel.getDateWiseBookingEventRequest(
-                                userId, day.date.toString().dateFormat(
-                                    "yyyy-MM-dd",
-                                    "dd-MM-yyyy"
-                                )
-                            )
-                        }*/
                     }
                 }
             }
@@ -237,28 +224,6 @@ class CalendarActivity : BaseActivity() {
                                 )
                             )
                             textView.background = null
-
-
-                            /*var mmonth = day.date.monthValue
-                            if (from.equals("Right")) {
-                                if (mmonth == 1) {
-                                    mmonth = 12
-                                } else {
-                                    mmonth = (mmonth - 1)
-                                }
-                            }else if (from.equals("Left")){
-
-                                if (mmonth == 12) {
-                                    mmonth = 1
-                                } else {
-                                    mmonth = mmonth + 1
-                                }
-                            }*/
-
-                            Log.e(
-                                "MONTHSSS",
-                                selectedMonth.toString() + "," + day.date.monthValue.toString()
-                            )
 
                             if (getEventListOfThisDate(day.date) > 0) {
                                 dotView.isVisible = true
@@ -323,12 +288,6 @@ class CalendarActivity : BaseActivity() {
 
                     binding.exThreeCalendar.smoothScrollToMonth(newMonth)
 
-                    /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        calendarViewModel.getMonthWiseBookingEventRequest(
-                            userId, selectedMonth
-                        )
-                    }*/
-
                 }
 
                 container.legendHeaderImgRightArrow.setOnClickListener {
@@ -351,12 +310,6 @@ class CalendarActivity : BaseActivity() {
 
                     binding.exThreeCalendar.smoothScrollToMonth(newMonth)
 
-                    /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        calendarViewModel.getMonthWiseBookingEventRequest(
-                            userId, selectedMonth
-                        )
-                    }*/
-
                 }
 
             }
@@ -371,7 +324,7 @@ class CalendarActivity : BaseActivity() {
             if (allEventList.get(i).date.equals(
                     date.toString().dateFormat(
                         "yyyy-MM-dd",
-                        "dd-MM-yyyy"
+                        dateDBFormat
                     )
                 )
             )
@@ -379,44 +332,6 @@ class CalendarActivity : BaseActivity() {
         }
         return count
     }
-
-/*
-    private val inputDialog by lazy {
-        val editText = AppCompatEditText()
-        val layout = FrameLayout().apply {
-            // Setting the padding on the EditText only pads the input area
-            // not the entire EditText so we wrap it in a FrameLayout.
-            val padding = dpToPx(20, requireContext())
-            setPadding(padding, padding, padding, padding)
-            addView(editText, FrameLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            ))
-        }
-        AlertDialog.Builder(requireContext())
-            .setTitle(getString(R.string.example_3_input_dialog_title))
-            .setView(layout)
-            .setPositiveButton(R.string.save) { _, _ ->
-                saveEvent(editText.text.toString())
-                // Prepare EditText for reuse.
-                editText.setText("")
-            }
-            .setNegativeButton(R.string.close, null)
-            .create()
-            .apply {
-                setOnShowListener {
-                    // Show the keyboard
-                    editText.requestFocus()
-                    context.inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
-                }
-                setOnDismissListener {
-                    // Hide the keyboard
-                    context.inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
-                }
-            }
-    }
-*/
-
 
     @SuppressLint("RestrictedApi")
     fun getDayOfMonthSuffix(n: Int): String? {
@@ -446,7 +361,6 @@ class CalendarActivity : BaseActivity() {
                     it.data?.let { resultList ->
                         allEventList.clear()
                         allEventList.addAll(resultList)
-                        Log.e("EVENLISTSIZE", allEventList.size.toString())
                         setUpCalendarDate()
                     }
                 }
@@ -495,7 +409,7 @@ class CalendarActivity : BaseActivity() {
                     if (allEventList.get(i).date.equals(
                             date.toString().dateFormat(
                                 "yyyy-MM-dd",
-                                "dd-MM-yyyy"
+                                dateDBFormat
                             )
                         )
                     )

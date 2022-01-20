@@ -6,6 +6,9 @@ import com.astroyodha.utils.Constants
 
 object AstrologerCallList {
 
+    /**
+     * set single model item
+     */
     fun getCallList(
         querySnapshot: DocumentSnapshot
     ): CallListModel {

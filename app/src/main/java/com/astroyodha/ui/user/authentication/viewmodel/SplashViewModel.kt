@@ -21,7 +21,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val cmsRepository: CMSRepository,
@@ -52,7 +51,9 @@ class SplashViewModel @Inject constructor(
     private val _mobileValidationCheckWithoutUserType: MutableLiveData<Resource<String>> = MutableLiveData()
     val mobileValidationCheckWithoutUserType: LiveData<Resource<String>> get() = _mobileValidationCheckWithoutUserType
 
-
+    /**
+     * Checking user already registered or not
+     */
     fun checkUserRegisterOrNot(userId: String) = viewModelScope.launch {
         if (networkHelper.isNetworkConnected()) {
             _userDataResponse.value = Resource.loading(null)
@@ -107,10 +108,9 @@ class SplashViewModel @Inject constructor(
         )
     }
 
-
-    /*
-    * Check mobile number is registered or not
-    * */
+    /**
+     * Check mobile number is registered or not
+     */
     fun checkMobieNuberRegisterdOrNotWithUserType(mobileNumber: String, userType:String) = viewModelScope.launch {
         if (networkHelper.isNetworkConnected()) {
             _userDataResponse.value = Resource.loading(null)
@@ -148,9 +148,9 @@ class SplashViewModel @Inject constructor(
         )
     }
 
-    /*
-   * Check mobile number is registered or not
-   * */
+    /**
+     * Check mobile number is registered or not
+     */
     fun checkMobieNuberRegisterdOrNotWithouUserType(mobileNumber: String) = viewModelScope.launch {
         if (networkHelper.isNetworkConnected()) {
             _userDataResponse.value = Resource.loading(null)
@@ -187,12 +187,9 @@ class SplashViewModel @Inject constructor(
         )
     }
 
-
-
-    /*
-    * Check user is already login using social media and user type
-    *
-    * */
+    /**
+     * Check user is already login using social media and user type
+     */
     fun checkUserWithSocialMediaWithUserType(socialId: String, userType:String) = viewModelScope.launch {
         if (networkHelper.isNetworkConnected()) {
             _userDataResponse.value = Resource.loading(null)
@@ -225,12 +222,9 @@ class SplashViewModel @Inject constructor(
         )
     }
 
-
-
-    /*
-  * Check user is already login using social media and user type
-  *
-  * */
+    /**
+     * Check user is already login using social media and user type
+     */
     fun checkUserWithSocialMediaWithoutUserType(socialId: String) = viewModelScope.launch {
         if (networkHelper.isNetworkConnected()) {
             _userDataResponse.value = Resource.loading(null)
@@ -262,11 +256,9 @@ class SplashViewModel @Inject constructor(
         )
     }
 
-
-
-    /*
-    * Check mobile number is registered or not
-    * */
+    /**
+     * get policy, terms and condition
+     */
     fun getPolicies(type: String) = viewModelScope.launch {
         if (networkHelper.isNetworkConnected()) {
             _termsAndPolicyResponse.value = Resource.loading(null)
@@ -285,9 +277,9 @@ class SplashViewModel @Inject constructor(
         )
     }
 
-    /*
-    * Check mobile number is registered or not
-    * */
+    /**
+     * get FAQ
+     */
     fun getFAQ(type: String) {
         viewModelScope.launch {
             if (networkHelper.isNetworkConnected()) {

@@ -10,6 +10,9 @@ dependencyResolutionManagement {
         maven {
             url "https://github.com/jitsi/jitsi-maven-repository/raw/master/releases"
         }
+        maven {
+            url 'https://sdk.squareup.com/public/android'
+        }
     }
 }
 rootProject.name = "AstrologyApp"

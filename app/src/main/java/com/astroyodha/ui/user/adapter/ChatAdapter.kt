@@ -16,7 +16,6 @@ import com.astroyodha.ui.user.activity.ChatActivity
 import com.astroyodha.ui.user.authentication.model.chat.MessagesModel
 import com.astroyodha.utils.*
 
-
 class ChatAdapter(val context: ChatActivity, private val messageList: ArrayList<MessagesModel>, val isGroup:Boolean) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var layoutInflater: LayoutInflater =
@@ -64,7 +63,6 @@ class ChatAdapter(val context: ChatActivity, private val messageList: ArrayList<
         private var imgPlay: ImageView = itemView.findViewById(R.id.imgPlay)
         private var cardViewImage: CardView = itemView.findViewById(R.id.cardViewImage)
         private var txtSenderName: TextView = itemView.findViewById(R.id.txtSenderName)
-//        private var txtMediaSenderName: TextView = itemView.findViewById(R.id.txtMediaSenderName)
         private var cardViewImageForSenderName: CardView = itemView.findViewById(R.id.cardViewImageForSenderName)
 
         fun bindItems(context: ChatActivity, chatModel: MessagesModel, isGroup: Boolean) {
@@ -86,14 +84,6 @@ class ChatAdapter(val context: ChatActivity, private val messageList: ArrayList<
                 cardViewImage.visibility = View.GONE
                 cardViewImageForSenderName.visibility = View.GONE
 
-                /*if(isGroup) {
-                    txtSenderName.visibility=View.VISIBLE
-                    txtSenderName.text = chatModel.senderName
-                }
-                else
-                {
-                    txtSenderName.visibility=View.GONE
-                }*/
             } else if (chatModel.messageType == Constants.TYPE_IMAGE) {
                 txtDateTime.makeGone()
                 txtDateTime1.makeVisible()
@@ -101,16 +91,6 @@ class ChatAdapter(val context: ChatActivity, private val messageList: ArrayList<
                 imgMessage.visibility = View.VISIBLE
                 imgPlay.visibility = View.GONE
                 cardViewImage.visibility = View.VISIBLE
-                /*if(isGroup) {
-                    cardViewImageForSenderName.visibility = View.VISIBLE
-                    txtMediaSenderName.visibility=View.VISIBLE
-                    txtMediaSenderName.text = chatModel.senderName
-                }
-                else
-                {
-                    cardViewImageForSenderName.visibility = View.GONE
-                    txtMediaSenderName.visibility=View.GONE
-                }*/
                 imgMessage.loadImage(chatModel.url)
 
             } else if (chatModel.messageType == Constants.TYPE_VIDEO) {
@@ -120,14 +100,6 @@ class ChatAdapter(val context: ChatActivity, private val messageList: ArrayList<
                 imgMessage.visibility = View.VISIBLE
                 imgPlay.visibility = View.VISIBLE
                 cardViewImage.visibility = View.VISIBLE
-                /*if (isGroup) {
-                    cardViewImageForSenderName.visibility = View.VISIBLE
-                    txtMediaSenderName.visibility = View.VISIBLE
-                    txtMediaSenderName.text = chatModel.senderName
-                } else {
-                    cardViewImageForSenderName.visibility = View.GONE
-                    txtMediaSenderName.visibility = View.GONE
-                }*/
                 imgMessage.loadImage(chatModel.url)
             }
 

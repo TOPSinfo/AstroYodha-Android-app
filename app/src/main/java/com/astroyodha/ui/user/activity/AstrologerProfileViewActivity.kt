@@ -90,7 +90,6 @@ class AstrologerProfileViewActivity : BaseActivity() {
                     showProgress(this)
                 }
                 Status.SUCCESS -> {
-//                    hideProgress()
                     it.data?.let { result ->
                         astrologerUserModel = result
                         bookingViewModel.getAllCompletedBooking(astrologerUserModel.uid.toString())
@@ -109,7 +108,6 @@ class AstrologerProfileViewActivity : BaseActivity() {
                 Status.LOADING -> {
                 }
                 Status.SUCCESS -> {
-//                    hideProgress()
                     it.data?.let {
                         binding.tvConsults.text = it
                         viewModel.getAstrologerRating(astrologerUserModel.uid.toString())
@@ -143,6 +141,9 @@ class AstrologerProfileViewActivity : BaseActivity() {
         })
     }
 
+    /**
+     * set data to view
+     */
     private fun setData(model: AstrologerUserModel) {
         binding.imgAvatar.loadRoundedImage(model.profileImage)
         binding.tvAstrologerName.text = model.fullName?.substringBefore(" ")
@@ -151,35 +152,26 @@ class AstrologerProfileViewActivity : BaseActivity() {
         var displayLanguageList = java.util.ArrayList<String>()
 
 
-        for(language in Constants.listOfLanguages)
-        {
-            for(selectedLanguage in model.languages!!)
-            {
-                if(language.id.equals(selectedLanguage))
-                {
+        for (language in Constants.listOfLanguages) {
+            for (selectedLanguage in model.languages!!) {
+                if (language.id.equals(selectedLanguage)) {
                     displayLanguageList.add(language.language)
                 }
             }
         }
 
-//                var languagesstr=mSelectedLanguage.toString()
-//        var languagesstr=displayLanguageList.toString()
-
         binding.tvLanguage.text = displayLanguageList.joinToString(", ")
 
 
         var displaySpecialityList = ArrayList<String>()
-            for(speciality in Constants.listOfSpeciality)
-            {
-                for(selectedSpeciality in model.speciality!!)
-                {
+        for (speciality in Constants.listOfSpeciality) {
+            for (selectedSpeciality in model.speciality!!) {
 
-                    if(speciality.id.equals(selectedSpeciality))
-                    {
-                        displaySpecialityList.add(speciality.language)
-                    }
+                if (speciality.id.equals(selectedSpeciality)) {
+                    displaySpecialityList.add(speciality.language)
                 }
             }
+        }
 
 
         binding.tvSpeciality.text = displaySpecialityList.joinToString(", ")
@@ -194,12 +186,10 @@ class AstrologerProfileViewActivity : BaseActivity() {
 
     }
 
+    /**
+     * set data to rating
+     */
     private fun setRatingData() {
-        /*mList.add(RatingModel(rating = "4"))
-        mList.add(RatingModel(rating = "1"))
-        mList.add(RatingModel(rating = "3"))
-        mList.add(RatingModel(rating = "5"))
-        mList.add(RatingModel(rating = "2"))*/
         val m5Star = mList.filter { it.rating == 5f }
         val m4Star = mList.filter { it.rating == 4f }
         val m3Star = mList.filter { it.rating == 3f }
@@ -229,8 +219,6 @@ class AstrologerProfileViewActivity : BaseActivity() {
         if (avarage != null) {
             mRecomendedAvarage = (avarage / 5) * 100
         }
-//        binding.tvRating.text = avarage.toString()
-//        binding.tvRate.text = avarage.toString()
 
         binding.tvRecommended.text =
             getString(
@@ -270,6 +258,9 @@ class AstrologerProfileViewActivity : BaseActivity() {
         }
     }
 
+    /**
+     * redirect to event booking
+     */
     private fun redirectToBookEvent() {
         startBookNowForResult.launch(
             Intent(this, EventBookingActivity::class.java)

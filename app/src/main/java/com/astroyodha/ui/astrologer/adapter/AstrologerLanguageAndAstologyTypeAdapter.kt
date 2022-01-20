@@ -44,15 +44,12 @@ class AstrologerLanguageAndAstologyTypeAdapter(
         try {
             holder.cbLanguage.setText(languageAndAstroType.language)
 
-            holder.cbLanguage.isChecked=selectedList.contains(languageAndAstroType.id)
+            holder.cbLanguage.isChecked = selectedList.contains(languageAndAstroType.id)
 
             holder.cbLanguage.setOnCheckedChangeListener { compoundButton, b ->
-                if(b)
-                {
+                if (b) {
                     selectedLanaguagesAndAstroType.add(languageAndAstroType.id)
-                }
-                else
-                {
+                } else {
                     selectedLanaguagesAndAstroType.remove(languageAndAstroType.id)
                 }
             }

@@ -8,7 +8,6 @@ import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivityAstrologerNotificationBinding
 import com.astroyodha.network.Status
 import com.astroyodha.ui.astrologer.adapter.AstrologerNotificationAdapter
-import com.astroyodha.ui.user.adapter.NotificationAdapter
 import com.astroyodha.ui.user.model.notification.NotificationModel
 import com.astroyodha.ui.user.viewmodel.NotificationViewModel
 import com.astroyodha.utils.makeGone

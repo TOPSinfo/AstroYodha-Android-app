@@ -105,19 +105,11 @@ class PastFragment : BaseFragment() {
                         bookingModel = model
                         mPositionEdit = position
                         profileAstrologerViewModel.getUserDetail(model.astrologerID)
-                        /*if (model.status == Constants.PENDING_STATUS) {
-                            bookigModel = model
-                            mPositionEdit = position
-                            profileAstrologerViewModel.getUserDetail(model.astrologerID)
-                        } else {
-                            binding.root.showSnackBarToast(context.getString(R.string.only_waiting_requests_are_editable))
-                        }*/
                     }
                 }
             )
         }
 
-//        bookingViewModel.getPastUserBookingRequest(userId,)
         bookingViewModel.getStatusUpdateListener(userId)
     }
 
@@ -128,9 +120,11 @@ class PastFragment : BaseFragment() {
         bookingViewModel.bookingList.observe(viewLifecycleOwner, { updatedData ->
             updatedData.forEach {
                 mList.mapIndexed { index, bookingModel ->
-                    if (bookingModel.id == it.id && bookingModel.status != it.status) {
-                        bookingModel.status = it.status
-                        binding.rvBooking.adapter?.notifyItemChanged(index, bookingModel)
+                    if (bookingModel.id == it.id /*&& bookingModel.status != it.status*/) {
+//                        bookingModel.status = it.status
+//                        binding.rvBooking.adapter?.notifyItemChanged(index, bookingModel)
+                        mList[index] = it
+                        binding.rvBooking.adapter?.notifyItemChanged(index)
                         return@forEach
                     }
                 }
@@ -146,7 +140,6 @@ class PastFragment : BaseFragment() {
                 Status.SUCCESS -> {
                     hideProgress()
                     it.data?.let { resultList ->
-//                        mList.addAll(resultList.filter { resultData -> resultData.status != Constants.PENDING_STATUS })
                         mList.addAll(resultList)
                         binding.rvBooking.adapter?.notifyDataSetChanged()
 

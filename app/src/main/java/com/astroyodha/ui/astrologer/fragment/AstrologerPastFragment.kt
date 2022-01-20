@@ -19,7 +19,6 @@ import com.astroyodha.ui.astrologer.adapter.AstrlogerBookingListAdapter
 import com.astroyodha.ui.astrologer.viewmodel.AstrologerBookingViewModel
 import com.astroyodha.ui.astrologer.viewmodel.ProfileAstrologerViewModel
 import com.astroyodha.ui.user.model.booking.BookingModel
-import com.astroyodha.ui.user.viewmodel.BookingViewModel
 import com.astroyodha.utils.Constants
 import com.astroyodha.utils.makeGone
 import com.astroyodha.utils.makeVisible
@@ -50,6 +49,7 @@ class AstrologerPastFragment : BaseFragment() {
 
             }
         }
+
     companion object {
         @JvmStatic
         fun newInstance(param1: String,param2: ArrayList<BookingModel>) =
@@ -106,19 +106,11 @@ class AstrologerPastFragment : BaseFragment() {
                         bookingModel = model
                         mPositionEdit = position
                         profileAstrologerViewModel.getUserDetail(model.astrologerID)
-                        /*if (model.status == Constants.PENDING_STATUS) {
-                            bookigModel = model
-                            mPositionEdit = position
-                            profileAstrologerViewModel.getUserDetail(model.astrologerID)
-                        } else {
-                            binding.root.showSnackBarToast(context.getString(R.string.only_waiting_requests_are_editable))
-                        }*/
                     }
                 }
             )
         }
 
-//        bookingViewModel.getPastUserBookingRequest(userId,)
         bookingViewModel.getStatusUpdateListener(userId)
     }
 
@@ -129,9 +121,9 @@ class AstrologerPastFragment : BaseFragment() {
         bookingViewModel.bookingList.observe(viewLifecycleOwner, { updatedData ->
             updatedData.forEach {
                 mList.mapIndexed { index, bookingModel ->
-                    if (bookingModel.id == it.id && bookingModel.status != it.status) {
-                        bookingModel.status = it.status
-                        binding.rvBooking.adapter?.notifyItemChanged(index, bookingModel)
+                    if (bookingModel.id == it.id ) {
+                        mList[index]=it
+                        binding.rvBooking.adapter?.notifyItemChanged(index)
                         return@forEach
                     }
                 }
@@ -147,7 +139,6 @@ class AstrologerPastFragment : BaseFragment() {
                 Status.SUCCESS -> {
                     hideProgress()
                     it.data?.let { resultList ->
-//                        mList.addAll(resultList.filter { resultData -> resultData.status != Constants.PENDING_STATUS })
                         mList.addAll(resultList)
                         binding.rvBooking.adapter?.notifyDataSetChanged()
 

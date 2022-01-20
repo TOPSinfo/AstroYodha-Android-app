@@ -31,7 +31,6 @@ import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
-
 @HiltViewModel
 class ChatViewModel @Inject constructor(
     private val chatRepository: ChatRepository,
@@ -51,11 +50,6 @@ class ChatViewModel @Inject constructor(
         MutableLiveData()
     val sendMessagesResponse: LiveData<Resource<Boolean>> get() = _sendMessagesResponse
 
-//    private val _addOneToOneCallDataResponse: MutableLiveData<Resource<String>> =
-//        MutableLiveData()
-//
-//    val addOneToOneCallDataResponse: LiveData<Resource<String>> get() = _addOneToOneCallDataResponse
-
     private val _addGroupCallDataResponse: MutableLiveData<Resource<String>> =
         MutableLiveData()
 
@@ -71,14 +65,11 @@ class ChatViewModel @Inject constructor(
     fun getMessagesList(otherUserId: String, isGroup: Boolean,userList:ArrayList<UserModel>) = viewModelScope.launch {
 
         if (networkHelper.isNetworkConnected()) {
-            var docId=""
-            if(isGroup)
-            {
-                 docId = otherUserId
-            }
-            else
-            {
-                 docId = getCurrentDocumentId(otherUserId)
+            var docId = ""
+            if (isGroup) {
+                docId = otherUserId
+            } else {
+                docId = getCurrentDocumentId(otherUserId)
             }
 
             chatRepository.getChatMessageRepository(docId)
@@ -96,24 +87,20 @@ class ChatViewModel @Inject constructor(
                         for (dc in value?.documentChanges!!) {
                             when (dc.type) {
                                 DocumentChange.Type.ADDED -> {
-                                    println("ABC::Added::" + dc.document.data)
                                     val messageModel = UsersList.getMessagesModel(dc.document)
 
                                     if(isGroup) {
                                         var user: UserModel? =
                                             userList.find { it.uid == messageModel.senderId }
-                                        Log.e("UserData=====", "====" + user?.fullName )
                                         messageModel.senderName = user?.fullName
                                     }
                                     chatList.add(messageModel)
                                 }
                                 DocumentChange.Type.MODIFIED -> {
-                                    println("ABC::Modified::" + dc.document.data)
                                     val messageModel = UsersList.getMessagesModel(dc.document)
                                     if(isGroup) {
                                         var user: UserModel? =
                                             userList.find { it.uid == messageModel.senderId }
-                                        Log.e("UserData=====", "====" + user?.fullName)
                                         messageModel.senderName = user?.fullName
                                     }
                                     modifiedChatList.add(messageModel)
@@ -147,13 +134,11 @@ class ChatViewModel @Inject constructor(
         viewModelScope.launch {
             if (networkHelper.isNetworkConnected()) {
                 val doc:CollectionReference
-                if(isGroup)
-                {
+                if (isGroup) {
                     doc =
                         chatRepository.getSendMessagePath(messagesModel.receiverId.toString())
-                }
-                else {
-                     doc =
+                } else {
+                    doc =
                         chatRepository.getSendMessagePath(getCurrentDocumentId(messagesModel.receiverId.toString()))
                 }
                 var timestamp = Timestamp(Date())
@@ -215,13 +200,9 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-
-
-
     /**
      * Getting video file thumb for upload to firebase
      */
-
     private fun getVideoThumb(
         messagesModel: MessagesModel,
         localVideoPath: String,
@@ -255,6 +236,9 @@ class ChatViewModel @Inject constructor(
 
     }
 
+    /**
+     * set Messages Read Status
+     */
     fun setMessagesReadStatus(messagesList: ArrayList<MessagesModel>) {
 
         for (i in messagesList.indices) {
@@ -294,7 +278,6 @@ class ChatViewModel @Inject constructor(
                 uploadTask.addOnProgressListener { taskSnapshot ->
                     val progress =
                         (100.0 * taskSnapshot.bytesTransferred) / taskSnapshot.totalByteCount
-                    println("Uploading in progress :$progress% done")
                     progressBar.progress = progress.toInt()
                 }
 
@@ -316,7 +299,6 @@ class ChatViewModel @Inject constructor(
                             messagesModel.url = it.toString()
                             messagesModel.status = Constants.TYPE_SEND
                             sendMessage(messagesModel, true,isGroup)
-                            println("Uploading url:$ $it")
                         }
                     }
                 }
@@ -333,12 +315,10 @@ class ChatViewModel @Inject constructor(
         )
     }
 
-    fun getChatDocumentId(otherUserId: String,isGroup: Boolean): String {
-        if(isGroup)
-        {
+    fun getChatDocumentId(otherUserId: String, isGroup: Boolean): String {
+        if (isGroup) {
             return chatRepository.getMessageDocumentId(otherUserId)
-        }
-        else {
+        } else {
             return chatRepository.getMessageDocumentId(getCurrentDocumentId(otherUserId))
         }
     }
@@ -367,7 +347,6 @@ class ChatViewModel @Inject constructor(
                 uploadTask.addOnProgressListener { taskSnapshot ->
                     val progress =
                         (100.0 * taskSnapshot.bytesTransferred) / taskSnapshot.totalByteCount
-                    println("Uploading in progress :$progress% done")
                     progressBar.progress = progress.toInt()
                 }
 
@@ -388,8 +367,6 @@ class ChatViewModel @Inject constructor(
                         downUri?.let {
                             messagesModel.videoUrl = it.toString()
                             messagesModel.status = Constants.TYPE_SEND
-                            //    sendMessage(messagesModel, true)
-                            println("Uploading url:$ $it")
                             progressBar.progress = 80
                             getVideoThumb(messagesModel, videoPath, progressBar,isGroup)
                         }
@@ -435,37 +412,5 @@ class ChatViewModel @Inject constructor(
                 )
             )
         }
-
-//    /**
-//     * Add GroupCall Data in database
-//     */
-//    fun setupOneToOneCallData(
-//        userIds: ArrayList<String>,
-//        callStatus: String,
-//        hostUserId: String,
-//        hostUserName: String
-//    ) = viewModelScope.launch {
-//        if (networkHelper.isNetworkConnected()) {
-//            val doc = getFirebaseDB().collection(Constant.TABLE_GROUPCALL).document()
-//            Log.e("HostName======","==="+hostUserName)
-//            val map = hashMapOf(
-//                Constant.FIELD_USERIDS to userIds,
-//                Constant.FIELD_CALL_STATUS to callStatus,
-//                Constant.FIELD_HOST_ID to hostUserId,
-//                Constant.FIELD_HOST_NAME to hostUserName
-//            )
-//
-//            doc.set(map).addOnSuccessListener {
-//                _addOneToOneCallDataResponse.postValue(Resource.success(doc.id))
-//            }.addOnFailureListener {
-//                _addOneToOneCallDataResponse.postValue(Resource.success("Failed to add Data"))
-//            }
-//        } else _addOneToOneCallDataResponse.postValue(
-//            Resource.error(
-//                Constant.MSG_NO_INTERNET_CONNECTION,
-//                null
-//            )
-//        )
-//    }
 
 }

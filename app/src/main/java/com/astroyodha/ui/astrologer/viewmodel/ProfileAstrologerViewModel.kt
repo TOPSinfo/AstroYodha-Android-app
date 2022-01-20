@@ -93,10 +93,8 @@ class ProfileAstrologerViewModel @Inject constructor(
                     // Delete the file
                     pictureRef.delete().addOnCompleteListener {
                         if(it.isSuccessful) {
-                            MyLog.e("Image Deleted", " Successfully")
                         }
                     }.addOnFailureListener {
-                        MyLog.e("Image Deleted", " ==" + it.message)
                     }
                 }
             }
@@ -177,7 +175,6 @@ class ProfileAstrologerViewModel @Inject constructor(
     /**
      * Update user presence online/offline
      */
-
     fun updateUserPresence(isOnline: Boolean, userId: String) {
 
         userRepository.getUserProfileRepository(userId)
@@ -232,7 +229,6 @@ class ProfileAstrologerViewModel @Inject constructor(
 
                     _userDetailResponse.postValue(Resource.success(userModel))
 
-                    MyLog.e("Name====", "======" + Constants.USER_NAME)
                 }
         } else {
             _userDetailResponse.value = Resource.error(Constants.MSG_NO_INTERNET_CONNECTION, null)
@@ -251,7 +247,6 @@ class ProfileAstrologerViewModel @Inject constructor(
                 .addSnapshotListener { snapshot, e ->
 
                     if (e != null) {
-                        MyLog.w(TAG, "Listen failed. $e")
                         _userDetailResponse.value= Resource.error(e.message.toString(),null)
                         return@addSnapshotListener
                     }
@@ -328,6 +323,9 @@ class ProfileAstrologerViewModel @Inject constructor(
 
     }
 
+    /**
+     * get astrologer as per filter
+     */
     fun getAllAstrologerFilterWise(sortBy: String, specialityList: List<String>) {
 
         if (networkHelper.isNetworkConnected()) {
@@ -346,7 +344,6 @@ class ProfileAstrologerViewModel @Inject constructor(
             ref.get().addOnSuccessListener {
 
                 var userModel = AstrologerUsersList.getUserArrayList(it, "")
-
 
                 _getAllAstrologerResponse.postValue(Resource.success(userModel))
 
@@ -484,7 +481,6 @@ class ProfileAstrologerViewModel @Inject constructor(
             userRepository.getUserProfileRepository(userId).update(data1)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
-                        MyLog.e("Token Updated"," Successful")
                         _userDataResponse.postValue(
                             Resource.success(
                                 Constants.MSG_UPDATE_SUCCESSFULL,
@@ -557,11 +553,12 @@ class ProfileAstrologerViewModel @Inject constructor(
      */
     fun getLanguageList() {
 
-        if(networkHelper.isNetworkConnected()) {
+        if (networkHelper.isNetworkConnected()) {
             userRepository.getLanguageRepository().get()
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
-                        var languageList=LanguageAndSpecialityList.getLanguageArrayList(it.result!!)
+                        var languageList =
+                            LanguageAndSpecialityList.getLanguageArrayList(it.result!!)
 
                         _languageAndSpecialityListResponse.postValue(
                             Resource.success(languageList)
@@ -576,9 +573,7 @@ class ProfileAstrologerViewModel @Inject constructor(
                         )
                     )
                 }
-        }
-        else
-        {
+        } else {
             _languageAndSpecialityListResponse.postValue(
                 Resource.error(
                     Constants.MSG_NO_INTERNET_CONNECTION,
@@ -602,10 +597,7 @@ class ProfileAstrologerViewModel @Inject constructor(
 
                     var userModel = AstrologerUsersList.getNormalUserDetail(it)
 
-
                     _normalUserDetailResponse.postValue(Resource.success(userModel))
-
-                    MyLog.e("Name====", "======" + Constants.USER_NAME)
                 }
         } else {
             _normalUserDetailResponse.value = Resource.error(Constants.MSG_NO_INTERNET_CONNECTION, null)

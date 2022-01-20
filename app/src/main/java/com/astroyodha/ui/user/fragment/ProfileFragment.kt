@@ -1,6 +1,5 @@
 package com.astroyodha.ui.user.fragment
 
-
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -9,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.viewModels
 import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -27,7 +27,6 @@ import com.astroyodha.ui.user.authentication.activity.WelcomeActivity
 import com.astroyodha.ui.user.authentication.model.user.UserModel
 import com.astroyodha.ui.user.viewmodel.ProfileViewModel
 import com.astroyodha.utils.*
-
 
 class ProfileFragment : BaseFragment() {
     private val TAG = "ProfileFragment"
@@ -90,6 +89,9 @@ class ProfileFragment : BaseFragment() {
                     googleSignInClient.signOut()
                 }
             }
+            context?.toast(getString(R.string.logout_successfully))
+//            pref.clearAllPref(context!!, Constants.PREF_FILE) // do not clear fcm token will clear and it will set "" in after login
+            NotificationManagerCompat.from(context!!).cancelAll() // clear all notification on logout
             startActivity(Intent(context, WelcomeActivity::class.java))
             activity!!.finish()
         }
@@ -159,6 +161,9 @@ class ProfileFragment : BaseFragment() {
 
     }
 
+    /**
+     * set data to view
+     */
     private fun setUserData() {
         userModel!!.fullName.let {
             binding.txtUserName.setText(it)
@@ -176,11 +181,13 @@ class ProfileFragment : BaseFragment() {
             binding.lnBirthday.makeVisible()
         }
         userModel!!.profileImage.let {
-            MyLog.e("Profile Image", "====" + it.toString())
             binding.imgUser.loadProfileImage(it.toString())
         }
     }
 
+    /**
+     * Checking image picker and cropper result after image selection
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_UPDATE_PROFILE) {

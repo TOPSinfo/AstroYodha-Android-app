@@ -57,7 +57,7 @@ class FAQAdapter(
             holder.tvAnswer.text = model.answer
 
             holder.itemView.setOnClickListener {
-                mCheckedPosition = position
+                mCheckedPosition = if(mCheckedPosition == position) -1 else position
                 notifyDataSetChanged()
 //                viewHolderClicks.onClickItem(model, holder.adapterPosition)
             }

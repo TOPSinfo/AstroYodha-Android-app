@@ -20,7 +20,6 @@ import com.astroyodha.utils.Constants
 import com.astroyodha.utils.Utility
 import com.astroyodha.utils.showSnackBarToast
 
-
 class RegistrationActivity : BaseActivity() {
 
     private lateinit var binding: ActivityRegistrationBinding
@@ -70,10 +69,9 @@ class RegistrationActivity : BaseActivity() {
         setObserver()
     }
 
-    /*
-   * change layout borders color based on view focus
-   * */
-
+    /**
+     * change layout borders color based on view focus
+     */
     private fun manageFocus() {
 
         binding.edFName.setOnFocusChangeListener { view, b ->
@@ -232,11 +230,12 @@ class RegistrationActivity : BaseActivity() {
             if(!loginType.equals("")) {
                 logoutSocialMedia()
             }
-            startActivity(
+            onBackPressed()
+            /*startActivity(
                 Intent(this, LoginActivity::class.java)
                     .putExtra(Constants.INTENT_USER_TYPE, Constants.USER_NORMAL)
             )
-            finish()
+            finish()*/
         }
 
         binding.imgBack.setOnClickListener {
@@ -247,10 +246,9 @@ class RegistrationActivity : BaseActivity() {
         }
     }
 
-
-    /*
-    * This function logout social media account
-    * */
+    /**
+     * This function logout social media account
+     */
     fun logoutSocialMedia()
     {
         Firebase.auth.signOut()

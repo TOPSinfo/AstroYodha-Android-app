@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.viewModels
 import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -91,7 +92,6 @@ class ProfileAstrologerFragment : BaseFragment() {
             startForResult.launch(
                 Intent(mContext, AstrologerEditProfileActivity::class.java)
             )
-//            startActivityForResult(Intent(mContext, AstrologerEditProfileActivity::class.java),RC_UPDATE_PROFILE)
         }
 
         binding.txtLogout.setOnClickListener {
@@ -109,6 +109,9 @@ class ProfileAstrologerFragment : BaseFragment() {
                     googleSignInClient.signOut()
                 }
             }
+            context?.toast(getString(R.string.logout_successfully))
+            //            pref.clearAllPref(context!!, Constants.PREF_FILE) // do not clear scm token will clear and it will set "" in after login
+            NotificationManagerCompat.from(context!!).cancelAll() // clear all notification on logout
             startActivity(Intent(context, WelcomeActivity::class.java))
             activity!!.finish()
         }
@@ -187,6 +190,9 @@ class ProfileAstrologerFragment : BaseFragment() {
         })
     }
 
+    /**
+     * set data to view
+     */
     private fun setUserData() {
         userModel!!.fullName.let {
             binding.txtUserName.setText(it)
@@ -202,11 +208,13 @@ class ProfileAstrologerFragment : BaseFragment() {
 
 
         userModel!!.profileImage.let {
-            MyLog.e("Profile Image", "====" + it.toString())
             binding.imgUser.loadProfileImage(it.toString())
         }
     }
 
+    /**
+     * Checking image picker and cropper result after image selection
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_UPDATE_PROFILE) {

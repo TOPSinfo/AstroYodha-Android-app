@@ -36,7 +36,6 @@ class WalletFragment : BaseFragment() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
                 //  you will get result here in result.data
-//                MyLog.e(TAG, result.data?.getBooleanExtra(Constants.INTENT_TRANSACTION, false).toString())
                 init()
             }
         }
@@ -47,13 +46,11 @@ class WalletFragment : BaseFragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentWalletBinding.inflate(inflater, container, false)
-        MyLog.e(TAG, "onCreateView")
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        MyLog.e(TAG, "onViewCreated")
         init()
         setClickListener()
         setObserver()
@@ -117,28 +114,28 @@ class WalletFragment : BaseFragment() {
      */
     private fun setClickListener() {
         binding.tv10.setOnClickListener {
-//            redirectToPayment(getString(R.string._10))
             binding.edAmount.setText(getString(R.string._10).getAmount())
+            binding.edAmount.setSelection(binding.edAmount.text.length)
         }
         binding.tv15.setOnClickListener {
-//            redirectToPayment(getString(R.string._15))
             binding.edAmount.setText(getString(R.string._15).getAmount())
+            binding.edAmount.setSelection(binding.edAmount.text.length)
         }
         binding.tv20.setOnClickListener {
-//            redirectToPayment(getString(R.string._20))
             binding.edAmount.setText(getString(R.string._20).getAmount())
+            binding.edAmount.setSelection(binding.edAmount.text.length)
         }
         binding.tv50.setOnClickListener {
-//            redirectToPayment(getString(R.string._50))
             binding.edAmount.setText(getString(R.string._50).getAmount())
+            binding.edAmount.setSelection(binding.edAmount.text.length)
         }
         binding.tv500.setOnClickListener {
-//            redirectToPayment(getString(R.string._500))
             binding.edAmount.setText(getString(R.string._500).getAmount())
+            binding.edAmount.setSelection(binding.edAmount.text.length)
         }
         binding.tv5000.setOnClickListener {
-//            redirectToPayment(getString(R.string._5000))
             binding.edAmount.setText(getString(R.string._5000).getAmount())
+            binding.edAmount.setSelection(binding.edAmount.text.length)
         }
         binding.btnSubmit.setOnClickListener {
             if (checkValidation()) {
@@ -163,13 +160,15 @@ class WalletFragment : BaseFragment() {
         if (TextUtils.isEmpty(binding.edAmount.text.toString().trim())) {
             binding.root.showSnackBarToast(getString(R.string.please_add_or_select_amount))
             return false
+        } else if (binding.edAmount.text.toString().toInt() <= 0) {
+            binding.root.showSnackBarToast(getString(R.string.please_add_valid_amount))
+            return false
         }
         return true
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        MyLog.e(TAG, "onDestroyView")
     }
 
 }

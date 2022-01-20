@@ -34,7 +34,9 @@ class AstrologerEventDetailActivity : BaseActivity() {
         clickListeners()
     }
 
-
+    /**
+     * initialize view
+     */
     fun init() {
 
         intent.getStringExtra(Constants.INTENT_USER_ID).let {
@@ -51,6 +53,9 @@ class AstrologerEventDetailActivity : BaseActivity() {
         setObserver()
     }
 
+    /**
+     * set observer
+     */
     fun setObserver() {
 
         profileViewModel.normalUserDetailResponse.observe(this, {
@@ -60,7 +65,6 @@ class AstrologerEventDetailActivity : BaseActivity() {
                 }
                 Status.SUCCESS -> {
                     it.data.let {
-//                        bookingViewModel.getBookingDetail(bookingId)
                         setData(it)
                         setEventData(bookingModel)
                     }
@@ -94,27 +98,11 @@ class AstrologerEventDetailActivity : BaseActivity() {
             }
         })
 
-//        bookingViewModel.getBookingDetailResponse.observe(this, {
-//            when (it.status) {
-//                Status.LOADING -> {
-////                    showProgress(requireContext())
-//                }
-//                Status.SUCCESS -> {
-//                    hideProgress()
-//                    it.data.let {
-//                        setEventData(it)
-//                    }
-//
-//
-//                }
-//                Status.ERROR -> {
-//                    hideProgress()
-//                    it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
-//                }
-//            }
-//        })
     }
 
+    /**
+     * manage click listener of view
+     */
     private fun clickListeners() {
         binding.imgBack.setOnClickListener { onBackPressed() }
 
@@ -146,7 +134,6 @@ class AstrologerEventDetailActivity : BaseActivity() {
         }
 
         it?.endTime.let {
-//            binding.tvEndTime.text = it?.dateToStringFormat(timeFormat)
             endTime = it?.dateToStringFormat(timeFormat).toString()
 
         }
@@ -158,7 +145,6 @@ class AstrologerEventDetailActivity : BaseActivity() {
                 it.toString(),
                 ContextCompat.getColor(this, R.color.astrologer_blue_theme)
             )
-//            binding.tvEventDescription.text = it.toString()
         }
     }
 

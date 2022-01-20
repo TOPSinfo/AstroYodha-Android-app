@@ -20,11 +20,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.FirebaseAuth
-import com.gun0912.tedpermission.PermissionListener
-import com.gun0912.tedpermission.TedPermission
-import com.theartofdev.edmodo.cropper.CropImage
-import com.theartofdev.edmodo.cropper.CropImageView
 import com.astroyodha.R
 import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivityAstrologerEditProfileBinding
@@ -36,6 +31,11 @@ import com.astroyodha.ui.astrologer.model.user.AstrologerUserModel
 import com.astroyodha.ui.astrologer.viewmodel.ProfileAstrologerViewModel
 import com.astroyodha.ui.astrologer.viewmodel.TimeSlotViewModel
 import com.astroyodha.utils.*
+import com.google.firebase.auth.FirebaseAuth
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import droidninja.filepicker.FilePickerBuilder
 import droidninja.filepicker.FilePickerConst
 import droidninja.filepicker.utils.ContentUriUtils
@@ -43,14 +43,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-
 class AstrologerEditProfileActivity : BaseActivity() {
 
     lateinit var binding: ActivityAstrologerEditProfileBinding
     var mSelectedLanguage: ArrayList<String> = ArrayList()
     var mSelectedAstrtoType: ArrayList<String> = ArrayList()
-//    var mLanguageList: ArrayList<String> = ArrayList()
-//    var mAstrtoTypeList: ArrayList<String> = ArrayList()
     var mTimeSlotList: ArrayList<TimeSlotModel> = ArrayList()
 
 
@@ -75,26 +72,15 @@ class AstrologerEditProfileActivity : BaseActivity() {
         binding.edExperience.inputType = InputType.TYPE_CLASS_NUMBER
 
         profileViewModel.getUserDetail(FirebaseAuth.getInstance().currentUser?.uid.toString())
-//        resources.getStringArray(R.array.language_array).also {
-//            var list = it
-//
-//            for (i in list) {
-//                mLanguageList.add(i)
-//            }
-//        }
-//        resources.getStringArray(R.array.astrlogy_type_array).also {
-//            var list = it
-//
-//            for (i in list) {
-//                mAstrtoTypeList.add(i)
-//            }
-//        }
         setTimeSlotAdapter()
         manageFocus()
         clickListener()
         setObserver()
     }
 
+    /**
+     * manage click listener of view
+     */
     private fun clickListener() {
         binding.imgBack.setOnClickListener {
             onBackPressed()
@@ -222,7 +208,6 @@ class AstrologerEditProfileActivity : BaseActivity() {
                     it.data?.let {
                         mTimeSlotList.clear()
                         mTimeSlotList.addAll(it)
-                        MyLog.e("========","Time Slot Data=="+mTimeSlotList.size)
 
                         if (mTimeSlotList.isNotEmpty()) {
                             binding.tvNoDataFound.makeGone()
@@ -284,10 +269,9 @@ class AstrologerEditProfileActivity : BaseActivity() {
         }
     }
 
-
-    /*
-    * set user profile data to UI
-    * */
+    /**
+     * set user profile data to UI
+     */
     private fun setUserData() {
         if (userModel != null) {
             userModel!!.fullName.let {
@@ -334,13 +318,6 @@ class AstrologerEditProfileActivity : BaseActivity() {
 
                 binding.edLanguage.setText(displayLanguageList.joinToString(", "))
 
-//                var languagesstr=mSelectedLanguage.toString()
-//                var languagesstr=displayLanguageList.toString()
-
-
-
-//                var languageStr=mSelectedLanguage.toString()
-//                binding.edLanguage.setText(languagesstr.replace("[", "").replace("]",""))
             }
 
             userModel!!.speciality.let {
@@ -360,14 +337,9 @@ class AstrologerEditProfileActivity : BaseActivity() {
                 }
 
                 binding.edAstroType.setText(displaySpecialityList.joinToString(", "))
-
-
-//                var astrostr=mSelectedAstrtoType.toString()
-//                binding.edAstroType.setText(astrostr.replace("[", "").replace("]",""))
             }
 
             userModel!!.profileImage.let {
-                MyLog.e("Profile Image", "====" + it.toString())
                 binding.imgUser.loadProfileImage(it.toString())
             }
         }
@@ -430,7 +402,6 @@ class AstrologerEditProfileActivity : BaseActivity() {
                     profileImagePath = resultUri
 
                 } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                    // val error = result.error
                 }
             }
 
@@ -445,9 +416,6 @@ class AstrologerEditProfileActivity : BaseActivity() {
         CropImage.activity(uri).setCropShape(CropImageView.CropShape.OVAL).setAspectRatio(1, 1)
             .start(this@AstrologerEditProfileActivity)
     }
-
-
-
 
     /**
      * Checking validation
@@ -509,10 +477,9 @@ class AstrologerEditProfileActivity : BaseActivity() {
 
 
 
-    /*
-* change layout borders color based on view focus
-* */
-
+    /**
+     * change layout borders color based on view focus
+     */
     private fun manageFocus() {
 
         binding.edFullName.setOnFocusChangeListener { view, b ->
@@ -624,7 +591,7 @@ class AstrologerEditProfileActivity : BaseActivity() {
             if (b) {
                 binding.edAbout.compoundDrawableTintList =
                     ColorStateList.valueOf(ContextCompat.getColor(this, R.color.orange_theme))
-                binding.edAbout.setBackgroundResource(R.drawable.background_edit_text_orange_line_background)
+                binding.lnAbout.setBackgroundResource(R.drawable.background_edit_text_orange_line_background)
                 binding.edAbout.setTextColor(
                     ContextCompat.getColor(
                         this,
@@ -634,18 +601,16 @@ class AstrologerEditProfileActivity : BaseActivity() {
             } else {
                 binding.edAbout.compoundDrawableTintList =
                     ColorStateList.valueOf(ContextCompat.getColor(this, R.color.text_gray))
-                binding.edAbout.setBackgroundResource(R.drawable.background_edit_text_grey_line_background)
+                binding.lnAbout.setBackgroundResource(R.drawable.background_edit_text_grey_line_background)
                 binding.edAbout.setTextColor(ContextCompat.getColor(this, R.color.black))
             }
         }
 
     }
 
-
-
-    /*
-    * Dialog for language Selection and astrology type selection
-    * */
+    /**
+     * Dialog for language Selection and astrology type selection
+     */
     private fun languageAndAstrologyTypeSelectionDialog(isLanguage: Boolean) {
 
         var beaconDialog = Dialog(this)
@@ -687,48 +652,33 @@ class AstrologerEditProfileActivity : BaseActivity() {
         }
 
         txtSubmit.setOnClickListener {
-            if(isLanguage)
-            {
-                mSelectedLanguage=languageAndAstologyTypeAdapter.getSelectedLanguagesAndAstroType()
+            if (isLanguage) {
+                mSelectedLanguage =
+                    languageAndAstologyTypeAdapter.getSelectedLanguagesAndAstroType()
                 var displayLanguageList = ArrayList<String>()
-                for(language in Constants.listOfLanguages)
-                {
-                    for(selectedLanguage in mSelectedLanguage)
-                    {
-                        if(language.id.equals(selectedLanguage))
-                        {
+                for (language in Constants.listOfLanguages) {
+                    for (selectedLanguage in mSelectedLanguage) {
+                        if (language.id.equals(selectedLanguage)) {
                             displayLanguageList.add(language.language)
                         }
                     }
                 }
 
                 binding.edLanguage.setText(displayLanguageList.joinToString(", "))
-//                var languagesstr=mSelectedLanguage.toString()
-//                var languagesstr=displayLanguageList.toString()
-//
-//                binding.edLanguage.setText(languagesstr.replace("[", "").replace("]",""))
-            }
-            else
-            {
-                mSelectedAstrtoType=languageAndAstologyTypeAdapter.getSelectedLanguagesAndAstroType()
+            } else {
+                mSelectedAstrtoType =
+                    languageAndAstologyTypeAdapter.getSelectedLanguagesAndAstroType()
 
                 var displaySpecialityList = ArrayList<String>()
-                for(speciality in Constants.listOfSpeciality)
-                {
-                    for(selectedSpeciality in mSelectedAstrtoType)
-                    {
-                        if(speciality.id.equals(selectedSpeciality))
-                        {
+                for (speciality in Constants.listOfSpeciality) {
+                    for (selectedSpeciality in mSelectedAstrtoType) {
+                        if (speciality.id.equals(selectedSpeciality)) {
                             displaySpecialityList.add(speciality.language)
                         }
                     }
                 }
 
                 binding.edAstroType.setText(displaySpecialityList.joinToString(", "))
-
-
-//                var astrostr=mSelectedAstrtoType.toString()
-//                binding.edAstroType.setText(astrostr.replace("[", "").replace("]",""))
             }
             beaconDialog.dismiss()
         }

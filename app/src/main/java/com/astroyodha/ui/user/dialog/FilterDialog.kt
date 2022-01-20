@@ -16,7 +16,6 @@ import com.astroyodha.ui.user.adapter.SpecialityAdapter
 import com.astroyodha.utils.makeGone
 import com.astroyodha.utils.makeVisible
 
-
 class FilterDialog(
     val mContext: Context,
     private val mSpeciality: ArrayList<LanguageAndSpecialityModel>,

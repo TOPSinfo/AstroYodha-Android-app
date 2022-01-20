@@ -24,11 +24,6 @@ class TermsAndPrivacyPolicyActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityTermsAndPrivacyPolicyBinding.inflate(layoutInflater)
         setContentView(binding.root)
-/*
-        binding.tvDescription.append(binding.tvDescription.text)
-        binding.tvDescription.append(binding.tvDescription.text)
-        binding.tvDescription.append(binding.tvDescription.text)
-        binding.tvDescription.setHtmlText(binding.tvDescription.text.toString())*/
 
         init()
         setClickListener()
@@ -45,26 +40,15 @@ class TermsAndPrivacyPolicyActivity : BaseActivity() {
             userType = it!!
         }
 
-        if(userType==Constants.USER_ASTROLOGER)
-        {
+        if (userType == Constants.USER_ASTROLOGER) {
             binding.imgClose.setImageResource(R.drawable.astrologer_back)
-        }
-        else
-        {
+        } else {
             binding.imgClose.setImageResource(R.drawable.ic_back)
         }
 
-
-        /*if(mFrom == Constants.TERM_AND_CONDITION_POLICY) {
-
-        } else if(mFrom == Constants.PRIVACY_POLICY) {
-
-        } else if(mFrom == Constants.FAQ_POLICY) {
-
-        }*/
         viewModel.getPolicies(mFrom.toString())
-
     }
+
     /**
      * Initialize observer
      */
@@ -87,8 +71,6 @@ class TermsAndPrivacyPolicyActivity : BaseActivity() {
                                 binding.tvDescription.setText(Html.fromHtml(resultList[0].content));
 
                             binding.tvDescription.movementMethod = LinkMovementMethod.getInstance();
-
-//                            binding.tvDescription.setHtmlText(resultList[0].content)
                         }
                     }
                 }

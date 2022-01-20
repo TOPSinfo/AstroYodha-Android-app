@@ -54,6 +54,9 @@ object NotificationList {
         return bookingArrayList
     }
 
+    /**
+     * set single model item
+     */
     fun getNotificationModel(
         querySnapshot: QueryDocumentSnapshot
     ): NotificationModel {
@@ -87,7 +90,9 @@ object NotificationList {
         return notificationModel
     }
 
-
+    /**
+     * set single model item
+     */
     fun getNotificationDetail(
         querySnapshot: DocumentSnapshot
     ): NotificationModel {

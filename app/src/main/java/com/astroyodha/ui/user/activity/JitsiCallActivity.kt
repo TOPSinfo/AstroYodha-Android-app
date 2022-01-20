@@ -43,12 +43,6 @@ class JitsiCallActivity : BaseActivity()
     , JitsiMeetActivityInterface, JitsiMeetViewListener
 {
 
-//    private val broadcastReceiver = object : BroadcastReceiver() {
-//        override fun onReceive(context: Context?, intent: Intent?) {
-//            onBroadcastReceived(intent)
-//        }
-//    }
-
     private val TAG = javaClass.simpleName
     private lateinit var jitsiManager: JitsiManager
     private val jitsiViewModel: JitsiViewModel by viewModels()
@@ -77,11 +71,11 @@ class JitsiCallActivity : BaseActivity()
                 )
                 //update timer
                 endTime = bookingModel.endTime!!.time
-                MyLog.e(TAG, "extended time is ${bookingModel.endTime.toString()} \n===end$endTime")
                 timer?.cancel()
                 setTime(endTime)
             }
         }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -95,19 +89,13 @@ class JitsiCallActivity : BaseActivity()
         bookingModel = intent.getParcelableExtra(Constants.INTENT_BOOKING_MODEL)!!
         astrologerModel = intent.getParcelableExtra(Constants.INTENT_MODEL)!!
 
-//        registerForBroadcastMessages()
-
         jitsiManager = JitsiManager(this)
         view = jitsiManager.startCustomVideoCall(roomId) as JitsiMeetView
         view.listener = this
-//        setContentView(view)
 
         binding.layoutJitsi.addView(view)
-//        binding.layoutJitsi.addView(binding.txtRemainingTime)
         binding.txtRemainingTime.bringToFront()
-        MyLog.e("Call List in JITSI Screen","====="+ Constants.listOfActiveCall.size)
 
-//        displayTimeValidationDialog()
         setObserver()
     }
 
@@ -118,7 +106,6 @@ class JitsiCallActivity : BaseActivity()
     }
 
     override fun onConferenceTerminated(p0: MutableMap<String, Any>?) {
-        Log.e("===============", "onConferenceTerminated============")
         jitsiViewModel.changeStatus(roomId,false)
         if (bookingModel.status != Constants.COMPLETED_STATUS) {
             finish()
@@ -127,7 +114,6 @@ class JitsiCallActivity : BaseActivity()
     }
 
     override fun onConferenceWillJoin(p0: MutableMap<String, Any>?) {
-        Log.e("===============", "onConferenceTerminated============")
         jitsiViewModel.changeStatus(roomId,true)
 
         endTime = bookingModel.endTime!!.time
@@ -179,16 +165,11 @@ class JitsiCallActivity : BaseActivity()
 
                 val totalTime = TimeUnit.HOURS.toMillis(hour) + TimeUnit.MINUTES.toMillis(minutes) + TimeUnit.SECONDS.toMillis(
                     seconds)
-                val fixedTime = time - 300000L // 5 min
+                val fixedTime = time - 600000L // 10 min
                 val totalFixedTime = time - fixedTime
 
                 val difference: Long = endTime - Date().time
                 val min = TimeUnit.MILLISECONDS.toMinutes(difference).toInt()
-
-//                MyLog.e("Diff in Minute","===${min}")
-
-//                MyLog.e("Timmerr", "$totalTime--$totalFixedTime--$totalSecs")
-
 
                 var timeString = String.format(" Ends in : %02d:%02d:%02d", hour, minutes, seconds)
 
@@ -197,24 +178,9 @@ class JitsiCallActivity : BaseActivity()
                 if (totalTime == totalFixedTime) {
                     displayTimeValidationDialog()
                 }
-                /*if (totalSecs == 0L) {
-                    MyLog.e(TAG, "========================= $totalSecs")
-                    timer?.cancel()
-//                    pref.setValueLong(
-//                        this@JitsiCallAstrologerActivity,
-//                        Constants.REMAINING_TIME,
-//                        endTime, Constants.PREF_FILE)
-                    // update booking status to complete
-                    bookingModel.status = Constants.COMPLETED_STATUS
-                    bookingViewModel.addUpdateBookingData(bookingModel, true)
-                    jitsiViewModel.changeStatus(roomId,false)
-//                    view.leave()
-//                    finish()
-                }*/
             }
 
             override fun onFinish() {
-                MyLog.e(TAG,"======================== onFinish")
                 // update booking status to complete
                 bookingModel.status = Constants.COMPLETED_STATUS
                 bookingViewModel.addUpdateBookingData(bookingModel, true)
@@ -240,7 +206,6 @@ class JitsiCallActivity : BaseActivity()
                 val popupMenu = PopupMenu(this, it)
                 popupMenu.menuInflater.inflate(R.menu.menu_extend_time, popupMenu.menu)
                 popupMenu.setOnMenuItemClickListener { item ->
-//                toast(item.title.toString())
                     txtTimeValue.text = item.title.toString()
                     true
                 }
@@ -271,24 +236,10 @@ class JitsiCallActivity : BaseActivity()
                         .putExtra(Constants.INTENT_IS_DIRECT_PAYMENT, true) //direct payment
                         .putExtra(Constants.INTENT_IS_EXTEND_CALL, true)
                 )
-//            if (txtTimeValue.text!!.isNotEmpty()) {
-//                timer?.cancel()
-//
-//                val tt = txtTimeValue.text.toString().trim()
-//                val extraTimeAdd = remainingTime + TimeUnit.MINUTES.toMillis(tt.toLong())
-//                // Call function
-//                setTime(extraTimeAdd)
-//                pref.setValueLong(
-//                    this@JitsiCallAstrologerActivity,
-//                    Constants.REMAINING_TIME,
-//                    extraTimeAdd, Constants.PREF_FILE)
-//                MyLog.e("remainingTime", remainingTime.toString())
-//            }
                 dialogEndTimeAlert.dismiss()
             }
             dialogEndTimeAlert.show()
         } catch (e: Exception) {
-            MyLog.e(TAG,e.message.toString())
         }
     }
 
@@ -299,19 +250,15 @@ class JitsiCallActivity : BaseActivity()
         bookingViewModel.bookingAddUpdateResponse.observe(this, {
             when (it.status) {
                 Status.LOADING -> {
-//                    showProgress(this)
                 }
                 Status.SUCCESS -> {
-//                    hideProgress()
                     it.data?.let { result ->
-//                        toast(result)
                         toast(getString(R.string.call_over))
                         view.leave()
                         startFromFresh()
                     }
                 }
                 Status.ERROR -> {
-//                    hideProgress()
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
@@ -322,7 +269,6 @@ class JitsiCallActivity : BaseActivity()
         //chat ended start from fresh
         startActivity(
             Intent(this, UserHomeActivity::class.java)
-//                .putExtra(Constants.INTENT_SHOW_TIMER, false)
         )
         finishAffinity()
     }

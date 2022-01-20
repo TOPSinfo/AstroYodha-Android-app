@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.auth.FirebaseAuth
 import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivityAstrologerTransactionBinding
 import com.astroyodha.network.Status
@@ -15,6 +14,7 @@ import com.astroyodha.utils.Constants
 import com.astroyodha.utils.makeGone
 import com.astroyodha.utils.makeVisible
 import com.astroyodha.utils.showSnackBarToast
+import com.google.firebase.auth.FirebaseAuth
 
 class AstrologerTransactionActivity : BaseActivity() {
     val TAG = javaClass.simpleName
@@ -54,9 +54,7 @@ class AstrologerTransactionActivity : BaseActivity() {
             )
         }
 
-
         viewModel.getAllTransaction(FirebaseAuth.getInstance().currentUser?.uid.toString())
-
     }
 
     /**
@@ -81,14 +79,10 @@ class AstrologerTransactionActivity : BaseActivity() {
                         } else {
                             binding.tvNoDataFound.makeGone()
                             binding.lnBottomBar.makeVisible()
-                            for (transactionData in mList)
-                            {
-                                if(transactionData.trancationType==Constants.TRANSACTION_TYPE_CREDIT)
-                                {
+                            for (transactionData in mList) {
+                                if (transactionData.trancationType == Constants.TRANSACTION_TYPE_CREDIT) {
                                     totalAmount += transactionData.amount
-                                }
-                                else if(transactionData.trancationType==Constants.TRANSACTION_TYPE_DEBIT)
-                                {
+                                } else if (transactionData.trancationType == Constants.TRANSACTION_TYPE_DEBIT) {
                                     totalAmount -= transactionData.amount
                                 }
                             }

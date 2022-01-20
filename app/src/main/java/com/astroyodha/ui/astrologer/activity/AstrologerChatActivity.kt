@@ -19,6 +19,18 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.astroyodha.R
+import com.astroyodha.core.BaseActivity
+import com.astroyodha.databinding.ActivityAstrologerChatBinding
+import com.astroyodha.network.Status
+import com.astroyodha.ui.astrologer.adapter.AstrologerChatAdapter
+import com.astroyodha.ui.astrologer.viewmodel.ProfileAstrologerViewModel
+import com.astroyodha.ui.user.authentication.model.chat.MessagesModel
+import com.astroyodha.ui.user.authentication.model.user.UserModel
+import com.astroyodha.ui.user.model.booking.BookingModel
+import com.astroyodha.ui.user.viewmodel.BookingViewModel
+import com.astroyodha.ui.user.viewmodel.ChatViewModel
+import com.astroyodha.utils.*
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.common.reflect.TypeToken
@@ -32,18 +44,6 @@ import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
-import com.astroyodha.R
-import com.astroyodha.core.BaseActivity
-import com.astroyodha.databinding.ActivityAstrologerChatBinding
-import com.astroyodha.network.Status
-import com.astroyodha.ui.astrologer.adapter.AstrologerChatAdapter
-import com.astroyodha.ui.astrologer.viewmodel.ProfileAstrologerViewModel
-import com.astroyodha.ui.user.authentication.model.chat.MessagesModel
-import com.astroyodha.ui.user.authentication.model.user.UserModel
-import com.astroyodha.ui.user.model.booking.BookingModel
-import com.astroyodha.ui.user.viewmodel.BookingViewModel
-import com.astroyodha.ui.user.viewmodel.ChatViewModel
-import com.astroyodha.utils.*
 import droidninja.filepicker.FilePickerBuilder
 import droidninja.filepicker.FilePickerConst
 import droidninja.filepicker.utils.ContentUriUtils
@@ -51,7 +51,6 @@ import java.io.File
 import java.lang.reflect.Type
 import java.util.*
 import kotlin.collections.ArrayList
-
 
 class AstrologerChatActivity : BaseActivity() {
 
@@ -88,14 +87,12 @@ class AstrologerChatActivity : BaseActivity() {
 
         otherUserId = intent.getStringExtra("user_id").toString()
         isGroup = intent.getBooleanExtra("isGroup", false)
-//        roomId = intent.getStringExtra("room_id").toString()
         opponentUserName = intent.getStringExtra("user_name").toString()
         groupIcon = intent.getStringExtra("group_image").toString()
         bookingModel = intent.getParcelableExtra(Constants.INTENT_BOOKING_MODEL)!!
 
         val type: Type = object : TypeToken<ArrayList<UserModel>>() {}.type
         userList = Gson().fromJson(intent.getStringExtra("userList").toString(), type)
-        MyLog.e("userLir", "===" + userList.size)
 
         if (isGroup) {
             memberIdList = intent.getStringExtra("memberIdList").toString()
@@ -116,14 +113,11 @@ class AstrologerChatActivity : BaseActivity() {
         setClickListener()
         getChatMessagesList()
         if (!isGroup) {
-//            binding.imgVideoCall.visibility=View.VISIBLE
             binding.txtPresence.visibility = View.GONE
-//            binding.txtPresence.visibility = View.VISIBLE
             binding.imgGroupInformation.visibility = View.GONE
             getUserPresence()
 
         } else {
-//            binding.imgVideoCall.visibility=View.GONE
             binding.txtPresence.visibility = View.GONE
             binding.imgGroupInformation.visibility = View.VISIBLE
         }
@@ -167,7 +161,6 @@ class AstrologerChatActivity : BaseActivity() {
                             if (user.size == 1) {
                                 if (user[0].messageType == Constants.TYPE_MESSAGE) {
                                     messageList.addAll(user)
-//                                    chatAdapter?.notifyDataSetChanged()
                                     setChatAdapter()
                                     binding.rvChatMessageList.scrollToPosition(messageList.size - 1)
                                 } else if (user[0].messageType == Constants.TYPE_IMAGE || user[0].messageType == Constants.TYPE_VIDEO) {
@@ -189,10 +182,6 @@ class AstrologerChatActivity : BaseActivity() {
                                     binding.rvChatMessageList.scrollToPosition(messageList.size - 1)
                                 }
                             }
-
-
-                            //chatAdapter?.notifyItemInserted(messageList.size - 1)
-                            //    binding.rvChatMessageList.scrollToPosition(messageList.size - 1)
 
                             updateMessageReadStatus()
                         }
@@ -239,29 +228,6 @@ class AstrologerChatActivity : BaseActivity() {
             }
         })
 
-//        chatViewModel.addOneToOneCallDataResponse.observe(this, {
-//            when (it.status) {
-//                Status.LOADING -> {
-//                    showProgress(this)
-//                }
-//                Status.SUCCESS -> {
-//                    it.data.let {
-////                       val view =  jitsiManagerObject.startVideoCall(it!!)
-////                        setContentView(view)
-//                        val intent = Intent(this, JitsiCallActivity::class.java)
-//                        intent.putExtra("RoomId", it!!)
-//                        intent.putExtra("OpponentUserName", opponentUserName)
-//                        intent.putExtra("isGroupCall", false)
-//                        startActivity(intent)
-//                    }
-//                }
-//                Status.ERROR -> {
-//                    hideProgress()
-//                    it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
-//                }
-//            }
-//        })
-
         chatViewModel.addGroupCallDataResponse.observe(this, {
             when (it.status) {
                 Status.LOADING -> {
@@ -298,8 +264,6 @@ class AstrologerChatActivity : BaseActivity() {
                     hideProgress()
                     it.data?.let { result ->
                         binding.root.showSnackBarToast(result)
-                        //show add rating dialog
-//                        showAddRatingDialog()
                         startFromFresh()
                     }
                 }
@@ -310,32 +274,15 @@ class AstrologerChatActivity : BaseActivity() {
             }
         })
 
-//        astrologerProfileViewModel.ratingDataResponse.observe(this, {
-//            when (it.status) {
-//                Status.LOADING -> {
-//                    showProgress(this)
-//                }
-//                Status.SUCCESS -> {
-//                    hideProgress()
-//                    it.data?.let { result ->
-//                        toast(result)
-//                        startFromFresh()
-//                    }
-//                }
-//                Status.ERROR -> {
-//                    hideProgress()
-//                    it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
-//                }
-//            }
-//        })
-
     }
 
+    /**
+     * start From dashboard
+     */
     private fun startFromFresh() {
         //chat ended start from fresh
         startActivity(
             Intent(this, AstrologerDashboardActivity::class.java)
-//                .putExtra(Constants.INTENT_SHOW_TIMER, false)
         )
         finishAffinity()
     }
@@ -547,7 +494,6 @@ class AstrologerChatActivity : BaseActivity() {
             }
         }
 
-        //  chatAdapter?.notifyDataSetChanged()
     }
 
     /**
@@ -744,13 +690,10 @@ class AstrologerChatActivity : BaseActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK && result.data != null) {
                 val data = result.data
-                // val uri = Uri.parse(TrimVideo.getTrimmedVideoPath(result.data))
                 val uri = Uri.fromFile(File(data?.getStringExtra("trimmed_video_path")))
-                println("Trimmed path:: $uri")
                 uploadVideo(uri)
 
-            } else
-                MyLog.v(TAG, "videoTrimResultLauncher data is null");
+            }
         }
 
     /**
@@ -771,16 +714,11 @@ class AstrologerChatActivity : BaseActivity() {
         startActivity(intent)
     }
 
-    private fun openGroupDetailForEdit() {
-        /*val intent = Intent(this, CreateGroupActivity::class.java)
-        intent.putExtra("memberIdList", memberIdList)
-        intent.putExtra("group_image", groupIcon)
-        intent.putExtra("group_name", opponentUserName)
-        intent.putExtra("isForDisplay", true)
-        startActivity(intent)*/
-    }
+    private fun openGroupDetailForEdit() {}
 
-
+    /**
+     * setup video call
+     */
     private fun setupVideoCall(userIds: ArrayList<String>, currentUserId: String) {
         var userIdsWithStatus = ArrayList<String>()
         for (i in userIds) {
@@ -791,7 +729,6 @@ class AstrologerChatActivity : BaseActivity() {
             }
         }
 
-//            userIds.add(0, currentUserId + "___Active")
         chatViewModel.setupVideoCallData(
             userIdsWithStatus,
             "Active",

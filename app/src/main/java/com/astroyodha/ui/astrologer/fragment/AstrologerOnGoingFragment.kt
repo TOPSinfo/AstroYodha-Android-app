@@ -115,9 +115,6 @@ class AstrologerOnGoingFragment : BaseFragment() {
             )
         }
 
-//        val df = SimpleDateFormat("dd-MM-yyyy hh:mm a", Locale.getDefault())
-//        bookingViewModel.getOnGoingUserBookingRequest(userId/*, df.format(Calendar.getInstance().getTime())*/)
-
         bookingViewModel.getStatusUpdateListener(userId)
     }
 
@@ -136,20 +133,6 @@ class AstrologerOnGoingFragment : BaseFragment() {
      * Redirect to chat activity after click on user
      */
     fun redirectChatActivity(userModel: UserModel) {
-
-//        val userlist = ArrayList<String>()
-//        userlist.add(0, FirebaseAuth.getInstance().currentUser?.uid.toString())
-//        userlist.add(1, bookingModel.astrologerID)
-//
-//        val intent = Intent(context, ChatActivity::class.java)
-//        intent.putExtra("isGroup", false)
-//        intent.putExtra("userList", Gson().toJson(ArrayList<UserModel>()))
-//        intent.putExtra(Constants.INTENT_BOOKING_MODEL, bookingModel)
-//
-//        intent.putExtra("user_id", bookingModel.astrologerID)
-//        intent.putExtra("user_name", userModel.fullName)
-//        intent.putExtra("group_image", "")
-//        startActivity(intent)
     }
 
     /**
@@ -159,9 +142,10 @@ class AstrologerOnGoingFragment : BaseFragment() {
         bookingViewModel.bookingList.observe(viewLifecycleOwner, { updatedData ->
             updatedData.forEach {
                 mList.mapIndexed { index, bookingModel ->
-                    if (bookingModel.id == it.id && bookingModel.status != it.status) {
-                        bookingModel.status = it.status
-                        binding.rvBooking.adapter?.notifyItemChanged(index, bookingModel)
+                    if (bookingModel.id == it.id ) {
+//                        bookingModel.status = it.status
+                        mList[index]=it
+                        binding.rvBooking.adapter?.notifyItemChanged(index)
                         return@forEach
                     }
                 }

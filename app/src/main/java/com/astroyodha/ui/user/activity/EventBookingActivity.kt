@@ -89,15 +89,8 @@ class EventBookingActivity : BaseActivity() {
     private val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
-                //  you will get result here in result.data
-                isDirectPayment =
-                    result.data?.getBooleanExtra(Constants.INTENT_IS_DIRECT_PAYMENT, false)!!
-
-                walletModel = Gson().fromJson(
-                    result.data?.getStringExtra(Constants.INTENT_MODEL),
-                    WalletModel::class.java
-                )
-                addUpdateEvent()
+                //booking added in payment no need to add from here
+                setResult()
             }
         }
 
@@ -134,35 +127,6 @@ class EventBookingActivity : BaseActivity() {
             if (intent.hasExtra(Constants.INTENT_IS_FROM)) {
                 bookingModel = intent.getParcelableExtra(Constants.INTENT_BOOKING_MODEL)!!
                 bookingViewModel.getBookingDetail(bookingModel.id)
-                /*if (intent.getStringExtra(Constants.INTENT_IS_FROM) == Constants.BOOKING_PAST ||
-                    intent.getStringExtra(Constants.INTENT_IS_FROM) == Constants.BOOKING_UPCOMING
-                ) {
-                    //disable edit add
-                    bookingModel = intent.getParcelableExtra(Constants.INTENT_BOOKING_MODEL)!!
-                    disableAddEdit()
-                    // showing chat icon if comes from past tab
-                    if (intent.getStringExtra(Constants.INTENT_IS_FROM) == Constants.BOOKING_PAST &&
-                        bookingModel.status == Constants.COMPLETED_STATUS
-                    ) {
-                        binding.imgChat.makeVisible()
-                    } else if (intent.getStringExtra(Constants.INTENT_IS_FROM) == Constants.BOOKING_UPCOMING && bookingModel.status == Constants.APPROVE_STATUS) {
-                        val mCurrentTime = Date()
-                        if (bookingModel.startTime?.before(mCurrentTime)!! && bookingModel.endTime?.after(
-                                mCurrentTime
-                            )!!
-                        ) {
-                            binding.groupCommunication.makeVisible()
-                        }
-                    }
-                } else if (intent.getStringExtra(Constants.INTENT_IS_FROM) == Constants.BOOKING_ONGOING) {
-                    //disable edit add
-                    bookingModel = intent.getParcelableExtra(Constants.INTENT_BOOKING_MODEL)!!
-                    disableAddEdit()
-                    //show chat option
-                    if (bookingModel.status == Constants.APPROVE_STATUS) {
-                        binding.groupCommunication.makeVisible()
-                    }
-                }*/
             } else {
                 // comes on add event
                 binding.groupAmount.makeGone()
@@ -170,6 +134,9 @@ class EventBookingActivity : BaseActivity() {
         }
     }
 
+    /**
+     * set disable data
+     */
     private fun disableAddEdit() {
         binding.tvTitle.text = getString(R.string.view_event)
         binding.tvSave.makeGone()
@@ -195,6 +162,9 @@ class EventBookingActivity : BaseActivity() {
         }
     }
 
+    /**
+     * set data to view
+     */
     private fun setData(showStatus: Boolean) {
         binding.tvAstrologerName.text = bookingModel.astrologerName
         binding.edDetails.setText(bookingModel.description)
@@ -285,7 +255,6 @@ class EventBookingActivity : BaseActivity() {
                     val difference: Long = date2.time - date1.time
                     val min = TimeUnit.MILLISECONDS.toMinutes(difference).toInt()
                     index++
-//                    MyLog.e(TAG, "$$$$$$$$$$$$$$$$ $index")
                     if (abs(min) <= 15) {
                         currentTimePosition = index
                     }
@@ -296,7 +265,6 @@ class EventBookingActivity : BaseActivity() {
 
         //print timings
         mTimeList.forEach { time ->
-            MyLog.e(TAG, "================== $time")
         }
 
         // gets customListBalloon's recyclerView.
@@ -347,33 +315,6 @@ class EventBookingActivity : BaseActivity() {
         mDialog.show()
 
         val rgNotification = mDialog.findViewById(R.id.rgNotification) as RadioGroup
-        //add radio button dynamic
-        /*val mReminderNotificationList = listOf(
-            getString(R.string.no_notification),
-            getString(R.string._5_minutes_before),
-            getString(R.string._10_minutes_before),
-            getString(R.string._15_minutes_before),
-            getString(R.string._30_minutes_before),
-            getString(R.string._1_hour_before),
-            getString(R.string._1_day_before)
-        )
-        mReminderNotificationList.forEach {
-            val params = LinearLayoutCompat.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                setMargins(0,resources.getDimension(R.dimen._5sdp).toInt(),0,0)
-            }
-            val rdnotify= RadioButton(this)
-            rdnotify.id = View.generateViewId()
-            rdnotify.text = it
-            rdnotify.setTextColor(getColor(R.color.grey_dark))
-//            rdnotify.textSize = resources.getDimension(R.dimen._4ssp)
-            rdnotify.setTextAppearance(this, R.style.fontRegular)
-            rdnotify.setPadding(resources.getDimension(R.dimen._5sdp).toInt(), 0, 0, 0)
-            rdnotify.layoutParams = params
-            rgNotification.addView(rdnotify)
-        }*/
 
         rgNotification.setOnCheckedChangeListener { radioGroup, checkedId ->
             val radioButton = radioGroup.findViewById(checkedId) as RadioButton
@@ -448,24 +389,6 @@ class EventBookingActivity : BaseActivity() {
                             userModel = result
                             if (onSave) {
                                 onSave = false
-                                /*chargableMin = getMin()
-                                if (binding.tvPaymentMode.text == getString(R.string.pay_with_other)) {
-                                    //redirect to razor pay for direct payment
-                                    hideProgress()
-                                    isFromWallet = false
-                                    redirectToPayment(chargableMin)
-                                } else if (userModel.walletBalance!!.toInt() > (astrologerModel.price * chargableMin)) {
-                                    //deduct from wallet
-                                    isFromWallet = true
-                                    walletModel.amount = astrologerModel.price * chargableMin
-                                    walletModel.paymentType = Constants.PAYMENT_TYPE_WALLET
-                                    addUpdateEvent()
-                                } else {
-                                    //redirect to razor pay for direct payment
-                                    hideProgress()
-                                    isFromWallet = false
-                                    redirectToPayment(chargableMin)
-                                }*/
                             } else if (!intent.hasExtra(Constants.INTENT_IS_FROM) && isFirstTime) {
                                 checkWalletBalance(true)
                             }
@@ -512,18 +435,11 @@ class EventBookingActivity : BaseActivity() {
                         if (isDirectPayment) {
                             // comes here after payment
                             toast(it.substringAfter(" "))
-//                            setResult()
                             walletModel.bookingId = it.substringBefore(" ")
-                            MyLog.e(
-                                TAG,
-                                "adding booking id to trancationId == " + walletModel.trancationId
-                            )
                             walletViewModel.addMoney(walletModel, true, true)
                         } else if (isFromWallet) {
                             //comes here if user have sufficient wallet balance
                             var walletModel = WalletModel()
-//                        walletModel.trancationId = razorpayPaymentID
-//                            walletModel.amount = "-${astrologerModel.price * chargableMin}"
                             walletModel.amount = astrologerModel.price * chargableMin
                             walletModel.userId = userModel.uid.toString()
                             walletModel.userName = userModel.fullName.toString()
@@ -610,7 +526,6 @@ class EventBookingActivity : BaseActivity() {
                     showProgress(this)
                 }
                 Status.SUCCESS -> {
-//                    hideProgress()
                     astrologerModel.walletBalance =
                         (astrologerModel.walletBalance!!.toInt() + astrologerModel.price * chargableMin)
                     astrologerProfileViewModel.updateAstrologerWalletBalance(
@@ -771,7 +686,6 @@ class EventBookingActivity : BaseActivity() {
                         } else {
                             binding.root.showSnackBarToast(getString(R.string.astrologer_not_available))
                         }
-                        MyLog.e("========", "Time Slot Data==" + mAstrologerTimeSlotList.size)
                     }
                 }
                 Status.ERROR -> {
@@ -838,7 +752,6 @@ class EventBookingActivity : BaseActivity() {
                         if(performTask) {
                             performSave()
                         } else {
-//                            binding.root.showSnackBarToast(getString(R.string.astrologer_not_available))
                             binding.root.showSnackBarToast(
                                 "Astrologer have already meeting" +
                                         " $astrologerBookingStartTime to $astrologerBookingEndTime"
@@ -855,6 +768,9 @@ class EventBookingActivity : BaseActivity() {
         })
     }
 
+    /**
+     * get weekly timeslot
+     */
     private fun getWeeklyTimeSlot() {
         // custom time not available call weekly
         request = getString(R.string.weekly)
@@ -865,6 +781,9 @@ class EventBookingActivity : BaseActivity() {
         )
     }
 
+    /**
+     * get repeat timeslot
+     */
     private fun getRepeatTimeSlot() {
         // weekly not available call repeat
         request = getString(R.string.repeat)
@@ -875,6 +794,9 @@ class EventBookingActivity : BaseActivity() {
         )
     }
 
+    /**
+     * get min from start time and end time
+     */
     private fun getMin(): Int {
         val simpleDateFormat = SimpleDateFormat(timeFormat)
 
@@ -882,14 +804,13 @@ class EventBookingActivity : BaseActivity() {
         val date2 = simpleDateFormat.parse(endTime)
         val difference: Long = date2.time - date1.time
         val min = TimeUnit.MILLISECONDS.toMinutes(difference).toInt()
-        /*val days = (difference / (1000 * 60 * 60 * 24)).toInt()
-        val hours = ((difference - 1000 * 60 * 60 * 24 * days) / (1000 * 60 * 60)).toInt()
-        val min =
-            (difference - 1000 * 60 * 60 * 24 * days - 1000 * 60 * 60 * hours).toInt() / (1000 * 60)*/
         return min
 
     }
 
+    /**
+     * check wallet balance
+     */
     private fun checkWalletBalance(isFirstTime: Boolean) {
         if (isFirstTime) {
             if (userModel.walletBalance!! > 0) {
@@ -905,8 +826,11 @@ class EventBookingActivity : BaseActivity() {
         }
     }
 
+    /**
+     * redirect to payment
+     */
     private fun redirectToPayment(min: Int) {
-
+        setBookingModel()
         startForResult.launch(
             Intent(this, PaymentActivity::class.java)
                 .putExtra(Constants.INTENT_AMOUNT, (astrologerModel.price * min).toString())
@@ -916,6 +840,9 @@ class EventBookingActivity : BaseActivity() {
         )
     }
 
+    /**
+     * set result
+     */
     private fun setResult() {
         setResult(
             Activity.RESULT_OK,
@@ -991,13 +918,11 @@ class EventBookingActivity : BaseActivity() {
                 .setPermissionListener(object : PermissionListener {
                     override fun onPermissionGranted() {
 
-                        if(bookingModel.endTime!!.time - Date().time <= 0L)
-                        {
+                        if (bookingModel.endTime!!.time - Date().time <= 0L) {
                             toast(getString(R.string.meeting_time_over))
                             binding.btnCall.makeGone()
                             binding.btnChat.makeGone()
-                        }
-                        else {
+                        } else {
 
                             var currentUserId =
                                 FirebaseAuth.getInstance().currentUser?.uid.toString()
@@ -1060,7 +985,6 @@ class EventBookingActivity : BaseActivity() {
             redirectChatActivity(userModel)
         }
         binding.imgDelete.setOnClickListener {
-//            bookingViewModel.deleteBooking(bookingModel.id)
             bookingModel.status = Constants.CANCEL_STATUS
             addUpdateEvent()
         }
@@ -1078,6 +1002,9 @@ class EventBookingActivity : BaseActivity() {
         }
     }
 
+    /**
+     * perform save click
+     */
     private fun performSave() {
         if (isEdit) {
             addUpdateEvent()
@@ -1102,6 +1029,9 @@ class EventBookingActivity : BaseActivity() {
         }
     }
 
+    /**
+     * adding booking event
+     */
     private fun addUpdateEvent() {
         bookingModel.astrologerName = astrologerModel.fullName.toString()
         bookingModel.astrologerPerMinCharge = astrologerModel.price
@@ -1154,7 +1084,6 @@ class EventBookingActivity : BaseActivity() {
                     0
                 }
             }
-        MyLog.e(TAG, "trancationId == " + walletModel.trancationId)
         bookingModel.transactionId = walletModel.trancationId
         if (walletModel.paymentType == Constants.PAYMENT_TYPE_WALLET) {
             bookingModel.paymentStatus = ""
@@ -1170,6 +1099,74 @@ class EventBookingActivity : BaseActivity() {
         )
     }
 
+    /**
+     * setting data to booking model
+     */
+    private fun setBookingModel() {
+        bookingModel.astrologerName = astrologerModel.fullName.toString()
+        bookingModel.astrologerPerMinCharge = astrologerModel.price
+        bookingModel.description = binding.edDetails.text.toString()
+        bookingModel.date = binding.tvDate.text.toString().dateFormat(
+            dateFormat,
+            dateDBFormat
+        )
+
+        val mFormat = SimpleDateFormat("$dateFormat $timeFormat")
+        var startDate: Date = mFormat.parse("${binding.tvDate.text} $startTime")
+        var endDate: Date = mFormat.parse("${binding.tvDate.text} $endTime")
+
+
+        bookingModel.startTime = startDate
+
+        bookingModel.endTime = endDate
+        bookingModel.month = "${binding.tvDate.text}".dateFormat(dateFormat, "MM")
+        bookingModel.year = "${binding.tvDate.text}".dateFormat(dateFormat, "yyyy")
+        bookingModel.userId = userId.toString()
+        bookingModel.userName = userModel.fullName.toString()
+        bookingModel.userBirthday = userModel.birthDate.toString()
+        bookingModel.userProfileImage = userModel.profileImage.toString()
+        bookingModel.astrologerID = astrologerModel.uid.toString()
+        bookingModel.notify = binding.tvNotify.text.toString()
+        bookingModel.notificationMin =
+            when {
+                binding.tvNotify.text.toString() == getString(R.string.no_notification) -> {
+                    0
+                }
+                binding.tvNotify.text.toString() == getString(R.string._5_minutes_before) -> {
+                    5
+                }
+                binding.tvNotify.text.toString() == getString(R.string._10_minutes_before) -> {
+                    10
+                }
+                binding.tvNotify.text.toString() == getString(R.string._15_minutes_before) -> {
+                    15
+                }
+                binding.tvNotify.text.toString() == getString(R.string._30_minutes_before) -> {
+                    30
+                }
+                binding.tvNotify.text.toString() == getString(R.string._1_hour_before) -> {
+                    60
+                }
+                binding.tvNotify.text.toString() == getString(R.string._1_day_before) -> {
+                    1440
+                }
+                else -> {
+                    0
+                }
+            }
+        bookingModel.transactionId = walletModel.trancationId
+        if (walletModel.paymentType == Constants.PAYMENT_TYPE_WALLET) {
+            bookingModel.paymentStatus = ""
+        } else {
+            bookingModel.paymentStatus = Constants.RAZOR_PAY_STATUS_AUTHORIZED
+        }
+        bookingModel.paymentType = walletModel.paymentType
+        bookingModel.amount = walletModel.amount
+    }
+
+    /**
+     * update date in date
+     */
     private fun updateDateInView() {
         val myFormat = dateFormat // mention the format you need
         val sdf = SimpleDateFormat(myFormat, Locale.US)
@@ -1230,7 +1227,6 @@ class EventBookingActivity : BaseActivity() {
             }
         }
 
-//            userIds.add(0, currentUserId + "___Active")
         chatViewModel.setupVideoCallData(
             userIdsWithStatus,
             "Active",

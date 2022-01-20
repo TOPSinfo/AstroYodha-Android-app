@@ -62,8 +62,8 @@
     <string name="please_select_from_time">Please select from time</string>
     <string name="please_select_to_time">Please select to time</string>
 
-    <string name="please_select_to_time_greater_than_from_time">Please select To time grater than From time</string>
-    <string name="please_select_end_date_greater_than_start_date">Please select end date grater than start date</string>
+    <string name="please_select_to_time_greater_than_from_time">Please select To time greater than From time</string>
+    <string name="please_select_end_date_greater_than_start_date">Please select end date greater than start date</string>
     <string name="please_select_days">Please select days</string>
     <string name="selected_time_alerady_available">selected time already available in time slot, Please select another time. </string>
 
@@ -94,6 +94,8 @@
     <string name="menu_price">Price</string>
     <string name="menu_profile">Profile</string>
     <string name="menu_logout">Logout</string>
+    <string name="logout_successfully">Logout Successfully</string>
+
 
     <!-- TODO: Booking Label -->
     <string name="my_bookings">My Bookings</string>
@@ -282,7 +284,7 @@
     <string name="notification">Notification</string>
 
     <string name="topup_wallet">Topup wallet</string>
-    <string name="add_money_in_your_walled">Add money in your walled</string>
+    <string name="add_money_in_your_walled">Add money in your wallet</string>
     <string name="enter_amount">Enter amount</string>
     <string name="recommended">Recommended</string>
     <string name="_10">₹ 10</string>
@@ -294,6 +296,7 @@
     <string name="_5000">₹ 5000</string>
     <string name="proceed_to_topup">Proceed to topup</string>
     <string name="please_add_or_select_amount">Please add or select amount</string>
+    <string name="please_add_valid_amount">Please add valid amount</string>
     <string name="no_bookings_available">There is not any pending invitation from user.</string>
     <string name="thank_you">Thank you</string>
     <string name="thank_you_for_connect_with_astroyodha_your_booking_with_astrologer_has_been_confirmed">Thank you for connect with astroyodha. Your booking with astrologer has been confirmed.</string>
@@ -361,8 +364,8 @@
     <string name="details">Details</string>
     <string name="total_earning">Total Earning :</string>
     <string name="meeting_time_over">Your Meeting time is over</string>
-    <string name="your_call_is_completed_in_next_5_min">Your call will end in next 5 min. Would you like to extend?</string>
-    <string name="call_will_end_in_5_min">Your call will end in next 5 min.</string>
+    <string name="your_call_is_completed_in_next_5_min">Your call will end in next 10 min. Would you like to extend?</string>
+    <string name="call_will_end_in_5_min">Your call will end in next 10 min.</string>
     <string name="call_over">Your call time is over..</string>
     <string name="ok">Ok</string>
 

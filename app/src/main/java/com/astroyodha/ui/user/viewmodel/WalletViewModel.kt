@@ -70,13 +70,12 @@ class WalletViewModel @Inject constructor(
             Constants.FIELD_BOOKING_ID to wallet.bookingId,
             Constants.FIELD_ASTROLOGER_ID to wallet.astrologerId,
             Constants.FIELD_ASTROLOGER_NAME to wallet.astrologerName,
-            Constants.FIELD_MONEY_ADDED_IN_WALLET to wallet.isMoneyAddedInWallet,
+            Constants.FIELD_SET_CAPTURED_GATEWAY to true/*wallet.setCapturedGateway*/,  // required to convert from authorized to captured in razor pay
             Constants.FIELD_GROUP_CREATED_AT to wallet.createdAt
         )
         addUserDocument.set(data)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
-                    MyLog.e("TAG", "addWalletData $$$ $wallet.id")
                     _walletDataResponse.postValue(
                         Resource.success(
                             "${wallet.id} ${Constants.MSG_MONEY_ADDED_SUCCESSFUL}",
@@ -121,9 +120,6 @@ class WalletViewModel @Inject constructor(
 
         var data1 = HashMap<String, Any>()
         user.bookingId?.let { data1.put(Constants.FIELD_BOOKING_ID, it) }
-//        user.amount?.let { data1.put(Constants.FIELD_AMOUNT, it) }
-//        user.trancationId?.let { data1.put(Constants.FIELD_TRANSACTION_ID, it) }
-//        user.userId?.let { data1.put(Constants.FIELD_UID, it) }
 
         userRepository.getWalletUpdateRepository(user).update(data1)
             .addOnCompleteListener {

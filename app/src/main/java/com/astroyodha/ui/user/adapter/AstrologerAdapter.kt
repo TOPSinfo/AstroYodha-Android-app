@@ -48,13 +48,10 @@ class AstrologerAdapter(
             holder.tvRate.text = model.rating.toDouble().roundOffDecimal().toString()
 
             var displaySpecialityList = ArrayList<String>()
-            for(speciality in Constants.listOfSpeciality)
-            {
-                for(selectedSpeciality in model.speciality!!)
-                {
+            for (speciality in Constants.listOfSpeciality) {
+                for (selectedSpeciality in model.speciality!!) {
 
-                    if(speciality.id.equals(selectedSpeciality))
-                    {
+                    if (speciality.id.equals(selectedSpeciality)) {
                         displaySpecialityList.add(speciality.language)
                     }
                 }

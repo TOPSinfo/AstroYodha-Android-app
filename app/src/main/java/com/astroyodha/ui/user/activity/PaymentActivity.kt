@@ -16,6 +16,7 @@ import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivityPaymentBinding
 import com.astroyodha.network.Status
 import com.astroyodha.ui.astrologer.model.user.AstrologerUserModel
+import com.astroyodha.ui.astrologer.viewmodel.ProfileAstrologerViewModel
 import com.astroyodha.ui.user.authentication.model.user.UserModel
 import com.astroyodha.ui.user.model.booking.BookingModel
 import com.astroyodha.ui.user.model.wallet.WalletModel
@@ -32,8 +33,10 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
     private val profileViewModel: ProfileViewModel by viewModels()
     private val walletViewModel: WalletViewModel by viewModels()
     private val bookingViewModel: BookingViewModel by viewModels()
+    private val astrologerProfileViewModel: ProfileAstrologerViewModel by viewModels()
 
     var userModel: UserModel = UserModel()
+    var astrologerModel: AstrologerUserModel = AstrologerUserModel()
     private var walletModel: WalletModel = WalletModel()
     var amountInSubUnit = 0
     var amount = ""
@@ -67,13 +70,13 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
         getIntentData()
         init()
         setObserver()
-//        setClickListener()
     }
 
     private fun getIntentData() {
         isDirectPayment = intent.getBooleanExtra(Constants.INTENT_IS_DIRECT_PAYMENT, false)
         isExtendMinute = intent.hasExtra(Constants.INTENT_IS_EXTEND_CALL)
         bookingModel = intent.getParcelableExtra(Constants.INTENT_BOOKING_MODEL)
+        astrologerModel = intent.getParcelableExtra(Constants.INTENT_MODEL)!!
         amount = intent.getStringExtra(Constants.INTENT_AMOUNT)!!
         minute = intent.getIntExtra(Constants.INTENT_MINUTE, minute)
     }
@@ -84,6 +87,9 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
     private fun init() {
         Checkout.preload(applicationContext)
         profileViewModel.getUserDetail(FirebaseAuth.getInstance().currentUser?.uid.toString())
+        if(isDirectPayment) {
+            astrologerProfileViewModel.getUserSnapshotDetail(astrologerModel.uid.toString())
+        }
     }
 
     /**
@@ -100,6 +106,27 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
                     it.data?.let {
                         userModel = it
                         startPayment(amount)
+                    }
+                }
+                Status.ERROR -> {
+                    hideProgress()
+                    it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
+                }
+            }
+        })
+
+        //astrologer profile
+        astrologerProfileViewModel.userDetailResponse.observe(this, {
+            when (it.status) {
+                Status.LOADING -> {
+                    showProgress(this)
+                }
+                Status.SUCCESS -> {
+                    hideProgress()
+                    it.data?.let { result ->
+                        if (result.uid == astrologerModel.uid) {
+                            astrologerModel = result
+                        }
                     }
                 }
                 Status.ERROR -> {
@@ -135,6 +162,17 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
                 Status.SUCCESS -> {
                     hideProgress()
                     it.data?.let {
+                        if (!walletModel.bookingId.isNullOrBlank() && !isExtendMinute) {
+                            //after booking added booking id will be not blank
+                            astrologerModel.walletBalance =
+                                (astrologerModel.walletBalance!!.toInt() + amount.toInt())
+                            astrologerProfileViewModel.updateAstrologerWalletBalance(
+                                astrologerModel.uid!!,
+                                astrologerModel.walletBalance!!
+                            )
+                            return@let
+                        }
+
                         walletModel.trancationId = it.substringBefore(" ")
                         if (!isDirectPayment) {
                             userModel.walletBalance =
@@ -145,19 +183,27 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
                         } else {
                             if(!isExtendMinute) {
                                 //comes from add booking payment mode online
-                                redirectToPaymentSuccessScreen()
+                                bookingModel?.transactionId = walletModel.trancationId
+                                if (walletModel.paymentType == Constants.PAYMENT_TYPE_WALLET) {
+                                    bookingModel?.paymentStatus = ""
+                                } else {
+                                    bookingModel?.paymentStatus = Constants.RAZOR_PAY_STATUS_AUTHORIZED
+                                }
+                                bookingModel?.paymentType = walletModel.paymentType
+                                bookingModel?.amount = walletModel.amount
+                                bookingViewModel.addUpdateBookingData(
+                                    bookingModel!!,
+                                    false
+                                )
                             } else {
                                 //comes when user want's to extend call
                                 //update booking end time
                                 val minuteMillis: Long = 60000 //millisecs
                                 val curTimeInMs: Long = bookingModel!!.endTime!!.time
-                                MyLog.e(TAG, "current time is ${bookingModel!!.endTime.toString()}")
                                 bookingModel!!.endTime = Date(curTimeInMs + minute * minuteMillis)
                                 bookingModel!!.status = Constants.APPROVE_STATUS
-                                MyLog.e(TAG, "extended time is ${bookingModel!!.endTime.toString()}")
-                                bookingViewModel.addUpdateBookingData(
-                                    bookingModel!!,
-                                    true
+                                bookingViewModel.extendBookingMinute(
+                                    bookingModel!!
                                 )
                             }
                         }
@@ -178,7 +224,51 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
                 Status.SUCCESS -> {
                     hideProgress()
                     it.data?.let {
+                       //booking added add booking id in trancation table
+                        walletModel.bookingId = it.substringBefore(" ")
+                        walletViewModel.addMoney(walletModel, true, true)
+                    }
+                }
+                Status.ERROR -> {
+                    hideProgress()
+                    it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
+                }
+            }
+        })
+
+        bookingViewModel.bookingExtendResponse.observe(this, {
+            when (it.status) {
+                Status.LOADING -> {
+                    showProgress(this)
+                }
+                Status.SUCCESS -> {
+                    hideProgress()
+                    it.data?.let {
                        //booking extended successfully
+                        astrologerModel.walletBalance =
+                            (astrologerModel.walletBalance!!.toInt() + amount.toInt())
+                        astrologerProfileViewModel.updateAstrologerWalletBalance(
+                            astrologerModel.uid!!,
+                            astrologerModel.walletBalance!!
+                        )
+                    }
+                }
+                Status.ERROR -> {
+                    hideProgress()
+                    it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
+                }
+            }
+        })
+
+        //update astrologer balance
+        astrologerProfileViewModel.userDataResponse.observe(this, {
+            when (it.status) {
+                Status.LOADING -> {
+                    showProgress(this)
+                }
+                Status.SUCCESS -> {
+                    hideProgress()
+                    if(isExtendMinute) {
                         setResult(
                             Activity.RESULT_OK,
                             Intent().putExtra(
@@ -187,6 +277,8 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
                             )
                         )
                         onBackPressed()
+                    } else {
+                        redirectToPaymentSuccessScreen()
                     }
                 }
                 Status.ERROR -> {
@@ -204,6 +296,9 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
         )
     }
 
+    /**
+     * start payment
+     */
     fun startPayment(amount: String) {
         /*
           You need to pass current activity in order to let Razorpay create CheckoutActivity
@@ -247,12 +342,13 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
 
     }
 
+    /**
+     * on Payment Success
+     */
     override fun onPaymentSuccess(razorpayPaymentID: String?) {
         try {
             if (razorpayPaymentID != null) {
                 walletModel = WalletModel()
-                var astrologerModel: AstrologerUserModel =
-                    intent.getParcelableExtra(Constants.INTENT_MODEL)!!
                 walletModel.trancationId = razorpayPaymentID
                 walletModel.paymentType = Constants.PAYMENT_TYPE_RAZOR_PAY
                 walletModel.bookingId = if(bookingModel?.id.isNullOrBlank()) "" else bookingModel?.id.toString()
@@ -266,24 +362,21 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
 //                    walletModel.amount = amount
                     walletModel.trancationType = Constants.TRANSACTION_TYPE_CREDIT
                     //adding money in wallet not required to add in astrologer side
-                    walletModel.isMoneyAddedInWallet = true
+//                    walletModel.setCapturedGateway = true
                     walletViewModel.addMoney(walletModel, false)
                 } else {
 //                    walletModel.amount = "-$amount"
                     walletModel.trancationType = Constants.TRANSACTION_TYPE_DEBIT
                     walletViewModel.addMoney(walletModel, false, true)
                 }
-                /*if (!isDirectPayment) {
-                    walletViewModel.addMoney(walletModel, false)
-                } else {
-                    redirectToPaymentSuccessScreen()
-                }*/
             }
         } catch (e: java.lang.Exception) {
-            MyLog.e(TAG, "Exception in onPaymentSuccess $e")
         }
     }
 
+    /**
+     * on Payment Error
+     */
     override fun onPaymentError(code: Int, response: String?) {
 
         try {
@@ -298,16 +391,8 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
                         onBackPressed()
                     }
                 }
-            }/* else if(code == Checkout.INVALID_OPTIONS) {
-                val jsonObject = JSONObject(response)
-                if (jsonObject.has("description")) {
-                    val description = jsonObject.get("description")
-                    toast("$description")
-                    onBackPressed()
-                }
-            }*/
+            }
         } catch (e: java.lang.Exception) {
-            MyLog.e(TAG, "Exception in onPaymentSuccess$e")
         }
     }
 }

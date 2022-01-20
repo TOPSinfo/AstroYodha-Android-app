@@ -56,29 +56,22 @@ class JitsiManager(var context: Context) {
             .setFeatureFlag("android.screensharing.enabled",false)
             .setFeatureFlag("conference-timer.enabled",false)
 
-//            .build()
-//        JitsiMeet.setDefaultConferenceOptions(defaultOptions)
-//            .setFeatureFlag("android.screensharing.enabled",false)
-//            .setFeatureFlag("audio-mute.enabled", false)
-//            .setFeatureFlag("pip.enabled",false)
-
     }
 
-    /*
+    /**
      * Start video call
-     * */
+     */
     fun startVideoCall(roomId: String):JitsiMeetConferenceOptions {
 
         val options = defaultOptions!!
             .setRoom(roomId)
             .build()
         return options
-//        JitsiMeetActivity.launch(context, options)
     }
-
-    /*
+    
+    /**
      * start custom call using jitsi meet view
-     * */
+     */
     fun startCustomVideoCall(roomId: String):View{
 
         val view=JitsiMeetView(context)
@@ -87,6 +80,5 @@ class JitsiManager(var context: Context) {
             .build()
         view.join(options)
         return view
-//        JitsiMeetActivity.launch(context, options)
     }
 }

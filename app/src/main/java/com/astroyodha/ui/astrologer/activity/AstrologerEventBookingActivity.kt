@@ -1,23 +1,10 @@
 package com.astroyodha.ui.astrologer.activity
 
 import android.Manifest
-import android.app.Activity
-import android.app.Dialog
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.MotionEvent
-import android.view.Window
-import android.view.WindowManager
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import androidx.activity.viewModels
-import com.google.common.reflect.TypeToken
-import com.google.firebase.auth.FirebaseAuth
-import com.google.gson.Gson
-import com.gun0912.tedpermission.PermissionListener
-import com.gun0912.tedpermission.TedPermission
 import com.astroyodha.R
 import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivityAstrologerEventBookingBinding
@@ -31,8 +18,12 @@ import com.astroyodha.ui.astrologer.viewmodel.TimeSlotViewModel
 import com.astroyodha.ui.user.model.booking.BookingModel
 import com.astroyodha.ui.user.viewmodel.ChatViewModel
 import com.astroyodha.utils.*
+import com.google.common.reflect.TypeToken
+import com.google.firebase.auth.FirebaseAuth
+import com.google.gson.Gson
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
 import java.lang.reflect.Type
-import java.text.SimpleDateFormat
 import java.util.*
 
 class AstrologerEventBookingActivity : BaseActivity() {
@@ -61,7 +52,6 @@ class AstrologerEventBookingActivity : BaseActivity() {
     var userModel: AstrologerUserModel = AstrologerUserModel()
 
     var selectedStatus: String = ""
-
 
     private var isGroup: Boolean = false
     private var memberIdList: String = ""
@@ -94,7 +84,9 @@ class AstrologerEventBookingActivity : BaseActivity() {
         bookingViewModel.getBookingDetail(bookingModel.id)
     }
 
-
+    /**
+     * disabling all fields on view
+     */
     private fun disableAddEdit() {
         binding.tvTitle.text = getString(R.string.view_event)
         binding.edDetails.isEnabled = false
@@ -121,6 +113,9 @@ class AstrologerEventBookingActivity : BaseActivity() {
 
     }
 
+    /**
+     * set data to view
+     */
     private fun setData() {
         binding.tvAstrologerName.text = getString(
             R.string.appointment_with,
@@ -215,10 +210,9 @@ class AstrologerEventBookingActivity : BaseActivity() {
                 }
                 Status.SUCCESS -> {
                     hideProgress()
-                    MyLog.e(TAG, "Updated Value observer===" + it.data!!.endTime)
 //                    if (isEdit) {
                     binding.tvTitle.text = getString(R.string.edit_event)
-                    bookingModel = it.data
+                    bookingModel = it.data!!
                     disableAddEdit()
 //                    }
 
@@ -251,23 +245,12 @@ class AstrologerEventBookingActivity : BaseActivity() {
             false
         }
 
-//        binding.tvNotify.setOnClickListener {
-//            showNotificationDialog()
-//        }
         binding.tvSave.setOnClickListener {
             hideKeyboard()
             if (isEdit) {
                 addUpdateEvent(selectedStatus)
             }
         }
-
-//        binding.tvStatus.setOnClickListener {
-////            Toast.makeText(this, "Change Status", Toast.LENGTH_SHORT).show()
-////            this@AstrologerEventBookingActivity.toast("Change Status")
-//            MyLog.e("====Status=====","====Clicked=======")
-//            requestStatusChangeDialog()
-//        }
-
 
         binding.btnCall.setOnClickListener {
 
@@ -353,57 +336,6 @@ class AstrologerEventBookingActivity : BaseActivity() {
         }
     }
 
-
-    /*
-   * Dialog for select status of request
-   * */
-
-//    private fun requestStatusChangeDialog() {
-//
-//        var beaconDialog = Dialog(this)
-//        beaconDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-//        beaconDialog.setContentView(R.layout.dialog_request_status)
-//
-//        val lp = WindowManager.LayoutParams()
-//        lp.copyFrom(beaconDialog.window!!.attributes)
-//        lp.width = WindowManager.LayoutParams.MATCH_PARENT
-//        lp.height = WindowManager.LayoutParams.WRAP_CONTENT
-//        beaconDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-//        beaconDialog.window!!.attributes = lp
-//        beaconDialog.show()
-//
-//        var radioGroupRequestStatus=beaconDialog.findViewById<RadioGroup>(R.id.rgrequestStatus)
-//
-//        radioGroupRequestStatus.setOnCheckedChangeListener { radioGroup, i ->
-//
-//            var mColor = getColor(R.color.pending_color)
-//            var mStatus = getString(R.string.waiting)
-//            var image = R.drawable.ic_waiting
-//            if(i==R.id.rbAccept)
-//            {
-//                mStatus = getString(R.string.approved)
-//                mColor = getColor(R.color.approved_color)
-//                image = R.drawable.ic_check_black
-//                selectedStatus=Constants.APPROVE_STATUS
-//            }
-//            else if(i== R.id.rbReject)
-//            {
-//                mStatus = getString(R.string.rejected)
-//                mColor = getColor(R.color.orange_theme)
-//                image = R.drawable.ic_close
-//                selectedStatus=Constants.REJECT_STATUS
-//            }
-//
-//            binding.tvStatus.text = mStatus
-//            binding.tvStatus.setTextColor(mColor)
-//            binding.imgStatus.setImageResource(image)
-//            binding.imgStatus.setColorFilter(mColor);
-//
-//            beaconDialog.dismiss()
-//
-//        }
-//    }
-
     private fun addUpdateEvent(status: String) {
 
         bookingModel.status = status
@@ -413,13 +345,6 @@ class AstrologerEventBookingActivity : BaseActivity() {
             isEdit
         )
     }
-
-//    private fun updateDateInView() {
-//        val myFormat = dateFormat // mention the format you need
-//        val sdf = SimpleDateFormat(myFormat, Locale.US)
-//        binding.tvDate.text = sdf.format(cal.time)
-//    }
-
 
     /**
      * Redirect to chat activity after click on user
@@ -453,7 +378,6 @@ class AstrologerEventBookingActivity : BaseActivity() {
             }
         }
 
-//            userIds.add(0, currentUserId + "___Active")
         chatViewModel.setupVideoCallData(
             userIdsWithStatus,
             "Active",

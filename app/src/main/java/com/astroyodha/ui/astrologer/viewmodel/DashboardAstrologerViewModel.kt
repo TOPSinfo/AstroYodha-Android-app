@@ -9,7 +9,6 @@ import com.astroyodha.network.Resource
 import com.astroyodha.ui.user.model.booking.BookingList
 import com.astroyodha.ui.user.model.booking.BookingModel
 import com.astroyodha.utils.Constants
-import com.astroyodha.utils.MyLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -36,7 +35,6 @@ class DashboardAstrologerViewModel @Inject constructor(
                 Constants.PENDING_STATUS, 6
             ).addSnapshotListener { value, error ->
                 if (error != null) {
-                    MyLog.e("Error List==View model=", "====" + error.message)
                     _getBookingListDataResponse.postValue(
                         Resource.error(
                             error.message.toString(),
@@ -46,7 +44,6 @@ class DashboardAstrologerViewModel @Inject constructor(
                 } else {
                     if (value != null) {
                         val mList = BookingList.getAstrologerBookingArrayList(value, userId)
-                        MyLog.e("Booking List==View model=", "====" + mList.size)
                         _getBookingListDataResponse.postValue(
                             Resource.success(
                                 mList

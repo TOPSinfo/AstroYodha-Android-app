@@ -6,7 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.text.Html
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -48,12 +47,12 @@ fun Context.changeFragment(
     val ft = (this as AppCompatActivity).supportFragmentManager.beginTransaction()
     ft.replace(containerId, fragment, TAG)
     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-//        supportFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE) //clear back stack on register button
     if (isBackStack) {
         ft.addToBackStack(TAG)
     }
     ft.commit()
 }
+
 /**
  * load image from drawable
  */
@@ -119,7 +118,7 @@ fun Context.toast(message: String) {
 /**
  * toast with duration
  */
-fun Context.toast(message: String, duration : Int) {
+fun Context.toast(message: String, duration: Int) {
     Toast.makeText(this, message, duration).show()
 }
 
@@ -195,7 +194,10 @@ fun Activity.hideKeyboard() {
     val inputManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     val focusedView = this.currentFocus
     if (focusedView != null) {
-        inputManager.hideSoftInputFromWindow(focusedView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+        inputManager.hideSoftInputFromWindow(
+            focusedView.windowToken,
+            InputMethodManager.HIDE_NOT_ALWAYS
+        )
     }
 }
 
@@ -221,7 +223,6 @@ fun String.dateFormat(currentfromate: String, newfromate: String): String {
 
     } catch (e: Exception) {
         e.printStackTrace()
-        MyLog.e("String.DateFromate", "setDateFromate: " + e.message)
     }
 
     return ""
@@ -239,7 +240,6 @@ fun Date.dateToStringFormat(format: String): String {
 
     } catch (e: Exception) {
         e.printStackTrace()
-        MyLog.e("String.dateToStringFormat", "dateToStringFormat: " + e.message)
     }
 
     return ""
@@ -257,7 +257,10 @@ fun Double.roundOffDecimal(): Double? {
     return df.format(this).toDouble()
 }
 
-fun TextView.addReadMoreText(text: String?,textColor:Int) {
+/**
+ * setup read more read less
+ */
+fun TextView.addReadMoreText(text: String?, textColor: Int) {
     try {
         val readMoreOption = ReadMoreOption.Builder(context)
             .textLength(4, ReadMoreOption.TYPE_LINE) // OR
@@ -272,7 +275,6 @@ fun TextView.addReadMoreText(text: String?,textColor:Int) {
         readMoreOption.addReadMoreTo(this, text)
     } catch (e: Exception) {
         e.printStackTrace()
-        Log.e("addReadMoreText", ": ${e.localizedMessage}");
     }
     /*this.text=text
     ReadMoreMediumTextView().makeTextViewResizable(this,2,"Read More",true)*/
@@ -281,7 +283,7 @@ fun TextView.addReadMoreText(text: String?,textColor:Int) {
 /**
  * share app intent
  */
-fun Context.shareApp(msg:String) {
+fun Context.shareApp(msg: String) {
     val shareBody = msg
     val sharingIntent = Intent(android.content.Intent.ACTION_SEND)
     sharingIntent.type = "text/plain"
@@ -304,7 +306,6 @@ fun Context.openSocialMedia(url: String) {
         val i = Intent(Intent.ACTION_VIEW, uri)
         startActivity(i)
     } catch (e: java.lang.Exception) {
-        MyLog.e("TAG", e.message.toString())
     }
 }
 
@@ -314,7 +315,6 @@ fun Context.openSocialMedia(url: String) {
 fun Context.getFirebaseToken(pref: Pref) {
     FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
         if (!task.isSuccessful) {
-            MyLog.w("My Extension", "Fetching FCM registration token failed ${task.exception}")
             return@OnCompleteListener
         }
 
@@ -323,7 +323,6 @@ fun Context.getFirebaseToken(pref: Pref) {
 
         // Log and toast
         token?.let {
-            MyLog.d("My Extension", "Token "+token)
             pref.setValue(
                 this,
                 Constants.PREF_FCM_TOKEN,

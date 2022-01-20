@@ -8,7 +8,6 @@ import android.widget.MediaController
 import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivityAstrologerVideoPlayBinding
 
-
 class AstrologerVideoPlayActivity : BaseActivity() {
 
     private lateinit var binding: ActivityAstrologerVideoPlayBinding
@@ -21,6 +20,9 @@ class AstrologerVideoPlayActivity : BaseActivity() {
         initUI()
     }
 
+    /**
+     * initialize view
+     */
     private fun initUI() {
 
         binding.imgBack.setOnClickListener {
@@ -43,7 +45,6 @@ class AstrologerVideoPlayActivity : BaseActivity() {
         binding.videoView.requestFocus()
 
         binding.videoView.setOnErrorListener { mp: MediaPlayer?, what: Int, extra: Int ->
-            Log.d("video", "setOnErrorListener ")
             true
         }
 

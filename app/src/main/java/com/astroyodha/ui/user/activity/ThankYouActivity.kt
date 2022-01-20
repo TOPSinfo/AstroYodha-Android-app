@@ -16,8 +16,9 @@ class ThankYouActivity : AppCompatActivity() {
         binding = ActivityThankYouBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if(intent.getBooleanExtra(Constants.INTENT_IS_DIRECT_PAYMENT, false)) {
+        if (intent.getBooleanExtra(Constants.INTENT_IS_DIRECT_PAYMENT, false)) {
             //comes from add book event so required to go back to add data in booking history
+            //not need to show on extend minute
             binding.tvGoToHome.makeGone()
         }
         setClickListener()
@@ -38,13 +39,15 @@ class ThankYouActivity : AppCompatActivity() {
                 //comes from wallet fragment
                 startActivity(
                     Intent(this, UserHomeActivity::class.java)
-//                        .putExtra(Constants.INTENT_SHOW_TIMER, false)
                 )
                 finishAffinity()
             }
         }
     }
 
+    /**
+     * onBackPressed
+     */
     override fun onBackPressed() {
         setResult(Activity.RESULT_OK, Intent().putExtra(Constants.INTENT_TRANSACTION, true))
         super.onBackPressed()

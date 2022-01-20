@@ -51,20 +51,16 @@ class ProfileViewModel @Inject constructor(
     fun updateProfilePicture(user: UserModel, profileImagePath: Uri?, isForUpdate:Boolean) {
 
         _userDataResponse.value = Resource.loading(null)
-        if(networkHelper.isNetworkConnected())
-        {
+        if (networkHelper.isNetworkConnected()) {
 
-            if(isForUpdate)
-            {
+            if (isForUpdate) {
                 if(profileImagePath!=null && !user.profileImage.equals("")) {//Update Data If image is Update
                     var pictureRef = Utility.storageRef.storage.getReferenceFromUrl(user.profileImage!!)
                     // Delete the file
                     pictureRef.delete().addOnCompleteListener {
                         if(it.isSuccessful) {
-                            MyLog.e("Image Deleted", " Successfully")
                         }
                     }.addOnFailureListener {
-                        MyLog.e("Image Deleted"," =="+it.message)
                     }
                 }
             }
@@ -92,9 +88,7 @@ class ProfileViewModel @Inject constructor(
                         }
                     }
                 }
-            }
-            else
-            {
+            } else {
                 addUserData(user)
             }
         }
@@ -153,7 +147,6 @@ class ProfileViewModel @Inject constructor(
     /**
      * Update user presence online/offline
      */
-
     fun updateUserPresence(isOnline: Boolean, userId: String) {
 
         userRepository.getUserProfileRepository(userId)
@@ -206,7 +199,6 @@ class ProfileViewModel @Inject constructor(
 
                     _userDetailResponse.postValue(Resource.success(userModel))
 
-                    MyLog.e("Name====", "======" + Constants.USER_NAME)
                 }
         }
         else
@@ -226,7 +218,6 @@ class ProfileViewModel @Inject constructor(
             userRepository.getUserProfileRepository(userId)
                 .addSnapshotListener { snapshot, e ->
                     if (e != null) {
-                        MyLog.w(TAG, "Listen failed. $e")
                         _userDetailResponse.value= Resource.error(e.message.toString(),null)
                         return@addSnapshotListener
                     }
@@ -235,12 +226,9 @@ class ProfileViewModel @Inject constructor(
 
                     _userDetailResponse.postValue(Resource.success(userModel))
 
-                    MyLog.e("Name====", "======" + Constants.USER_NAME)
                 }
-        }
-        else
-        {
-            _userDetailResponse.value= Resource.error(Constants.MSG_NO_INTERNET_CONNECTION,null)
+        } else {
+            _userDetailResponse.value = Resource.error(Constants.MSG_NO_INTERNET_CONNECTION, null)
         }
 
     }
@@ -295,7 +283,6 @@ class ProfileViewModel @Inject constructor(
             userRepository.getUserProfileRepository(userId).update(data1)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
-                        MyLog.e("Token Updated"," Successful")
                         _userDataResponse.postValue(
                             Resource.success(
                                 Constants.MSG_UPDATE_SUCCESSFULL,

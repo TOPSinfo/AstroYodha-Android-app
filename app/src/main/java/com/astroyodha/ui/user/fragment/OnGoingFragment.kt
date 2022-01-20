@@ -114,9 +114,6 @@ class OnGoingFragment : BaseFragment() {
             )
         }
 
-//        val df = SimpleDateFormat("dd-MM-yyyy hh:mm a", Locale.getDefault())
-//        bookingViewModel.getOnGoingUserBookingRequest(userId/*, df.format(Calendar.getInstance().getTime())*/)
-
         bookingViewModel.getStatusUpdateListener(userId)
     }
 
@@ -137,9 +134,10 @@ class OnGoingFragment : BaseFragment() {
         bookingViewModel.bookingList.observe(viewLifecycleOwner, { updatedData ->
             updatedData.forEach {
                 mList.mapIndexed { index, bookingModel ->
-                    if (bookingModel.id == it.id && bookingModel.status != it.status) {
-                        bookingModel.status = it.status
-                        binding.rvBooking.adapter?.notifyItemChanged(index, bookingModel)
+                    if (bookingModel.id == it.id /*&& bookingModel.status != it.status*/) {
+//                        bookingModel.status = it.status
+                        mList[index] = it
+                        binding.rvBooking.adapter?.notifyItemChanged(index)
                         return@forEach
                     }
                 }
@@ -155,7 +153,6 @@ class OnGoingFragment : BaseFragment() {
                 Status.SUCCESS -> {
                     hideProgress()
                     it.data?.let { resultList ->
-//                        mList.addAll(resultList.filter { resultData -> resultData.status != Constants.PENDING_STATUS })
                         mList.addAll(resultList)
                         binding.rvBooking.adapter?.notifyDataSetChanged()
 

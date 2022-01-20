@@ -2,11 +2,11 @@ package com.astroyodha.ui.user.activity
 
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.MediaController
 import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivityVideoPlayBinding
+import com.astroyodha.utils.MyLog
 
 
 class VideoPlayActivity : BaseActivity() {
@@ -21,6 +21,9 @@ class VideoPlayActivity : BaseActivity() {
         initUI()
     }
 
+    /**
+     * initialize view
+     */
     private fun initUI() {
 
         binding.imgBack.setOnClickListener {
@@ -43,7 +46,6 @@ class VideoPlayActivity : BaseActivity() {
         binding.videoView.requestFocus()
 
         binding.videoView.setOnErrorListener { mp: MediaPlayer?, what: Int, extra: Int ->
-            Log.d("video", "setOnErrorListener ")
             true
         }
 

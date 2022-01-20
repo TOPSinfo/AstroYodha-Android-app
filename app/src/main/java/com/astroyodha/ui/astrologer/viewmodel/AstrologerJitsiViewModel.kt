@@ -49,11 +49,6 @@ class AstrologerJitsiViewModel @Inject constructor(
 
                 var map = HashMap<String, Any>()
 
-//                if(!isActive && model.HostId.equals(FirebaseAuth.getInstance().currentUser?.uid.toString()))
-//                {
-//                    map.put("CallStatus","InActive")
-//                }
-
                 if (isActive) {
                     var pos =
                         model.userIds.indexOf(FirebaseAuth.getInstance().currentUser?.uid.toString() + "___InActive")
@@ -113,7 +108,6 @@ class AstrologerJitsiViewModel @Inject constructor(
                 }
 
                 if (snapshot !== null) {
-//                    Constant.listOfActiveCall.clear()
                     if(snapshot.isEmpty)
                     {
                         Constants.listOfActiveCall.clear()
@@ -124,15 +118,9 @@ class AstrologerJitsiViewModel @Inject constructor(
                             if (callModel.callStatus.equals("Active")) {
                                 Constants.listOfActiveCall.clear()
                                 Constants.listOfActiveCall.add(callModel)
-                                MyLog.e(
-                                    "List Of New Active Call ADD===",
-                                    "===" + Constants.listOfActiveCall
-                                )
-
                             }
                         }
                     }
-                    MyLog.w("List Of New Active Call ADD===", "===" + Constants.listOfActiveCall)
                 }
 
             }

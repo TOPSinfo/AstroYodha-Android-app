@@ -56,7 +56,6 @@ import java.lang.reflect.Type
 import java.util.*
 import kotlin.collections.ArrayList
 
-
 class ChatActivity : BaseActivity() {
 
     private val TAG: String = javaClass.simpleName
@@ -67,7 +66,6 @@ class ChatActivity : BaseActivity() {
     private lateinit var binding: ActivityChatBinding
     private var otherUserId: String? = null
 
-    //    private var roomId: String? = null
     private var chatAdapter: ChatAdapter? = null
     private val messageList = ArrayList<MessagesModel>()
     private var opponentUserName: String = ""
@@ -91,7 +89,6 @@ class ChatActivity : BaseActivity() {
 
         otherUserId = intent.getStringExtra("user_id").toString()
         isGroup = intent.getBooleanExtra("isGroup", false)
-//        roomId = intent.getStringExtra("room_id").toString()
         opponentUserName = intent.getStringExtra("user_name").toString()
         groupIcon = intent.getStringExtra("group_image").toString()
         bookingModel = intent.getParcelableExtra(Constants.INTENT_BOOKING_MODEL)!!
@@ -99,7 +96,6 @@ class ChatActivity : BaseActivity() {
 
         val type: Type = object : TypeToken<ArrayList<UserModel>>() {}.type
         userList = Gson().fromJson(intent.getStringExtra("userList").toString(), type)
-        MyLog.e("userLir", "===" + userList.size)
 
         if (isGroup) {
             memberIdList = intent.getStringExtra("memberIdList").toString()
@@ -120,14 +116,11 @@ class ChatActivity : BaseActivity() {
         setClickListener()
         getChatMessagesList()
         if (!isGroup) {
-//            binding.imgVideoCall.visibility=View.VISIBLE
             binding.txtPresence.visibility = View.GONE
-//            binding.txtPresence.visibility = View.VISIBLE
             binding.imgGroupInformation.visibility = View.GONE
             getUserPresence()
 
         } else {
-//            binding.imgVideoCall.visibility=View.GONE
             binding.txtPresence.visibility = View.GONE
             binding.imgGroupInformation.visibility = View.VISIBLE
         }
@@ -171,7 +164,6 @@ class ChatActivity : BaseActivity() {
                             if (user.size == 1) {
                                 if (user[0].messageType == Constants.TYPE_MESSAGE) {
                                     messageList.addAll(user)
-//                                    chatAdapter?.notifyDataSetChanged()
                                     setChatAdapter()
                                     binding.rvChatMessageList.scrollToPosition(messageList.size - 1)
                                 } else if (user[0].messageType == Constants.TYPE_IMAGE || user[0].messageType == Constants.TYPE_VIDEO) {
@@ -189,15 +181,10 @@ class ChatActivity : BaseActivity() {
                                     }
 
                                     messageList.sortedBy { it.timeStamp }
-//                                    chatAdapter?.notifyDataSetChanged()
                                     setChatAdapter()
                                     binding.rvChatMessageList.scrollToPosition(messageList.size - 1)
                                 }
                             }
-
-
-                            //chatAdapter?.notifyItemInserted(messageList.size - 1)
-                            //    binding.rvChatMessageList.scrollToPosition(messageList.size - 1)
 
                             updateMessageReadStatus()
                         }
@@ -209,6 +196,7 @@ class ChatActivity : BaseActivity() {
                 }
             }
         })
+
         chatViewModel.updatedMessagesResponse.observe(this, {
             when (it.status) {
                 Status.LOADING -> {
@@ -228,6 +216,7 @@ class ChatActivity : BaseActivity() {
                 }
             }
         })
+
         chatViewModel.sendMessagesResponse.observe(this, {
             when (it.status) {
                 Status.LOADING -> {
@@ -243,29 +232,6 @@ class ChatActivity : BaseActivity() {
                 }
             }
         })
-
-//        chatViewModel.addOneToOneCallDataResponse.observe(this, {
-//            when (it.status) {
-//                Status.LOADING -> {
-//                    showProgress(this)
-//                }
-//                Status.SUCCESS -> {
-//                    it.data.let {
-////                       val view =  jitsiManagerObject.startVideoCall(it!!)
-////                        setContentView(view)
-//                        val intent = Intent(this, JitsiCallActivity::class.java)
-//                        intent.putExtra("RoomId", it!!)
-//                        intent.putExtra("OpponentUserName", opponentUserName)
-//                        intent.putExtra("isGroupCall", false)
-//                        startActivity(intent)
-//                    }
-//                }
-//                Status.ERROR -> {
-//                    hideProgress()
-//                    it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
-//                }
-//            }
-//        })
 
         chatViewModel.addGroupCallDataResponse.observe(this, {
             when (it.status) {
@@ -340,7 +306,6 @@ class ChatActivity : BaseActivity() {
         //chat ended start from fresh
         startActivity(
             Intent(this, UserHomeActivity::class.java)
-//                .putExtra(Constants.INTENT_SHOW_TIMER, false)
         )
         finishAffinity()
     }
@@ -407,81 +372,6 @@ class ChatActivity : BaseActivity() {
                             setupVideoCall(userIds, currentUserId)
                         }
 
-//                        if (isGroup) {
-//                            var isCallActive = false
-//                            for (i in Constant.listOfActiveCall) {
-//                                if (i.userIds.size > 2) {
-//                                    var selectedMemberIdList = ArrayList<String>()
-//                                    if (!memberIdList.equals("")) {
-//                                        val type: Type = object : TypeToken<ArrayList<String>>() {}.type
-//                                        selectedMemberIdList = Gson().fromJson(memberIdList, type)
-//                                    }
-//                                    var memberCount=0
-//                                    for(j in selectedMemberIdList)
-//                                    {
-//                                        if ((i.userIds.contains(j + "___Active") || i.userIds.contains(
-//                                            j + "___InActive"
-//                                        )) )
-//                                        {
-//                                            memberCount++
-//                                        }
-//                                    }
-//
-//                                    if(selectedMemberIdList.size==memberCount)
-//                                    {
-//                                        isCallActive = true
-//                                        val intent =
-//                                            Intent(this@ChatActivity, JitsiCallActivity::class.java)
-//                                        intent.putExtra("RoomId", i.docId)
-//                                        intent.putExtra("OpponentUserName", opponentUserName)
-//                                        intent.putExtra("isGroupCall", false)
-//                                        startActivity(intent)
-//                                        break
-//                                    }
-//                                }
-//
-//                            }
-//                            if (!isCallActive) {
-//                                setupGroupVideoCall()
-//                            }
-//
-//                        }
-//                        else {
-//                            var isCallActive = false
-//                            for (i in Constant.listOfActiveCall) {
-//                                if (i.userIds.size == 2) {
-//                                    if ((i.userIds.contains(currentUserId + "___Active") || i.userIds.contains(
-//                                            currentUserId + "___InActive"
-//                                        ))
-//                                        && (i.userIds.contains(otherUserId + "___Active") || i.userIds.contains(
-//                                            otherUserId + "___InActive"
-//                                        ))
-//                                    ) {
-//                                        Log.e("=============", "ACTIVE==============")
-//                                        isCallActive = true
-//                                        val intent =
-//                                            Intent(this@ChatActivity, JitsiCallActivity::class.java)
-//                                        intent.putExtra("RoomId", i.docId)
-//                                        intent.putExtra("OpponentUserName", opponentUserName)
-//                                        intent.putExtra("isGroupCall", false)
-//                                        startActivity(intent)
-//                                        break
-//                                    }
-//                                }
-//
-//                            }
-//                            if (!isCallActive) {
-//                                val userIds = ArrayList<String>()
-//                                userIds.add(0, currentUserId + "___Active")
-//                                userIds.add(1, otherUserId!! + "___InActive")
-//                                chatViewModel.setupOneToOneCallData(
-//                                    userIds,
-//                                    "Active",
-//                                    currentUserId,
-//                                    Constant.USER_NAME
-//                                )
-//                            }
-//                        }
                     }
 
                     override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
@@ -526,15 +416,9 @@ class ChatActivity : BaseActivity() {
         val imgStar3 = mDialog.findViewById(R.id.imgStar3) as ImageView
         val imgStar4 = mDialog.findViewById(R.id.imgStar4) as ImageView
         val imgStar5 = mDialog.findViewById(R.id.imgStar5) as ImageView
-//        val rbRating = mDialog.findViewById(R.id.rbRating) as RatingBar
         val edFeedBack = mDialog.findViewById(R.id.edFeedBack) as EditText
         val btnSubmit = mDialog.findViewById(R.id.btnSubmit) as MaterialButton
 
-        /*rbRating.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
-            if (rating < 1) {
-                rbRating.rating = 1f
-            }
-        }*/
         imgStar3.isSelected = true
 
         imgClose.setOnClickListener {
@@ -546,7 +430,7 @@ class ChatActivity : BaseActivity() {
             imgStar2.setImageResource(R.mipmap.star_two_unselected)
             imgStar3.setImageResource(R.mipmap.star_three_unselected)
             imgStar4.setImageResource(R.mipmap.star_four_unselected)
-            imgStar5.setImageResource(R.mipmap.star_two_unselected)
+            imgStar5.setImageResource(R.mipmap.star_five_unselected)
         }
         imgStar2.setOnClickListener {
             rating = 2
@@ -554,7 +438,7 @@ class ChatActivity : BaseActivity() {
             imgStar2.setImageResource(R.mipmap.star_two_selected)
             imgStar3.setImageResource(R.mipmap.star_three_unselected)
             imgStar4.setImageResource(R.mipmap.star_four_unselected)
-            imgStar5.setImageResource(R.mipmap.star_two_unselected)
+            imgStar5.setImageResource(R.mipmap.star_five_unselected)
         }
         imgStar3.setOnClickListener {
             rating = 3
@@ -562,7 +446,7 @@ class ChatActivity : BaseActivity() {
             imgStar2.setImageResource(R.mipmap.star_two_unselected)
             imgStar3.setImageResource(R.mipmap.star_three_selected)
             imgStar4.setImageResource(R.mipmap.star_four_unselected)
-            imgStar5.setImageResource(R.mipmap.star_two_unselected)
+            imgStar5.setImageResource(R.mipmap.star_five_unselected)
         }
         imgStar4.setOnClickListener {
             rating = 4
@@ -570,7 +454,7 @@ class ChatActivity : BaseActivity() {
             imgStar2.setImageResource(R.mipmap.star_two_unselected)
             imgStar3.setImageResource(R.mipmap.star_three_unselected)
             imgStar4.setImageResource(R.mipmap.star_four_selected)
-            imgStar5.setImageResource(R.mipmap.star_two_unselected)
+            imgStar5.setImageResource(R.mipmap.star_five_unselected)
         }
         imgStar5.setOnClickListener {
             rating = 5
@@ -578,7 +462,7 @@ class ChatActivity : BaseActivity() {
             imgStar2.setImageResource(R.mipmap.star_two_unselected)
             imgStar3.setImageResource(R.mipmap.star_three_unselected)
             imgStar4.setImageResource(R.mipmap.star_four_unselected)
-            imgStar5.setImageResource(R.mipmap.star_two_selected)
+            imgStar5.setImageResource(R.mipmap.star_five_selected)
         }
         btnSubmit.setOnClickListener {
             // add rating
@@ -690,7 +574,6 @@ class ChatActivity : BaseActivity() {
             }
         }
 
-        //  chatAdapter?.notifyDataSetChanged()
     }
 
     /**
@@ -820,7 +703,6 @@ class ChatActivity : BaseActivity() {
         messagesModel.messageId = chatViewModel.getChatDocumentId(otherUserId.toString(), isGroup)
 
 
-
         messagesModel.message = binding.edMessage.text.toString().trim()
         messagesModel.messageType = Constants.TYPE_VIDEO
         messagesModel.receiverId = otherUserId.toString()
@@ -887,13 +769,10 @@ class ChatActivity : BaseActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK && result.data != null) {
                 val data = result.data
-                // val uri = Uri.parse(TrimVideo.getTrimmedVideoPath(result.data))
                 val uri = Uri.fromFile(File(data?.getStringExtra("trimmed_video_path")))
-                println("Trimmed path:: $uri")
                 uploadVideo(uri)
 
-            } else
-                MyLog.v(TAG, "videoTrimResultLauncher data is null");
+            }
         }
 
     /**
@@ -915,12 +794,6 @@ class ChatActivity : BaseActivity() {
     }
 
     private fun openGroupDetailForEdit() {
-        /*val intent = Intent(this, CreateGroupActivity::class.java)
-        intent.putExtra("memberIdList", memberIdList)
-        intent.putExtra("group_image", groupIcon)
-        intent.putExtra("group_name", opponentUserName)
-        intent.putExtra("isForDisplay", true)
-        startActivity(intent)*/
     }
 
 
@@ -934,7 +807,6 @@ class ChatActivity : BaseActivity() {
             }
         }
 
-//            userIds.add(0, currentUserId + "___Active")
         chatViewModel.setupVideoCallData(
             userIdsWithStatus,
             "Active",

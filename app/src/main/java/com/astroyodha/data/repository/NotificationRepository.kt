@@ -16,7 +16,6 @@ class NotificationRepository @Inject constructor() {
         return return firestoreDB.collection(Constants.TABLE_USER).document(userId)
             .collection(Constants.TABLE_NOTIFICATION)
             .orderBy(Constants.FIELD_GROUP_CREATED_AT, Query.Direction.DESCENDING)
-//            .whereEqualTo(Constants.FIELD_USERID_NOTIFICATION, userId)
     }
 
 }

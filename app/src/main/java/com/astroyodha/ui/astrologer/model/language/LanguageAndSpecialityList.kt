@@ -8,7 +8,6 @@ object LanguageAndSpecialityList {
     /**
      * make array list of language from firestore snapshot
      */
-
     fun getLanguageArrayList(
         querySnapshot: QuerySnapshot
     ): ArrayList<LanguageAndSpecialityModel> {

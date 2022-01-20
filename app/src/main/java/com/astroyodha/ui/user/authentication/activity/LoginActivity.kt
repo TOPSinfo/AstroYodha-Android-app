@@ -50,7 +50,6 @@ class LoginActivity : BaseActivity() {
     var logintype: String = ""
     var userType: String = ""
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FacebookSdk.sdkInitialize(this)
@@ -84,29 +83,31 @@ class LoginActivity : BaseActivity() {
             binding.edPhoneNumber.setText("")
         }
 
-
     }
 
+    /**
+     * initialize facebook login
+     */
     fun initFacebookLogin() {
         callbackManager = CallbackManager.Factory.create()
         binding.facebookLoginButton.setReadPermissions("email", "public_profile")
         binding.facebookLoginButton.registerCallback(callbackManager, object :
             FacebookCallback<LoginResult> {
             override fun onSuccess(loginResult: LoginResult) {
-                MyLog.d(TAG, "facebook:onSuccess:$loginResult")
                 handleFacebookAccessToken(loginResult.accessToken)
             }
 
             override fun onCancel() {
-                MyLog.d(TAG, "facebook:onCancel")
             }
 
             override fun onError(error: FacebookException) {
-                MyLog.e(TAG, "facebook:onError ${error}")
             }
         })
     }
 
+    /**
+     * initialize google login
+     */
     private fun googleSignIn() {
         googleSignInClient = GoogleSignIn.getClient(this, gso);
         val signInIntent = googleSignInClient.signInIntent
@@ -164,7 +165,6 @@ class LoginActivity : BaseActivity() {
                     .putExtra(Constants.INTENT_SOCIAL_TYPE, logintype)
                     .putExtra(Constants.INTENT_USER_TYPE, userType)
             )
-            finish()
         }
 
         binding.layouLoginWithFacebook.setOnClickListener {
@@ -177,6 +177,9 @@ class LoginActivity : BaseActivity() {
         }
     }
 
+    /**
+     * manage edittext focus
+     */
     fun changeLayoutOnFocusChange(b: Boolean) {
         if (b) {
             binding.imgMobile.setColorFilter(
@@ -245,7 +248,6 @@ class LoginActivity : BaseActivity() {
                         if (it) {
                             redirectDashboard()
                         } else {
-//                            redirectCreateAccountActivity(name, email, socialId)
                             viewModel.checkUserWithSocialMediaWithoutUserType(socialId)
                         }
                     }
@@ -284,19 +286,14 @@ class LoginActivity : BaseActivity() {
 
     }
 
-
-    /*
-    * This function logout social media account
-    * */
-    fun logoutSocialMedia()
-    {
+    /**
+     * This function logout social media account
+     */
+    fun logoutSocialMedia() {
         Firebase.auth.signOut()
-        if(logintype.equals(Constants.SOCIAL_TYPE_FACEBOOK))
-        {
+        if (logintype.equals(Constants.SOCIAL_TYPE_FACEBOOK)) {
             LoginManager.getInstance().logOut();
-        }
-        else if(logintype.equals(Constants.SOCIAL_TYPE_GOOGLE))
-        {
+        } else if (logintype.equals(Constants.SOCIAL_TYPE_GOOGLE)) {
             val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.web_client_id))
                 .requestEmail()
@@ -322,6 +319,9 @@ class LoginActivity : BaseActivity() {
         )
     }
 
+    /**
+     * manage facebook token
+     */
     private fun handleFacebookAccessToken(token: AccessToken) {
         Log.d(TAG, "handleFacebookAccessToken:$token")
 
@@ -330,7 +330,6 @@ class LoginActivity : BaseActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
                     name = user!!.displayName!!
                     email = if (user.email.isNullOrBlank()) "" else user.email.toString()
@@ -339,7 +338,6 @@ class LoginActivity : BaseActivity() {
                     viewModel.checkUserWithSocialMediaWithUserType(socialId,userType)
 //                   redirectCreateAccountActivity(name,email,socialId)
                 } else {
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
                     hideProgress()
                     Toast.makeText(
                         baseContext, "Authentication failed.",
@@ -349,13 +347,15 @@ class LoginActivity : BaseActivity() {
             }
     }
 
+    /**
+     * manage google login
+     */
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d("TAG", "signInWithCredential:success")
                     val user = auth.currentUser
 
                     name = user!!.displayName!!
@@ -365,7 +365,6 @@ class LoginActivity : BaseActivity() {
                     viewModel.checkUserWithSocialMediaWithUserType(socialId,userType)
 //                    redirectCreateAccountActivity(name, email, socialId)
                 } else {
-                    Log.w("TAG", "signInWithCredential:failure", task.exception)
                     hideProgress()
                 }
 
@@ -386,6 +385,9 @@ class LoginActivity : BaseActivity() {
 
     }
 
+    /**
+     * Checking image picker and cropper result after image selection
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -396,21 +398,19 @@ class LoginActivity : BaseActivity() {
                 // Google Sign In was successful, authenticate with Firebase
                 showProgress(this)
                 val account = task.getResult(ApiException::class.java)!!
-                Log.d("TAG", "firebaseAuthWithGoogle:" + account.id)
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
-                Log.w("TAG", "Google sign in failed", e)
                 hideProgress()
-                // ...
             }
         } else {
-            // Pass the activity result back to the Facebook SDK
-//            showProgress(this)
             callbackManager.onActivityResult(requestCode, resultCode, data)
         }
     }
 
+    /**
+     * redirect to user dashboard
+     */
     fun redirectDashboard() {
         startActivity(Intent(this, UserHomeActivity::class.java))
         finishAffinity()

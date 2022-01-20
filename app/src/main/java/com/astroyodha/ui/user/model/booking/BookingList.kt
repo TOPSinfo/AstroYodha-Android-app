@@ -10,7 +10,6 @@ object BookingList {
     /**
      * make array list of order from firestore snapshot
      */
-
     fun getAstrologerBookingArrayList(
         querySnapshot: QuerySnapshot,
         userId: String
@@ -97,6 +96,9 @@ object BookingList {
         return bookingArrayList
     }
 
+    /**
+     * make array list of from firestore
+     */
     fun getUserBookingArrayList(
         querySnapshot: QuerySnapshot,
         userId: String
@@ -172,6 +174,9 @@ object BookingList {
         return bookingArrayList
     }
 
+    /**
+     * make array list of from firestore
+     */
     fun getUserBookingForAstrologerArrayList(
         querySnapshot: QuerySnapshot,
         userId: String
@@ -247,6 +252,9 @@ object BookingList {
         return bookingArrayList
     }
 
+    /**
+     * set single model item
+     */
     fun getBookingDetail(
         doc: DocumentSnapshot
     ): BookingModel {

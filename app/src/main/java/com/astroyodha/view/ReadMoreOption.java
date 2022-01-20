@@ -73,10 +73,6 @@ public class ReadMoreOption {
 
                     ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) textView.getLayoutParams();
 
-                    /*String subString = text.toString().substring(textView.getLayout().getLineStart(0),
-                            textView.getLayout().getLineEnd(textLength - 1));
-                    textLengthNew = subString.length() - (moreLabel.length() + 4 + (lp.rightMargin / 6));*/
-
                     //get start index for last line
                     final int startIndex = textView.getLayout().getLineStart(textLength - 1);
                     //get end index for last line

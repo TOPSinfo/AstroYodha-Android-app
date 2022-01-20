@@ -32,6 +32,9 @@ object FAQList {
         return cmsArrayList
     }
 
+    /**
+     * set single model item
+     */
     fun getCMSModel(
         querySnapshot: QueryDocumentSnapshot
     ): FAQModel {
@@ -51,7 +54,9 @@ object FAQList {
         return cmsModel
     }
 
-
+    /**
+     * set single model item
+     */
     fun getCMSDetail(
         querySnapshot: DocumentSnapshot
     ): FAQModel {

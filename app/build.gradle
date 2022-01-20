@@ -6,6 +6,7 @@ plugins {
     id 'com.google.gms.google-services'
     id 'dagger.hilt.android.plugin'
     id 'com.google.firebase.crashlytics'
+    id "org.sonarqube" version "3.3"
 }
 
 
@@ -17,7 +18,7 @@ android {
         minSdk 23
         targetSdk 30
         versionCode 1
-        versionName "1.0"
+        versionName "1.2"
 
         multiDexEnabled true
 
@@ -53,12 +54,27 @@ android {
     }
 }
 
+sonarqube {
+    tasks.sonarqube.dependsOn build
+    properties {
+        property 'sonar.projectName', 'Astroyodha'
+        property "sonar.projectKey",
+                "root_astrologer_android_AX52n6VdQ6yA7gc5p-J5"
+        property "sonar.qualitygate.wait", true
+        property "sonar.language", "kotlin"
+        property "sonar.sources", "src/main/java/"  //comment sonar.sources and sonar.tests on multi module project because it will only scan src path file only other module file will not scan
+        property "sonar.tests","src/androidTest"
+        property "sonar.binaries", "build"
+        property "sonar.sourceEncoding", "UTF-8"
+    }
+}
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'com.android.support:multidex:1.0.3' //Multidex Support
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'

@@ -7,45 +7,33 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.fragment.app.viewModels
 import com.astroyodha.R
 import com.astroyodha.core.BaseActivity
-import com.facebook.react.modules.core.PermissionListener
 import com.astroyodha.databinding.ActivityJitsiCallBinding
 import com.astroyodha.network.Status
 import com.astroyodha.ui.astrologer.viewmodel.AstrologerBookingViewModel
 import com.astroyodha.ui.astrologer.viewmodel.AstrologerJitsiViewModel
 import com.astroyodha.ui.user.model.booking.BookingModel
 import com.astroyodha.utils.*
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import dagger.hilt.android.AndroidEntryPoint
+import com.facebook.react.modules.core.PermissionListener
 import org.jitsi.meet.sdk.JitsiMeetActivityInterface
 import org.jitsi.meet.sdk.JitsiMeetView
 import org.jitsi.meet.sdk.JitsiMeetViewListener
 import java.util.*
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 import kotlin.time.ExperimentalTime
 
 class JitsiCallAstrologerActivity : BaseActivity(), JitsiMeetActivityInterface,
     JitsiMeetViewListener {
 
     private var TAG = javaClass.simpleName
-//    private val broadcastReceiver = object : BroadcastReceiver() {
-//        override fun onReceive(context: Context?, intent: Intent?) {
-//            onBroadcastReceived(intent)
-//        }
-//    }
 
     private lateinit var jitsiManager: JitsiManager
     private val jitsiViewModel: AstrologerJitsiViewModel by viewModels()
@@ -64,8 +52,6 @@ class JitsiCallAstrologerActivity : BaseActivity(), JitsiMeetActivityInterface,
 
     private val bookingViewModel: AstrologerBookingViewModel by viewModels()
 
-//    private var isTimeOver:Boolean=false
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -81,7 +67,6 @@ class JitsiCallAstrologerActivity : BaseActivity(), JitsiMeetActivityInterface,
         //Get detail of booking
         bookingViewModel.getBookingDetail(bookingModel.id)
         startCall()
-        MyLog.e("Call List in JITSI Screen", "=====" + Constants.listOfActiveCall.size)
     }
 
 
@@ -104,13 +89,10 @@ class JitsiCallAstrologerActivity : BaseActivity(), JitsiMeetActivityInterface,
                 }
                 Status.SUCCESS -> {
                     hideProgress()
-                    MyLog.e(TAG, "Updated Value observer===" + it.data!!.endTime)
-                    bookingModel = it.data
+                    bookingModel = it.data!!
                     endTime = bookingModel.endTime!!.time
-                    MyLog.e(TAG, "Updated new Value in model===" + bookingModel.endTime)
                     if (bookingModel.status != Constants.COMPLETED_STATUS) {
                         if (timer != null) {
-                            MyLog.e(TAG, "Old timer cancel=====")
                             timer!!.cancel()
                         }
                         setTime(endTime)
@@ -145,7 +127,9 @@ class JitsiCallAstrologerActivity : BaseActivity(), JitsiMeetActivityInterface,
         })
     }
 
-
+    /**
+     * start From dashboard
+     */
     private fun startFromFresh() {
         startActivity(
             Intent(this, AstrologerDashboardActivity::class.java)
@@ -161,7 +145,6 @@ class JitsiCallAstrologerActivity : BaseActivity(), JitsiMeetActivityInterface,
     }
 
     override fun onConferenceTerminated(p0: MutableMap<String, Any>?) {
-        MyLog.e("===============", "onConferenceTerminated============")
         jitsiViewModel.changeStatus(roomId, false)
         if (bookingModel.status != Constants.COMPLETED_STATUS) {
             finish()
@@ -171,7 +154,6 @@ class JitsiCallAstrologerActivity : BaseActivity(), JitsiMeetActivityInterface,
     }
 
     override fun onConferenceWillJoin(p0: MutableMap<String, Any>?) {
-        MyLog.e("===============", "onConferenceTerminated============")
         jitsiViewModel.changeStatus(roomId, true)
         endTime = bookingModel.endTime!!.time
 
@@ -179,6 +161,9 @@ class JitsiCallAstrologerActivity : BaseActivity(), JitsiMeetActivityInterface,
         binding.txtRemainingTime.makeVisible()
     }
 
+    /**
+     * manage back press
+     */
     override fun onBackPressed() {
         super.onBackPressed()
         if (view != null) {
@@ -201,7 +186,9 @@ class JitsiCallAstrologerActivity : BaseActivity(), JitsiMeetActivityInterface,
         }
     }
 
-
+    /**
+     * start count down timer for auto drop
+     */
     @OptIn(ExperimentalTime::class)
     fun startCountdownTimer(time: Long) {
 
@@ -219,28 +206,19 @@ class JitsiCallAstrologerActivity : BaseActivity(), JitsiMeetActivityInterface,
                     TimeUnit.HOURS.toMillis(hour) + TimeUnit.MINUTES.toMillis(minutes) + TimeUnit.SECONDS.toMillis(
                         seconds
                     )
-                val fixedTime = time - 300000L // 5 min
+                val fixedTime = time - 600000L // 10 min
                 val totalFixedTime = time - fixedTime
 
-//                MyLog.e("Timmerr", "$totalTime--$totalFixedTime--$totalSecs")
                 var timeString = String.format(" Ends in : %02d:%02d:%02d", hour, minutes, seconds)
 
                 binding.txtRemainingTime.text = timeString
 
                 if (totalTime == totalFixedTime) {
-//                    isTimeOver=false
                     displayTimeValidationDialog(getString(R.string.call_will_end_in_5_min))
                 }
-//                if (totalSecs == 0L) {
-////                    MyLog.e(TAG, "TIme Over =======")
-////                    timer?.cancel()
-////                    bookingModel.status = Constants.COMPLETED_STATUS
-////                    bookingViewModel.addUpdateBookingData(bookingModel, true)
-//                }
             }
 
             override fun onFinish() {
-                MyLog.e(TAG, "onFinish=====")
                 bookingModel.status = Constants.COMPLETED_STATUS
                 bookingViewModel.addUpdateBookingData(bookingModel, true)
             }
@@ -248,6 +226,9 @@ class JitsiCallAstrologerActivity : BaseActivity(), JitsiMeetActivityInterface,
         (timer as CountDownTimer).start()
     }
 
+    /**
+     * show remaining time dialog
+     */
     private fun displayTimeValidationDialog(description: String) {
 
         try {
@@ -270,7 +251,6 @@ class JitsiCallAstrologerActivity : BaseActivity(), JitsiMeetActivityInterface,
 
             val remainingTime =
                 pref.getValueLong(this, Constants.REMAINING_TIME, 0L, Constants.PREF_FILE)
-            MyLog.e("remainingTime", remainingTime.toString())
             llBtnOk.setOnClickListener {
                 dialogEndTimeAlert.dismiss()
             }

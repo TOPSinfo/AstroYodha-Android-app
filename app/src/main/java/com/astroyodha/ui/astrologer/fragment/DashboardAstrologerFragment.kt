@@ -79,16 +79,15 @@ class DashboardAstrologerFragment : BaseFragment() {
             )
         )
 
-//        setBookingListAdapter()
-
         dashboardAstrologerViewModel.getPendingBookingofAstrologer(userId!!)
     }
 
-
-    fun clickListeners()
-    {
+    /**
+     * manage click listener of view
+     */
+    fun clickListeners() {
         binding.txtViewAll.setOnClickListener {
-            startActivity(Intent(mContext,PendingBookingListActivity::class.java))
+            startActivity(Intent(mContext, PendingBookingListActivity::class.java))
         }
     }
 
@@ -101,7 +100,6 @@ class DashboardAstrologerFragment : BaseFragment() {
         dashboardAstrologerViewModel.getBookingListDataResponse.observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.LOADING -> {
-//                    showProgress(requireContext())
                 }
                 Status.SUCCESS -> {
                     hideProgress()
@@ -111,9 +109,6 @@ class DashboardAstrologerFragment : BaseFragment() {
                             binding.recyclerBookingList.makeVisible()
                             mList.clear()
                             mList.addAll(resultList)
-//                            mList.sortByDescending({ selector(it) })
-                            MyLog.e("Booking List===","===="+mList.size)
-//                            binding.recyclerBookingList.adapter?.notifyDataSetChanged()
                             setBookingListAdapter()
                         } else {
                             binding.layoutNoData.makeVisible()
@@ -148,25 +143,18 @@ class DashboardAstrologerFragment : BaseFragment() {
 
 
     }
-    /*
-      * This is used to set adapter of recyclerview ti display list of booking.
-      * */
+
+    /**
+     * This is used to set adapter of recyclerview ti display list of booking.
+     */
     private fun setBookingListAdapter() {
         with(binding.recyclerBookingList) {
 
             val  mGridLayoutManager= GridLayoutManager(context, 2)
             val  mLinearLayoutManager= LinearLayoutManager(context)
-//            layoutManager = mLinearLayoutManager
 
             layoutManager = mGridLayoutManager
 
-//            if(mList.size>2)
-//            {
-//                layoutManager = mGridLayoutManager
-//            }
-//            else {
-//                layoutManager = mLinearLayoutManager
-//            }
             itemAnimator = DefaultItemAnimator()
             adapter = BookingAstrologerAdapter(
                 context, mList,
@@ -178,16 +166,14 @@ class DashboardAstrologerFragment : BaseFragment() {
                         isForDetail: Boolean
                     ) {
 
-                        if(isForDetail)
-                        {
-                               mContext.startActivity(
-                                   Intent(mContext,AstrologerEventDetailActivity::class.java)
-                                       .putExtra(Constants.INTENT_USER_ID,model.userId)
-                                       .putExtra(Constants.INTENT_BOOKING_ID,model.id)
-                                       .putExtra(Constants.INTENT_BOOKING_MODEL,model)
-                               )
-                        }
-                        else {
+                        if (isForDetail) {
+                            mContext.startActivity(
+                                Intent(mContext, AstrologerEventDetailActivity::class.java)
+                                    .putExtra(Constants.INTENT_USER_ID, model.userId)
+                                    .putExtra(Constants.INTENT_BOOKING_ID, model.id)
+                                    .putExtra(Constants.INTENT_BOOKING_MODEL, model)
+                            )
+                        } else {
                             if (model.status == Constants.PENDING_STATUS) {
 
                                 mPosition = position

@@ -239,6 +239,7 @@
                     android:contentDescription="@string/saturday"
                     android:gravity="center"
                     android:maxLength="2"
+                    android:onClick="manageDaySelection"
                     android:text="S"
                     android:textColor="@color/text_gray"
                     android:textSize="@dimen/_14ssp"

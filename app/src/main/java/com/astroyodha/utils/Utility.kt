@@ -11,7 +11,6 @@ import android.os.Environment
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.webkit.MimeTypeMap
-import androidx.annotation.RequiresApi
 import com.google.firebase.storage.FirebaseStorage
 import java.io.File
 import java.net.URLConnection
@@ -26,7 +25,6 @@ object Utility {
 
 
     fun log(message: String) {
-        android.util.Log.d("TAG", "rs $message")
     }
 
 
@@ -156,7 +154,6 @@ object Utility {
 
     fun getTimesInMillieS(ourDate: String): Long {
         try {
-            //val sdf = SimpleDateFormat("yyyy/MM/dd HH:mm:ss")
             val sdf = SimpleDateFormat("dd/MM/yy HH:mm:ss")
             val date = sdf.parse(ourDate)
             val millis = date.time

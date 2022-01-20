@@ -113,6 +113,9 @@ class PriceFragment : BaseFragment() {
         })
     }
 
+    /**
+     * set data to view
+     */
     private fun setUserData() {
         userModel.fifteenMin.let {
             binding.edFifteenMin.setText(it)

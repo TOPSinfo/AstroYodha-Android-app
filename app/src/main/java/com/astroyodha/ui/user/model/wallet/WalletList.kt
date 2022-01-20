@@ -52,8 +52,8 @@ object WalletList {
             doc.get(Constants.FIELD_REFUND)?.let {
                 bookingModel.isRefund = it.toString().toBoolean()
             }
-            doc.get(Constants.FIELD_MONEY_ADDED_IN_WALLET)?.let {
-                bookingModel.isMoneyAddedInWallet = it.toString().toBoolean()
+            doc.get(Constants.FIELD_SET_CAPTURED_GATEWAY)?.let {
+                bookingModel.setCapturedGateway = it.toString().toBoolean()
             }
             doc.get(Constants.FIELD_GROUP_CREATED_AT)?.let {
                 val tm = it as Timestamp
@@ -70,6 +70,9 @@ object WalletList {
         return bookingArrayList
     }
 
+    /**
+     * set single model item
+     */
     fun getBookingModel(
         querySnapshot: QueryDocumentSnapshot
     ): WalletModel {
@@ -109,8 +112,8 @@ object WalletList {
         querySnapshot.get(Constants.FIELD_REFUND)?.let {
             bookintModel.isRefund = it.toString().toBoolean()
         }
-        querySnapshot.get(Constants.FIELD_MONEY_ADDED_IN_WALLET)?.let {
-            bookintModel.isMoneyAddedInWallet = it.toString().toBoolean()
+        querySnapshot.get(Constants.FIELD_SET_CAPTURED_GATEWAY)?.let {
+            bookintModel.setCapturedGateway = it.toString().toBoolean()
         }
         querySnapshot.get(Constants.FIELD_GROUP_CREATED_AT)?.let {
             val tm = it as Timestamp
@@ -119,7 +122,9 @@ object WalletList {
         return bookintModel
     }
 
-
+    /**
+     * set single model item
+     */
     fun getBookingDetail(
         querySnapshot: DocumentSnapshot
     ): WalletModel {
@@ -159,8 +164,8 @@ object WalletList {
         querySnapshot.get(Constants.FIELD_REFUND)?.let {
             bookingModel.isRefund = it.toString().toBoolean()
         }
-        querySnapshot.get(Constants.FIELD_MONEY_ADDED_IN_WALLET)?.let {
-            bookingModel.isMoneyAddedInWallet = it.toString().toBoolean()
+        querySnapshot.get(Constants.FIELD_SET_CAPTURED_GATEWAY)?.let {
+            bookingModel.setCapturedGateway = it.toString().toBoolean()
         }
         querySnapshot.get(Constants.FIELD_GROUP_CREATED_AT)?.let {
             val tm = it as Timestamp

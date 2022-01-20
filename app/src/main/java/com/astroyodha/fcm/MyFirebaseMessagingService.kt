@@ -36,7 +36,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(s: String) {
         super.onNewToken(s)
-        MyLog.e("New Token", "Refreshed token: $s")
         Coroutines.io {
             pref.setValue(this, Constants.PREF_FCM_TOKEN, s, Constants.PREF_FILE)
         }
@@ -46,12 +45,9 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         super.onMessageReceived(remoteMessage)
         // Check if message contains a data payload.
         large_icon = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
-        MyLog.e("==Firebase messaging==", "" + remoteMessage.data.toString())
-        MyLog.e("Message notification=", remoteMessage.notification.toString())
 
         /*//for testing
         remoteMessage.notification?.let {
-            MyLog.e(TAG, "Message Notification Body: ${it.title} ${it.body}")
             val intent = Intent(this, SplashActivity::class.java)
             createNotification(
                 it.title,

@@ -39,7 +39,6 @@ class SplashActivity : BaseActivity() {
     private fun init() {
         if (Utility.checkConnection(this)) {
             val db = FirebaseFirestore.getInstance()
-            MyLog.e("Firebase application", db.app.toString())
             getFirebaseToken(pref)
         } else {
             toast(Constants.MSG_NO_INTERNET_CONNECTION)

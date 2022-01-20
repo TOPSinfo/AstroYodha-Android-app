@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.auth.FirebaseAuth
 import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivityPendingBookingListBinding
 import com.astroyodha.network.Status
@@ -15,6 +14,7 @@ import com.astroyodha.ui.astrologer.adapter.BookingAstrologerAdapter
 import com.astroyodha.ui.astrologer.viewmodel.AstrologerBookingViewModel
 import com.astroyodha.ui.user.model.booking.BookingModel
 import com.astroyodha.utils.*
+import com.google.firebase.auth.FirebaseAuth
 
 class PendingBookingListActivity : BaseActivity() {
 
@@ -36,16 +36,20 @@ class PendingBookingListActivity : BaseActivity() {
         setObserver()
     }
 
-    fun init()
-    {
+    /**
+     * initialize view
+     */
+    fun init() {
         val fb = FirebaseAuth.getInstance().currentUser
         userId = fb?.uid.toString()
 
         astrologerBookingViewModel.getPendingBookingofAstrologer(userId)
     }
 
-    fun clickListeners()
-    {
+    /**
+     * manage click listener of view
+     */
+    fun clickListeners() {
         binding.imgBack.setOnClickListener {
             onBackPressed()
         }
@@ -69,9 +73,6 @@ class PendingBookingListActivity : BaseActivity() {
                             binding.recyclerBookingList.makeVisible()
                             mList.clear()
                             mList.addAll(resultList)
-//                            mList.sortByDescending({ selector(it) })
-                            MyLog.e("Booking List===","===="+mList.size)
-//                            binding.recyclerBookingList.adapter?.notifyDataSetChanged()
                             setBookingListAdapter()
                         } else {
                             binding.layoutNoData.makeVisible()
@@ -107,25 +108,17 @@ class PendingBookingListActivity : BaseActivity() {
 
     }
 
-    /*
-      * This is used to set adapter of recyclerview ti display list of booking.
-      * */
+    /**
+     * This is used to set adapter of recyclerview ti display list of booking.
+     */
     private fun setBookingListAdapter() {
         with(binding.recyclerBookingList) {
 
             val  mGridLayoutManager= GridLayoutManager(context, 2)
             val  mLinearLayoutManager= LinearLayoutManager(context)
-//            layoutManager = mLinearLayoutManager
 
             layoutManager = mGridLayoutManager
 
-//            if(mList.size>2)
-//            {
-//                layoutManager = mGridLayoutManager
-//            }
-//            else {
-//                layoutManager = mLinearLayoutManager
-//            }
             itemAnimator = DefaultItemAnimator()
             adapter = BookingAstrologerAdapter(
                 context, mList,
@@ -161,8 +154,6 @@ class PendingBookingListActivity : BaseActivity() {
                                 binding.root.showSnackBarToast("Status already changed")
                             }
                         }
-
-
                     }
 
                 }

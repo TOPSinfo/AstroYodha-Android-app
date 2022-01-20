@@ -36,9 +36,6 @@ class UserHomeActivity : BaseActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        /*if (savedInstanceState == null) {
-            changeFragment(fragment = DashboardFragment(), TAG = "home")
-        }*/
         setObserver()
         profileViewModel.getSpeciality()
         init()
@@ -89,32 +86,12 @@ class UserHomeActivity : BaseActivity() {
             setupWithNavController(navController)
         }
         tabChange.observe(this, {
-//            binding.bottomNavigation.onMenuItemClick(1)
             startActivity(
                 Intent(this, UserHomeActivity::class.java)
                     .putExtra(Constants.INTENT_INDEX, it)
             )
             finishAffinity()
         })
-
-        /*binding.bottomNavigation.setOnMenuItemClickListener { model, i ->
-//            binding.bottomNavigation.setSelectedIndex(i)
-//            findNavController().navigate(model.destinationId)
-            if (i == 0) {
-                changeFragment(fragment = DashboardFragment(), TAG = "home")
-            } else if (i == 1) {
-                changeFragment(fragment = BookingFragment(), TAG = "book")
-            } else if (i == 2) {
-                changeFragment(fragment = WalletFragment(), TAG = "wallet")
-            } else if (i == 3) {
-                changeFragment(fragment = ProfileFragment(), TAG = "profile")
-            }
-        }
-
-        binding.bottomNavigation.setOnReselectListener {  }
-*/
-
-//        profileViewModel.getUserDetail(FirebaseAuth.getInstance().currentUser?.uid.toString())
 
     }
 
@@ -126,14 +103,12 @@ class UserHomeActivity : BaseActivity() {
         profileViewModel.languageAndSpecialityListResponse.observe(this, {
             when (it.status) {
                 Status.LOADING -> {
-//                    showProgress(requireContext())
                 }
                 Status.SUCCESS -> {
                     hideProgress()
                     it.data?.let { resultList ->
                         Constants.listOfLanguages.clear()
                         Constants.listOfLanguages.addAll(resultList)
-                        MyLog.e("List of Language","=====${Constants.listOfLanguages.size}")
                     }
                 }
                 Status.ERROR -> {
@@ -147,14 +122,12 @@ class UserHomeActivity : BaseActivity() {
         profileViewModel.specialityResponse.observe(this, {
             when (it.status) {
                 Status.LOADING -> {
-//                    showProgress(requireContext())
                 }
                 Status.SUCCESS -> {
                     hideProgress()
                     it.data?.let { resultList ->
                         Constants.listOfSpeciality.clear()
                         Constants.listOfSpeciality.addAll(resultList)
-                        MyLog.e("List of Speciality","=====${Constants.listOfSpeciality.size}")
                     }
                 }
                 Status.ERROR -> {
@@ -165,8 +138,6 @@ class UserHomeActivity : BaseActivity() {
         })
     }
 
-
-
     fun changeTab() {
         tabChange.postValue(1)
     }
@@ -176,5 +147,16 @@ class UserHomeActivity : BaseActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+    /**
+     * manage notification intent
+     */
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        startActivity(
+            Intent(this, UserHomeActivity::class.java)
+                        .putExtra(Constants.INTENT_INDEX, 1)
+        )
+        finishAffinity()
+    }
 
 }

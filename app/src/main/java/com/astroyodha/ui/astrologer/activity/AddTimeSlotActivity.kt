@@ -14,8 +14,6 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.activity.viewModels
-import com.google.firebase.auth.FirebaseAuth
-import com.skydoves.balloon.balloon
 import com.astroyodha.R
 import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivityAddTimeSlotBinding
@@ -23,6 +21,7 @@ import com.astroyodha.network.Status
 import com.astroyodha.ui.astrologer.model.timeslot.TimeSlotModel
 import com.astroyodha.ui.astrologer.viewmodel.TimeSlotViewModel
 import com.astroyodha.utils.*
+import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -39,12 +38,7 @@ class AddTimeSlotActivity : BaseActivity() {
     lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
 
     var interval = 15
-//    private var mTimeList: ArrayList<String> = arrayListOf()
 
-    var timeFormat: String = ""
-    var fromTime: String = ""
-    var toTime: String = ""
-    var isFromTimeClick = false
     var startDate: Date? = null
     var endDate: Date? = null
     var isFromDateClick = false
@@ -55,8 +49,6 @@ class AddTimeSlotActivity : BaseActivity() {
     var mWeeklyDaysList: ArrayList<String> = ArrayList()
 
     val dateFormat = "dd - MMM - yyyy"
-    //ballon popup
-    private val customListBalloon by balloon<CustomListBalloonFactory>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddTimeSlotBinding.inflate(layoutInflater)
@@ -82,6 +74,9 @@ class AddTimeSlotActivity : BaseActivity() {
         updateViewOnModeChange()
     }
 
+    /**
+     * update view on mode change
+     */
     private fun updateViewOnModeChange() {
         binding.tvStartDate.text = ""
         startDate = null
@@ -167,9 +162,6 @@ class AddTimeSlotActivity : BaseActivity() {
 
         binding.tvFromTime.setOnClickListener {
             hideKeyboard()
-//            isFromTimeClick = true
-//            customListBalloon.showAlignBottom(it, 0, 10)
-
             //checking start date end date added or not
             if(checkStartEndDate()) {
                 val mcurrentTime = Calendar.getInstance()
@@ -259,7 +251,6 @@ class AddTimeSlotActivity : BaseActivity() {
                             } else {
                                 binding.root.showSnackBarToast(getString(R.string.please_select_to_time_greater_than_from_time))
                             }
-//                    binding.edTimeOfBirth.setText("$selectedHour:$selectedMinute")
 
                         },
                         hour,
@@ -278,9 +269,6 @@ class AddTimeSlotActivity : BaseActivity() {
             hideKeyboard()
             if (checkValidation()) {
                 model.id = id
-//                model.date = binding.edDate.text.toString()
-//                model.fromTime = "${binding.edDate.text} $fromTime".dateFormat("dd - MMM - yyyy hh:mm a","dd-MM-yyyy hh:mm a")
-//                model.toTime = "${binding.edDate.text} $toTime".dateFormat("dd - MMM - yyyy hh:mm a","dd-MM-yyyy hh:mm a")
 
                 if (binding.tvMode.text.toString() == getString(R.string.repeat)) {
                     model.startDate = startDate?.dateToStringFormat(dateFormat).toString()
@@ -300,7 +288,6 @@ class AddTimeSlotActivity : BaseActivity() {
                 model.type = binding.tvMode.text.toString()
                 model.userId = userId.toString()
 
-                MyLog.e(TAG, "===== $model")
                 viewModel.addUpdateBookingData(
                     model,
                     false
@@ -330,8 +317,10 @@ class AddTimeSlotActivity : BaseActivity() {
 
     }
 
+    /**
+     * update date in start date and end date
+     */
     private fun updateDateInView() {
-//        val myFormat = "dd - MMM - yyyy" // mention the format you need
         val sdf = SimpleDateFormat(dateFormat, Locale.US)
         if (isFromDateClick) {
             startDate = cal.time

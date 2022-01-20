@@ -58,7 +58,6 @@ class DashboardFragment : BaseFragment() {
     ): View? {
         dashboardViewModel =
             ViewModelProvider(this).get(DashboardViewModel::class.java)
-        MyLog.e("getAstrologerList", "======onCreateView")
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -67,13 +66,14 @@ class DashboardFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        MyLog.e("getAstrologerList", "======onVIewCreated")
         init()
         setObserver()
         setClickListener()
     }
 
-
+    /**
+     * initialize view
+     */
     fun init() {
 
         val myFormat = "dd MMMM yyyy" //In which you need put here
@@ -126,14 +126,10 @@ class DashboardFragment : BaseFragment() {
         astrologerViewModel.getAstrologerListResponse.observe(this, {
             when (it.status) {
                 Status.LOADING -> {
-                    MyLog.e("LOADING", "=========")
-//                    showProgress(mContext)
                 }
                 Status.SUCCESS -> {
                     hideProgress()
                     it.data?.let { result ->
-                        /*for (i in 0..5) {
-                        }*/
                         mAstrologerList.addAll(result)
                         binding.recyclerAstrologerList.adapter?.notifyDataSetChanged()
                     }

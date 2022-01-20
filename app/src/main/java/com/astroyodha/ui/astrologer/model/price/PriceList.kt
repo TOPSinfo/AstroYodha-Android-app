@@ -10,7 +10,6 @@ object PriceList {
     /**
      * make array list of order from firestore snapshot
      */
-
     fun getPriceArrayList(
         querySnapshot: QuerySnapshot,
         userId: String
@@ -45,6 +44,9 @@ object PriceList {
         return bookingArrayList
     }
 
+    /**
+     * set single model item
+     */
     fun getPriceModel(
         querySnapshot: QueryDocumentSnapshot
     ): PriceModel {
@@ -73,7 +75,9 @@ object PriceList {
         return priceModel
     }
 
-
+    /**
+     * set single model item
+     */
     fun getPriceDetail(
         doc: DocumentSnapshot
     ): PriceModel {

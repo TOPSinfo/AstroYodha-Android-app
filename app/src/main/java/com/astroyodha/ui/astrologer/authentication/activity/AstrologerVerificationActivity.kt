@@ -26,7 +26,6 @@ import com.astroyodha.utils.hideKeyboard
 import com.astroyodha.utils.showSnackBarToast
 import java.util.concurrent.TimeUnit
 
-
 class AstrologerVerificationActivity : BaseActivity(), AstrologerVerificationNavigator {
     val TAG = javaClass.simpleName
 
@@ -55,14 +54,12 @@ class AstrologerVerificationActivity : BaseActivity(), AstrologerVerificationNav
         viewModel.verificationNavigator = this
         phoneNumber = intent.getStringExtra(Constants.INTENT_MOBILE)
 
-        if(intent.hasExtra(Constants.INTENT_USER_DATA))
-        {
-            userModel= intent.getParcelableExtra(Constants.INTENT_USER_DATA) as AstrologerUserModel?
-            if(userModel!=null)
-            {
-                if(!userModel!!.socialId.equals(""))
-                {
-                    viewModel.isSocialLogin=true
+        if (intent.hasExtra(Constants.INTENT_USER_DATA)) {
+            userModel =
+                intent.getParcelableExtra(Constants.INTENT_USER_DATA) as AstrologerUserModel?
+            if (userModel != null) {
+                if (!userModel!!.socialId.equals("")) {
+                    viewModel.isSocialLogin = true
                 }
             }
         }
@@ -92,7 +89,6 @@ class AstrologerVerificationActivity : BaseActivity(), AstrologerVerificationNav
         binding.otpView.otpListener = object : OTPListener {
             override fun onInteractionListener() {
                 // fired when user types something in the Otpbox
-//                viewModel.OTPCode.postValue(binding.otpView.otp.toString().trim())
             }
 
             override fun onOTPComplete(otp: String) {
@@ -221,10 +217,6 @@ class AstrologerVerificationActivity : BaseActivity(), AstrologerVerificationNav
      * Enabling resend button
      */
     override fun enableResendOTPView() {
-//        binding.txtResend.isClickable = true
-//        binding.txtResend.alpha = 1f
-//        binding.txtTimer.text = getString(R.string.one)
-//        binding.txtTimer.visibility = View.GONE
         binding.txtResend.text = getString(R.string.resend_otp_available)
         binding.btnResendOTP.visibility=View.VISIBLE
     }
@@ -233,11 +225,6 @@ class AstrologerVerificationActivity : BaseActivity(), AstrologerVerificationNav
      * Disabling resend button
      */
     private fun disableResendOTPView() {
-
-//        binding.txtTimer.text = getString(R.string.one)
-//        binding.txtResend.isClickable = false
-//        binding.txtResend.alpha = 0.3f
-//        binding.txtTimer.visibility = View.VISIBLE
         binding.btnResendOTP.visibility=View.GONE
     }
 
@@ -256,7 +243,6 @@ class AstrologerVerificationActivity : BaseActivity(), AstrologerVerificationNav
                 val seconds = totalSecs % 60;
 
                 var resendOTPString=String.format(getString(R.string.resend_code),Utility.twoDigitString(seconds.toInt()))
-//                "" + minutes + ":" + Utility.twoDigitString(seconds.toInt())
                 binding.txtResend.text = resendOTPString
             }
 

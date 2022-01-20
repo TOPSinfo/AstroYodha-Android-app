@@ -18,6 +18,6 @@ data class WalletModel(
     var trancationType: String = "",
     var bookingId: String = "",
     var isRefund: Boolean = false,
-    var isMoneyAddedInWallet: Boolean = false,
+    var setCapturedGateway: Boolean = true,
     var createdAt: Timestamp? = null,
 ) : Parcelable

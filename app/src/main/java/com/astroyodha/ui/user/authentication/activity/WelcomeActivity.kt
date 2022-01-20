@@ -20,18 +20,21 @@ class WelcomeActivity : BaseActivity() {
 
 
     }
-    private fun setClickListener()
-    {
+
+    /**
+     * manage click listener of view
+     */
+    private fun setClickListener() {
         binding.btnSignupAstrologer.setOnClickListener {
             startActivity(
                 Intent(this, AstrologerLoginActivity::class.java)
-                    .putExtra(Constants.INTENT_USER_TYPE,Constants.USER_ASTROLOGER)
+                    .putExtra(Constants.INTENT_USER_TYPE, Constants.USER_ASTROLOGER)
             )
         }
         binding.btnSignupUser.setOnClickListener {
             startActivity(
                 Intent(this, LoginActivity::class.java)
-                    .putExtra(Constants.INTENT_USER_TYPE,Constants.USER_NORMAL)
+                    .putExtra(Constants.INTENT_USER_TYPE, Constants.USER_NORMAL)
             )
         }
     }

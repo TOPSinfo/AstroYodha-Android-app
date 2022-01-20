@@ -274,14 +274,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_15ssp"
                     android:background="@drawable/background_edit_text_grey_line_background"
+                    android:digits="0123456789"
                     android:drawableStart="@mipmap/rs"
                     android:drawablePadding="@dimen/_10sdp"
                     android:hint="@string/price_per_min"
                     android:imeOptions="actionNext"
                     android:inputType="number"
-                    android:maxLines="1"
                     android:maxLength="4"
-                    android:digits="0123456789"
+                    android:maxLines="1"
                     android:padding="@dimen/_8sdp"
                     android:singleLine="true"
                     android:textColor="@color/edittext_text_color"
@@ -295,37 +295,51 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_15ssp"
                     android:background="@drawable/background_edit_text_grey_line_background"
+                    android:digits="0123456789"
                     android:drawableStart="@mipmap/experience"
                     android:drawablePadding="@dimen/_10sdp"
                     android:hint="@string/experience"
                     android:imeOptions="actionNext"
                     android:inputType="number"
-                    android:maxLines="1"
                     android:maxLength="2"
-                    android:digits="0123456789"
+                    android:maxLines="1"
                     android:padding="@dimen/_8sdp"
                     android:singleLine="true"
                     android:textColor="@color/edittext_text_color"
                     android:textColorHint="@color/edittext_hint_color"
                     android:textSize="@dimen/edittext_font_size" />
 
-                <EditText
-                    android:id="@+id/edAbout"
-                    style="@style/fontRegular"
+                <LinearLayout
+                    android:id="@+id/lnAbout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_15ssp"
-                    android:background="@drawable/background_edit_text_grey_line_background"
-                    android:drawableStart="@mipmap/about_you"
-                    android:drawablePadding="@dimen/_10sdp"
-                    android:gravity="start|top"
-                    android:hint="@string/about_you"
-                    android:inputType="textMultiLine"
-                    android:lines="5"
-                    android:padding="@dimen/_8sdp"
-                    android:textColor="@color/edittext_text_color"
-                    android:textColorHint="@color/edittext_hint_color"
-                    android:textSize="@dimen/edittext_font_size" />
+                    android:background="@drawable/background_edit_text_grey_line_background">
+
+                    <ImageView
+                        android:layout_width="@dimen/_10sdp"
+                        android:layout_height="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_11sdp"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/about_you" />
+
+                    <EditText
+                        android:id="@+id/edAbout"
+                        style="@style/fontRegular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:gravity="start|top"
+                        android:hint="@string/about_you"
+                        android:inputType="textMultiLine"
+                        android:lines="5"
+                        android:padding="@dimen/_8sdp"
+                        android:textColor="@color/edittext_text_color"
+                        android:textColorHint="@color/edittext_hint_color"
+                        android:textSize="@dimen/edittext_font_size" />
+
+                </LinearLayout>
 
 
                 <RelativeLayout

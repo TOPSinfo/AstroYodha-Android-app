@@ -10,7 +10,6 @@ object TimeSlotList {
     /**
      * make array list of order from firestore snapshot
      */
-
     fun getTimeSlotArrayList(
         querySnapshot: QuerySnapshot,
         userId: String
@@ -53,6 +52,9 @@ object TimeSlotList {
         return bookingArrayList
     }
 
+    /**
+     * set single model item
+     */
     fun getTimeSlotModel(
         querySnapshot: QueryDocumentSnapshot
     ): TimeSlotModel {
@@ -81,7 +83,9 @@ object TimeSlotList {
         return timeSlotModel
     }
 
-
+    /**
+     * set single model item
+     */
     fun getTimeSlotDetail(
         querySnapshot: DocumentSnapshot
     ): TimeSlotModel {

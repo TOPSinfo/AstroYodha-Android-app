@@ -11,7 +11,6 @@ object RatingList {
     /**
      * make array list of order from firestore snapshot
      */
-
     fun getRatingArrayList(
         querySnapshot: QuerySnapshot,
         userId: String
@@ -44,6 +43,9 @@ object RatingList {
         return ratingArrayList
     }
 
+    /**
+     * set single model item
+     */
     fun getRatingModel(
         querySnapshot: QueryDocumentSnapshot
     ): RatingModel {
@@ -73,7 +75,9 @@ object RatingList {
         return ratingModel
     }
 
-
+    /**
+     * set single model item
+     */
     fun getRatingDetail(
         querySnapshot: DocumentSnapshot
     ): RatingModel {

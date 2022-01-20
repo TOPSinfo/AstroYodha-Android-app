@@ -139,7 +139,6 @@ class TimeSlotViewModel @Inject constructor(
 
             ref.addSnapshotListener { value, error ->
                 if (error != null) {
-                    MyLog.e("Error getting timeslot", "===")
                     _timeSlotListResponse.value = Resource.error("", null)
 
                 } else {
@@ -162,14 +161,11 @@ class TimeSlotViewModel @Inject constructor(
             _timeSlotListResponse.value = Resource.loading(null)
             val ref = userRepository.getCustomTimeSlotRepository(userId, eventDate)
 
-            ref.addSnapshotListener { value, error ->
-                if (error != null) {
-                    MyLog.e("Error getting timeslot", "===")
-                    _timeSlotListResponse.value = Resource.error("", null)
-                } else {
-                    var timeSlotList = TimeSlotList.getTimeSlotArrayList(value!!, userId)
-                    _timeSlotListResponse.postValue(Resource.success(timeSlotList))
-                }
+            ref.get().addOnSuccessListener {
+                var timeSlotList = TimeSlotList.getTimeSlotArrayList(it, userId)
+                _timeSlotListResponse.postValue(Resource.success(timeSlotList))
+            }.addOnFailureListener {
+                _timeSlotListResponse.value = Resource.error("", null)
             }
         } else {
             _timeSlotListResponse.value = Resource.error(Constants.MSG_NO_INTERNET_CONNECTION, null)
@@ -186,14 +182,11 @@ class TimeSlotViewModel @Inject constructor(
             _timeSlotListResponse.value = Resource.loading(null)
             val ref = userRepository.getWeeklyTimeSlotRepository(userId, eventDate)
 
-            ref.addSnapshotListener { value, error ->
-                if (error != null) {
-                    MyLog.e("Error getting timeslot", "===")
-                    _timeSlotListResponse.value = Resource.error("", null)
-                } else {
-                    var timeSlotList = TimeSlotList.getTimeSlotArrayList(value!!, userId)
-                    _timeSlotListResponse.postValue(Resource.success(timeSlotList))
-                }
+            ref.get().addOnSuccessListener {
+                var timeSlotList = TimeSlotList.getTimeSlotArrayList(it, userId)
+                _timeSlotListResponse.postValue(Resource.success(timeSlotList))
+            }.addOnFailureListener {
+                _timeSlotListResponse.value = Resource.error("", null)
             }
         } else {
             _timeSlotListResponse.value = Resource.error(Constants.MSG_NO_INTERNET_CONNECTION, null)
@@ -210,14 +203,11 @@ class TimeSlotViewModel @Inject constructor(
             _timeSlotListResponse.value = Resource.loading(null)
             val ref = userRepository.getRepeatTimeSlotRepository(userId, eventDate)
 
-            ref.addSnapshotListener { value, error ->
-                if (error != null) {
-                    MyLog.e("Error getting timeslot", "===")
-                    _timeSlotListResponse.value = Resource.error("", null)
-                } else {
-                    var timeSlotList = TimeSlotList.getTimeSlotArrayList(value!!, userId)
-                    _timeSlotListResponse.postValue(Resource.success(timeSlotList))
-                }
+            ref.get().addOnSuccessListener {
+                var timeSlotList = TimeSlotList.getTimeSlotArrayList(it, userId)
+                _timeSlotListResponse.postValue(Resource.success(timeSlotList))
+            }.addOnFailureListener {
+                _timeSlotListResponse.value = Resource.error("", null)
             }
         } else {
             _timeSlotListResponse.value = Resource.error(Constants.MSG_NO_INTERNET_CONNECTION, null)

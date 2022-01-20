@@ -4,10 +4,19 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.telephony.TelephonyManager
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.astroyodha.R
+import com.astroyodha.core.BaseActivity
+import com.astroyodha.databinding.ActivityAstrologerLoginBinding
+import com.astroyodha.network.NetworkHelper
+import com.astroyodha.network.Status
+import com.astroyodha.ui.astrologer.activity.AstrologerDashboardActivity
+import com.astroyodha.ui.user.authentication.viewmodel.SplashViewModel
+import com.astroyodha.utils.Constants
+import com.astroyodha.utils.MyLog
+import com.astroyodha.utils.showSnackBarToast
 import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
@@ -20,15 +29,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.astroyodha.R
-import com.astroyodha.core.BaseActivity
-import com.astroyodha.databinding.ActivityAstrologerLoginBinding
-import com.astroyodha.network.NetworkHelper
-import com.astroyodha.network.Status
-import com.astroyodha.ui.astrologer.activity.AstrologerDashboardActivity
-import com.astroyodha.ui.user.authentication.viewmodel.SplashViewModel
-import com.astroyodha.utils.Constants
-import com.astroyodha.utils.showSnackBarToast
 
 class AstrologerLoginActivity : BaseActivity() {
     val TAG = javaClass.simpleName
@@ -66,12 +66,9 @@ class AstrologerLoginActivity : BaseActivity() {
      * initialize view
      */
     private fun init() {
-
-
         intent.getStringExtra(Constants.INTENT_USER_TYPE).let {
             userType=it.toString()
         }
-
 
         auth = Firebase.auth
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -85,29 +82,31 @@ class AstrologerLoginActivity : BaseActivity() {
             binding.edPhoneNumber.setText("")
         }
 
-
     }
 
+    /**
+     * initialize facebook login
+     */
     fun initFacebookLogin() {
         callbackManager = CallbackManager.Factory.create()
         binding.facebookLoginButton.setReadPermissions("email", "public_profile")
         binding.facebookLoginButton.registerCallback(callbackManager, object :
             FacebookCallback<LoginResult> {
             override fun onSuccess(loginResult: LoginResult) {
-                Log.d(TAG, "facebook:onSuccess:$loginResult")
                 handleFacebookAccessToken(loginResult.accessToken)
             }
 
             override fun onCancel() {
-                Log.d(TAG, "facebook:onCancel")
             }
 
             override fun onError(error: FacebookException) {
-                Log.d(TAG, "facebook:onError", error)
             }
         })
     }
 
+    /**
+     * initialize google login
+     */
     private fun googleSignIn() {
         googleSignInClient = GoogleSignIn.getClient(this, gso);
         val signInIntent = googleSignInClient.signInIntent
@@ -165,8 +164,6 @@ class AstrologerLoginActivity : BaseActivity() {
                     .putExtra(Constants.INTENT_SOCIAL_TYPE, logintype)
                     .putExtra(Constants.INTENT_USER_TYPE, userType)
             )
-            finish()
-//            onBackPressed()
         }
 
         binding.layouLoginWithFacebook.setOnClickListener {
@@ -179,6 +176,9 @@ class AstrologerLoginActivity : BaseActivity() {
         }
     }
 
+    /**
+     * manage edittext focus
+     */
     fun changeLayoutOnFocusChange(b: Boolean) {
         if (b) {
             binding.imgMobile.setColorFilter(
@@ -284,13 +284,11 @@ class AstrologerLoginActivity : BaseActivity() {
                 }
             }
         })
-
-
     }
 
-    /*
-  * This function logout social media account
-  * */
+    /**
+     * This function logout social media account
+     */
     fun logoutSocialMedia()
     {
         Firebase.auth.signOut()
@@ -324,24 +322,23 @@ class AstrologerLoginActivity : BaseActivity() {
         )
     }
 
+    /**
+     * manage facebook token
+     */
     private fun handleFacebookAccessToken(token: AccessToken) {
-        Log.d(TAG, "handleFacebookAccessToken:$token")
 
         val credential = FacebookAuthProvider.getCredential(token.token)
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
                     name = user!!.displayName!!
                     email = if (user.email.isNullOrBlank()) "" else user.email.toString()
                     socialId = user.uid
                     logintype = Constants.SOCIAL_TYPE_FACEBOOK
                     viewModel.checkUserWithSocialMediaWithUserType(socialId,userType)
-//                   redirectCreateAccountActivity(name,email,socialId)
                 } else {
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
                     hideProgress()
                     Toast.makeText(
                         baseContext, "Authentication failed.",
@@ -351,14 +348,15 @@ class AstrologerLoginActivity : BaseActivity() {
             }
     }
 
-
+    /**
+     * manage google login
+     */
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d("TAG", "signInWithCredential:success")
                     val user = auth.currentUser
 
                     name = user!!.displayName!!
@@ -366,13 +364,9 @@ class AstrologerLoginActivity : BaseActivity() {
                     socialId = user.uid
                     logintype = Constants.SOCIAL_TYPE_GOOGLE
                     viewModel.checkUserWithSocialMediaWithUserType(socialId,userType)
-//                    redirectCreateAccountActivity(name, email, socialId)
                 } else {
-                    Log.w("TAG", "signInWithCredential:failure", task.exception)
                     hideProgress()
                 }
-
-                // ...
             }
     }
 
@@ -399,11 +393,9 @@ class AstrologerLoginActivity : BaseActivity() {
                 // Google Sign In was successful, authenticate with Firebase
                 showProgress(this)
                 val account = task.getResult(ApiException::class.java)!!
-                Log.d("TAG", "firebaseAuthWithGoogle:" + account.id)
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
-                Log.w("TAG", "Google sign in failed", e)
                 hideProgress()
                 // ...
             }
@@ -414,6 +406,9 @@ class AstrologerLoginActivity : BaseActivity() {
         }
     }
 
+    /**
+     * redirect to astrologer dashboard
+     */
     fun redirectDashboard() {
         startActivity(Intent(this, AstrologerDashboardActivity::class.java))
         finishAffinity()

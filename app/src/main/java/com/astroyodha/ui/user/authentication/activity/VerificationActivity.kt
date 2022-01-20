@@ -25,7 +25,6 @@ import com.astroyodha.utils.hideKeyboard
 import com.astroyodha.utils.showSnackBarToast
 import java.util.concurrent.TimeUnit
 
-
 class VerificationActivity : BaseActivity(), VerificationNavigator {
     val TAG = javaClass.simpleName
 
@@ -43,7 +42,6 @@ class VerificationActivity : BaseActivity(), VerificationNavigator {
         init()
         setObserver()
         setClickListener()
-//        enableResendOTPView()
         startPhoneNumberVerification()
     }
 
@@ -54,20 +52,14 @@ class VerificationActivity : BaseActivity(), VerificationNavigator {
         viewModel.verificationNavigator = this
         phoneNumber = intent.getStringExtra(Constants.INTENT_MOBILE)
 
-        if(intent.hasExtra(Constants.INTENT_USER_DATA))
-        {
-            userModel= intent.getSerializableExtra(Constants.INTENT_USER_DATA) as UserModel?
-            if(userModel!=null)
-            {
-                if(!userModel!!.socialId.equals(""))
-                {
-                    viewModel.isSocialLogin=true
+        if (intent.hasExtra(Constants.INTENT_USER_DATA)) {
+            userModel = intent.getSerializableExtra(Constants.INTENT_USER_DATA) as UserModel?
+            if (userModel != null) {
+                if (!userModel!!.socialId.equals("")) {
+                    viewModel.isSocialLogin = true
                 }
             }
         }
-
-
-
 
         var phoneNumberWithMasking=phoneNumber!!.replace(phoneNumber!!.substring(5,phoneNumber!!.length-2),"******")
 
@@ -95,7 +87,6 @@ class VerificationActivity : BaseActivity(), VerificationNavigator {
         binding.otpView.otpListener = object : OTPListener {
             override fun onInteractionListener() {
                 // fired when user types something in the Otpbox
-//                viewModel.OTPCode.postValue(binding.otpView.otp.toString().trim())
             }
 
             override fun onOTPComplete(otp: String) {
@@ -224,10 +215,6 @@ class VerificationActivity : BaseActivity(), VerificationNavigator {
      * Enabling resend button
      */
     override fun enableResendOTPView() {
-//        binding.txtResend.isClickable = true
-//        binding.txtResend.alpha = 1f
-//        binding.txtTimer.text = getString(R.string.one)
-//        binding.txtTimer.visibility = View.GONE
         binding.txtResend.text = getString(R.string.resend_otp_available)
         binding.btnResendOTP.visibility=View.VISIBLE
     }
@@ -236,11 +223,6 @@ class VerificationActivity : BaseActivity(), VerificationNavigator {
      * Disabling resend button
      */
     private fun disableResendOTPView() {
-
-//        binding.txtTimer.text = getString(R.string.one)
-//        binding.txtResend.isClickable = false
-//        binding.txtResend.alpha = 0.3f
-//        binding.txtTimer.visibility = View.VISIBLE
         binding.btnResendOTP.visibility=View.GONE
     }
 
@@ -259,7 +241,6 @@ class VerificationActivity : BaseActivity(), VerificationNavigator {
                 val seconds = totalSecs % 60;
 
                 var resendOTPString=String.format(getString(R.string.resend_code),Utility.twoDigitString(seconds.toInt()))
-//                "" + minutes + ":" + Utility.twoDigitString(seconds.toInt())
                 binding.txtResend.text = resendOTPString
             }
 

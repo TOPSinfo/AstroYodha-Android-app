@@ -10,7 +10,6 @@ object CMSList {
     /**
      * make array list of order from firestore snapshot
      */
-
     fun getCMSArrayList(
         querySnapshot: QuerySnapshot
     ): ArrayList<CMSModel> {
@@ -35,6 +34,9 @@ object CMSList {
         return cmsArrayList
     }
 
+    /**
+     * set single model item
+     */
     fun getCMSModel(
         querySnapshot: QueryDocumentSnapshot
     ): CMSModel {
@@ -58,7 +60,9 @@ object CMSList {
         return cmsModel
     }
 
-
+    /**
+     * set single model item
+     */
     fun getCMSDetail(
         querySnapshot: DocumentSnapshot
     ): CMSModel {

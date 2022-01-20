@@ -15,6 +15,9 @@ class ImageViewActivity : BaseActivity() {
         initUI()
     }
 
+    /**
+     * initialize view
+     */
     private fun initUI() {
         binding.imgView.loadImageWithoutCenterCrop(intent.getStringExtra("ImageUrl"))
         binding.imgBack.setOnClickListener {

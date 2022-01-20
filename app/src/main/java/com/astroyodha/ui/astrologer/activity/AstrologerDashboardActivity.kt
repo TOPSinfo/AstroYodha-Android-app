@@ -1,11 +1,10 @@
 package com.astroyodha.ui.astrologer.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import com.google.firebase.auth.FirebaseAuth
-import com.simform.custombottomnavigation.Model
 import com.astroyodha.R
 import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivityAstrologerDashboardBinding
@@ -15,6 +14,8 @@ import com.astroyodha.ui.astrologer.viewmodel.ProfileAstrologerViewModel
 import com.astroyodha.utils.Constants
 import com.astroyodha.utils.MyLog
 import com.astroyodha.utils.showSnackBarToast
+import com.google.firebase.auth.FirebaseAuth
+import com.simform.custombottomnavigation.Model
 
 class AstrologerDashboardActivity : BaseActivity() {
     private lateinit var binding: ActivityAstrologerDashboardBinding
@@ -48,11 +49,6 @@ class AstrologerDashboardActivity : BaseActivity() {
         navController = findNavController(R.id.nav_host_fragment_astrologer)
 
         val menuItems = arrayOf(
-            /*Model(
-                icon = R.drawable.ic_home,                // Icon
-                destinationId = R.id.nav_dashboard_astrologer,     // destinationID
-                id = 0,                // ID
-                text = R.string.title_dashboard),*/
             Model(
                 icon = R.drawable.ic_calender,
                 destinationId = R.id.nav_booking_astrologer,
@@ -81,14 +77,12 @@ class AstrologerDashboardActivity : BaseActivity() {
         profileViewModel.languageAndSpecialityListResponse.observe(this, {
             when (it.status) {
                 Status.LOADING -> {
-//                    showProgress(requireContext())
                 }
                 Status.SUCCESS -> {
                     hideProgress()
                     it.data?.let { resultList ->
                         Constants.listOfLanguages.clear()
                         Constants.listOfLanguages.addAll(resultList)
-                        MyLog.e("List of Language","=====${Constants.listOfLanguages.size}")
                     }
                 }
                 Status.ERROR -> {
@@ -101,14 +95,12 @@ class AstrologerDashboardActivity : BaseActivity() {
         profileViewModel.specialityResponse.observe(this, {
             when (it.status) {
                 Status.LOADING -> {
-//                    showProgress(requireContext())
                 }
                 Status.SUCCESS -> {
                     hideProgress()
                     it.data?.let { resultList ->
                         Constants.listOfSpeciality.clear()
                         Constants.listOfSpeciality.addAll(resultList)
-                        MyLog.e("List of Speciality","=====${Constants.listOfSpeciality.size}")
                     }
                 }
                 Status.ERROR -> {
@@ -117,6 +109,17 @@ class AstrologerDashboardActivity : BaseActivity() {
                 }
             }
         })
+    }
+
+    /**
+     * manage new intent
+     */
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        startActivity(
+            Intent(this, AstrologerDashboardActivity::class.java)
+        )
+        finishAffinity()
     }
 
 

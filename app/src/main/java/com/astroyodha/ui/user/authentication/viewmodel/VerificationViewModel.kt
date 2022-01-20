@@ -19,7 +19,6 @@ import com.astroyodha.utils.MyLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-
 @HiltViewModel
 class VerificationViewModel @Inject constructor(private val userRepository: UserRepository) :
     ViewModel() {
@@ -120,10 +119,8 @@ class VerificationViewModel @Inject constructor(private val userRepository: User
         var userRef: Task<AuthResult>
 //
         if (isSocialLogin) {
-            MyLog.e("Social Login==","true")
             userRef = auth.currentUser!!.linkWithCredential(credential)
         } else {
-            MyLog.e("Social Login==","false")
             userRef = auth.signInWithCredential(credential)
         }
 
@@ -154,7 +151,6 @@ class VerificationViewModel @Inject constructor(private val userRepository: User
     /**
      * Verifying OTP number
      */
-
     fun verifyPhoneNumberWithCode() {
         verificationNavigator?.showDialog()
 
@@ -184,7 +180,6 @@ class VerificationViewModel @Inject constructor(private val userRepository: User
     /**
      * Checking validation
      */
-
     fun checkValidation(): Boolean {
 
         if (OTPCode.value.isNullOrEmpty() || OTPCode.value?.length!! < 6) {

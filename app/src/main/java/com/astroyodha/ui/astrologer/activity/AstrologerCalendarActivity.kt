@@ -15,13 +15,6 @@ import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.auth.FirebaseAuth
-import com.kizitonwose.calendarview.model.CalendarDay
-import com.kizitonwose.calendarview.model.CalendarMonth
-import com.kizitonwose.calendarview.model.DayOwner
-import com.kizitonwose.calendarview.ui.DayBinder
-import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
-import com.kizitonwose.calendarview.ui.ViewContainer
 import com.astroyodha.R
 import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.*
@@ -31,6 +24,13 @@ import com.astroyodha.ui.astrologer.viewmodel.AstrologerBookingViewModel
 import com.astroyodha.ui.user.model.booking.BookingModel
 import com.astroyodha.utils.dateFormat
 import com.astroyodha.utils.showSnackBarToast
+import com.google.firebase.auth.FirebaseAuth
+import com.kizitonwose.calendarview.model.CalendarDay
+import com.kizitonwose.calendarview.model.CalendarMonth
+import com.kizitonwose.calendarview.model.DayOwner
+import com.kizitonwose.calendarview.ui.DayBinder
+import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
+import com.kizitonwose.calendarview.ui.ViewContainer
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
@@ -61,7 +61,7 @@ class AstrologerCalendarActivity : BaseActivity() {
     private val selectionFormatter = DateTimeFormatter.ofPattern("d MMMM")
 
     private val userId: String by lazy { FirebaseAuth.getInstance().currentUser!!.uid }
-
+    var dateDBFormat: String = "dd - MMM - yyyy"
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,7 +113,6 @@ class AstrologerCalendarActivity : BaseActivity() {
         }
 
         binding.exThreeCalendar.monthScrollListener = {
-            Log.e("MONTH_LISTENER", it.month.toString())
 
             // Select the first day of the month when
             // we scroll to a new month.
@@ -133,7 +132,6 @@ class AstrologerCalendarActivity : BaseActivity() {
                 }
             }
             selectedMonth = mmonth.toString()
-            Log.e("MONTH_LISTENER_1", selectedMonth)
 
             selectDate(it.yearMonth.atDay(1), "Init")
         }
@@ -316,12 +314,6 @@ class AstrologerCalendarActivity : BaseActivity() {
 
                     binding.exThreeCalendar.smoothScrollToMonth(newMonth)
 
-                    /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        calendarViewModel.getMonthWiseBookingEventRequest(
-                            userId, selectedMonth
-                        )
-                    }*/
-
                 }
 
             }
@@ -336,7 +328,7 @@ class AstrologerCalendarActivity : BaseActivity() {
             if (allEventList.get(i).date.equals(
                     date.toString().dateFormat(
                         "yyyy-MM-dd",
-                        "dd-MM-yyyy"
+                        dateDBFormat
                     )
                 )
             )
@@ -373,7 +365,6 @@ class AstrologerCalendarActivity : BaseActivity() {
                     it.data?.let { resultList ->
                         allEventList.clear()
                         allEventList.addAll(resultList)
-                        Log.e("EVENLISTSIZE", allEventList.toString())
                         setUpCalendarDate()
                     }
                 }
@@ -391,10 +382,6 @@ class AstrologerCalendarActivity : BaseActivity() {
      * manage click listener of view
      */
     private fun setClickListener() {
-        /*binding.imgAdd.setOnClickListener {
-            startActivity(Intent(this, SelectAstrologerActivity::class.java))
-        }*/
-
         binding.imgClose.setOnClickListener {
             onBackPressed()
         }
@@ -422,7 +409,7 @@ class AstrologerCalendarActivity : BaseActivity() {
                     if (allEventList.get(i).date.equals(
                             date.toString().dateFormat(
                                 "yyyy-MM-dd",
-                                "dd-MM-yyyy"
+                                dateDBFormat
                             )
                         )
                     )

@@ -13,7 +13,6 @@ object AstrologerUsersList {
     /**
      * make array list of order from firestore snapshot
      */
-
     fun getUserArrayList(
         querySnapshot: QuerySnapshot,
         userId: String
@@ -80,7 +79,9 @@ object AstrologerUsersList {
         return userArrayList
     }
 
-
+    /**
+     * set single model item
+     */
     fun getMessagesModel(
         querySnapshot: QueryDocumentSnapshot
     ): MessagesModel {
@@ -120,6 +121,9 @@ object AstrologerUsersList {
         return messagesModel
     }
 
+    /**
+     * set single model item
+     */
     fun getAstrologerUserModel(
         querySnapshot: QueryDocumentSnapshot
     ): AstrologerUserModel {

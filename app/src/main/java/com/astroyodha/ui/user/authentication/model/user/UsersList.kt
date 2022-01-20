@@ -8,6 +8,9 @@ import com.astroyodha.utils.Constants
 
 object UsersList {
 
+    /**
+     * set single model item
+     */
     fun getMessagesModel(
         querySnapshot: QueryDocumentSnapshot
     ): MessagesModel {
@@ -47,6 +50,9 @@ object UsersList {
         return messagesModel
     }
 
+    /**
+     * set single model item
+     */
     fun getUserDetail(
         querySnapshot: DocumentSnapshot
     ): UserModel {

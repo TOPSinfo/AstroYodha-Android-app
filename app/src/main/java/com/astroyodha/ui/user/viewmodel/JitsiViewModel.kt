@@ -1,6 +1,5 @@
 package com.astroyodha.ui.user.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,6 +11,7 @@ import com.astroyodha.network.Resource
 import com.astroyodha.ui.user.model.CallListModel
 import com.astroyodha.ui.user.model.videocall.CallList
 import com.astroyodha.utils.Constants
+import com.astroyodha.utils.MyLog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -35,9 +35,9 @@ class JitsiViewModel @Inject constructor(
     val receiveGroupCallInvitationResponse: LiveData<Resource<String>> get() = _receiveGroupCallInvitationResponse
 
 
-    fun changeStatus(docId:String,isActive:Boolean){
+    fun changeStatus(docId: String, isActive: Boolean) {
         if (networkHelper.isNetworkConnected()) {
-            val docRef= getFirebaseDB().collection(Constants.TABLE_GROUPCALL).document(docId)
+            val docRef = getFirebaseDB().collection(Constants.TABLE_GROUPCALL).document(docId)
 
             docRef.get().addOnSuccessListener {
                 var model = CallListModel(
@@ -48,45 +48,36 @@ class JitsiViewModel @Inject constructor(
                     it[Constants.FIELD_HOST_NAME].toString()
                 )
 
-                var map=HashMap<String,Any>()
+                var map = HashMap<String, Any>()
 
-//                if(!isActive && model.HostId.equals(FirebaseAuth.getInstance().currentUser?.uid.toString()))
-//                {
-//                    map.put("CallStatus","InActive")
-//                }
-
-                if(isActive)
-                {
-                    var pos=model.userIds.indexOf(FirebaseAuth.getInstance().currentUser?.uid.toString()+"___InActive")
-                    if(pos<model.userIds.size && pos!=-1) {
+                if (isActive) {
+                    var pos =
+                        model.userIds.indexOf(FirebaseAuth.getInstance().currentUser?.uid.toString() + "___InActive")
+                    if (pos < model.userIds.size && pos != -1) {
                         model.userIds[pos] =
                             FirebaseAuth.getInstance().currentUser?.uid.toString() + "___Active"
                     }
-                }
-                else
-                {
-                    var pos=model.userIds.indexOf(FirebaseAuth.getInstance().currentUser?.uid.toString()+"___Active")
-                    if(pos<model.userIds.size && pos!=-1) {
+                } else {
+                    var pos =
+                        model.userIds.indexOf(FirebaseAuth.getInstance().currentUser?.uid.toString() + "___Active")
+                    if (pos < model.userIds.size && pos != -1) {
                         model.userIds[pos] =
                             FirebaseAuth.getInstance().currentUser?.uid.toString() + "___InActive"
                     }
                 }
 
-                map.put(Constants.FIELD_CALL_STATUS,"InActive")
-                for(i in model.userIds)
-                {
-                    if(i.endsWith("___Active"))
-                    {
-                        map.put(Constants.FIELD_CALL_STATUS,"Active")
+                map.put(Constants.FIELD_CALL_STATUS, "InActive")
+                for (i in model.userIds) {
+                    if (i.endsWith("___Active")) {
+                        map.put(Constants.FIELD_CALL_STATUS, "Active")
                     }
                 }
-                map.put(Constants.FIELD_USERIDS,model.userIds)
+                map.put(Constants.FIELD_USERIDS, model.userIds)
                 docRef.update(map)
 
             }
 
         } else {
-//            toast(Constant.MSG_NO_INTERNET_CONNECTION)
         }
     }
 
@@ -116,12 +107,9 @@ class JitsiViewModel @Inject constructor(
                 }
 
                 if (snapshot !== null) {
-//                    Constant.listOfActiveCall.clear()
-                    if(snapshot.isEmpty)
-                    {
+                    if (snapshot.isEmpty) {
                         Constants.listOfActiveCall.clear()
-                    }
-                    else {
+                    } else {
 
                         for (dc in snapshot.documents) {
                             val callModel = CallList.getCallList(dc)
@@ -132,7 +120,6 @@ class JitsiViewModel @Inject constructor(
                             }
                         }
                     }
-                    Log.e("List Of New Active Call ADD===", "===" + Constants.listOfActiveCall)
                 }
 
             }

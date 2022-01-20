@@ -40,7 +40,6 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class EditProfileActivity : BaseActivity() {
 
     lateinit var binding: ActivityEditProfileBinding
@@ -113,7 +112,6 @@ class EditProfileActivity : BaseActivity() {
                     val myFormat = "hh:mm a" //In which you need put here
                     val sdf = SimpleDateFormat(myFormat, Locale.US)
 
-//                    binding.edTimeOfBirth.setText("$selectedHour:$selectedMinute")
                     binding.edTimeOfBirth.setText(sdf.format(timeCalnder.time))},
                 hour,
                 minute,
@@ -150,7 +148,6 @@ class EditProfileActivity : BaseActivity() {
             onBackPressed()
         }
 
-//        binding.edPlaceOfBirth.setOnClickListener { callAutoSearch() }
     }
 
 
@@ -170,10 +167,9 @@ class EditProfileActivity : BaseActivity() {
     }
 
 
-    /*
-* change layout borders color based on view focus
-* */
-
+    /**
+     * change layout borders color based on view focus
+     */
     private fun manageFocus() {
 
         binding.edFullName.setOnFocusChangeListener { view, b ->
@@ -281,12 +277,11 @@ class EditProfileActivity : BaseActivity() {
             }
         }
 
-
     }
 
-    /*
-    * manage auto search places
-    * */
+    /**
+     * manage auto search places
+     */
     private fun callAutoSearch() {
         val fields =
             listOf(Place.Field.ID, Place.Field.NAME, Place.Field.ADDRESS, Place.Field.LAT_LNG)
@@ -347,6 +342,9 @@ class EditProfileActivity : BaseActivity() {
         })
     }
 
+    /**
+     * set data to view
+     */
     private fun setUserData() {
         if (userModel != null) {
             userModel!!.fullName.let {
@@ -373,7 +371,6 @@ class EditProfileActivity : BaseActivity() {
             }
 
             userModel!!.profileImage.let {
-                MyLog.e("Profile Image", "====" + it.toString())
                 binding.imgUser.loadProfileImage(it.toString())
             }
         }
@@ -435,7 +432,6 @@ class EditProfileActivity : BaseActivity() {
                     profileImagePath = resultUri
 
                 } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                    // val error = result.error
                 }
             }
             AUTOCOMPLETE_REQUEST_CODE-> {
@@ -461,7 +457,6 @@ class EditProfileActivity : BaseActivity() {
                 else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                     // TODO: Handle the error.
                     var status = Autocomplete.getStatusFromIntent(data);
-                    Log.e("PLace INTENT===", status.getStatusMessage().toString());
                 } else {
                     // The user canceled the operation.
                 }
