@@ -1,9 +1,6 @@
 # Kotlin - AstroYodha
 This repository is a demonstration of a booking system for astrologers that includes features such as the ability to book an astrologer based on their speciality, as well as the ability to chat and video call with them.
 
-
-![](https://github.com/TOPSinfo/Jitsi-Video-call-Android/blob/master/media/kotlin_sample_new.gif)
-
 # Description
 
 In the Welcome screen, You have two options for user application. You can continue as astrologer or you can continue as user.User/Astrologer can login or register using social media and mobile number.
