@@ -94,7 +94,6 @@ class SelectAstrologerActivity : BaseActivity() {
                 }
             )
         }
-
         viewModel.getAllAstrologer()
     }
 
