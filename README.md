@@ -35,6 +35,17 @@ In the Profile screen, the user can manage his/her profile.
 
 In the Chat screen, users can chat with astrologers by sending Text, images, and video. Also users can initiate a video call(one-to-one) from here.
 
+# Credentials
+
+#### Astrologer
+
+- Phone Number ==> +91 7428723247
+- OTP ==> 123456
+
+#### User
+
+- Phone Number ==> +91 7428723248
+- OTP ==> 123456
 
 # Table of Contents
 
