@@ -103,7 +103,7 @@
         android:layout_gravity="end"
         android:layout_margin="@dimen/_10sdp"
         android:visibility="gone"
-        app:cardBackgroundColor="@color/light_orange"
+        app:cardBackgroundColor="@color/otp_back_user"
         app:cardCornerRadius="@dimen/_10sdp">
 
         <androidx.cardview.widget.CardView

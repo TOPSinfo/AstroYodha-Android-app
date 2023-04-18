@@ -12,7 +12,6 @@ import com.astroyodha.R
 import com.astroyodha.ui.user.model.notification.NotificationModel
 import com.astroyodha.utils.Constants
 import com.astroyodha.utils.dateToStringFormat
-import java.util.*
 
 /**
  * Notification list adapter : Show Notification list.

@@ -13,7 +13,6 @@ import com.astroyodha.ui.astrologer.model.user.AstrologerUserModel
 import com.astroyodha.utils.Constants
 import com.astroyodha.utils.loadRoundedImage
 import com.astroyodha.utils.roundOffDecimal
-import java.util.*
 
 /**
  * Astrologer list adapter : Show Astrologer list.

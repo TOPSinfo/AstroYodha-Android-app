@@ -9,9 +9,6 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
-import com.google.firebase.auth.FirebaseAuth
 import com.astroyodha.R
 import com.astroyodha.core.BaseFragment
 import com.astroyodha.databinding.FragmentBookingBinding
@@ -25,6 +22,9 @@ import com.astroyodha.utils.Constants
 import com.astroyodha.utils.makeGone
 import com.astroyodha.utils.makeVisible
 import com.astroyodha.utils.showSnackBarToast
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
 import java.util.*
 
 class BookingFragment : BaseFragment() {
@@ -111,7 +111,7 @@ class BookingFragment : BaseFragment() {
      * set observer
      */
     private fun setObserver() {
-        bookingViewModel.getBookingListDataResponse.observe(viewLifecycleOwner, {
+        bookingViewModel.getBookingListDataResponse.observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.LOADING -> {
                     binding.tabLayout.makeGone()
@@ -123,16 +123,24 @@ class BookingFragment : BaseFragment() {
                         val mCurrentTime = Date()
                         upComingList.clear()
                         upComingList.addAll(resultList.filter { resultData ->
-                            resultData.startTime?.after(mCurrentTime)!! && resultData.endTime?.after(mCurrentTime)!!
+                            resultData.startTime?.after(mCurrentTime)!! && resultData.endTime?.after(
+                                mCurrentTime
+                            )!!
                         })
                         pastList.clear()
                         pastList.addAll(resultList.filter { resultData ->
-                            (resultData.startTime?.before(mCurrentTime)!! && resultData.endTime?.before(mCurrentTime)!!) ||
-                              resultData.startTime!!.before(mCurrentTime) && resultData.endTime!!.after(mCurrentTime) && resultData.status != Constants.APPROVE_STATUS
+                            (resultData.startTime?.before(mCurrentTime)!! && resultData.endTime?.before(
+                                mCurrentTime
+                            )!!) ||
+                                    resultData.startTime!!.before(mCurrentTime) && resultData.endTime!!.after(
+                                mCurrentTime
+                            ) && resultData.status != Constants.APPROVE_STATUS
                         })
                         onGoingList.clear()
                         onGoingList.addAll(resultList.filter { resultData ->
-                            resultData.startTime!!.before(mCurrentTime) && resultData.endTime!!.after(mCurrentTime) && resultData.status == Constants.APPROVE_STATUS
+                            resultData.startTime!!.before(mCurrentTime) && resultData.endTime!!.after(
+                                mCurrentTime
+                            ) && resultData.status == Constants.APPROVE_STATUS
                         })
                         setUpViewPager()
                     }
@@ -143,7 +151,7 @@ class BookingFragment : BaseFragment() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
+        }
     }
 
     /**

@@ -23,7 +23,6 @@ import com.astroyodha.ui.user.activity.*
 import com.astroyodha.ui.user.adapter.AstrologerAdapter
 import com.astroyodha.ui.user.viewmodel.DashboardViewModel
 import com.astroyodha.utils.Constants
-import com.astroyodha.utils.MyLog
 import com.astroyodha.utils.showSnackBarToast
 import java.text.SimpleDateFormat
 import java.util.*
@@ -123,9 +122,10 @@ class DashboardFragment : BaseFragment() {
      * set observer
      */
     private fun setObserver() {
-        astrologerViewModel.getAstrologerListResponse.observe(this, {
+        astrologerViewModel.getAstrologerListResponse.observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.LOADING -> {
+                    // loading state
                 }
                 Status.SUCCESS -> {
                     hideProgress()
@@ -139,7 +139,7 @@ class DashboardFragment : BaseFragment() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
+        }
 
 
     }

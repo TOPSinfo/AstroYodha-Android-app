@@ -91,7 +91,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@mipmap/birthdate_inactive"
-                        app:tint="@color/border_blue" />
+                        app:tint="@color/astrologer_theme" />
 
                     <TextView
                         style="@style/fontRegular"
@@ -308,7 +308,7 @@
         android:layout_marginTop="@dimen/_15ssp"
         android:layout_marginEnd="@dimen/_15ssp"
         android:layout_marginBottom="@dimen/_15ssp"
-        android:background="@color/button_background_color"
+        android:background="@color/user_theme"
         android:padding="@dimen/_10sdp"
         android:text="@string/update"
         android:textColor="@color/button_text_color"

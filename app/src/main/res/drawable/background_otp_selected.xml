@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <stroke android:color="@color/border_blue"  android:width="2dp"/>
-    <solid android:color="@color/otp_back_blue" />
+    <stroke android:color="@color/astrologer_theme"  android:width="2dp"/>
+    <solid android:color="@color/otp_back_astrologer" />
     <corners android:radius="@dimen/_3sdp" />
 </shape>

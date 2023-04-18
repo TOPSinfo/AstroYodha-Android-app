@@ -13,7 +13,6 @@ import com.astroyodha.ui.user.model.booking.BookingModel
 import com.astroyodha.utils.Constants
 import com.astroyodha.utils.loadRoundedImage
 import com.astroyodha.utils.makeGone
-import java.util.*
 
 /**
  * Booking list adapter : Show booking request.

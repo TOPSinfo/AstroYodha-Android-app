@@ -2,15 +2,12 @@ package com.astroyodha.ui.user.activity
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import com.google.firebase.auth.FirebaseAuth
-import com.google.gson.Gson
-import com.razorpay.Checkout
-import com.razorpay.PaymentResultListener
 import com.astroyodha.R
 import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivityPaymentBinding
@@ -23,7 +20,14 @@ import com.astroyodha.ui.user.model.wallet.WalletModel
 import com.astroyodha.ui.user.viewmodel.BookingViewModel
 import com.astroyodha.ui.user.viewmodel.ProfileViewModel
 import com.astroyodha.ui.user.viewmodel.WalletViewModel
-import com.astroyodha.utils.*
+import com.astroyodha.utils.Constants
+import com.astroyodha.utils.getAmount
+import com.astroyodha.utils.showSnackBarToast
+import com.astroyodha.utils.toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.gson.Gson
+import com.razorpay.Checkout
+import com.razorpay.PaymentResultListener
 import org.json.JSONObject
 import java.util.*
 
@@ -45,6 +49,11 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
     var isExtendMinute = false
     var transactionID = ""
     var bookingModel: BookingModel? = BookingModel()
+
+    var photoPath: Uri? = null
+    var kundaliPath: Uri? = null
+
+
     private val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -79,6 +88,15 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
         astrologerModel = intent.getParcelableExtra(Constants.INTENT_MODEL)!!
         amount = intent.getStringExtra(Constants.INTENT_AMOUNT)!!
         minute = intent.getIntExtra(Constants.INTENT_MINUTE, minute)
+
+        if (intent.hasExtra(Constants.INTENT_PHOTO_URI)) {
+            photoPath = Uri.parse(intent.getStringExtra(Constants.INTENT_PHOTO_URI))
+        }
+
+        if (intent.hasExtra(Constants.INTENT_KUNDALI_URI)) {
+            kundaliPath = Uri.parse(intent.getStringExtra(Constants.INTENT_KUNDALI_URI))
+        }
+
     }
 
     /**
@@ -191,10 +209,14 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
                                 }
                                 bookingModel?.paymentType = walletModel.paymentType
                                 bookingModel?.amount = walletModel.amount
-                                bookingViewModel.addUpdateBookingData(
-                                    bookingModel!!,
-                                    false
-                                )
+
+                                if(kundaliPath!=null && photoPath!=null) {
+
+                                    bookingViewModel.uploadPhotoAndKundaliForAddBooking(
+                                        bookingModel!!,photoPath,kundaliPath,
+                                        false
+                                    )
+                                }
                             } else {
                                 //comes when user want's to extend call
                                 //update booking end time
@@ -202,6 +224,8 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
                                 val curTimeInMs: Long = bookingModel!!.endTime!!.time
                                 bookingModel!!.endTime = Date(curTimeInMs + minute * minuteMillis)
                                 bookingModel!!.status = Constants.APPROVE_STATUS
+                                bookingModel!!.allowExtendTIme = Constants.EXTEND_STATUS_COMPLETE
+
                                 bookingViewModel.extendBookingMinute(
                                     bookingModel!!
                                 )
@@ -216,10 +240,27 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
             }
         })
 
-        bookingViewModel.bookingAddUpdateResponse.observe(this, {
+
+        //add event and upload photo or kundali
+        bookingViewModel.bookingUploadPhotoResponse.observe(this, {
             when (it.status) {
                 Status.LOADING -> {
                     showProgress(this)
+                }
+                Status.SUCCESS -> {
+                }
+                Status.ERROR -> {
+                    hideProgress()
+                    it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
+                }
+            }
+        })
+
+
+        bookingViewModel.bookingAddUpdateResponse.observe(this, {
+            when (it.status) {
+                Status.LOADING -> {
+//                    showProgress(this)
                 }
                 Status.SUCCESS -> {
                     hideProgress()
@@ -316,7 +357,7 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
             options.put("description", "")
             //You can omit the image option to fetch the image from dashboard
             // options.put("image", Constants.BASE_IMAGE_URL+"512.png")
-            options.put("theme.color", ContextCompat.getColor(this, R.color.orange_theme))
+            options.put("theme.color", ContextCompat.getColor(this, R.color.user_theme))
             options.put("currency", "INR")
 //            options.put("status", Constants.RAZOR_PAY_STATUS_CAPTURED)
             //options.put("order_id", "order_DBJOWsdsdzybf0sJbb")
@@ -371,6 +412,7 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
                 }
             }
         } catch (e: java.lang.Exception) {
+            // exception
         }
     }
 
@@ -393,6 +435,7 @@ class PaymentActivity : BaseActivity(), PaymentResultListener {
                 }
             }
         } catch (e: java.lang.Exception) {
+            // exception
         }
     }
 }

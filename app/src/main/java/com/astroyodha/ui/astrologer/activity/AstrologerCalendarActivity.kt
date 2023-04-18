@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -17,12 +16,16 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.astroyodha.R
 import com.astroyodha.core.BaseActivity
-import com.astroyodha.databinding.*
+import com.astroyodha.databinding.ActivityAstrologerCalendarBinding
+import com.astroyodha.databinding.Example3CalendarDayBinding
+import com.astroyodha.databinding.Example3CalendarHeaderBinding
 import com.astroyodha.network.Status
 import com.astroyodha.ui.astrologer.adapter.AstrologerCalendarEventAdapter
 import com.astroyodha.ui.astrologer.viewmodel.AstrologerBookingViewModel
 import com.astroyodha.ui.user.model.booking.BookingModel
 import com.astroyodha.utils.dateFormat
+import com.astroyodha.utils.makeInvisible
+import com.astroyodha.utils.makeVisible
 import com.astroyodha.utils.showSnackBarToast
 import com.google.firebase.auth.FirebaseAuth
 import com.kizitonwose.calendarview.model.CalendarDay
@@ -87,7 +90,7 @@ class AstrologerCalendarActivity : BaseActivity() {
                         model: BookingModel,
                         position: Int
                     ) {
-                        //click of recyclerview item
+                        // click of recyclerview item
                     }
                 }
             )
@@ -136,7 +139,6 @@ class AstrologerCalendarActivity : BaseActivity() {
             selectDate(it.yearMonth.atDay(1), "Init")
         }
 
-
         class MonthViewContainer(view: View) : ViewContainer(view) {
             val legendLayout = Example3CalendarHeaderBinding.bind(view).legendLayout.llWeekDays
             val legendHeaderImgLeftArrow =
@@ -146,7 +148,6 @@ class AstrologerCalendarActivity : BaseActivity() {
             val legendHeaderTxtMonth =
                 Example3CalendarHeaderBinding.bind(view).legendLayout.txtMonth
         }
-
 
         class DayViewContainer(view: View) : ViewContainer(view) {
             lateinit var day: CalendarDay // Will be set when this container is bound.
@@ -161,7 +162,6 @@ class AstrologerCalendarActivity : BaseActivity() {
             }
         }
 
-
         binding.exThreeCalendar.dayBinder = object : DayBinder<DayViewContainer> {
             override fun create(view: View) = DayViewContainer(view)
 
@@ -174,7 +174,7 @@ class AstrologerCalendarActivity : BaseActivity() {
                 dotView.backgroundTintList = ColorStateList.valueOf(
                     ContextCompat.getColor(
                         this@AstrologerCalendarActivity,
-                        R.color.astrologer_blue_theme
+                        R.color.astrologer_theme
                     )
                 )
                 textView.text = day.date.dayOfMonth.toString()
@@ -186,14 +186,14 @@ class AstrologerCalendarActivity : BaseActivity() {
                             textView.setTextColor(
                                 ContextCompat.getColor(
                                     this@AstrologerCalendarActivity,
-                                    R.color.astrologer_blue_theme
+                                    R.color.astrologer_theme
                                 )
                             )
                             textView.setBackgroundResource(R.drawable.calendar_today_bg)
                             textView.backgroundTintList = ColorStateList.valueOf(
                                 ContextCompat.getColor(
                                     this@AstrologerCalendarActivity,
-                                    R.color.otp_back_blue
+                                    R.color.otp_back_astrologer
                                 )
                             )
 
@@ -214,11 +214,11 @@ class AstrologerCalendarActivity : BaseActivity() {
                             textView.backgroundTintList = ColorStateList.valueOf(
                                 ContextCompat.getColor(
                                     this@AstrologerCalendarActivity,
-                                    R.color.astrologer_blue_theme
+                                    R.color.astrologer_theme
                                 )
                             )
 
-                            dotView.makeInVisible()
+                            dotView.makeInvisible()
                         }
                         else -> {
                             textView.setTextColor(
@@ -234,12 +234,11 @@ class AstrologerCalendarActivity : BaseActivity() {
                             } else {
                                 dotView.isVisible = false
                             }
-
                         }
                     }
                 } else {
-                    textView.makeInVisible()
-                    dotView.makeInVisible()
+                    textView.makeInvisible()
+                    dotView.makeInvisible()
                 }
             }
         }
@@ -259,7 +258,7 @@ class AstrologerCalendarActivity : BaseActivity() {
                                         TextStyle.SHORT, Locale.US
                                     )
                                 } else {
-                                    TODO("VERSION.SDK_INT < O")
+                                    ""
                                 }
 
                             tv.text = dayOfWeekDisplayName.toString()
@@ -275,10 +274,9 @@ class AstrologerCalendarActivity : BaseActivity() {
                     container.legendHeaderTxtMonth.text = titleFormatter.format(month.yearMonth)
                 }
                 container.legendHeaderImgLeftArrow.setOnClickListener {
-                    val newMonth = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        month.yearMonth.minusMonths(1)
-                    } else {
-                        TODO("VERSION.SDK_INT < O")
+                    var newMonth: YearMonth = month.yearMonth
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        newMonth = month.yearMonth.minusMonths(1)
                     }
                     from = "Left"
                     selectedMonth = newMonth.monthValue.toString()
@@ -291,14 +289,12 @@ class AstrologerCalendarActivity : BaseActivity() {
                     }
 
                     binding.exThreeCalendar.smoothScrollToMonth(newMonth)
-
                 }
 
                 container.legendHeaderImgRightArrow.setOnClickListener {
-                    val newMonth = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        month.yearMonth.plusMonths(1)
-                    } else {
-                        TODO("VERSION.SDK_INT < O")
+                    var newMonth: YearMonth = month.yearMonth
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        newMonth = month.yearMonth.plusMonths(1)
                     }
                     selectedMonth = newMonth.monthValue.toString()
                     if (from.isEmpty()) {
@@ -311,15 +307,10 @@ class AstrologerCalendarActivity : BaseActivity() {
 
                     from = "Right"
 
-
                     binding.exThreeCalendar.smoothScrollToMonth(newMonth)
-
                 }
-
             }
         }
-
-
     }
 
     private fun getEventListOfThisDate(date: LocalDate): Int {
@@ -355,7 +346,7 @@ class AstrologerCalendarActivity : BaseActivity() {
      */
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setObserver() {
-        calendarViewModel.getBookingListDataResponse.observe(this, {
+        calendarViewModel.getBookingListDataResponse.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
                     showProgress(this)
@@ -373,8 +364,7 @@ class AstrologerCalendarActivity : BaseActivity() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
-
+        }
 
     }
 
@@ -387,55 +377,44 @@ class AstrologerCalendarActivity : BaseActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun selectDate(date: LocalDate, from: String) {
-        if (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                selectedDate != date
-            } else {
-                TODO("VERSION.SDK_INT < O")
-            }
-        ) {
+        if (selectedDate != date && !from.equals("Init")) {
 
-            if (!from.equals("Init")) {
+            val oldDate = selectedDate
+            selectedDate = date
+            binding.rvEventList.post(Runnable {
+                oldDate?.let { binding.exThreeCalendar.notifyDateChanged(it) }
+                binding.exThreeCalendar.notifyDateChanged(date)
+            })
 
-                val oldDate = selectedDate
-                selectedDate = date
-                binding.rvEventList.post(Runnable {
-                    oldDate?.let { binding.exThreeCalendar.notifyDateChanged(it) }
-                    binding.exThreeCalendar.notifyDateChanged(date)
-                })
-
-                selectedDateEventList.clear()
-                for (i in 0..allEventList.size - 1) {
-                    if (allEventList.get(i).date.equals(
-                            date.toString().dateFormat(
-                                "yyyy-MM-dd",
-                                dateDBFormat
-                            )
+            selectedDateEventList.clear()
+            for (i in 0..allEventList.size - 1) {
+                if (allEventList.get(i).date.equals(
+                        date.toString().dateFormat(
+                            "yyyy-MM-dd",
+                            dateDBFormat
                         )
                     )
-                        selectedDateEventList.add(allEventList.get(i))
-                }
-
-                binding.rvEventList.adapter?.notifyDataSetChanged()
-
-
-                val selectedDate = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    selectionFormatter.format(date)
-                } else {
-                    TODO("VERSION.SDK_INT < O")
-                }
-                binding.exThreeSelectedDateText.text = selectedDate.substring(
-                    0,
-                    selectedDate.indexOf(' ')
-                ) + getDayOfMonthSuffix(
-                    selectedDate.substring(0, selectedDate.indexOf(' ')).toInt()
-                ) + selectedDate.substring(
-                    selectedDate.indexOf(' '),
-                    selectedDate.length
-                ) + " Events"
+                )
+                    selectedDateEventList.add(allEventList.get(i))
             }
 
+            binding.rvEventList.adapter?.notifyDataSetChanged()
+
+            val selectedDate = selectionFormatter.format(date)
+
+            binding.exThreeSelectedDateText.text = selectedDate.substring(
+                0,
+                selectedDate.indexOf(' ')
+            ) + getDayOfMonthSuffix(
+                selectedDate.substring(0, selectedDate.indexOf(' ')).toInt()
+            ) + selectedDate.substring(
+                selectedDate.indexOf(' '),
+                selectedDate.length
+            ) + " Events"
         }
+
     }
 
     override fun onStart() {
@@ -458,19 +437,6 @@ class AstrologerCalendarActivity : BaseActivity() {
             daysOfWeek = rhs + lhs
         }
         return daysOfWeek
-    }
-
-
-    fun View.makeVisible() {
-        visibility = View.VISIBLE
-    }
-
-    fun View.makeInVisible() {
-        visibility = View.INVISIBLE
-    }
-
-    fun View.makeGone() {
-        visibility = View.GONE
     }
 
 }

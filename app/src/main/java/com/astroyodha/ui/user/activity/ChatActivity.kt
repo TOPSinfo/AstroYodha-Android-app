@@ -20,19 +20,6 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.progressindicator.CircularProgressIndicator
-import com.google.common.reflect.TypeToken
-import com.google.firebase.Timestamp
-import com.google.firebase.auth.FirebaseAuth
-import com.google.gson.Gson
-import com.gowtham.library.utils.CompressOption
-import com.gowtham.library.utils.TrimType
-import com.gowtham.library.utils.TrimVideo
-import com.gun0912.tedpermission.PermissionListener
-import com.gun0912.tedpermission.TedPermission
-import com.theartofdev.edmodo.cropper.CropImage
-import com.theartofdev.edmodo.cropper.CropImageView
 import com.astroyodha.R
 import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivityChatBinding
@@ -48,13 +35,25 @@ import com.astroyodha.ui.user.viewmodel.BookingViewModel
 import com.astroyodha.ui.user.viewmodel.ChatViewModel
 import com.astroyodha.ui.user.viewmodel.ProfileViewModel
 import com.astroyodha.utils.*
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.common.reflect.TypeToken
+import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.gson.Gson
+import com.gowtham.library.utils.CompressOption
+import com.gowtham.library.utils.TrimType
+import com.gowtham.library.utils.TrimVideo
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import droidninja.filepicker.FilePickerBuilder
 import droidninja.filepicker.FilePickerConst
 import droidninja.filepicker.utils.ContentUriUtils
 import java.io.File
 import java.lang.reflect.Type
 import java.util.*
-import kotlin.collections.ArrayList
 
 class ChatActivity : BaseActivity() {
 
@@ -304,10 +303,11 @@ class ChatActivity : BaseActivity() {
 
     private fun startFromFresh() {
         //chat ended start from fresh
+        // dashboard launch mode is single task it will kill middle screens automatically
         startActivity(
             Intent(this, UserHomeActivity::class.java)
         )
-        finishAffinity()
+//        finishAffinity()
     }
 
     /**
@@ -329,7 +329,17 @@ class ChatActivity : BaseActivity() {
             TedPermission.with(this@ChatActivity)
                 .setPermissionListener(object : PermissionListener {
                     override fun onPermissionGranted() {
-                        var currentUserId = FirebaseAuth.getInstance().currentUser?.uid.toString()
+                        val intent = Intent(
+                            this@ChatActivity,
+                            JitsiCallActivity::class.java
+                        )
+                        intent.putExtra("RoomId", bookingModel.id)
+//                        intent.putExtra("OpponentUserName", "")
+//                        intent.putExtra("isGroupCall", isGroup)
+                        intent.putExtra(Constants.INTENT_MODEL, astrologerModel)
+                        intent.putExtra(Constants.INTENT_BOOKING_MODEL, bookingModel)
+                        startActivity(intent)
+                        /*var currentUserId = FirebaseAuth.getInstance().currentUser?.uid.toString()
                         var userIds = ArrayList<String>()
                         if (isGroup) {
                             var selectedMemberIdList = ArrayList<String>()
@@ -370,11 +380,12 @@ class ChatActivity : BaseActivity() {
 
                         if (!isCallActive) {
                             setupVideoCall(userIds, currentUserId)
-                        }
+                        }*/
 
                     }
 
                     override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                        // onPermissionDenied
                     }
 
                 }).setDeniedMessage(getString(R.string.permission_denied))
@@ -618,6 +629,7 @@ class ChatActivity : BaseActivity() {
                 }
 
                 override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                    // onPermissionDenied
                 }
 
             }).setDeniedMessage(getString(R.string.permission_denied))
@@ -776,7 +788,7 @@ class ChatActivity : BaseActivity() {
         }
 
     /**
-     * Redirecting to full screen image view activity
+     * Redirecting to full screen image view activitye
      */
     fun redirectImageViewActivity(url: String) {
         val intent = Intent(this, ImageViewActivity::class.java)
@@ -794,6 +806,7 @@ class ChatActivity : BaseActivity() {
     }
 
     private fun openGroupDetailForEdit() {
+        // openGroupDetailForEdit
     }
 
 
@@ -811,7 +824,8 @@ class ChatActivity : BaseActivity() {
             userIdsWithStatus,
             "Active",
             currentUserId,
-            Constants.USER_NAME
+            Constants.USER_NAME,
+            bookingModel.id
         )
 
     }

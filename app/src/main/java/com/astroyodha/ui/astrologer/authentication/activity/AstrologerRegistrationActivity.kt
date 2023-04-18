@@ -5,11 +5,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import com.facebook.login.LoginManager
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.astroyodha.R
 import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivityAstrologerRegistrationBinding
@@ -20,6 +15,11 @@ import com.astroyodha.ui.user.authentication.viewmodel.SplashViewModel
 import com.astroyodha.utils.Constants
 import com.astroyodha.utils.Utility
 import com.astroyodha.utils.showSnackBarToast
+import com.facebook.login.LoginManager
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class AstrologerRegistrationActivity : BaseActivity() {
 
@@ -76,14 +76,14 @@ class AstrologerRegistrationActivity : BaseActivity() {
      */
     private fun manageFocus() {
 
-        binding.edFName.setOnFocusChangeListener { view, b ->
+        binding.edFName.setOnFocusChangeListener { _, b ->
             if (b) {
                 binding.icUser.setColorFilter(
-                    ContextCompat.getColor(this, R.color.orange_theme),
+                    ContextCompat.getColor(this, R.color.user_theme),
                     android.graphics.PorterDuff.Mode.SRC_IN
                 )
                 binding.layoutFullName.setBackgroundResource(R.drawable.background_edit_text_orange_line_background)
-                binding.edFName.setTextColor(ContextCompat.getColor(this, R.color.orange_theme))
+                binding.edFName.setTextColor(ContextCompat.getColor(this, R.color.user_theme))
             } else {
                 binding.icUser.setColorFilter(
                     ContextCompat.getColor(this, R.color.text_gray),
@@ -94,20 +94,20 @@ class AstrologerRegistrationActivity : BaseActivity() {
             }
         }
 
-        binding.edPhoneNumber.setOnFocusChangeListener { view, b ->
+        binding.edPhoneNumber.setOnFocusChangeListener { _, b ->
             if (b) {
                 binding.icMobile.setColorFilter(
-                    ContextCompat.getColor(this, R.color.orange_theme),
+                    ContextCompat.getColor(this, R.color.user_theme),
                     android.graphics.PorterDuff.Mode.SRC_IN
                 );
                 binding.layoutMobileNumber.setBackgroundResource(R.drawable.background_edit_text_orange_line_background)
                 binding.edPhoneNumber.setTextColor(
                     ContextCompat.getColor(
                         this,
-                        R.color.orange_theme
+                        R.color.user_theme
                     )
                 )
-                binding.countryPicker.textColor = ContextCompat.getColor(this, R.color.orange_theme)
+                binding.countryPicker.textColor = ContextCompat.getColor(this, R.color.user_theme)
             } else {
                 binding.icMobile.setColorFilter(
                     ContextCompat.getColor(this, R.color.text_gray),
@@ -119,14 +119,14 @@ class AstrologerRegistrationActivity : BaseActivity() {
             }
         }
 
-        binding.edEmail.setOnFocusChangeListener { view, b ->
+        binding.edEmail.setOnFocusChangeListener { _, b ->
             if (b) {
                 binding.icEmail.setColorFilter(
-                    ContextCompat.getColor(this, R.color.orange_theme),
+                    ContextCompat.getColor(this, R.color.user_theme),
                     android.graphics.PorterDuff.Mode.SRC_IN
                 );
                 binding.layoutEmail.setBackgroundResource(R.drawable.background_edit_text_orange_line_background)
-                binding.edEmail.setTextColor(ContextCompat.getColor(this, R.color.orange_theme))
+                binding.edEmail.setTextColor(ContextCompat.getColor(this, R.color.user_theme))
             } else {
                 binding.icEmail.setColorFilter(
                     ContextCompat.getColor(this, R.color.text_gray),

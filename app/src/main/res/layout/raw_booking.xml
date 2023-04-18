@@ -16,9 +16,11 @@
         <ImageView
             android:id="@+id/imgColor"
             android:layout_width="@dimen/_90sdp"
-            android:layout_height="@dimen/_90sdp"
+            android:layout_height="@dimen/_100sdp"
             android:visibility="visible"
-            tools:background="@color/orange_theme" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/user_theme" />
 
         <TextView
             android:id="@+id/tvDate"
@@ -65,11 +67,29 @@
             android:text="@string/time_user_time"
             android:textColor="@color/text_gray"
             android:textSize="@dimen/_10ssp"
-            app:layout_constraintBottom_toTopOf="@+id/tvCharge"
+            app:layout_constraintBottom_toTopOf="@+id/tvBookingId"
             app:layout_constraintEnd_toEndOf="@+id/tvBookingWith"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/tvBookingWith"
             app:layout_constraintTop_toBottomOf="@+id/tvBookingWith" />
+
+        <TextView
+            android:id="@+id/tvBookingId"
+            style="@style/fontRegular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="Id: 123"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toTopOf="@+id/tvCharge"
+            app:layout_constraintEnd_toEndOf="@+id/tvBookingWith"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/tvBookingWith"
+            app:layout_constraintTop_toBottomOf="@+id/tvTime" />
 
         <TextView
             android:id="@+id/tvCharge"
@@ -87,7 +107,7 @@
             app:layout_constraintEnd_toEndOf="@+id/tvBookingWith"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/tvBookingWith"
-            app:layout_constraintTop_toBottomOf="@+id/tvTime" />
+            app:layout_constraintTop_toBottomOf="@+id/tvBookingId" />
 
         <TextView
             android:id="@+id/tvStatusLabel"

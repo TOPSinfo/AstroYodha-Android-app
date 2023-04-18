@@ -1,6 +1,7 @@
 package com.astroyodha.utils
 
 import android.app.Activity
+import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -15,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.astroyodha.R
+import com.astroyodha.view.ReadMoreOption
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -22,8 +25,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.messaging.FirebaseMessaging
-import com.astroyodha.R
-import com.astroyodha.view.ReadMoreOption
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
@@ -129,7 +130,7 @@ fun View.showSnackBarToast(strMessage: String) {
     try {
         Snackbar.make(this, strMessage, Snackbar.LENGTH_LONG).show()
     } catch (e: Exception) {
-
+        // exception
     }
 }
 
@@ -198,6 +199,22 @@ fun Activity.hideKeyboard() {
             focusedView.windowToken,
             InputMethodManager.HIDE_NOT_ALWAYS
         )
+    }
+}
+
+/**
+ * check activity is last or not
+ */
+fun Context.checkIsLastActivity():Boolean {
+    val mngr = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager?
+
+    val taskList = mngr!!.getRunningTasks(10)
+
+    return if (taskList[0].numActivities == 1 && taskList[0].topActivity!!.className == this.javaClass.getName()) {
+//        MyLog.i("TAG", "This is last activity in the stack")
+        true
+    } else {
+        false
     }
 }
 
@@ -306,6 +323,7 @@ fun Context.openSocialMedia(url: String) {
         val i = Intent(Intent.ACTION_VIEW, uri)
         startActivity(i)
     } catch (e: java.lang.Exception) {
+        // exception
     }
 }
 

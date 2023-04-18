@@ -1,15 +1,15 @@
 package com.astroyodha.data.repository
 
 import android.content.Context
-import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 import com.astroyodha.R
 import com.astroyodha.ui.astrologer.model.price.PriceModel
 import com.astroyodha.ui.astrologer.model.timeslot.TimeSlotModel
 import com.astroyodha.ui.user.model.booking.BookingModel
 import com.astroyodha.utils.Constants
+import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 

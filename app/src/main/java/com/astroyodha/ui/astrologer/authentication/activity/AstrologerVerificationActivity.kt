@@ -6,10 +6,6 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
 import androidx.activity.viewModels
-import com.google.firebase.auth.PhoneAuthOptions
-import com.google.firebase.auth.PhoneAuthProvider
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.astroyodha.R
 import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivityAstrologerVerificationBinding
@@ -24,6 +20,10 @@ import com.astroyodha.utils.Constants
 import com.astroyodha.utils.Utility
 import com.astroyodha.utils.hideKeyboard
 import com.astroyodha.utils.showSnackBarToast
+import com.google.firebase.auth.PhoneAuthOptions
+import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import java.util.concurrent.TimeUnit
 
 class AstrologerVerificationActivity : BaseActivity(), AstrologerVerificationNavigator {
@@ -57,10 +57,8 @@ class AstrologerVerificationActivity : BaseActivity(), AstrologerVerificationNav
         if (intent.hasExtra(Constants.INTENT_USER_DATA)) {
             userModel =
                 intent.getParcelableExtra(Constants.INTENT_USER_DATA) as AstrologerUserModel?
-            if (userModel != null) {
-                if (!userModel!!.socialId.equals("")) {
-                    viewModel.isSocialLogin = true
-                }
+            if (userModel != null && !userModel!!.socialId.equals("")) {
+                viewModel.isSocialLogin = true
             }
         }
         var phoneNumberWithMasking=phoneNumber!!.replace(phoneNumber!!.substring(5,phoneNumber!!.length-2),"******")

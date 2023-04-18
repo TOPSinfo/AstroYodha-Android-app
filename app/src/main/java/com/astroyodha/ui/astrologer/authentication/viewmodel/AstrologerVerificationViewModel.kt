@@ -3,19 +3,18 @@ package com.astroyodha.ui.astrologer.authentication.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.gms.tasks.Task
-import com.google.firebase.FirebaseException
-import com.google.firebase.Timestamp
-import com.google.firebase.auth.*
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.DocumentSnapshot
 import com.astroyodha.data.repository.UserRepository
 import com.astroyodha.network.Resource
 import com.astroyodha.ui.astrologer.authentication.navigator.AstrologerVerificationNavigator
 import com.astroyodha.ui.astrologer.model.user.AstrologerUserModel
 import com.astroyodha.ui.astrologer.model.user.AstrologerUsersList
 import com.astroyodha.utils.Constants
-import com.astroyodha.utils.MyLog
+import com.google.android.gms.tasks.Task
+import com.google.firebase.FirebaseException
+import com.google.firebase.Timestamp
+import com.google.firebase.auth.*
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -51,7 +50,7 @@ class AstrologerVerificationViewModel @Inject constructor(private val userReposi
      */
     fun initVerificationCallback() {
 
-        // auth.firebaseAuthSettings.setAppVerificationDisabledForTesting(true)
+         auth.firebaseAuthSettings.setAppVerificationDisabledForTesting(true)
         //Auth.auth().settings.isAppVerificationDisabledForTesting = TRUE
 
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {

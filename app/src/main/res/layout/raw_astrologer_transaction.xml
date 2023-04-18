@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/_10sdp">
@@ -38,12 +39,13 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="Paid to Castro chat"
-        android:textColor="@color/grey_dark"
+        android:textColor="@color/edittext_text_color"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintBottom_toTopOf="@+id/tvTime"
         app:layout_constraintEnd_toEndOf="@+id/barrier"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imgRupee"
-        app:layout_constraintTop_toTopOf="@id/imgRupee"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
@@ -54,10 +56,25 @@
         android:text="06 Nov, 5:10 PM"
         android:textColor="@color/text_gray"
         android:textSize="@dimen/_10ssp"
-        app:layout_constraintBottom_toBottomOf="@id/imgRupee"
+        app:layout_constraintBottom_toTopOf="@+id/tvBookingId"
         app:layout_constraintEnd_toEndOf="@id/tvTransaction"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/tvTransaction"
         app:layout_constraintTop_toBottomOf="@+id/tvTransaction" />
+
+    <TextView
+        android:id="@+id/tvBookingId"
+        style="@style/fontRegular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/_10ssp"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@id/tvTransaction"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/tvTransaction"
+        app:layout_constraintTop_toBottomOf="@+id/tvTime"
+        tools:text="123" />
 
     <TextView
         android:id="@+id/tvOperand"
@@ -65,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="+"
-        android:textColor="@color/grey_dark"
+        android:textColor="@color/edittext_text_color"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintEnd_toStartOf="@+id/imgRupeeAmount"
         app:layout_constraintTop_toTopOf="@id/tvTransaction" />
@@ -88,7 +105,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="21"
-        android:textColor="@color/grey_dark"
+        android:textColor="@color/edittext_text_color"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintTop_toTopOf="@id/tvTransaction" />

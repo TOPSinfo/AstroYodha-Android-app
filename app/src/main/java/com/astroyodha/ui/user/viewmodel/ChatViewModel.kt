@@ -9,11 +9,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.android.material.progressindicator.CircularProgressIndicator
-import com.google.firebase.Timestamp
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.*
-import com.google.firebase.firestore.EventListener
 import com.astroyodha.data.repository.ChatRepository
 import com.astroyodha.network.NetworkHelper
 import com.astroyodha.network.Resource
@@ -22,6 +17,11 @@ import com.astroyodha.ui.user.authentication.model.user.UserModel
 import com.astroyodha.ui.user.authentication.model.user.UsersList
 import com.astroyodha.utils.Constants
 import com.astroyodha.utils.Utility
+import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.*
+import com.google.firebase.firestore.EventListener
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.io.File
@@ -29,7 +29,6 @@ import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 @HiltViewModel
 class ChatViewModel @Inject constructor(
@@ -71,6 +70,8 @@ class ChatViewModel @Inject constructor(
             } else {
                 docId = getCurrentDocumentId(otherUserId)
             }
+
+            Log.e("","====++Document ID=$docId")
 
             chatRepository.getChatMessageRepository(docId)
                 .addSnapshotListener(object : EventListener<QuerySnapshot?> {
@@ -387,15 +388,22 @@ class ChatViewModel @Inject constructor(
     /**
      * Add video Call Data in database
      */
-    fun setupVideoCallData(userIds: ArrayList<String>, callStatus: String, hostUserId: String,hostname:String) =
+    fun setupVideoCallData(
+        userIds: ArrayList<String>,
+        callStatus: String,
+        hostUserId: String,
+        hostname: String,
+        bookingID: String
+    ) =
         viewModelScope.launch {
             if (networkHelper.isNetworkConnected()) {
-                val doc = getFirebaseDB().collection(Constants.TABLE_GROUPCALL).document()
+                val doc = getFirebaseDB().collection(Constants.TABLE_GROUPCALL).document(bookingID)
                 val map = hashMapOf(
                     Constants.FIELD_USERIDS to userIds,
                     Constants.FIELD_CALL_STATUS to callStatus,
                     Constants.FIELD_HOST_ID to hostUserId,
-                    Constants.FIELD_HOST_NAME to hostname
+                    Constants.FIELD_HOST_NAME to hostname,
+                    Constants.FIELD_GROUP_CREATED_AT to Timestamp.now()
                 )
 
                 doc.set(map).addOnCompleteListener {

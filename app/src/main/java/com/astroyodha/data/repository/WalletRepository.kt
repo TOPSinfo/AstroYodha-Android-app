@@ -1,10 +1,10 @@
 package com.astroyodha.data.repository
 
+import com.astroyodha.ui.user.model.wallet.WalletModel
+import com.astroyodha.utils.Constants
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.astroyodha.ui.user.model.wallet.WalletModel
-import com.astroyodha.utils.Constants
 import javax.inject.Inject
 
 class WalletRepository @Inject constructor() {

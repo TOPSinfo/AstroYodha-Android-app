@@ -1,10 +1,10 @@
 package com.astroyodha.ui.user.authentication.model.user
 
+import com.astroyodha.ui.user.authentication.model.chat.MessagesModel
+import com.astroyodha.utils.Constants
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot
-import com.astroyodha.ui.user.authentication.model.chat.MessagesModel
-import com.astroyodha.utils.Constants
 
 object UsersList {
 

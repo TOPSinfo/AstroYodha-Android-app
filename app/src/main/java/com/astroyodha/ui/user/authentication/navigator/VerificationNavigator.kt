@@ -1,7 +1,7 @@
 package com.astroyodha.ui.user.authentication.navigator
 
-import com.google.firebase.auth.PhoneAuthProvider
 import com.astroyodha.ui.user.authentication.model.user.UserModel
+import com.google.firebase.auth.PhoneAuthProvider
 
 interface VerificationNavigator {
     fun onStarted()

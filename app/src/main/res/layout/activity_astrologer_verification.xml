@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/_20sdp"
-            android:textColor="@color/orange_theme"
+            android:textColor="@color/user_theme"
             app:height="@dimen/_35sdp"
             app:hide_otp="true"
             app:hide_otp_drawable="@drawable/circle_orange"
@@ -100,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
-            android:textColor="@color/green_text"
+            android:textColor="@color/completed_color"
             android:textSize="@dimen/_14sdp" />
 
         <androidx.appcompat.widget.AppCompatButton

@@ -10,7 +10,7 @@
         android:id="@+id/lnActionBar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/astrologer_blue_theme"
+        android:background="@color/astrologer_theme"
         android:paddingStart="@dimen/_5sdp"
         android:paddingEnd="@dimen/_5sdp">
 
@@ -69,7 +69,7 @@
         android:id="@+id/lnBottomBar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/astrologer_blue_theme"
+        android:background="@color/astrologer_theme"
         android:paddingStart="@dimen/_5sdp"
         android:layout_alignParentBottom="true"
         android:visibility="gone"

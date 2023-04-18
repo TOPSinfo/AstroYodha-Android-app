@@ -11,7 +11,7 @@
         android:id="@+id/rlActionBar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/astrologer_blue_theme"
+        android:background="@color/astrologer_theme"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -76,7 +76,7 @@
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="sans-serif-medium"
-            android:textColor="@color/grey_dark"
+            android:textColor="@color/edittext_text_color"
             android:textSize="@dimen/_12ssp"
             tools:text="22th November Events" />
 

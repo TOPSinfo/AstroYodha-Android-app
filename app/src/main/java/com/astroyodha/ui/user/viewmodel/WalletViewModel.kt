@@ -3,14 +3,13 @@ package com.astroyodha.ui.user.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.Timestamp
 import com.astroyodha.data.repository.WalletRepository
 import com.astroyodha.network.NetworkHelper
 import com.astroyodha.network.Resource
 import com.astroyodha.ui.user.model.wallet.WalletList
 import com.astroyodha.ui.user.model.wallet.WalletModel
 import com.astroyodha.utils.Constants
-import com.astroyodha.utils.MyLog
+import com.google.firebase.Timestamp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -59,7 +58,7 @@ class WalletViewModel @Inject constructor(
         wallet.createdAt = Timestamp.now()
 
         val data = hashMapOf(
-            Constants.FIELD_ID to wallet.id,
+            Constants.FIELD_ORDER_ID to wallet.id,
             Constants.FIELD_UID to wallet.userId,
             Constants.FIELD_USER_NAME to wallet.userName,
             Constants.FIELD_TRANSACTION_ID to wallet.trancationId,
@@ -70,7 +69,7 @@ class WalletViewModel @Inject constructor(
             Constants.FIELD_BOOKING_ID to wallet.bookingId,
             Constants.FIELD_ASTROLOGER_ID to wallet.astrologerId,
             Constants.FIELD_ASTROLOGER_NAME to wallet.astrologerName,
-            Constants.FIELD_SET_CAPTURED_GATEWAY to true/*wallet.setCapturedGateway*/,  // required to convert from authorized to captured in razor pay
+            Constants.FIELD_SET_CAPTURED_GATEWAY to /*true*/wallet.setCapturedGateway,  // required to convert from authorized to captured in razor pay
             Constants.FIELD_GROUP_CREATED_AT to wallet.createdAt
         )
         addUserDocument.set(data)
@@ -104,7 +103,9 @@ class WalletViewModel @Inject constructor(
 
             addUserDocument.set(data)
                 .addOnCompleteListener {
-                    if (it.isSuccessful) {}
+                    if (it.isSuccessful) {
+                        // data set completed
+                    }
                 }.addOnFailureListener {
                 }
         }
@@ -144,6 +145,7 @@ class WalletViewModel @Inject constructor(
             userRepository.getAstrologerWalletUpdateRepository(user).update(data1)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
+                        // data set completed
                     }
                 }.addOnFailureListener {
                 }

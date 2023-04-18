@@ -1,18 +1,22 @@
 package com.astroyodha.ui.user.viewmodel
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.Timestamp
-import com.google.firebase.firestore.EventListener
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
 import com.astroyodha.data.repository.BookingRepository
 import com.astroyodha.network.NetworkHelper
 import com.astroyodha.network.Resource
 import com.astroyodha.ui.user.model.booking.BookingList
 import com.astroyodha.ui.user.model.booking.BookingModel
+import com.astroyodha.ui.user.model.calllog.CallLogModel
 import com.astroyodha.utils.Constants
+import com.astroyodha.utils.MyLog
+import com.astroyodha.utils.Utility
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.EventListener
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.QuerySnapshot
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -40,6 +44,97 @@ class BookingViewModel @Inject constructor(
     private val _getBookingDetailResponse: MutableLiveData<Resource<BookingModel>> =
         MutableLiveData()
     val getBookingDetailResponse: LiveData<Resource<BookingModel>> get() = _getBookingDetailResponse
+
+    private val _bookingUploadPhotoResponse: MutableLiveData<Resource<String>> = MutableLiveData()
+    val bookingUploadPhotoResponse: LiveData<Resource<String>> get() = _bookingUploadPhotoResponse
+
+    /**
+     * uploading profile picture to firebase storage
+     */
+    fun uploadPhotoAndKundaliForAddBooking(bookingModel: BookingModel, photoPath: Uri?,kundaliPath: Uri?,isForUpdate:Boolean) {
+
+        _bookingUploadPhotoResponse.value = Resource.loading(null)
+        if (networkHelper.isNetworkConnected()) {
+
+            if (isForUpdate) {
+                if(photoPath!=null && !bookingModel.photo.equals("")) {//Update Data If image is Update
+                    var pictureRef = Utility.storageRef.storage.getReferenceFromUrl(bookingModel.photo!!)
+                    // Delete the file
+                    pictureRef.delete().addOnCompleteListener {
+                        if(it.isSuccessful) {
+                            // file deleted
+                        }
+                    }.addOnFailureListener {
+                    }
+                }
+
+                if(kundaliPath!=null && !bookingModel.kundali.equals("")) {//Update Data If image is Update
+                    var pictureRef = Utility.storageRef.storage.getReferenceFromUrl(bookingModel.kundali!!)
+                    // Delete the file
+                    pictureRef.delete().addOnCompleteListener {
+                        if(it.isSuccessful) {
+                            // file deleted
+                        }
+                    }.addOnFailureListener {
+                    }
+                }
+
+            }
+
+            if(photoPath!=null && kundaliPath!=null) {
+                val frontCardPath =
+                    "${Constants.BOOKING_IMAGE_PATH}/${System.currentTimeMillis()}_photo.jpg"
+                val filepath = Utility.storageRef.child(frontCardPath)
+                filepath.putFile(photoPath!!).continueWithTask { task ->
+                    if (!task.isSuccessful) {
+                        throw task.exception!!
+                    }
+                    filepath.downloadUrl
+                }.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val downUri: Uri? = task.result
+                        downUri?.let {
+                            MyLog.e("Photo URL","===${it.toString()}")
+                            bookingModel.photo = it.toString()
+                        }
+
+                        val frontKundaliPath =
+                            "${Constants.BOOKING_IMAGE_PATH}/${System.currentTimeMillis()}_kundali.jpg"
+                        val filepathKundali = Utility.storageRef.child(frontKundaliPath)
+                        filepathKundali.putFile(kundaliPath!!).continueWithTask { task ->
+                            if (!task.isSuccessful) {
+                                throw task.exception!!
+                            }
+                            filepathKundali.downloadUrl
+                        }.addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                val downUri: Uri? = task.result
+                                downUri?.let {
+                                    MyLog.e("kundali URL","===${it.toString()}")
+                                    bookingModel.kundali = it.toString()
+                                    if (isForUpdate) {
+                                        updateBookingData(bookingModel)
+                                    } else {
+                                        addBookingData(bookingModel)
+                                    }
+
+                                }
+                            }
+                        }
+
+
+
+                    }
+                }
+            } else {
+                addBookingData(bookingModel)
+            }
+        }
+        else{
+            _bookingUploadPhotoResponse.value = Resource.error(Constants.MSG_NO_INTERNET_CONNECTION,null)
+        }
+
+    }
 
     /**
      * uploading profile picture to firebase storage
@@ -91,6 +186,14 @@ class BookingViewModel @Inject constructor(
             Constants.FIELD_PAYMENT_TYPE to user.paymentType,
             Constants.FIELD_AMOUNT to user.amount,
             Constants.FIELD_GROUP_CREATED_AT to user.createdAt,
+            Constants.FIELD_TIME_EXTEND to user.extendedTimeInMinute,
+            Constants.FIELD_ALLOW_EXTEND to user.allowExtendTIme,
+            Constants.FIELD_PHOTO to user.photo,
+            Constants.FIELD_FULL_NAME to user.fullname,
+            Constants.FIELD_BIRTH_DATE to user.birthDate,
+            Constants.FIELD_BIRTH_TIME to user.birthTime,
+            Constants.FIELD_BIRTH_PLACE to user.birthPlace,
+            Constants.FIELD_KUNDALI to user.kundali
         )
 
         ref.set(data)
@@ -131,6 +234,15 @@ class BookingViewModel @Inject constructor(
         user.status.let { data1.put(Constants.FIELD_STATUS, it) }
         user.notify.let { data1.put(Constants.FIELD_NOTIFY, it) }
         user.notificationMin.let { data1.put(Constants.FIELD_NOTIFICATION_MIN, it) }
+        user.extendedTimeInMinute.let { data1.put(Constants.FIELD_TIME_EXTEND, it) }
+        user.allowExtendTIme.let { data1.put(Constants.FIELD_ALLOW_EXTEND, it) }
+        user.photo.let { data1.put(Constants.FIELD_PHOTO, it) }
+        user.fullname.let { data1.put(Constants.FIELD_FULL_NAME, it) }
+        user.birthDate.let { data1.put(Constants.FIELD_BIRTH_DATE, it) }
+        user.birthTime.let { data1.put(Constants.FIELD_BIRTH_TIME, it) }
+        user.birthPlace.let { data1.put(Constants.FIELD_BIRTH_PLACE, it) }
+        user.kundali.let { data1.put(Constants.FIELD_KUNDALI, it) }
+
 
         bookingRepository.getBookingUpdateRepository(user)
             .update(data1)
@@ -170,6 +282,14 @@ class BookingViewModel @Inject constructor(
         user.status.let { data1.put(Constants.FIELD_STATUS, it) }
         user.notify.let { data1.put(Constants.FIELD_NOTIFY, it) }
         user.notificationMin.let { data1.put(Constants.FIELD_NOTIFICATION_MIN, it) }
+        user.extendedTimeInMinute.let { data1.put(Constants.FIELD_TIME_EXTEND, it) }
+        user.allowExtendTIme.let { data1.put(Constants.FIELD_ALLOW_EXTEND, it) }
+        user.photo.let { data1.put(Constants.FIELD_PHOTO, it) }
+        user.fullname.let { data1.put(Constants.FIELD_FULL_NAME, it) }
+        user.birthDate.let { data1.put(Constants.FIELD_BIRTH_DATE, it) }
+        user.birthTime.let { data1.put(Constants.FIELD_BIRTH_TIME, it) }
+        user.birthPlace.let { data1.put(Constants.FIELD_BIRTH_PLACE, it) }
+        user.kundali.let { data1.put(Constants.FIELD_KUNDALI, it) }
 
         bookingRepository.getBookingUpdateRepository(user)
             .update(data1)

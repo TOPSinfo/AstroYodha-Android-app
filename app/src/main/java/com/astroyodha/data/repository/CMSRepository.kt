@@ -1,8 +1,8 @@
 package com.astroyodha.data.repository
 
+import com.astroyodha.utils.Constants
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.astroyodha.utils.Constants
 import javax.inject.Inject
 
 class CMSRepository @Inject constructor() {

@@ -2,13 +2,10 @@ package com.astroyodha.ui.astrologer.viewmodel
 
 import android.content.Context
 import android.net.Uri
+import android.os.Build
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.Timestamp
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.EventListener
-import com.google.firebase.firestore.FirebaseFirestoreException
 import com.astroyodha.R
 import com.astroyodha.data.repository.UserRepository
 import com.astroyodha.network.NetworkHelper
@@ -23,6 +20,10 @@ import com.astroyodha.ui.user.authentication.model.user.UserModel
 import com.astroyodha.utils.Constants
 import com.astroyodha.utils.MyLog
 import com.astroyodha.utils.Utility
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.EventListener
+import com.google.firebase.firestore.FirebaseFirestoreException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -70,6 +71,7 @@ class ProfileAstrologerViewModel @Inject constructor(
         MutableLiveData()
     val normalUserDetailResponse: LiveData<Resource<UserModel>> get() = _normalUserDetailResponse
 
+    var lastResult: DocumentSnapshot? = null
 
     /**
      * uploading profile picture to firebase storage
@@ -93,6 +95,7 @@ class ProfileAstrologerViewModel @Inject constructor(
                     // Delete the file
                     pictureRef.delete().addOnCompleteListener {
                         if(it.isSuccessful) {
+                            // file deleted
                         }
                     }.addOnFailureListener {
                     }
@@ -303,19 +306,31 @@ class ProfileAstrologerViewModel @Inject constructor(
     /**
      * Get user presence of selected user
      */
-    fun getAllAstrologer() {
+    fun getAllAstrologer(paginationSize: Long) {
 
         if (networkHelper.isNetworkConnected()) {
             _getAllAstrologerResponse.value = Resource.loading(null)
-            userRepository.getAllAstrologerUser()
-                .get().addOnSuccessListener {
+            var ref = if (lastResult == null) {
+                userRepository.getAllAstrologerUser()
+                    .orderBy(Constants.FIELD_FULL_NAME)
+                    .limit(paginationSize)
+            } else {
+                userRepository.getAllAstrologerUser()
+                    .orderBy(Constants.FIELD_FULL_NAME)
+                    .startAfter(lastResult)
+                    .limit(paginationSize)
+            }
+            ref = userRepository.getAllAstrologerUser()
+            ref.get().addOnSuccessListener {
 
-                    var userModel = AstrologerUsersList.getUserArrayList(it, "")
-
-
-                    _getAllAstrologerResponse.postValue(Resource.success(userModel))
-
+                var userModel = AstrologerUsersList.getUserArrayList(it, "")
+                MyLog.e(TAG, "data == " + userModel.size)
+                if (it.size() > 0) {
+                    lastResult = it.documents.last()
                 }
+                _getAllAstrologerResponse.postValue(Resource.success(userModel))
+
+            }
         } else {
             _getAllAstrologerResponse.value =
                 Resource.error(Constants.MSG_NO_INTERNET_CONNECTION, null)
@@ -477,6 +492,8 @@ class ProfileAstrologerViewModel @Inject constructor(
         if(networkHelper.isNetworkConnected()) {
             var data1 = HashMap<String, Any>()
             token.let { data1.put(Constants.FIELD_TOKEN, it) }
+            token.let { data1.put(Constants.FIELD_DEVICE_DETAILS, "${Constants.DEVICE_TYPE}, ${Build.MODEL}, ${Build.VERSION.SDK_INT}") }
+            token.let { data1.put(Constants.FIELD_LAST_UPDATE_TIME, Timestamp.now()) }
 
             userRepository.getUserProfileRepository(userId).update(data1)
                 .addOnCompleteListener {

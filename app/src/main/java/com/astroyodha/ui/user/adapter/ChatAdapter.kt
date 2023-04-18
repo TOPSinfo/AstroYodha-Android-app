@@ -9,12 +9,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.progressindicator.CircularProgressIndicator
-import com.google.firebase.auth.FirebaseAuth
 import com.astroyodha.R
 import com.astroyodha.ui.user.activity.ChatActivity
 import com.astroyodha.ui.user.authentication.model.chat.MessagesModel
 import com.astroyodha.utils.*
+import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.firebase.auth.FirebaseAuth
 
 class ChatAdapter(val context: ChatActivity, private val messageList: ArrayList<MessagesModel>, val isGroup:Boolean) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -202,9 +202,9 @@ class ChatAdapter(val context: ChatActivity, private val messageList: ArrayList<
             }
 
             if (chatModel.status == Constants.TYPE_READ) {
-                imgMessageStatus.setColorFilter(context.getColor(R.color.orange_theme))
+                imgMessageStatus.setColorFilter(context.getColor(R.color.user_theme))
                 imgMessageStatus.setImageResource(R.drawable.ic_read)
-                imgMessageStatus1.setColorFilter(context.getColor(R.color.orange_theme))
+                imgMessageStatus1.setColorFilter(context.getColor(R.color.user_theme))
                 imgMessageStatus1.setImageResource(R.drawable.ic_read)
             } else if (chatModel.status == Constants.TYPE_SEND) {
                 imgMessageStatus.setImageResource(R.drawable.ic_check_black)

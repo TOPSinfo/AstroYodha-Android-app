@@ -1,7 +1,7 @@
 package com.astroyodha.ui.astrologer.authentication.navigator
 
-import com.google.firebase.auth.PhoneAuthProvider
 import com.astroyodha.ui.astrologer.model.user.AstrologerUserModel
+import com.google.firebase.auth.PhoneAuthProvider
 
 interface AstrologerVerificationNavigator {
     fun onStarted()

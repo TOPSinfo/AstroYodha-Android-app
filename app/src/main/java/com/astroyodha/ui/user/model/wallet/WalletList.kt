@@ -1,10 +1,10 @@
 package com.astroyodha.ui.user.model.wallet
 
+import com.astroyodha.utils.Constants
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
-import com.astroyodha.utils.Constants
 
 object WalletList {
 

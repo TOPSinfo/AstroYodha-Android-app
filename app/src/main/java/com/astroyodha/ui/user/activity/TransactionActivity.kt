@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.auth.FirebaseAuth
 import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivityTransactionBinding
 import com.astroyodha.network.Status
@@ -14,6 +13,7 @@ import com.astroyodha.ui.user.viewmodel.WalletViewModel
 import com.astroyodha.utils.makeGone
 import com.astroyodha.utils.makeVisible
 import com.astroyodha.utils.showSnackBarToast
+import com.google.firebase.auth.FirebaseAuth
 
 class TransactionActivity : BaseActivity() {
     val TAG = javaClass.simpleName

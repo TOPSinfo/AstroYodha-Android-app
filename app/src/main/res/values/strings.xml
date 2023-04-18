@@ -47,10 +47,12 @@
     <string name="please_select_date">Please select date</string>
     <string name="please_select_start_time">Please select start time</string>
     <string name="please_select_end_time">Please select end time</string>
+    <string name="please_select_duration">Please select duration</string>
     <string name="please_select_payment_mode">Please select payment mode</string>
     <string name="user_not_registered">User not registered.</string>
     <string name="please_enter_birth_date">Please enter date of birth</string>
     <string name="please_enter_birth_time">Please enter time of birth</string>
+    <string name="please_enter_valid_birth_time">Please enter valid time of birth</string>
     <string name="please_enter_birth_place">Please enter place of birth</string>
 
     <string name="please_select_language">Please select language</string>
@@ -121,6 +123,7 @@
     <string name="example_3_dialog_delete_confirmation">Delete this event?</string>
     <string name="delete">Delete</string>
     <string name="close">Close</string>
+
     <string name="select_astrologers">Select Astrologers</string>
     <string name="book_now">Book Now</string>
     <string name="sort_and_filter"><![CDATA[Sort & filter]]></string>
@@ -216,6 +219,9 @@
     <string name="end">End</string>
     <string name="end_chat">End Chat</string>
     <string name="are_you_sure_you_want_to_end_the_chat">Are you sure you want to end the chat?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="txt_cancel">Cancel</string>
 
     <string name="give_feedback">Give feedback</string>
     <string name="rate_your_experience_with_astrologer">Rate your experience with astrologer?</string>
@@ -258,6 +264,7 @@
     <string name="money_added_to_wallet">Money added to wallet</string>
     <string name="paid_to_user">Paid to %1$s</string>
     <string name="get_refund_user">Get Refund from %1$s</string>
+    <string name="order_id_user">Order Id: #%1$s</string>
     <string name="sent_from">Sent from</string>
     <string name="receive_in">Receive in</string>
     <string name="received_from_user">Received from %1$s</string>
@@ -303,7 +310,7 @@
     <string name="only_waiting_requests_are_editable">Only waiting requests are editable.</string>
 
     <string name="astrologer">Astrologer</string>
-    <string name="per_min_price">₹ %1$s/min</string>
+    <string name="per_min_price">₹ %1$s/ 15min</string>
     <string name="experience">Experience</string>
     <string name="rating">Rating</string>
     <string name="consults">Consults</string>
@@ -321,7 +328,7 @@
     <string name="basic_detail">Basic Detail</string>
     <string name="mobile_number">Mobile Number</string>
     <string name="other_detail">Other Detail</string>
-    <string name="price_per_min">Price per min</string>
+    <string name="price_per_min">Price per 15min</string>
     <string name="about_you">About You</string>
     <string name="language">Language</string>
     <string name="astrology_type">Astrology Type</string>
@@ -363,10 +370,26 @@
     <string name="details">Details</string>
     <string name="total_earning">Total Earning :</string>
     <string name="meeting_time_over">Your Meeting time is over</string>
-    <string name="your_call_is_completed_in_next_5_min">Your call will end in next 10 min. Would you like to extend?</string>
-    <string name="call_will_end_in_5_min">Your call will end in next 10 min.</string>
+    <string name="your_call_is_completed_in_next_5_min">Your call will end in next %s min. Would you like to extend?</string>
+    <string name="call_will_end_in_5_min">Your call will end in next %s min.</string>
     <string name="call_over">Your call time is over..</string>
     <string name="ok">Ok</string>
+    <string name="event_duration">Event Duration</string>
+    <string name="select_duration_in_minute">select Minute</string>
+    <string name="minute">Minute</string>
 
+    <string name="time_extend_approval_dialog_message">%s wants to extend event by %d minute.\n Would you like to allow for extend event ?</string>
+    <string name="time_extend_approval_payment_dialog_message">%s accepted your time extend request.\nPlease make payment and continue event.</string>
+    <string name="make_payment">Make Payment</string>
+    <string name="time_extended">Time will be Extended after user make payment successful.</string>
+    <string name="personal_detail">Personal Detail</string>
+    <string name="payment_mode">Payment Mode</string>
+    <string name="upload_your_photo">Upload your photo</string>
+    <string name="upload_kundali">Upload Kundali</string>
+
+
+    <string name="please_upload_your_photo">Please upload your photo</string>
+    <string name="please_upload_your_kundali">Please upload your Kundali</string>
+    <string name="incoming_call">Incoming Call</string>
 
 </resources>

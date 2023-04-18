@@ -12,7 +12,6 @@ import com.astroyodha.R
 import com.astroyodha.ui.user.model.booking.BookingModel
 import com.astroyodha.utils.Constants
 import com.astroyodha.utils.dateToStringFormat
-import java.util.*
 
 /**
  * Community list adapter : Show Community list.
@@ -53,6 +52,7 @@ class AstrlogerBookingListAdapter(
                 model.startTime!!.dateToStringFormat(mTimeFormat),
                 model.endTime!!.dateToStringFormat(mTimeFormat)
             )
+            holder.tvBookingId.text = "id: ${model.id}"
 
 
             var mColor = mContext.getColor(R.color.pending_color)
@@ -68,7 +68,7 @@ class AstrlogerBookingListAdapter(
                 }
                 Constants.REJECT_STATUS -> {
                     mStatus = mContext.getString(R.string.rejected)
-                    mColor = mContext.getColor(R.color.orange_theme)
+                    mColor = mContext.getColor(R.color.user_theme)
                 }
                 Constants.PENDING_STATUS -> {
                     mStatus = mContext.getString(R.string.waiting)
@@ -100,6 +100,7 @@ class AstrlogerBookingListAdapter(
         var tvBookingWith: TextView = itemView.findViewById(R.id.tvBookingWith)
         var tvDate: TextView = itemView.findViewById(R.id.tvDate)
         var tvTime: TextView = itemView.findViewById(R.id.tvTime)
+        var tvBookingId: TextView = itemView.findViewById(R.id.tvBookingId)
         var tvStatus: TextView = itemView.findViewById(R.id.tvStatus)
     }
 

@@ -1,9 +1,9 @@
 package com.astroyodha.ui.astrologer.model.timeslot
 
+import com.astroyodha.utils.Constants
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
-import com.astroyodha.utils.Constants
 
 object TimeSlotList {
 

@@ -24,7 +24,6 @@ import com.astroyodha.utils.*
 import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class AddTimeSlotActivity : BaseActivity() {
     val TAG = javaClass.simpleName
@@ -49,6 +48,7 @@ class AddTimeSlotActivity : BaseActivity() {
     var mWeeklyDaysList: ArrayList<String> = ArrayList()
 
     val dateFormat = "dd - MMM - yyyy"
+    val timeFormat = "hh:mm a"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddTimeSlotBinding.inflate(layoutInflater)
@@ -143,7 +143,7 @@ class AddTimeSlotActivity : BaseActivity() {
         }
 
         dateSetListener =
-            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                 cal.set(Calendar.YEAR, year)
                 cal.set(Calendar.MONTH, monthOfYear)
                 cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -170,13 +170,13 @@ class AddTimeSlotActivity : BaseActivity() {
                 val mTimePicker: TimePickerDialog
                 mTimePicker = TimePickerDialog(
                     this@AddTimeSlotActivity, R.style.DatePickerTheme,
-                    { timePicker, selectedHour, selectedMinute ->
+                    { _, selectedHour, selectedMinute ->
 
                         var timeCalnder = Calendar.getInstance()
                         timeCalnder.set(Calendar.HOUR_OF_DAY, selectedHour)
                         timeCalnder.set(Calendar.MINUTE, selectedMinute)
 
-                        val myFormat = "hh:mm a" //In which you need put here
+                        val myFormat = timeFormat //In which you need put here
                         val sdf = SimpleDateFormat(myFormat, Locale.US)
 
                         var isValidTime = true
@@ -217,13 +217,13 @@ class AddTimeSlotActivity : BaseActivity() {
                     val mTimePicker: TimePickerDialog
                     mTimePicker = TimePickerDialog(
                         this@AddTimeSlotActivity, R.style.DatePickerTheme,
-                        { timePicker, selectedHour, selectedMinute ->
+                        { _, selectedHour, selectedMinute ->
 
                             var timeCalnder = Calendar.getInstance()
                             timeCalnder.set(Calendar.HOUR_OF_DAY, selectedHour)
                             timeCalnder.set(Calendar.MINUTE, selectedMinute)
 
-                            val myFormat = "hh:mm a" //In which you need put here
+                            val myFormat = timeFormat //In which you need put here
                             val sdf = SimpleDateFormat(myFormat, Locale.US)
                             var fromTime = sdf.parse(binding.tvFromTime.text.toString().trim())
                             var toTime = sdf.parse(sdf.format(timeCalnder.time))
@@ -461,7 +461,7 @@ class AddTimeSlotActivity : BaseActivity() {
         //mode wise comparison continue mitesh
         /*if (binding.tvMode.text.toString() == getString(R.string.repeat)) {
             mTimeSlotList.forEachIndexed { index, timeSlotModel ->
-                val myFormat = "hh:mm a" //In which you need put here
+                val myFormat = timeFormat //In which you need put here
                 val dateFormay = "dd mm yyyy" //In which you need put here
                 val sdf = SimpleDateFormat(myFormat, Locale.US)
                 var fromTime = sdf.parse(timeSlotModel.fromTime)
@@ -497,7 +497,7 @@ class AddTimeSlotActivity : BaseActivity() {
         }*/
         //any time wise comparison continue satyaraj
         /*for (timeSlot in mTimeSlotList) {
-            val myFormat = "hh:mm a" //In which you need put here
+            val myFormat = timeFormat //In which you need put here
             val sdf = SimpleDateFormat(myFormat, Locale.US)
             var fromTime = sdf.parse(timeSlot.fromTime)
             var toTime = sdf.parse(timeSlot.toTime)
@@ -514,7 +514,7 @@ class AddTimeSlotActivity : BaseActivity() {
     fun checkExistingTimeSlotIsBetweenSelectedTime(timeFrom: String,timeTo:String): Boolean {
         var isTimeSlotBetweenFormAndToTime = true
         for (timeSlot in mTimeSlotList) {
-            val myFormat = "hh:mm a" //In which you need put here
+            val myFormat = timeFormat //In which you need put here
             val sdf = SimpleDateFormat(myFormat, Locale.US)
             var fromTime = sdf.parse(timeSlot.fromTime)
             var toTime = sdf.parse(timeSlot.toTime)

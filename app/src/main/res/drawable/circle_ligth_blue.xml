@@ -4,7 +4,7 @@
     android:shape="oval">
 
     <solid
-        android:color="@color/otp_back_blue"/>
+        android:color="@color/otp_back_astrologer"/>
 
     <size
         android:width="@dimen/_50sdp"

@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/screen_background"
+    android:paddingBottom="@dimen/_60sdp"
     tools:context=".ui.user.fragment.WalletFragment">
 
     <RelativeLayout
         android:id="@+id/lnActionBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="@color/white"
+       >
 
         <TextView
             android:id="@+id/tvtitle"
@@ -283,7 +285,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:backgroundTint="@color/button_background_color"
+                android:backgroundTint="@color/user_theme"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:letterSpacing="0"

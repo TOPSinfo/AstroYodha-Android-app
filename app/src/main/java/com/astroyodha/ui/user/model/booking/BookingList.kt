@@ -1,9 +1,9 @@
 package com.astroyodha.ui.user.model.booking
 
+import com.astroyodha.utils.Constants
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
-import com.astroyodha.utils.Constants
 
 object BookingList {
 
@@ -84,6 +84,34 @@ object BookingList {
             doc.get(Constants.FIELD_USER_BIRTH_DATE)?.let {
                 bookingModel.userBirthday = it.toString()
             }
+            doc.get(Constants.FIELD_TIME_EXTEND)?.let {
+                bookingModel.extendedTimeInMinute = it.toString().toInt()
+            }
+            doc.get(Constants.FIELD_ALLOW_EXTEND)?.let {
+                bookingModel.allowExtendTIme = it.toString()
+            }
+
+            doc.get(Constants.FIELD_PHOTO)?.let {
+                bookingModel.photo = it.toString()
+            }
+            doc.get(Constants.FIELD_FULL_NAME)?.let {
+                bookingModel.fullname = it.toString()
+            }
+            doc.get(Constants.FIELD_BIRTH_DATE)?.let {
+                bookingModel.birthDate = it.toString()
+            }
+            doc.get(Constants.FIELD_BIRTH_TIME)?.let {
+                bookingModel.birthTime = it.toString()
+            }
+            doc.get(Constants.FIELD_BIRTH_PLACE)?.let {
+                bookingModel.birthPlace = it.toString()
+            }
+
+            doc.get(Constants.FIELD_KUNDALI)?.let {
+                bookingModel.kundali = it.toString()
+            }
+
+
 
             doc.get(Constants.FIELD_GROUP_CREATED_AT)?.let {
                 bookingModel.createdAt = it as Timestamp
@@ -166,6 +194,34 @@ object BookingList {
             doc.get(Constants.FIELD_USER_NAME)?.let {
                 bookingModel.userName = it.toString()
             }
+
+            doc.get(Constants.FIELD_TIME_EXTEND)?.let {
+                bookingModel.extendedTimeInMinute = it.toString().toInt()
+            }
+            doc.get(Constants.FIELD_ALLOW_EXTEND)?.let {
+                bookingModel.allowExtendTIme = it.toString()
+            }
+
+            doc.get(Constants.FIELD_PHOTO)?.let {
+                bookingModel.photo = it.toString()
+            }
+            doc.get(Constants.FIELD_FULL_NAME)?.let {
+                bookingModel.fullname = it.toString()
+            }
+            doc.get(Constants.FIELD_BIRTH_DATE)?.let {
+                bookingModel.birthDate = it.toString()
+            }
+            doc.get(Constants.FIELD_BIRTH_TIME)?.let {
+                bookingModel.birthTime = it.toString()
+            }
+            doc.get(Constants.FIELD_BIRTH_PLACE)?.let {
+                bookingModel.birthPlace = it.toString()
+            }
+
+            doc.get(Constants.FIELD_KUNDALI)?.let {
+                bookingModel.kundali = it.toString()
+            }
+
             if (doc.get(Constants.FIELD_UID) == userId) {
                 bookingArrayList.add(bookingModel)
             }
@@ -244,6 +300,33 @@ object BookingList {
             doc.get(Constants.FIELD_USER_NAME)?.let {
                 bookingModel.userName = it.toString()
             }
+            doc.get(Constants.FIELD_TIME_EXTEND)?.let {
+                bookingModel.extendedTimeInMinute = it.toString().toInt()
+            }
+            doc.get(Constants.FIELD_ALLOW_EXTEND)?.let {
+                bookingModel.allowExtendTIme = it.toString()
+            }
+
+            doc.get(Constants.FIELD_PHOTO)?.let {
+                bookingModel.photo = it.toString()
+            }
+            doc.get(Constants.FIELD_FULL_NAME)?.let {
+                bookingModel.fullname = it.toString()
+            }
+            doc.get(Constants.FIELD_BIRTH_DATE)?.let {
+                bookingModel.birthDate = it.toString()
+            }
+            doc.get(Constants.FIELD_BIRTH_TIME)?.let {
+                bookingModel.birthTime = it.toString()
+            }
+            doc.get(Constants.FIELD_BIRTH_PLACE)?.let {
+                bookingModel.birthPlace = it.toString()
+            }
+
+            doc.get(Constants.FIELD_KUNDALI)?.let {
+                bookingModel.kundali = it.toString()
+            }
+
             if (doc.get(Constants.FIELD_ASTROLOGER_ID) == userId) {
                 bookingArrayList.add(bookingModel)
             }
@@ -319,6 +402,31 @@ object BookingList {
         }
         doc.get(Constants.FIELD_USER_NAME)?.let {
             bookingModel.userName = it.toString()
+        }
+        doc.get(Constants.FIELD_TIME_EXTEND)?.let {
+            bookingModel.extendedTimeInMinute = it.toString().toInt()
+        }
+        doc.get(Constants.FIELD_ALLOW_EXTEND)?.let {
+            bookingModel.allowExtendTIme = it.toString()
+        }
+        doc.get(Constants.FIELD_PHOTO)?.let {
+            bookingModel.photo = it.toString()
+        }
+        doc.get(Constants.FIELD_FULL_NAME)?.let {
+            bookingModel.fullname = it.toString()
+        }
+        doc.get(Constants.FIELD_BIRTH_DATE)?.let {
+            bookingModel.birthDate = it.toString()
+        }
+        doc.get(Constants.FIELD_BIRTH_TIME)?.let {
+            bookingModel.birthTime = it.toString()
+        }
+        doc.get(Constants.FIELD_BIRTH_PLACE)?.let {
+            bookingModel.birthPlace = it.toString()
+        }
+
+        doc.get(Constants.FIELD_KUNDALI)?.let {
+            bookingModel.kundali = it.toString()
         }
         return bookingModel
     }

@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.google.firebase.auth.FirebaseAuth
 import com.astroyodha.R
 import com.astroyodha.core.BaseFragment
 import com.astroyodha.databinding.FragmentPriceBinding
@@ -14,6 +13,7 @@ import com.astroyodha.network.Status
 import com.astroyodha.ui.astrologer.model.price.PriceModel
 import com.astroyodha.ui.astrologer.viewmodel.PriceViewModel
 import com.astroyodha.utils.showSnackBarToast
+import com.google.firebase.auth.FirebaseAuth
 
 class PriceFragment : BaseFragment() {
     private val TAG = "PriceFragment"

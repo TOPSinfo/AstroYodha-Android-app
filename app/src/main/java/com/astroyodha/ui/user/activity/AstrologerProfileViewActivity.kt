@@ -53,7 +53,7 @@ class AstrologerProfileViewActivity : BaseActivity() {
 
     private fun getIntentData() {
         val model: AstrologerUserModel = intent.getParcelableExtra(Constants.INTENT_MODEL)!!
-        viewModel.getUserDetail(model.uid.toString())
+        viewModel.getUserDetail(model.uid.toString(), true)
     }
 
     /**
@@ -106,6 +106,7 @@ class AstrologerProfileViewActivity : BaseActivity() {
         bookingViewModel.completedBookingResponse.observe(this, {
             when (it.status) {
                 Status.LOADING -> {
+                    // loading state
                 }
                 Status.SUCCESS -> {
                     it.data?.let {
@@ -180,7 +181,7 @@ class AstrologerProfileViewActivity : BaseActivity() {
         binding.tvRate.text = model.rating.toDouble().roundOffDecimal().toString()
         binding.tvAboutDesc.addReadMoreText(
             model.about,
-            ContextCompat.getColor(this, R.color.orange_theme)
+            ContextCompat.getColor(this, R.color.user_theme)
         )
         binding.groupAbout.isVisible = model.about.isNotBlank()
 

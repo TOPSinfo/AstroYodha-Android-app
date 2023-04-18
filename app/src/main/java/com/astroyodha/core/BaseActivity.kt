@@ -4,11 +4,10 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
-import com.google.firebase.auth.FirebaseAuth
 import com.astroyodha.ui.user.authentication.activity.LoginActivity
-import com.astroyodha.utils.Constants
 import com.astroyodha.utils.Pref
 import com.astroyodha.view.CustomProgressDialog
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -41,10 +40,8 @@ abstract class BaseActivity : AppCompatActivity() {
      */
     protected fun hideProgress() {
         try {
-            if (customProgressDialog != null) {
-                if (customProgressDialog!!.isShowing) {
-                    customProgressDialog!!.dismiss()
-                }
+            if (customProgressDialog != null && customProgressDialog!!.isShowing) {
+                customProgressDialog!!.dismiss()
             }
         } catch (e: Exception) {
             e.printStackTrace()

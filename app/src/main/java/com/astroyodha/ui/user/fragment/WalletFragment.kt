@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
-import com.google.firebase.auth.FirebaseAuth
 import com.astroyodha.R
 import com.astroyodha.core.BaseFragment
 import com.astroyodha.databinding.FragmentWalletBinding
@@ -21,7 +20,11 @@ import com.astroyodha.ui.user.activity.PaymentActivity
 import com.astroyodha.ui.user.authentication.model.user.UserModel
 import com.astroyodha.ui.user.viewmodel.ProfileViewModel
 import com.astroyodha.ui.user.viewmodel.WalletViewModel
-import com.astroyodha.utils.*
+import com.astroyodha.utils.Constants
+import com.astroyodha.utils.getAmount
+import com.astroyodha.utils.loadResourceImage
+import com.astroyodha.utils.showSnackBarToast
+import com.google.firebase.auth.FirebaseAuth
 
 class WalletFragment : BaseFragment() {
     val TAG = "WalletFragment"
@@ -36,6 +39,7 @@ class WalletFragment : BaseFragment() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
                 //  you will get result here in result.data
+                binding.edAmount.text.clear()
                 init()
             }
         }
@@ -71,10 +75,10 @@ class WalletFragment : BaseFragment() {
      * set observer
      */
     private fun setObserver() {
-        profileViewModel.userDetailResponse.observe(viewLifecycleOwner, {
+        profileViewModel.userDetailResponse.observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.LOADING -> {
-                    showProgress(requireContext())
+//                    showProgress(requireContext())
                 }
                 Status.SUCCESS -> {
                     hideProgress()
@@ -88,9 +92,9 @@ class WalletFragment : BaseFragment() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
+        }
 
-        walletViewModel.walletDataResponse.observe(viewLifecycleOwner, {
+        walletViewModel.walletDataResponse.observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.LOADING -> {
                     showProgress(requireContext())
@@ -106,7 +110,7 @@ class WalletFragment : BaseFragment() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
+        }
     }
 
     /**

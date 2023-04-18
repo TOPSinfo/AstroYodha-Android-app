@@ -9,7 +9,6 @@ import android.widget.CheckBox
 import androidx.recyclerview.widget.RecyclerView
 import com.astroyodha.R
 import com.astroyodha.ui.astrologer.model.language.LanguageAndSpecialityModel
-import java.util.*
 
 /**
  * Review list adapter : Show Review list.

@@ -12,9 +12,18 @@ import android.location.Geocoder
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.astroyodha.R
+import com.astroyodha.core.BaseActivity
+import com.astroyodha.databinding.ActivityEditProfileBinding
+import com.astroyodha.network.Status
+import com.astroyodha.ui.user.authentication.model.user.UserModel
+import com.astroyodha.ui.user.viewmodel.ProfileViewModel
+import com.astroyodha.utils.Constants
+import com.astroyodha.utils.Utility
+import com.astroyodha.utils.loadProfileImage
+import com.astroyodha.utils.showSnackBarToast
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
@@ -26,13 +35,6 @@ import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
-import com.astroyodha.R
-import com.astroyodha.core.BaseActivity
-import com.astroyodha.databinding.ActivityEditProfileBinding
-import com.astroyodha.network.Status
-import com.astroyodha.ui.user.authentication.model.user.UserModel
-import com.astroyodha.ui.user.viewmodel.ProfileViewModel
-import com.astroyodha.utils.*
 import droidninja.filepicker.FilePickerBuilder
 import droidninja.filepicker.FilePickerConst
 import droidninja.filepicker.utils.ContentUriUtils
@@ -103,7 +105,7 @@ class EditProfileActivity : BaseActivity() {
             val mTimePicker: TimePickerDialog
             mTimePicker = TimePickerDialog(
                 this@EditProfileActivity,
-                { timePicker, selectedHour, selectedMinute ->
+                { _, selectedHour, selectedMinute ->
 
                     var timeCalnder=Calendar.getInstance()
                     timeCalnder.set(Calendar.HOUR_OF_DAY,selectedHour)
@@ -149,10 +151,9 @@ class EditProfileActivity : BaseActivity() {
         }
 
     }
-
-
+    
     var date =
-        DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth -> // TODO Auto-generated method stub
+        DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
             myCalendar.set(Calendar.YEAR, year)
             myCalendar.set(Calendar.MONTH, monthOfYear)
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -172,12 +173,12 @@ class EditProfileActivity : BaseActivity() {
      */
     private fun manageFocus() {
 
-        binding.edFullName.setOnFocusChangeListener { view, b ->
+        binding.edFullName.setOnFocusChangeListener { _, b ->
             if (b) {
                 binding.edFullName.compoundDrawableTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.border_blue))
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.astrologer_theme))
                 binding.edFullName.setBackgroundResource(R.drawable.background_edit_text_blue_line_background)
-                binding.edFullName.setTextColor(ContextCompat.getColor(this, R.color.border_blue))
+                binding.edFullName.setTextColor(ContextCompat.getColor(this, R.color.astrologer_theme))
             } else {
                 binding.edFullName.compoundDrawableTintList =
                     ColorStateList.valueOf(ContextCompat.getColor(this, R.color.text_gray))
@@ -186,15 +187,15 @@ class EditProfileActivity : BaseActivity() {
             }
         }
 
-        binding.edPhoneNumber.setOnFocusChangeListener { view, b ->
+        binding.edPhoneNumber.setOnFocusChangeListener { _, b ->
             if (b) {
                 binding.edPhoneNumber.compoundDrawableTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.border_blue))
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.astrologer_theme))
                 binding.edPhoneNumber.setBackgroundResource(R.drawable.background_edit_text_blue_line_background)
                 binding.edPhoneNumber.setTextColor(
                     ContextCompat.getColor(
                         this,
-                        R.color.border_blue
+                        R.color.astrologer_theme
                     )
                 )
             } else {
@@ -205,12 +206,12 @@ class EditProfileActivity : BaseActivity() {
             }
         }
 
-        binding.edEmail.setOnFocusChangeListener { view, b ->
+        binding.edEmail.setOnFocusChangeListener { _, b ->
             if (b) {
                 binding.edEmail.compoundDrawableTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.border_blue))
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.astrologer_theme))
                 binding.edEmail.setBackgroundResource(R.drawable.background_edit_text_blue_line_background)
-                binding.edEmail.setTextColor(ContextCompat.getColor(this, R.color.border_blue))
+                binding.edEmail.setTextColor(ContextCompat.getColor(this, R.color.astrologer_theme))
             } else {
                 binding.edEmail.compoundDrawableTintList =
                     ColorStateList.valueOf(ContextCompat.getColor(this, R.color.text_gray))
@@ -220,15 +221,15 @@ class EditProfileActivity : BaseActivity() {
         }
 
 
-        binding.edDateOfBirth.setOnFocusChangeListener { view, b ->
+        binding.edDateOfBirth.setOnFocusChangeListener { _, b ->
             if (b) {
                 binding.edDateOfBirth.compoundDrawableTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.border_blue))
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.astrologer_theme))
                 binding.edDateOfBirth.setBackgroundResource(R.drawable.background_edit_text_blue_line_background)
                 binding.edDateOfBirth.setTextColor(
                     ContextCompat.getColor(
                         this,
-                        R.color.border_blue
+                        R.color.astrologer_theme
                     )
                 )
             } else {
@@ -239,15 +240,15 @@ class EditProfileActivity : BaseActivity() {
             }
         }
 
-        binding.edTimeOfBirth.setOnFocusChangeListener { view, b ->
+        binding.edTimeOfBirth.setOnFocusChangeListener { _, b ->
             if (b) {
                 binding.edTimeOfBirth.compoundDrawableTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.border_blue))
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.astrologer_theme))
                 binding.edTimeOfBirth.setBackgroundResource(R.drawable.background_edit_text_blue_line_background)
                 binding.edTimeOfBirth.setTextColor(
                     ContextCompat.getColor(
                         this,
-                        R.color.border_blue
+                        R.color.astrologer_theme
                     )
                 )
             } else {
@@ -258,15 +259,15 @@ class EditProfileActivity : BaseActivity() {
             }
         }
 
-        binding.edPlaceOfBirth.setOnFocusChangeListener { view, b ->
+        binding.edPlaceOfBirth.setOnFocusChangeListener { _, b ->
             if (b) {
                 binding.edPlaceOfBirth.compoundDrawableTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.border_blue))
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.astrologer_theme))
                 binding.edPlaceOfBirth.setBackgroundResource(R.drawable.background_edit_text_blue_line_background)
                 binding.edPlaceOfBirth.setTextColor(
                     ContextCompat.getColor(
                         this,
-                        R.color.border_blue
+                        R.color.astrologer_theme
                     )
                 )
             } else {
@@ -400,6 +401,7 @@ class EditProfileActivity : BaseActivity() {
                 }
 
                 override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                    // onPermissionDenied
                 }
 
             }).setDeniedMessage(getString(R.string.permission_denied))
@@ -417,10 +419,8 @@ class EditProfileActivity : BaseActivity() {
             100 -> if (resultCode == Activity.RESULT_OK && data != null) {
                 val dataList =
                     data.getParcelableArrayListExtra<Uri>(FilePickerConst.KEY_SELECTED_MEDIA)
-                if (dataList != null) {
-                    if (dataList.size > 0) {
-                        openCropper(dataList[0])
-                    }
+                if (dataList != null && dataList.size > 0) {
+                    openCropper(dataList[0])
                 }
             }
             CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE -> {
@@ -432,6 +432,7 @@ class EditProfileActivity : BaseActivity() {
                     profileImagePath = resultUri
 
                 } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                    // crop image error receive here
                 }
             }
             AUTOCOMPLETE_REQUEST_CODE-> {

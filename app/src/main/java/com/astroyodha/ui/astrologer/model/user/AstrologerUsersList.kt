@@ -1,12 +1,12 @@
 package com.astroyodha.ui.astrologer.model.user
 
+import com.astroyodha.ui.user.authentication.model.chat.MessagesModel
+import com.astroyodha.ui.user.authentication.model.user.UserModel
+import com.astroyodha.utils.Constants
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
-import com.astroyodha.ui.user.authentication.model.chat.MessagesModel
-import com.astroyodha.ui.user.authentication.model.user.UserModel
-import com.astroyodha.utils.Constants
 
 object AstrologerUsersList {
 

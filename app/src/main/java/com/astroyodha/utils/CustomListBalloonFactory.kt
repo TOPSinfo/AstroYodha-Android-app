@@ -18,8 +18,8 @@ package com.astroyodha.utils
 
 import android.content.Context
 import androidx.lifecycle.LifecycleOwner
-import com.skydoves.balloon.*
 import com.astroyodha.R
+import com.skydoves.balloon.*
 
 /**
  * CustomListBalloonFactory: to show popup dialog set value as per your requirement
@@ -33,7 +33,7 @@ class CustomListBalloonFactory : Balloon.Factory() {
                 .setHeight(250)
                 .setArrowOrientation(ArrowOrientation.TOP)
                 .setArrowPositionRules(ArrowPositionRules.ALIGN_ANCHOR)
-                .setArrowColorResource(R.color.edittext_bg)
+                .setArrowColorResource(R.color.shadow_color)
                 .setArrowPosition(0.5f)
                 .setArrowSize(10)
                 .setTextSize(12f)

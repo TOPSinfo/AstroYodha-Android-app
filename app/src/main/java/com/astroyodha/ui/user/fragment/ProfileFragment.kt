@@ -10,12 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.viewModels
-import com.facebook.login.LoginManager
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.astroyodha.R
 import com.astroyodha.core.BaseFragment
 import com.astroyodha.databinding.FragmentProfileBinding
@@ -27,6 +21,12 @@ import com.astroyodha.ui.user.authentication.activity.WelcomeActivity
 import com.astroyodha.ui.user.authentication.model.user.UserModel
 import com.astroyodha.ui.user.viewmodel.ProfileViewModel
 import com.astroyodha.utils.*
+import com.facebook.login.LoginManager
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class ProfileFragment : BaseFragment() {
     private val TAG = "ProfileFragment"
@@ -138,10 +138,10 @@ class ProfileFragment : BaseFragment() {
      */
     private fun setObserver() {
 
-        profileViewModel.userDetailResponse.observe(viewLifecycleOwner, {
+        profileViewModel.userDetailResponse.observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.LOADING -> {
-                    showProgress(requireContext())
+//                    showProgress(requireContext())
                 }
                 Status.SUCCESS -> {
                     hideProgress()
@@ -157,7 +157,7 @@ class ProfileFragment : BaseFragment() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
+        }
 
     }
 
@@ -190,10 +190,8 @@ class ProfileFragment : BaseFragment() {
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RC_UPDATE_PROFILE) {
-            if (resultCode == Activity.RESULT_OK) {
-                profileViewModel.getUserDetail(FirebaseAuth.getInstance().currentUser?.uid.toString())
-            }
+        if (requestCode == RC_UPDATE_PROFILE && resultCode == Activity.RESULT_OK) {
+            profileViewModel.getUserDetail(FirebaseAuth.getInstance().currentUser?.uid.toString())
         }
 
     }

@@ -23,6 +23,6 @@
         android:layout_marginBottom="10dp"
         android:layout_gravity="bottom|center_horizontal"
         android:background="@drawable/calendar_today_bg"
-        android:backgroundTint="@color/orange_theme"/>
+        android:backgroundTint="@color/user_theme"/>
 </FrameLayout>
 

@@ -1,11 +1,11 @@
 package com.astroyodha.data.repository
 
+import com.astroyodha.ui.user.model.booking.BookingModel
+import com.astroyodha.utils.Constants
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.astroyodha.ui.user.model.booking.BookingModel
-import com.astroyodha.utils.Constants
 import java.util.*
 import javax.inject.Inject
 
@@ -143,6 +143,20 @@ class BookingRepository @Inject constructor() {
         return firestoreDB.collection(Constants.TABLE_BOOKING).document(bookingId)
     }
 
+    // call log
+    fun getCallLogAddRepository(
+        bookingId: String
+    ): DocumentReference {
+        return firestoreDB.collection(Constants.TABLE_BOOKING).document(bookingId)
+            .collection(Constants.TABLE_CALL_LOG).document()
+    }
 
+    fun getCallLogUpdateRepository(
+        bookingId: String,
+        calllogId: String,
+    ): DocumentReference {
+        return firestoreDB.collection(Constants.TABLE_BOOKING).document(bookingId)
+            .collection(Constants.TABLE_CALL_LOG).document(calllogId)
+    }
 
 }

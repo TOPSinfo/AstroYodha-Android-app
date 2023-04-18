@@ -23,7 +23,6 @@ import com.astroyodha.utils.Constants
 import com.astroyodha.utils.makeGone
 import com.astroyodha.utils.makeVisible
 import com.astroyodha.utils.showSnackBarToast
-import java.util.*
 
 private const val ARG_PARAM1 = "userId"
 private const val ARG_PARAM2 = "list"
@@ -82,7 +81,6 @@ class UpComingFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
         setObserver()
-        setClickListener()
     }
 
     /**
@@ -109,7 +107,7 @@ class UpComingFragment : BaseFragment() {
                         //click of recyclerview item
                         bookingModel = model
                         mPositionEdit = position
-                        profileAstrologerViewModel.getUserDetail(model.astrologerID)
+                        profileAstrologerViewModel.getUserDetail(model.astrologerID, true)
                     }
                 }
             )
@@ -136,7 +134,7 @@ class UpComingFragment : BaseFragment() {
      */
     private fun setObserver() {
 
-        bookingViewModel.bookingList.observe(viewLifecycleOwner, { updatedData ->
+        bookingViewModel.bookingList.observe(viewLifecycleOwner) { updatedData ->
             updatedData.forEach {
                 mList.mapIndexed { index, mBookingModel ->
                     if (mBookingModel.id == it.id /*&& mBookingModel.status != it.status*/) {
@@ -150,8 +148,8 @@ class UpComingFragment : BaseFragment() {
                 }
             }
 
-        })
-        bookingViewModel.getBookingListDataResponse.observe(viewLifecycleOwner, {
+        }
+        bookingViewModel.getBookingListDataResponse.observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.LOADING -> {
                     showProgress(requireContext())
@@ -176,9 +174,9 @@ class UpComingFragment : BaseFragment() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
+        }
 
-        profileAstrologerViewModel.userDetailResponse.observe(viewLifecycleOwner, {
+        profileAstrologerViewModel.userDetailResponse.observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.LOADING -> {
                     showProgress(requireContext())
@@ -186,7 +184,7 @@ class UpComingFragment : BaseFragment() {
                 Status.SUCCESS -> {
                     hideProgress()
                     it.data?.let { result ->
-                        if(bookingModel.status == Constants.PENDING_STATUS) {
+                        if (bookingModel.status == Constants.PENDING_STATUS) {
                             startForResult.launch(
                                 Intent(context, EventBookingActivity::class.java)
                                     .putExtra(Constants.INTENT_ISEDIT, true)
@@ -210,15 +208,8 @@ class UpComingFragment : BaseFragment() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
-    }
-
-    /**
-     * manage click listener of view
-     */
-    private fun setClickListener() {
-        binding.fabAdd.setOnClickListener {
-
         }
     }
+
+
 }

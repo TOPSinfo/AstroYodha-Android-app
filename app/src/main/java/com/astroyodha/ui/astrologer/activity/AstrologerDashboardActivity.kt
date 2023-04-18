@@ -11,8 +11,8 @@ import com.astroyodha.databinding.ActivityAstrologerDashboardBinding
 import com.astroyodha.network.Status
 import com.astroyodha.ui.astrologer.model.user.AstrologerUserModel
 import com.astroyodha.ui.astrologer.viewmodel.ProfileAstrologerViewModel
+import com.astroyodha.ui.user.authentication.activity.SplashActivity
 import com.astroyodha.utils.Constants
-import com.astroyodha.utils.MyLog
 import com.astroyodha.utils.showSnackBarToast
 import com.google.firebase.auth.FirebaseAuth
 import com.simform.custombottomnavigation.Model
@@ -64,7 +64,7 @@ class AstrologerDashboardActivity : BaseActivity() {
         )
 
         binding.bottomNavigation.apply {
-            setMenuItems(menuItems, intent.getIntExtra(Constants.INTENT_INDEX, 0))
+            setMenuItems(menuItems, intent.getIntExtra(Constants.INTENT_INDEX, Constants.BOOKING_ASTROLOGER_INDEX))
             setupWithNavController(navController)
         }
 
@@ -74,9 +74,10 @@ class AstrologerDashboardActivity : BaseActivity() {
      * set observer
      */
     private fun setObserver() {
-        profileViewModel.languageAndSpecialityListResponse.observe(this, {
+        profileViewModel.languageAndSpecialityListResponse.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
+                    // loading state
                 }
                 Status.SUCCESS -> {
                     hideProgress()
@@ -90,11 +91,12 @@ class AstrologerDashboardActivity : BaseActivity() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
+        }
 
-        profileViewModel.specialityResponse.observe(this, {
+        profileViewModel.specialityResponse.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
+                    // loading state
                 }
                 Status.SUCCESS -> {
                     hideProgress()
@@ -108,7 +110,7 @@ class AstrologerDashboardActivity : BaseActivity() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
+        }
     }
 
     /**
@@ -116,8 +118,11 @@ class AstrologerDashboardActivity : BaseActivity() {
      */
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
+        // dashboard launch mode is single task it will kill middle screens automatically
         startActivity(
-            Intent(this, AstrologerDashboardActivity::class.java)
+            Intent(this, SplashActivity::class.java)
+                .putExtra(Constants.INTENT_SHOW_TIMER, false)
+                .putExtra(Constants.INTENT_USER_TYPE, Constants.USER_ASTROLOGER)
         )
         finishAffinity()
     }

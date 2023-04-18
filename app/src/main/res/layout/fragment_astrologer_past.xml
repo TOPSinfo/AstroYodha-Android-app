@@ -22,19 +22,6 @@
         tools:itemCount="10"
         tools:listitem="@layout/raw_booking_astrloger_list" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:layout_marginBottom="@dimen/_16sdp"
-        android:backgroundTint="@color/green"
-        android:src="@drawable/ic_round_add_24"
-        android:visibility="gone"
-        app:tint="@android:color/white"
-        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/tvNoDataFound"

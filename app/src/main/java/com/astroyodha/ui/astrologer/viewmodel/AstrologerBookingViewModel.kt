@@ -3,17 +3,17 @@ package com.astroyodha.ui.astrologer.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.Timestamp
-import com.google.firebase.firestore.EventListener
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
 import com.astroyodha.data.repository.BookingRepository
 import com.astroyodha.network.NetworkHelper
 import com.astroyodha.network.Resource
 import com.astroyodha.ui.user.model.booking.BookingList
 import com.astroyodha.ui.user.model.booking.BookingModel
+import com.astroyodha.ui.user.model.calllog.CallLogModel
 import com.astroyodha.utils.Constants
-import com.astroyodha.utils.MyLog
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.EventListener
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.QuerySnapshot
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -41,6 +41,12 @@ class AstrologerBookingViewModel @Inject constructor(
         MutableLiveData()
     val getBookingDetailResponse: LiveData<Resource<BookingModel>> get() = _getBookingDetailResponse
 
+
+    private val _bookingTimeUpdatePermissionResponse: MutableLiveData<Resource<String>> = MutableLiveData()
+    val bookingTimeUpdatePermissionResponse: LiveData<Resource<String>> get() = _bookingTimeUpdatePermissionResponse
+
+    private val _bookingLogsResponse: MutableLiveData<Resource<String>> = MutableLiveData()
+    val bookingLogsResponse: LiveData<Resource<String>> get() = _bookingLogsResponse
 
     /**
      * uploading profile picture to firebase storage
@@ -84,6 +90,8 @@ class AstrologerBookingViewModel @Inject constructor(
             Constants.FIELD_UID to user.userId,
             Constants.FIELD_STATUS to user.status,
             Constants.FIELD_GROUP_CREATED_AT to user.createdAt,
+            Constants.FIELD_TIME_EXTEND to user.extendedTimeInMinute,
+            Constants.FIELD_ALLOW_EXTEND to user.allowExtendTIme,
         )
 
         ref.set(data)
@@ -122,6 +130,8 @@ class AstrologerBookingViewModel @Inject constructor(
         user.startTime.let { data1.put(Constants.FIELD_START_TIME, it!!) }
         user.endTime.let { data1.put(Constants.FIELD_END_TIME, it!!) }
         user.status.let { data1.put(Constants.FIELD_STATUS, it) }
+        user.extendedTimeInMinute.let { data1.put(Constants.FIELD_TIME_EXTEND, it) }
+        user.allowExtendTIme.let { data1.put(Constants.FIELD_ALLOW_EXTEND, it) }
 
         bookingRepository.getBookingUpdateRepository(user)
             .update(data1)
@@ -136,6 +146,39 @@ class AstrologerBookingViewModel @Inject constructor(
             }.addOnFailureListener {
 
                 _bookingAddUpdateResponse.postValue(
+                    Resource.error(
+                        Constants.VALIDATION_ERROR,
+                        null
+                    )
+                )
+            }
+    }
+
+
+    /**
+     * Updating booking info in firebase
+     */
+    fun updateTimeExtendPermission(user: BookingModel) {
+
+        _bookingTimeUpdatePermissionResponse.value = Resource.loading(null)
+        user.createdAt = Timestamp.now()
+
+        var data1 = HashMap<String, Any>()
+        user.allowExtendTIme.let { data1.put(Constants.FIELD_ALLOW_EXTEND, it) }
+
+        bookingRepository.getBookingUpdateRepository(user)
+            .update(data1)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    _bookingTimeUpdatePermissionResponse.postValue(
+                        Resource.success(
+                            Constants.MSG_BOOKING_UPDATE_SUCCESSFUL,
+                        )
+                    )
+                }
+            }.addOnFailureListener {
+
+                _bookingTimeUpdatePermissionResponse.postValue(
                     Resource.error(
                         Constants.VALIDATION_ERROR,
                         null
@@ -296,6 +339,5 @@ class AstrologerBookingViewModel @Inject constructor(
             )
         }
     }
-
 
 }

@@ -16,14 +16,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/_70sdp">
 
 
             <RelativeLayout
                 android:id="@+id/layoutHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/otp_back_blue"
+                android:background="@color/otp_back_astrologer"
                 android:padding="@dimen/_10sdp">
 
                 <LinearLayout
@@ -197,7 +198,7 @@
                             android:paddingEnd="@dimen/_10sdp"
                             android:paddingBottom="@dimen/_5sdp"
                             android:text="@string/book_appointment"
-                            android:textColor="@color/orange_theme"
+                            android:textColor="@color/user_theme"
                             android:textSize="@dimen/_12sdp" />
 
                     </LinearLayout>
@@ -261,7 +262,7 @@
                             android:lines="2"
                             android:minLines="2"
                             android:text="@string/daily_horoscope"
-                            android:textColor="@color/orange_theme"
+                            android:textColor="@color/user_theme"
                             android:textSize="@dimen/_8sdp" />
 
                     </LinearLayout>
@@ -292,7 +293,7 @@
                             android:lines="2"
                             android:minLines="2"
                             android:text="@string/free_kundali"
-                            android:textColor="@color/border_blue"
+                            android:textColor="@color/astrologer_theme"
                             android:textSize="@dimen/_8sdp" />
 
                     </LinearLayout>
@@ -323,7 +324,7 @@
                             android:paddingStart="@dimen/_10sdp"
                             android:paddingEnd="@dimen/_10sdp"
                             android:text="@string/horoscope_matching"
-                            android:textColor="@color/yellow"
+                            android:textColor="@color/pending_color"
                             android:textSize="@dimen/_8sdp" />
 
                     </LinearLayout>

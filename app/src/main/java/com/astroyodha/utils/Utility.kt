@@ -25,6 +25,7 @@ object Utility {
 
 
     fun log(message: String) {
+        // log
     }
 
 
@@ -125,10 +126,8 @@ object Utility {
         var mediaFile: File? = null
         try {
             val mediaStorageDir = File(Environment.getExternalStorageDirectory(), ".TopsDemo")
-            if (!mediaStorageDir.exists()) {
-                if (!mediaStorageDir.mkdirs()) {
-                    return null
-                }
+            if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()) {
+                return null
             }
             val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
             mediaFile = File(mediaStorageDir.path + File.separator + "VID_" + timeStamp + ".mp4")
@@ -159,6 +158,7 @@ object Utility {
             val millis = date.time
             return millis
         } catch (e: java.lang.Exception) {
+            // exception
         }
         return 0
     }

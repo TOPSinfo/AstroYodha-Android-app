@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.DocumentSnapshot
 import com.astroyodha.data.repository.CMSRepository
 import com.astroyodha.data.repository.UserRepository
 import com.astroyodha.network.NetworkHelper
@@ -17,6 +15,8 @@ import com.astroyodha.ui.user.authentication.model.cms.FAQModel
 import com.astroyodha.ui.user.authentication.model.user.UserModel
 import com.astroyodha.ui.user.authentication.model.user.UsersList
 import com.astroyodha.utils.Constants
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

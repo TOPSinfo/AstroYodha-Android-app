@@ -12,7 +12,6 @@ import com.astroyodha.R
 import com.astroyodha.ui.user.model.booking.BookingModel
 import com.astroyodha.utils.Constants
 import com.astroyodha.utils.dateToStringFormat
-import java.util.*
 
 /**
  * Event list adapter : Show Event list.
@@ -63,7 +62,7 @@ class CalendarEventAdapter(
                 }
                 Constants.REJECT_STATUS -> {
                     image = R.drawable.ic_close
-                    mColor = mContext.getColor(R.color.orange_theme)
+                    mColor = mContext.getColor(R.color.user_theme)
                 }
                 Constants.PENDING_STATUS -> {
                     image = R.drawable.ic_waiting

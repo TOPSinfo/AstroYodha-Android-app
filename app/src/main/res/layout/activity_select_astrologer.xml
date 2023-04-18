@@ -10,7 +10,7 @@
         android:id="@+id/rlActionBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/orange_theme">
+        android:background="@color/user_theme">
 
         <ImageView
             android:id="@+id/imgClose"

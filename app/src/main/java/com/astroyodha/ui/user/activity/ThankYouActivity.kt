@@ -37,10 +37,11 @@ class ThankYouActivity : AppCompatActivity() {
                 onBackPressed()
             } else {
                 //comes from wallet fragment
+                // dashboard launch mode is single task it will kill middle screens automatically
                 startActivity(
                     Intent(this, UserHomeActivity::class.java)
                 )
-                finishAffinity()
+//                finishAffinity()
             }
         }
     }

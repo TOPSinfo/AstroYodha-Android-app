@@ -275,7 +275,7 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:gravity="center"
                         android:text="@string/sign_up"
-                        android:textColor="@color/orange_theme"
+                        android:textColor="@color/user_theme"
                         android:textSize="@dimen/_14ssp"
                         android:visibility="visible"
                         app:layout_constraintEnd_toEndOf="@id/guideline2"

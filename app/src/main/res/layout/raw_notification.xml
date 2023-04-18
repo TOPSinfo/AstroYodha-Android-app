@@ -37,7 +37,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="Give Review"
-        android:textColor="@color/grey_dark"
+        android:textColor="@color/edittext_text_color"
         android:textSize="@dimen/_12ssp"
         app:layout_constraintBottom_toTopOf="@+id/tvDesc"
         app:layout_constraintEnd_toStartOf="@+id/tvTime"

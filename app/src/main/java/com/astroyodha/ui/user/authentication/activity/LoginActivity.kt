@@ -4,10 +4,18 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.telephony.TelephonyManager
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.astroyodha.R
+import com.astroyodha.core.BaseActivity
+import com.astroyodha.databinding.ActivityLoginBinding
+import com.astroyodha.network.NetworkHelper
+import com.astroyodha.network.Status
+import com.astroyodha.ui.user.activity.UserHomeActivity
+import com.astroyodha.ui.user.authentication.viewmodel.SplashViewModel
+import com.astroyodha.utils.Constants
+import com.astroyodha.utils.showSnackBarToast
+import com.astroyodha.utils.toast
 import com.facebook.*
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
@@ -20,16 +28,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.astroyodha.R
-import com.astroyodha.core.BaseActivity
-import com.astroyodha.databinding.ActivityLoginBinding
-import com.astroyodha.network.NetworkHelper
-import com.astroyodha.network.Status
-import com.astroyodha.ui.user.activity.UserHomeActivity
-import com.astroyodha.ui.user.authentication.viewmodel.SplashViewModel
-import com.astroyodha.utils.Constants
-import com.astroyodha.utils.MyLog
-import com.astroyodha.utils.showSnackBarToast
 
 class LoginActivity : BaseActivity() {
     val TAG = javaClass.simpleName
@@ -98,9 +96,11 @@ class LoginActivity : BaseActivity() {
             }
 
             override fun onCancel() {
+                // onCancel
             }
 
             override fun onError(error: FacebookException) {
+                // onError
             }
         })
     }
@@ -148,11 +148,10 @@ class LoginActivity : BaseActivity() {
             onBackPressed()
         }
 
-        binding.edPhoneNumber.setOnFocusChangeListener { view, b ->
+        binding.edPhoneNumber.setOnFocusChangeListener { _, b ->
             changeLayoutOnFocusChange(b)
-
         }
-        binding.countryPicker.setOnFocusChangeListener { view, b ->
+        binding.countryPicker.setOnFocusChangeListener { _, b ->
             changeLayoutOnFocusChange(b)
         }
 
@@ -183,12 +182,12 @@ class LoginActivity : BaseActivity() {
     fun changeLayoutOnFocusChange(b: Boolean) {
         if (b) {
             binding.imgMobile.setColorFilter(
-                ContextCompat.getColor(this, R.color.border_blue),
+                ContextCompat.getColor(this, R.color.astrologer_theme),
                 android.graphics.PorterDuff.Mode.SRC_IN
             )
             binding.lnMobile.setBackgroundResource(R.drawable.background_edit_text_blue_line_background)
-            binding.edPhoneNumber.setTextColor(ContextCompat.getColor(this, R.color.border_blue))
-            binding.countryPicker.textColor = ContextCompat.getColor(this, R.color.border_blue)
+            binding.edPhoneNumber.setTextColor(ContextCompat.getColor(this, R.color.astrologer_theme))
+            binding.countryPicker.textColor = ContextCompat.getColor(this, R.color.astrologer_theme)
         } else {
             binding.imgMobile.setColorFilter(
                 ContextCompat.getColor(this, R.color.text_gray),
@@ -215,8 +214,7 @@ class LoginActivity : BaseActivity() {
      * Initialize observer
      */
     private fun setObserver() {
-
-        viewModel.mobileValidationCheckWithUserType.observe(this, {
+        viewModel.mobileValidationCheckWithUserType.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
                     showProgress(this)
@@ -234,10 +232,10 @@ class LoginActivity : BaseActivity() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
+        }
 
 
-        viewModel.socialLoginCheckWithUserType.observe(this, {
+        viewModel.socialLoginCheckWithUserType.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
                     showProgress(this)
@@ -257,9 +255,9 @@ class LoginActivity : BaseActivity() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
+        }
 
-        viewModel.socialLoginCheckWithoutUserType.observe(this, {
+        viewModel.socialLoginCheckWithoutUserType.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
                     showProgress(this)
@@ -268,7 +266,7 @@ class LoginActivity : BaseActivity() {
                     hideProgress()
                     it.data?.let {
                         if (it) {
-                            if(!logintype.equals("")) {
+                            if (!logintype.equals("")) {
                                 logoutSocialMedia()
                             }
                             binding.root.showSnackBarToast(Constants.MSG_SOCIAL_MEDIA_ALREADY_REGISTER)
@@ -282,7 +280,7 @@ class LoginActivity : BaseActivity() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
+        }
 
     }
 
@@ -323,8 +321,6 @@ class LoginActivity : BaseActivity() {
      * manage facebook token
      */
     private fun handleFacebookAccessToken(token: AccessToken) {
-        Log.d(TAG, "handleFacebookAccessToken:$token")
-
         val credential = FacebookAuthProvider.getCredential(token.token)
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
@@ -339,10 +335,7 @@ class LoginActivity : BaseActivity() {
 //                   redirectCreateAccountActivity(name,email,socialId)
                 } else {
                     hideProgress()
-                    Toast.makeText(
-                        baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    toast("Authentication failed.")
                 }
             }
     }

@@ -17,6 +17,5 @@ sonarqube-check:
   script:
     - sh gradlew sonarqube
   allow_failure: true
-  when: manual
   only:
-    - dev_mitesh # or the name of your main branch
+    - schedules

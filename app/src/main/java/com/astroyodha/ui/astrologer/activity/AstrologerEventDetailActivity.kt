@@ -50,6 +50,9 @@ class AstrologerEventDetailActivity : BaseActivity() {
 
         profileViewModel.getUserDetailById(userId)
 
+        if (!intent.getBooleanExtra(Constants.INTENT_ISEDIT, false)) {
+            binding.lnApproval.makeGone()
+        }
         setObserver()
     }
 
@@ -87,8 +90,7 @@ class AstrologerEventDetailActivity : BaseActivity() {
                     hideProgress()
                     it.data?.let { result ->
                         binding.root.showSnackBarToast(result)
-                        binding.btnAccept.makeGone()
-                        binding.btnReject.makeGone()
+                        binding.lnApproval.makeGone()
                     }
                 }
                 Status.ERROR -> {
@@ -143,7 +145,7 @@ class AstrologerEventDetailActivity : BaseActivity() {
         it?.description.let {
             binding.tvEventDescription.addReadMoreText(
                 it.toString(),
-                ContextCompat.getColor(this, R.color.astrologer_blue_theme)
+                ContextCompat.getColor(this, R.color.astrologer_theme)
             )
         }
     }

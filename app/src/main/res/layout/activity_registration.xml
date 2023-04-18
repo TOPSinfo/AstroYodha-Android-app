@@ -35,34 +35,6 @@
                 android:textSize="@dimen/_18sdp"
                 android:textStyle="bold" />
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/imgUser"
-                    android:layout_width="@dimen/_80sdp"
-                    android:layout_height="@dimen/_80sdp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/ic_placeholder_user" />
-
-                <ImageView
-                    android:id="@+id/imgEdit"
-                    android:layout_width="@dimen/_25sdp"
-                    android:layout_height="@dimen/_25sdp"
-                    android:layout_gravity="bottom|end"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:background="@drawable/background_gray_circle"
-                    android:padding="@dimen/_5sdp"
-                    android:src="@drawable/ic_camera_pic" />
-
-            </FrameLayout>
-
             <LinearLayout
                 android:id="@+id/layoutFullName"
                 android:layout_width="match_parent"
@@ -213,7 +185,7 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:layout_toEndOf="@+id/tvIAgree"
                     android:text="@string/terms_condition"
-                    android:textColor="@color/orange_theme"
+                    android:textColor="@color/user_theme"
                     android:textSize="@dimen/_12sdp" />
 
                 <LinearLayout
@@ -240,7 +212,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:text="@string/privacy_policy"
-                        android:textColor="@color/orange_theme"
+                        android:textColor="@color/user_theme"
                         android:textSize="@dimen/_12sdp" />
                 </LinearLayout>
 
@@ -357,7 +329,7 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:gravity="center"
                         android:text="@string/login"
-                        android:textColor="@color/orange_theme"
+                        android:textColor="@color/user_theme"
                         android:textSize="@dimen/_14ssp"
                         android:visibility="visible" />
                 </LinearLayout>

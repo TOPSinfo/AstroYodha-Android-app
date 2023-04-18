@@ -11,7 +11,7 @@
         android:id="@+id/lnActionBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/orange_theme">
+        android:background="@color/user_theme">
 
         <ImageView
             android:id="@+id/imgClose"
@@ -190,9 +190,9 @@
                     style="@style/fontRegular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2yr+"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_10ssp" />
+                    android:textSize="@dimen/_10ssp"
+                    tools:text="2yr+" />
 
                 <TextView
                     style="@style/fontRegular"
@@ -254,11 +254,11 @@
                     style="@style/fontRegular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1000+"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_10ssp"
                     app:layout_constraintStart_toStartOf="@+id/guideline"
-                    app:layout_constraintTop_toBottomOf="@id/tvAstrologerName" />
+                    app:layout_constraintTop_toBottomOf="@id/tvAstrologerName"
+                    tools:text="0" />
 
                 <TextView
                     style="@style/fontRegular"
@@ -367,7 +367,6 @@
                 style="@style/fontBold"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="4.5"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_18ssp"
@@ -376,7 +375,8 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="@+id/imgRatingCircle"
                 app:layout_constraintTop_toTopOf="@+id/imgRatingCircle"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="4.5" />
 
             <TextView
                 android:id="@+id/tvOfFive"
@@ -414,7 +414,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:max="100"
-                app:indicatorColor="@color/orange_theme"
+                app:indicatorColor="@color/user_theme"
                 app:layout_constraintBottom_toBottomOf="@+id/tv5Star"
                 app:layout_constraintEnd_toStartOf="@+id/barrier2"
                 app:layout_constraintStart_toEndOf="@id/barrier1"
@@ -428,12 +428,12 @@
                 style="@style/fontRegular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="98%"
                 android:textColor="@color/grey"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="@id/tv5Star"
                 app:layout_constraintEnd_toEndOf="@+id/guideline2"
-                app:layout_constraintTop_toTopOf="@id/tv5Star" />
+                app:layout_constraintTop_toTopOf="@id/tv5Star"
+                tools:text="98%" />
 
             <TextView
                 android:id="@+id/tv4Star"
@@ -455,7 +455,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:max="100"
-                app:indicatorColor="@color/orange_theme"
+                app:indicatorColor="@color/user_theme"
                 app:layout_constraintBottom_toBottomOf="@+id/tv4Star"
                 app:layout_constraintEnd_toStartOf="@+id/barrier2"
                 app:layout_constraintStart_toEndOf="@id/barrier1"
@@ -469,12 +469,12 @@
                 style="@style/fontRegular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2%"
                 android:textColor="@color/grey"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="@id/tv4Star"
                 app:layout_constraintEnd_toEndOf="@+id/tv5StarPercentage"
-                app:layout_constraintTop_toTopOf="@id/tv4Star" />
+                app:layout_constraintTop_toTopOf="@id/tv4Star"
+                tools:text="2%" />
 
             <TextView
                 android:id="@+id/tv3Star"
@@ -496,7 +496,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:max="100"
-                app:indicatorColor="@color/orange_theme"
+                app:indicatorColor="@color/user_theme"
                 app:layout_constraintBottom_toBottomOf="@+id/tv3Star"
                 app:layout_constraintEnd_toStartOf="@+id/barrier2"
                 app:layout_constraintStart_toEndOf="@id/barrier1"
@@ -510,12 +510,12 @@
                 style="@style/fontRegular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0%"
                 android:textColor="@color/grey"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="@id/tv3Star"
                 app:layout_constraintEnd_toEndOf="@+id/tv5StarPercentage"
-                app:layout_constraintTop_toTopOf="@id/tv3Star" />
+                app:layout_constraintTop_toTopOf="@id/tv3Star"
+                tools:text="0%" />
 
             <TextView
                 android:id="@+id/tv2Star"
@@ -537,7 +537,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:max="100"
-                app:indicatorColor="@color/orange_theme"
+                app:indicatorColor="@color/user_theme"
                 app:layout_constraintBottom_toBottomOf="@+id/tv2Star"
                 app:layout_constraintEnd_toStartOf="@+id/barrier2"
                 app:layout_constraintStart_toEndOf="@id/barrier1"
@@ -551,12 +551,12 @@
                 style="@style/fontRegular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0%"
                 android:textColor="@color/grey"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="@id/tv2Star"
                 app:layout_constraintEnd_toEndOf="@+id/tv5StarPercentage"
-                app:layout_constraintTop_toTopOf="@id/tv2Star" />
+                app:layout_constraintTop_toTopOf="@id/tv2Star"
+                tools:text="0%" />
 
             <TextView
                 android:id="@+id/tv1Star"
@@ -578,7 +578,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:max="100"
-                app:indicatorColor="@color/orange_theme"
+                app:indicatorColor="@color/user_theme"
                 app:layout_constraintBottom_toBottomOf="@+id/tv1Star"
                 app:layout_constraintEnd_toStartOf="@+id/barrier2"
                 app:layout_constraintStart_toEndOf="@id/barrier1"
@@ -592,12 +592,12 @@
                 style="@style/fontRegular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0%"
                 android:textColor="@color/grey"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintBottom_toBottomOf="@id/tv1Star"
                 app:layout_constraintEnd_toEndOf="@+id/tv5StarPercentage"
-                app:layout_constraintTop_toTopOf="@id/tv1Star" />
+                app:layout_constraintTop_toTopOf="@id/tv1Star"
+                tools:text="0%" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvReview"
@@ -619,7 +619,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:backgroundTint="@color/button_background_color"
+                android:backgroundTint="@color/orange_theme"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:letterSpacing="0"
@@ -666,7 +666,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="@dimen/_16sdp"
         android:layout_marginBottom="@dimen/_16sdp"
-        android:backgroundTint="@color/orange_theme"
+        android:backgroundTint="@color/user_theme"
         android:src="@drawable/ic_round_add_24"
         app:tint="@android:color/white"
         tools:visibility="visible" />

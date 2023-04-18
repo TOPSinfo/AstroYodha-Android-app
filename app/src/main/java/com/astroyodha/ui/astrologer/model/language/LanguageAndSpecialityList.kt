@@ -1,7 +1,7 @@
 package com.astroyodha.ui.astrologer.model.language
 
-import com.google.firebase.firestore.QuerySnapshot
 import com.astroyodha.utils.Constants
+import com.google.firebase.firestore.QuerySnapshot
 
 object LanguageAndSpecialityList {
 

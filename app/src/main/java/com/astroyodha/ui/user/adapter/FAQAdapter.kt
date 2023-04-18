@@ -12,7 +12,6 @@ import com.astroyodha.R
 import com.astroyodha.ui.user.authentication.model.cms.FAQModel
 import com.astroyodha.utils.makeGone
 import com.astroyodha.utils.makeVisible
-import java.util.*
 
 /**
  * FAQ list adapter : Show FAQ list.
@@ -45,7 +44,7 @@ class FAQAdapter(
 
             if(holder.adapterPosition == mCheckedPosition) {
                 holder.tvAnswer.makeVisible()
-                holder.tvQuestion.setTextColor(mContext.getColor(R.color.orange_theme))
+                holder.tvQuestion.setTextColor(mContext.getColor(R.color.user_theme))
                 holder.imgDown.setImageResource(R.drawable.ic_up_arrow)
             } else {
                 holder.tvAnswer.makeGone()

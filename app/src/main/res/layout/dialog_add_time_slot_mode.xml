@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/_10sdp"
                 android:text="@string/repeat"
-                android:textColor="@color/grey_dark"
+                android:textColor="@color/edittext_text_color"
                 android:textSize="@dimen/_12ssp" />
 
             <com.google.android.material.radiobutton.MaterialRadioButton
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/_10sdp"
                 android:text="@string/weekly"
-                android:textColor="@color/grey_dark"
+                android:textColor="@color/edittext_text_color"
                 android:textSize="@dimen/_12ssp" />
 
             <com.google.android.material.radiobutton.MaterialRadioButton
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/_10sdp"
                 android:text="@string/custom"
-                android:textColor="@color/grey_dark"
+                android:textColor="@color/edittext_text_color"
                 android:textSize="@dimen/_12ssp" />
 
         </RadioGroup>

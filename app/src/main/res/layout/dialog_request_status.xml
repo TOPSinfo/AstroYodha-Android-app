@@ -17,14 +17,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/accept"
-            android:buttonTint="@color/astrologer_blue_theme"/>
+            android:buttonTint="@color/astrologer_theme"/>
 
         <RadioButton
             android:id="@+id/rbReject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/reject"
-            android:buttonTint="@color/astrologer_blue_theme"/>
+            android:buttonTint="@color/astrologer_theme"/>
 
     </RadioGroup>
 

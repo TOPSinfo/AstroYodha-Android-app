@@ -1,9 +1,9 @@
 package com.astroyodha.ui.user.authentication.model.cms
 
+import com.astroyodha.utils.Constants
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
-import com.astroyodha.utils.Constants
 
 object CMSList {
 

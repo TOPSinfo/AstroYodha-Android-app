@@ -13,7 +13,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
 import android.text.TextUtils
-import android.view.*
+import android.view.Window
+import android.view.WindowManager
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -41,7 +42,6 @@ import droidninja.filepicker.FilePickerConst
 import droidninja.filepicker.utils.ContentUriUtils
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class AstrologerEditProfileActivity : BaseActivity() {
 
@@ -107,7 +107,7 @@ class AstrologerEditProfileActivity : BaseActivity() {
                 myCalendar[Calendar.MONTH],
                 myCalendar[Calendar.DAY_OF_MONTH]
             )
-            datePickerDialog.datePicker.maxDate = System.currentTimeMillis();
+            datePickerDialog.datePicker.maxDate = System.currentTimeMillis()
             datePickerDialog.setTitle(resources.getString(R.string.date_of_birth))
             datePickerDialog.show()
         }
@@ -305,12 +305,9 @@ class AstrologerEditProfileActivity : BaseActivity() {
                 }
 
                 var displayLanguageList = ArrayList<String>()
-                for(language in Constants.listOfLanguages)
-                {
-                    for(selectedLanguage in mSelectedLanguage)
-                    {
-                        if(language.id.equals(selectedLanguage))
-                        {
+                for (language in Constants.listOfLanguages) {
+                    for (selectedLanguage in mSelectedLanguage) {
+                        if (language.id.equals(selectedLanguage)) {
                             displayLanguageList.add(language.language)
                         }
                     }
@@ -325,12 +322,9 @@ class AstrologerEditProfileActivity : BaseActivity() {
                     mSelectedAstrtoType.add(i)
                 }
                 var displaySpecialityList = ArrayList<String>()
-                for(speciality in Constants.listOfSpeciality)
-                {
-                    for(selectedSpeciality in mSelectedAstrtoType)
-                    {
-                        if(speciality.id.equals(selectedSpeciality))
-                        {
+                for (speciality in Constants.listOfSpeciality) {
+                    for (selectedSpeciality in mSelectedAstrtoType) {
+                        if (speciality.id.equals(selectedSpeciality)) {
                             displaySpecialityList.add(speciality.language)
                         }
                     }
@@ -370,6 +364,7 @@ class AstrologerEditProfileActivity : BaseActivity() {
                 }
 
                 override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                    // onPermissionDenied
                 }
 
             }).setDeniedMessage(getString(R.string.permission_denied))
@@ -387,10 +382,8 @@ class AstrologerEditProfileActivity : BaseActivity() {
             100 -> if (resultCode == Activity.RESULT_OK && data != null) {
                 val dataList =
                     data.getParcelableArrayListExtra<Uri>(FilePickerConst.KEY_SELECTED_MEDIA)
-                if (dataList != null) {
-                    if (dataList.size > 0) {
-                        openCropper(dataList[0])
-                    }
+                if (dataList != null && dataList.size > 0) {
+                    openCropper(dataList[0])
                 }
             }
             CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE -> {
@@ -402,6 +395,7 @@ class AstrologerEditProfileActivity : BaseActivity() {
                     profileImagePath = resultUri
 
                 } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                    // crop image error receive here
                 }
             }
 
@@ -461,7 +455,7 @@ class AstrologerEditProfileActivity : BaseActivity() {
 
 
     var date =
-        DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth -> // TODO Auto-generated method stub
+        DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
             myCalendar.set(Calendar.YEAR, year)
             myCalendar.set(Calendar.MONTH, monthOfYear)
             myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -482,12 +476,12 @@ class AstrologerEditProfileActivity : BaseActivity() {
      */
     private fun manageFocus() {
 
-        binding.edFullName.setOnFocusChangeListener { view, b ->
+        binding.edFullName.setOnFocusChangeListener { _, b ->
             if (b) {
                 binding.edFullName.compoundDrawableTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.orange_theme))
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.user_theme))
                 binding.edFullName.setBackgroundResource(R.drawable.background_edit_text_orange_line_background)
-                binding.edFullName.setTextColor(ContextCompat.getColor(this, R.color.orange_theme))
+                binding.edFullName.setTextColor(ContextCompat.getColor(this, R.color.user_theme))
             } else {
                 binding.edFullName.compoundDrawableTintList =
                     ColorStateList.valueOf(ContextCompat.getColor(this, R.color.text_gray))
@@ -496,15 +490,15 @@ class AstrologerEditProfileActivity : BaseActivity() {
             }
         }
 
-        binding.edPhoneNumber.setOnFocusChangeListener { view, b ->
+        binding.edPhoneNumber.setOnFocusChangeListener { _, b ->
             if (b) {
                 binding.edPhoneNumber.compoundDrawableTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.orange_theme))
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.user_theme))
                 binding.edPhoneNumber.setBackgroundResource(R.drawable.background_edit_text_orange_line_background)
                 binding.edPhoneNumber.setTextColor(
                     ContextCompat.getColor(
                         this,
-                        R.color.orange_theme
+                        R.color.user_theme
                     )
                 )
             } else {
@@ -515,12 +509,12 @@ class AstrologerEditProfileActivity : BaseActivity() {
             }
         }
 
-        binding.edEmail.setOnFocusChangeListener { view, b ->
+        binding.edEmail.setOnFocusChangeListener { _, b ->
             if (b) {
                 binding.edEmail.compoundDrawableTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.orange_theme))
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.user_theme))
                 binding.edEmail.setBackgroundResource(R.drawable.background_edit_text_orange_line_background)
-                binding.edEmail.setTextColor(ContextCompat.getColor(this, R.color.orange_theme))
+                binding.edEmail.setTextColor(ContextCompat.getColor(this, R.color.user_theme))
             } else {
                 binding.edEmail.compoundDrawableTintList =
                     ColorStateList.valueOf(ContextCompat.getColor(this, R.color.text_gray))
@@ -530,15 +524,15 @@ class AstrologerEditProfileActivity : BaseActivity() {
         }
 
 
-        binding.edDateOfBirth.setOnFocusChangeListener { view, b ->
+        binding.edDateOfBirth.setOnFocusChangeListener { _, b ->
             if (b) {
                 binding.edDateOfBirth.compoundDrawableTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.orange_theme))
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.user_theme))
                 binding.edDateOfBirth.setBackgroundResource(R.drawable.background_edit_text_orange_line_background)
                 binding.edDateOfBirth.setTextColor(
                     ContextCompat.getColor(
                         this,
-                        R.color.orange_theme
+                        R.color.user_theme
                     )
                 )
             } else {
@@ -549,15 +543,15 @@ class AstrologerEditProfileActivity : BaseActivity() {
             }
         }
 
-        binding.edPricePerMin.setOnFocusChangeListener { view, b ->
+        binding.edPricePerMin.setOnFocusChangeListener { _, b ->
             if (b) {
                 binding.edPricePerMin.compoundDrawableTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.orange_theme))
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.user_theme))
                 binding.edPricePerMin.setBackgroundResource(R.drawable.background_edit_text_orange_line_background)
                 binding.edPricePerMin.setTextColor(
                     ContextCompat.getColor(
                         this,
-                        R.color.orange_theme
+                        R.color.user_theme
                     )
                 )
             } else {
@@ -568,15 +562,15 @@ class AstrologerEditProfileActivity : BaseActivity() {
             }
         }
 
-        binding.edExperience.setOnFocusChangeListener { view, b ->
+        binding.edExperience.setOnFocusChangeListener { _, b ->
             if (b) {
                 binding.edExperience.compoundDrawableTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.orange_theme))
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.user_theme))
                 binding.edExperience.setBackgroundResource(R.drawable.background_edit_text_orange_line_background)
                 binding.edExperience.setTextColor(
                     ContextCompat.getColor(
                         this,
-                        R.color.orange_theme
+                        R.color.user_theme
                     )
                 )
             } else {
@@ -587,15 +581,15 @@ class AstrologerEditProfileActivity : BaseActivity() {
             }
         }
 
-        binding.edAbout.setOnFocusChangeListener { view, b ->
+        binding.edAbout.setOnFocusChangeListener { _, b ->
             if (b) {
                 binding.edAbout.compoundDrawableTintList =
-                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.orange_theme))
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.user_theme))
                 binding.lnAbout.setBackgroundResource(R.drawable.background_edit_text_orange_line_background)
                 binding.edAbout.setTextColor(
                     ContextCompat.getColor(
                         this,
-                        R.color.orange_theme
+                        R.color.user_theme
                     )
                 )
             } else {

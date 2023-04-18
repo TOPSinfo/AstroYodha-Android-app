@@ -4,12 +4,9 @@ import `in`.aabhasjindal.otptextview.OTPListener
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
-import com.google.firebase.auth.PhoneAuthOptions
-import com.google.firebase.auth.PhoneAuthProvider
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.astroyodha.R
 import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivityVerificationBinding
@@ -23,6 +20,10 @@ import com.astroyodha.utils.Constants
 import com.astroyodha.utils.Utility
 import com.astroyodha.utils.hideKeyboard
 import com.astroyodha.utils.showSnackBarToast
+import com.google.firebase.auth.PhoneAuthOptions
+import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import java.util.concurrent.TimeUnit
 
 class VerificationActivity : BaseActivity(), VerificationNavigator {
@@ -54,10 +55,8 @@ class VerificationActivity : BaseActivity(), VerificationNavigator {
 
         if (intent.hasExtra(Constants.INTENT_USER_DATA)) {
             userModel = intent.getSerializableExtra(Constants.INTENT_USER_DATA) as UserModel?
-            if (userModel != null) {
-                if (!userModel!!.socialId.equals("")) {
-                    viewModel.isSocialLogin = true
-                }
+            if (userModel != null && !userModel!!.socialId.equals("")) {
+                viewModel.isSocialLogin = true
             }
         }
 
@@ -101,20 +100,20 @@ class VerificationActivity : BaseActivity(), VerificationNavigator {
      * set up observer
      */
     private fun setObserver() {
-        viewModel.isOTPFilled.observe(this@VerificationActivity, {
+        viewModel.isOTPFilled.observe(this@VerificationActivity) {
             if (it) {
                 binding.otpView.setOTP(viewModel.OTPCode.value.toString())
             }
-        })
+        }
 
-        viewModel.isStopTimer.observe(this@VerificationActivity, {
+        viewModel.isStopTimer.observe(this@VerificationActivity) {
             if (it) {
                 timer?.cancel()
                 enableResendOTPView()
             }
-        })
+        }
 
-        viewModel.userDataResponse.observe(this, {
+        viewModel.userDataResponse.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
                     showProgress(this)
@@ -130,7 +129,7 @@ class VerificationActivity : BaseActivity(), VerificationNavigator {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
+        }
     }
 
     /**
@@ -165,6 +164,7 @@ class VerificationActivity : BaseActivity(), VerificationNavigator {
      */
     override fun redirectToDashboard(user: UserModel) {
         viewModel.isStopTimer.value = true
+        Log.e("===============","${user.type}")
         if (user.type == Constants.USER_NORMAL) {
             startActivity(Intent(this, UserHomeActivity::class.java))
             finishAffinity()

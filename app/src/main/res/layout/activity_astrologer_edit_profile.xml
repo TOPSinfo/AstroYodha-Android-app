@@ -10,7 +10,7 @@
         android:id="@+id/toolBarEditProfile"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
-        android:background="@color/astrologer_blue_theme"
+        android:background="@color/astrologer_theme"
         android:orientation="horizontal">
 
         <ImageView
@@ -168,7 +168,7 @@
                     android:maxLines="1"
                     android:padding="@dimen/_10sdp"
                     android:singleLine="true"
-                    android:textColor="@color/amp_light_gray_2"
+                    android:textColor="@color/edittext_text_color"
                     android:textColorHint="@color/edittext_hint_color"
                     android:textSize="@dimen/edittext_font_size"
                     tools:text="+919978899885" />
@@ -347,6 +347,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/tvAppointment"
                         style="@style/fontMedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -359,6 +360,8 @@
                         android:id="@+id/imgAddTimeSlot"
                         android:layout_width="@dimen/_30sdp"
                         android:layout_height="@dimen/_30sdp"
+                        android:layout_alignTop="@+id/tvAppointment"
+                        android:layout_alignBottom="@+id/tvAppointment"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_gravity="bottom|end"

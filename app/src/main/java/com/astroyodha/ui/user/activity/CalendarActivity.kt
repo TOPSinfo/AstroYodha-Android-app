@@ -5,7 +5,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.activity.result.ActivityResult
@@ -18,6 +17,19 @@ import androidx.core.view.children
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.astroyodha.R
+import com.astroyodha.core.BaseActivity
+import com.astroyodha.databinding.ActivityCalendarBinding
+import com.astroyodha.databinding.Example3CalendarDayBinding
+import com.astroyodha.databinding.Example3CalendarHeaderBinding
+import com.astroyodha.network.Status
+import com.astroyodha.ui.user.adapter.CalendarEventAdapter
+import com.astroyodha.ui.user.model.booking.BookingModel
+import com.astroyodha.ui.user.viewmodel.CalendarViewModel
+import com.astroyodha.utils.dateFormat
+import com.astroyodha.utils.makeInvisible
+import com.astroyodha.utils.makeVisible
+import com.astroyodha.utils.showSnackBarToast
 import com.google.firebase.auth.FirebaseAuth
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
@@ -25,16 +37,6 @@ import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
 import com.kizitonwose.calendarview.ui.ViewContainer
-import com.astroyodha.R
-import com.astroyodha.core.BaseActivity
-import com.astroyodha.databinding.*
-import com.astroyodha.network.Status
-import com.astroyodha.ui.user.adapter.CalendarEventAdapter
-import com.astroyodha.ui.user.model.booking.BookingModel
-import com.astroyodha.ui.user.viewmodel.CalendarViewModel
-import com.astroyodha.utils.MyLog
-import com.astroyodha.utils.dateFormat
-import com.astroyodha.utils.showSnackBarToast
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth
@@ -42,6 +44,7 @@ import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.time.temporal.WeekFields
 import java.util.*
+
 
 class CalendarActivity : BaseActivity() {
 
@@ -196,7 +199,7 @@ class CalendarActivity : BaseActivity() {
                             textView.setTextColor(
                                 ContextCompat.getColor(
                                     this@CalendarActivity,
-                                    R.color.orange_theme
+                                    R.color.user_theme
                                 )
                             )
                             textView.setBackgroundResource(R.drawable.calendar_today_bg)
@@ -214,7 +217,7 @@ class CalendarActivity : BaseActivity() {
                                 )
                             )
                             textView.setBackgroundResource(R.drawable.calendar_selected_bg)
-                            dotView.makeInVisible()
+                            dotView.makeInvisible()
                         }
                         else -> {
                             textView.setTextColor(
@@ -234,8 +237,8 @@ class CalendarActivity : BaseActivity() {
                         }
                     }
                 } else {
-                    textView.makeInVisible()
-                    dotView.makeInVisible()
+                    textView.makeInvisible()
+                    dotView.makeInvisible()
                 }
             }
         }
@@ -250,13 +253,9 @@ class CalendarActivity : BaseActivity() {
                     container.legendLayout.children.map { it as TextView }
                         .forEachIndexed { index, tv ->
                             val dayOfWeekDisplayName: String =
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                    daysOfWeek[index].getDisplayName(
-                                        TextStyle.SHORT, Locale.US
-                                    )
-                                } else {
-                                    TODO("VERSION.SDK_INT < O")
-                                }
+                                daysOfWeek[index].getDisplayName(
+                                    TextStyle.SHORT, Locale.US
+                                )
 
                             tv.text = dayOfWeekDisplayName.toString()
                             tv.setTextColor(
@@ -271,11 +270,7 @@ class CalendarActivity : BaseActivity() {
                     container.legendHeaderTxtMonth.text = titleFormatter.format(month.yearMonth)
                 }
                 container.legendHeaderImgLeftArrow.setOnClickListener {
-                    val newMonth = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        month.yearMonth.minusMonths(1)
-                    } else {
-                        TODO("VERSION.SDK_INT < O")
-                    }
+                    val newMonth = month.yearMonth.minusMonths(1)
                     from = "Left"
                     selectedMonth = newMonth.monthValue.toString()
                     if (from.isEmpty()) {
@@ -291,11 +286,7 @@ class CalendarActivity : BaseActivity() {
                 }
 
                 container.legendHeaderImgRightArrow.setOnClickListener {
-                    val newMonth = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        month.yearMonth.plusMonths(1)
-                    } else {
-                        TODO("VERSION.SDK_INT < O")
-                    }
+                    val newMonth = month.yearMonth.plusMonths(1)
                     selectedMonth = newMonth.monthValue.toString()
                     if (from.isEmpty()) {
                         if (selectedMonth.toInt() == 12) {
@@ -387,13 +378,9 @@ class CalendarActivity : BaseActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun selectDate(date: LocalDate, from: String) {
-        if (if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                selectedDate != date
-            } else {
-                TODO("VERSION.SDK_INT < O")
-            }
-        ) {
+        if (selectedDate != date) {
 
             if (!from.equals("Init")) {
 
@@ -419,11 +406,7 @@ class CalendarActivity : BaseActivity() {
                 binding.rvEventList.adapter?.notifyDataSetChanged()
 
 
-                val selectedDate = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    selectionFormatter.format(date)
-                } else {
-                    TODO("VERSION.SDK_INT < O")
-                }
+                val selectedDate = selectionFormatter.format(date)
                 binding.exThreeSelectedDateText.text = selectedDate.substring(
                     0,
                     selectedDate.indexOf(' ')
@@ -458,19 +441,6 @@ class CalendarActivity : BaseActivity() {
             daysOfWeek = rhs + lhs
         }
         return daysOfWeek
-    }
-
-
-    fun View.makeVisible() {
-        visibility = View.VISIBLE
-    }
-
-    fun View.makeInVisible() {
-        visibility = View.INVISIBLE
-    }
-
-    fun View.makeGone() {
-        visibility = View.GONE
     }
 
 }

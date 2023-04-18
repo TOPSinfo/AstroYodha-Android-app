@@ -11,7 +11,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.auth.FirebaseAuth
 import com.astroyodha.R
 import com.astroyodha.core.BaseFragment
 import com.astroyodha.databinding.FragmentAstrologerDashboardBinding
@@ -22,10 +21,13 @@ import com.astroyodha.ui.astrologer.adapter.BookingAstrologerAdapter
 import com.astroyodha.ui.astrologer.viewmodel.AstrologerBookingViewModel
 import com.astroyodha.ui.astrologer.viewmodel.DashboardAstrologerViewModel
 import com.astroyodha.ui.user.model.booking.BookingModel
-import com.astroyodha.utils.*
+import com.astroyodha.utils.Constants
+import com.astroyodha.utils.makeGone
+import com.astroyodha.utils.makeVisible
+import com.astroyodha.utils.showSnackBarToast
+import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 class DashboardAstrologerFragment : BaseFragment() {
 
@@ -100,6 +102,7 @@ class DashboardAstrologerFragment : BaseFragment() {
         dashboardAstrologerViewModel.getBookingListDataResponse.observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.LOADING -> {
+                    // loading state
                 }
                 Status.SUCCESS -> {
                     hideProgress()
@@ -140,8 +143,6 @@ class DashboardAstrologerFragment : BaseFragment() {
                 }
             }
         })
-
-
     }
 
     /**
@@ -172,10 +173,10 @@ class DashboardAstrologerFragment : BaseFragment() {
                                     .putExtra(Constants.INTENT_USER_ID, model.userId)
                                     .putExtra(Constants.INTENT_BOOKING_ID, model.id)
                                     .putExtra(Constants.INTENT_BOOKING_MODEL, model)
+                                    .putExtra(Constants.INTENT_ISEDIT, true)
                             )
                         } else {
                             if (model.status == Constants.PENDING_STATUS) {
-
                                 mPosition = position
                                 if (isAccept) {
                                     model.status = Constants.APPROVE_STATUS
@@ -187,8 +188,6 @@ class DashboardAstrologerFragment : BaseFragment() {
                                 binding.root.showSnackBarToast("Status already changed")
                             }
                         }
-
-
                     }
 
                 }

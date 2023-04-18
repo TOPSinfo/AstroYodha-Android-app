@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/screen_background"
     android:orientation="vertical"
+    android:paddingBottom="@dimen/_70sdp"
     tools:context=".ui.user.fragment.BookingFragment">
 
     <RelativeLayout
@@ -36,7 +37,7 @@
             android:clickable="true"
             android:padding="@dimen/_9sdp"
             android:src="@drawable/ic_calender"
-            app:tint="@color/grey_dark" />
+            app:tint="@color/edittext_text_color" />
 
         <ImageView
             android:id="@+id/imgAdd"
@@ -47,7 +48,7 @@
             android:clickable="true"
             android:padding="@dimen/_9sdp"
             android:src="@drawable/ic_add_event"
-            app:tint="@color/grey_dark" />
+            app:tint="@color/edittext_text_color" />
 
         <View
             android:id="@+id/view"
@@ -63,8 +64,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabBackground="@color/white"
-        app:tabIndicatorColor="@color/orange_theme"
-        app:tabSelectedTextColor="@color/orange_theme"
+        app:tabIndicatorColor="@color/user_theme"
+        app:tabSelectedTextColor="@color/user_theme"
         app:tabTextColor="@color/unselected_tab_text_color" />
 
     <androidx.viewpager2.widget.ViewPager2

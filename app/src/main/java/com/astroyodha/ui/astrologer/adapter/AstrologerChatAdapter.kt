@@ -9,14 +9,14 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.progressindicator.CircularProgressIndicator
-import com.google.firebase.auth.FirebaseAuth
 import com.astroyodha.R
 import com.astroyodha.ui.astrologer.activity.AstrologerChatActivity
 import com.astroyodha.ui.user.authentication.model.chat.MessagesModel
 import com.astroyodha.utils.Constants
 import com.astroyodha.utils.Utility
 import com.astroyodha.utils.loadImage
+import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.firebase.auth.FirebaseAuth
 
 /**
  * Chat list adapter : Show message list.

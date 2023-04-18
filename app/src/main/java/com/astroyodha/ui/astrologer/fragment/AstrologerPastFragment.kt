@@ -73,7 +73,6 @@ class AstrologerPastFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
         setObserver()
-        setClickListener()
     }
 
     /**
@@ -118,20 +117,20 @@ class AstrologerPastFragment : BaseFragment() {
      * set observer
      */
     private fun setObserver() {
-        bookingViewModel.bookingList.observe(viewLifecycleOwner, { updatedData ->
+        bookingViewModel.bookingList.observe(viewLifecycleOwner) { updatedData ->
             updatedData.forEach {
                 mList.mapIndexed { index, bookingModel ->
-                    if (bookingModel.id == it.id ) {
-                        mList[index]=it
+                    if (bookingModel.id == it.id) {
+                        mList[index] = it
                         binding.rvBooking.adapter?.notifyItemChanged(index)
                         return@forEach
                     }
                 }
             }
 
-        })
+        }
 
-        bookingViewModel.getBookingListDataResponse.observe(viewLifecycleOwner, {
+        bookingViewModel.getBookingListDataResponse.observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.LOADING -> {
                     showProgress(requireContext())
@@ -156,9 +155,9 @@ class AstrologerPastFragment : BaseFragment() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
+        }
 
-        profileAstrologerViewModel.userDetailResponse.observe(viewLifecycleOwner, {
+        profileAstrologerViewModel.userDetailResponse.observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.LOADING -> {
                     showProgress(requireContext())
@@ -180,16 +179,8 @@ class AstrologerPastFragment : BaseFragment() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
-    }
-
-    /**
-     * manage click listener of view
-     */
-    private fun setClickListener() {
-        binding.fabAdd.setOnClickListener {
-
         }
     }
+
 
 }

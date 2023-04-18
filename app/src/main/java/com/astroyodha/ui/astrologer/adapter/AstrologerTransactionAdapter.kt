@@ -13,6 +13,7 @@ import com.astroyodha.ui.user.model.wallet.WalletModel
 import com.astroyodha.utils.Constants
 import com.astroyodha.utils.dateToStringFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Transaction list adapter : Show Transaction list.
@@ -68,6 +69,13 @@ class AstrologerTransactionAdapter(
             holder.imgRupee.setImageResource(mImage)
             holder.tvTransaction.text = mTranscation
             holder.tvTime.text = model.createdAt?.toDate()?.dateToStringFormat(mDateFormat)
+            if (model.bookingId.isNotBlank()) {
+                holder.tvBookingId.text =
+                    mContext.getString(
+                        R.string.order_id_user,
+                        model.bookingId.takeLast(4).uppercase(Locale.getDefault())
+                    )
+            }
             holder.tvAmount.text = model.amount.toString().removePrefix("-")
             holder.itemView.setOnClickListener {
                 viewHolderClicks.onClickItem(model, holder.adapterPosition)
@@ -85,6 +93,7 @@ class AstrologerTransactionAdapter(
         var imgRupee: ImageView = itemView.findViewById(R.id.imgRupee)
         var tvTransaction: TextView = itemView.findViewById(R.id.tvTransaction)
         var tvTime: TextView = itemView.findViewById(R.id.tvTime)
+        var tvBookingId: TextView = itemView.findViewById(R.id.tvBookingId)
         var tvOperand: TextView = itemView.findViewById(R.id.tvOperand)
         var tvAmount: TextView = itemView.findViewById(R.id.tvAmount)
         var imgPaymentBy: ImageView = itemView.findViewById(R.id.imgPaymentBy)

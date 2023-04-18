@@ -27,7 +27,7 @@
                 style="@style/fontRegular"
                 android:textSize="@dimen/_12ssp"
                 android:paddingStart="@dimen/_10sdp"
-                android:textColor="@color/grey_dark"/>
+                android:textColor="@color/edittext_text_color"/>
 
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/rb5MinNotification"
@@ -37,7 +37,7 @@
                 style="@style/fontRegular"
                 android:textSize="@dimen/_12ssp"
                 android:paddingStart="@dimen/_10sdp"
-                android:textColor="@color/grey_dark"/>
+                android:textColor="@color/edittext_text_color"/>
 
         </RadioGroup>
 

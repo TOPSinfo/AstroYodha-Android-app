@@ -132,7 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/_3sdp"
-                        android:text="1000+"
+                        android:text="0"
                         android:maxLines="1"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16sdp"/>
@@ -179,7 +179,7 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp"
                         android:visibility="gone"
-                        android:drawableTint="@color/astrologer_blue_theme"
+                        android:drawableTint="@color/astrologer_theme"
                         app:drawableStartCompat="@mipmap/booking_history" />
 
                     <View
@@ -198,7 +198,7 @@
                         android:text="@string/transaction_history"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp"
-                        android:drawableTint="@color/astrologer_blue_theme"
+                        android:drawableTint="@color/astrologer_theme"
                         app:drawableStartCompat="@mipmap/transiction_history" />
 
                     <View
@@ -218,7 +218,7 @@
                         android:text="@string/help_faq"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp"
-                        android:drawableTint="@color/astrologer_blue_theme"
+                        android:drawableTint="@color/astrologer_theme"
                         app:drawableStartCompat="@mipmap/faq" />
 
                     <View
@@ -236,7 +236,7 @@
                         android:text="@string/rate_app"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp"
-                        android:drawableTint="@color/astrologer_blue_theme"
+                        android:drawableTint="@color/astrologer_theme"
                         app:drawableStartCompat="@mipmap/rating" />
 
 
@@ -270,7 +270,7 @@
                         android:text="@string/share_app"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp"
-                        android:drawableTint="@color/astrologer_blue_theme"
+                        android:drawableTint="@color/astrologer_theme"
                         app:drawableStartCompat="@mipmap/share" />
 
                     <View
@@ -288,7 +288,7 @@
                         android:text="@string/menu_logout"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp"
-                        android:drawableTint="@color/astrologer_blue_theme"
+                        android:drawableTint="@color/astrologer_theme"
                         app:drawableStartCompat="@mipmap/logout" />
 
 
@@ -311,7 +311,7 @@
         android:layout_marginTop="@dimen/_15ssp"
         android:layout_marginEnd="@dimen/_15ssp"
         android:layout_marginBottom="@dimen/_15ssp"
-        android:background="@color/button_background_color"
+        android:background="@color/user_theme"
         android:padding="@dimen/_10sdp"
         android:text="@string/update"
         android:textColor="@color/button_text_color"

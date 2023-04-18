@@ -5,11 +5,10 @@ import android.content.Intent
 import androidx.annotation.LayoutRes
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
-import com.google.firebase.auth.FirebaseAuth
 import com.astroyodha.ui.user.authentication.activity.LoginActivity
-import com.astroyodha.utils.Constants
 import com.astroyodha.utils.Pref
 import com.astroyodha.view.CustomProgressDialog
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -51,10 +50,8 @@ open class BaseFragment(@LayoutRes layoutId: Int = 0) : Fragment() {
      */
     protected fun hideProgress() {
         try {
-            if (customProgressDialog != null) {
-                if (customProgressDialog!!.isShowing) {
-                    customProgressDialog!!.dismiss()
-                }
+            if (customProgressDialog != null && customProgressDialog!!.isShowing) {
+                customProgressDialog!!.dismiss()
             }
         } catch (e: Exception) {
             e.printStackTrace()

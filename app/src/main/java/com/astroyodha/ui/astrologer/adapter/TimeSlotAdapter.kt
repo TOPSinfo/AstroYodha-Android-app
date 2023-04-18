@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.astroyodha.R
 import com.astroyodha.ui.astrologer.model.timeslot.TimeSlotModel
 import com.astroyodha.utils.dateFormat
-import java.util.*
 
 /**
  * Community list adapter : Show Community list.

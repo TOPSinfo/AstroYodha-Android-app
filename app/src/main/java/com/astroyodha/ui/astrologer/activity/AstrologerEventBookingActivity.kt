@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import androidx.activity.viewModels
+import androidx.core.app.NotificationManagerCompat
 import com.astroyodha.R
 import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivityAstrologerEventBookingBinding
@@ -15,16 +16,17 @@ import com.astroyodha.ui.astrologer.viewmodel.AstrologerBookingViewModel
 import com.astroyodha.ui.astrologer.viewmodel.AstrologerJitsiViewModel
 import com.astroyodha.ui.astrologer.viewmodel.ProfileAstrologerViewModel
 import com.astroyodha.ui.astrologer.viewmodel.TimeSlotViewModel
+import com.astroyodha.ui.user.authentication.activity.SplashActivity
 import com.astroyodha.ui.user.model.booking.BookingModel
 import com.astroyodha.ui.user.viewmodel.ChatViewModel
 import com.astroyodha.utils.*
-import com.google.common.reflect.TypeToken
 import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
 import com.gun0912.tedpermission.PermissionListener
 import com.gun0912.tedpermission.TedPermission
-import java.lang.reflect.Type
+import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class AstrologerEventBookingActivity : BaseActivity() {
     val TAG = javaClass.simpleName
@@ -61,6 +63,10 @@ class AstrologerEventBookingActivity : BaseActivity() {
         binding = ActivityAstrologerEventBookingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        startFromFresh()
+    }
+
+    private fun startFromFresh() {
         getIntentData()
         setClickListener()
     }
@@ -96,6 +102,15 @@ class AstrologerEventBookingActivity : BaseActivity() {
         binding.tvStatus.isEnabled = false
         binding.tvSave.makeGone()
         binding.tvNotify.isEnabled = false
+
+        binding.edtUserName.isEnabled = false
+        binding.edtPlaceOfBirth.isEnabled = false
+//        binding.tvUploadPhoto.isEnabled = false
+//        binding.tvUploadKundali.isEnabled = false
+        binding.tvDateOfBirth.isEnabled = false
+        binding.tvTimeOfBirth.isEnabled = false
+
+
         setData()
         binding.groupStatus.makeVisible()
 
@@ -124,10 +139,23 @@ class AstrologerEventBookingActivity : BaseActivity() {
         binding.edDetails.setText(bookingModel.description)
         binding.tvDate.text = bookingModel.startTime?.dateToStringFormat(dateFormat)
         binding.tvStartTime.text = bookingModel.startTime?.dateToStringFormat(timeFormat)
-        startTime = binding.tvStartTime.text.toString()
-        binding.tvEndTime.text = bookingModel.endTime?.dateToStringFormat(timeFormat)
-        endTime = binding.tvEndTime.text.toString()
+        startTime = bookingModel.startTime?.dateToStringFormat(timeFormat).toString()
+        endTime = bookingModel.endTime?.dateToStringFormat(timeFormat).toString()
+
+        binding.tvEndTime.text="${getMin()} "+getString(R.string.minute)
+
         binding.tvNotify.text = bookingModel.notify
+
+        binding.edtUserName.setText(bookingModel.fullname)
+        binding.tvDateOfBirth.setText(bookingModel.birthDate)
+        binding.tvTimeOfBirth.setText(bookingModel.birthTime)
+        binding.edtPlaceOfBirth.setText(bookingModel.birthPlace)
+
+        binding.imgUploadPhoto.loadRoundedImage(bookingModel.photo)
+        binding.imgUploadKundali.loadRoundedImage(bookingModel.kundali)
+
+
+
 
         if (bookingModel.paymentType == Constants.PAYMENT_TYPE_WALLET) {
             binding.tvPaymentMode.text = getString(R.string.pay_with_wallet)
@@ -153,7 +181,7 @@ class AstrologerEventBookingActivity : BaseActivity() {
             }
             Constants.REJECT_STATUS -> {
                 mStatus = getString(R.string.rejected)
-                mColor = getColor(R.color.orange_theme)
+                mColor = getColor(R.color.user_theme)
                 image = R.drawable.ic_close
             }
             Constants.PENDING_STATUS -> {
@@ -180,7 +208,7 @@ class AstrologerEventBookingActivity : BaseActivity() {
      */
     private fun setObserver() {
         //chat
-        chatViewModel.addGroupCallDataResponse.observe(this, {
+        chatViewModel.addGroupCallDataResponse.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
                     showProgress(this)
@@ -188,9 +216,9 @@ class AstrologerEventBookingActivity : BaseActivity() {
                 Status.SUCCESS -> {
                     it.data.let {
                         val intent = Intent(this, JitsiCallAstrologerActivity::class.java)
-                        intent.putExtra("RoomId", it!!)
-                        intent.putExtra("OpponentUserName", "")
-                        intent.putExtra("isGroupCall", isGroup)
+                        intent.putExtra("RoomId", bookingModel.id)
+//                        intent.putExtra("OpponentUserName", "")
+//                        intent.putExtra("isGroupCall", isGroup)
                         intent.putExtra(Constants.INTENT_BOOKING_MODEL, bookingModel)
                         startActivity(intent)
                     }
@@ -201,9 +229,9 @@ class AstrologerEventBookingActivity : BaseActivity() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
+        }
 
-        bookingViewModel.getBookingDetailResponse.observe(this, {
+        bookingViewModel.getBookingDetailResponse.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
                     showProgress(this)
@@ -216,13 +244,22 @@ class AstrologerEventBookingActivity : BaseActivity() {
                     disableAddEdit()
 //                    }
 
+                    if (intent.hasExtra(Constants.INTENT_IS_FROM) &&
+                        intent.getStringExtra(Constants.INTENT_IS_FROM) == Constants.VIDEO_CALL_NOTIFICATION
+                    ) {
+                        NotificationManagerCompat.from(this)
+                            .cancel(intent.getIntExtra(Constants.INTENT_NOTIFICATION_ID, 0))
+                        if (!intent.getBooleanExtra(Constants.INTENT_CALL_REJECT, false)) {
+                            redirectToVideoCallActivity()
+                        }
+                    }
                 }
                 Status.ERROR -> {
                     hideProgress()
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
+        }
 
     }
 
@@ -234,6 +271,15 @@ class AstrologerEventBookingActivity : BaseActivity() {
             onBackPressed()
         }
 
+        binding.tvAstrologerName.setOnClickListener {
+            startActivity(
+                Intent(this, AstrologerEventDetailActivity::class.java)
+                    .putExtra(Constants.INTENT_USER_ID, bookingModel.userId)
+                    .putExtra(Constants.INTENT_BOOKING_ID, bookingModel.id)
+                    .putExtra(Constants.INTENT_BOOKING_MODEL, bookingModel)
+                    .putExtra(Constants.INTENT_ISEDIT, false)
+            )
+        }
         //this will allow inside scroll on multiline edit text if you have parent nested scrollview
         binding.edDetails.setOnTouchListener { v, event ->
             if (v.id == R.id.edDetails) {
@@ -252,74 +298,16 @@ class AstrologerEventBookingActivity : BaseActivity() {
             }
         }
 
+        binding.tvUploadPhoto.setOnClickListener {
+            redirectToImageView(bookingModel.photo)
+        }
+
+        binding.tvUploadKundali.setOnClickListener {
+            redirectToImageView(bookingModel.kundali)
+        }
+
         binding.btnCall.setOnClickListener {
-
-            TedPermission.with(this)
-                .setPermissionListener(object : PermissionListener {
-                    override fun onPermissionGranted() {
-
-                        if (bookingModel.endTime!!.time - Date().time <= 0L) {
-                            toast(getString(R.string.meeting_time_over))
-                            binding.btnCall.makeGone()
-                            binding.btnChat.makeGone()
-                        } else {
-
-                            var currentUserId =
-                                FirebaseAuth.getInstance().currentUser?.uid.toString()
-                            var userIds = ArrayList<String>()
-                            if (isGroup) {
-                                var selectedMemberIdList = ArrayList<String>()
-                                if (!memberIdList.equals("")) {
-                                    val type: Type = object : TypeToken<ArrayList<String>>() {}.type
-                                    selectedMemberIdList = Gson().fromJson(memberIdList, type)
-                                }
-                                userIds.addAll(selectedMemberIdList)
-                            } else {
-                                userIds.add(currentUserId)
-                                userIds.add(bookingModel.userId)
-                            }
-
-                            var isCallActive = false
-                            for (i in Constants.listOfActiveCall) {
-                                var isAllAvailable = true
-                                for (j in userIds) {
-                                    if ((i.userIds.contains(j + "___Active") || i.userIds.contains(j + "___InActive"))) {
-                                    } else {
-                                        isAllAvailable = false
-                                        break
-                                    }
-                                }
-
-                                if (isAllAvailable && userIds.size == i.userIds.size) {
-                                    isCallActive = true
-                                    val intent =
-                                        Intent(
-                                            this@AstrologerEventBookingActivity,
-                                            JitsiCallAstrologerActivity::class.java
-                                        )
-                                    intent.putExtra("RoomId", i.docId)
-                                    intent.putExtra("OpponentUserName", bookingModel.userName)
-                                    intent.putExtra("isGroupCall", isGroup)
-                                    intent.putExtra(Constants.INTENT_BOOKING_MODEL, bookingModel)
-                                    startActivity(intent)
-                                    break
-                                }
-                            }
-
-                            if (!isCallActive) {
-                                setupVideoCall(userIds, currentUserId)
-                            }
-
-                        }
-
-                    }
-
-                    override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
-                    }
-
-                }).setDeniedMessage(getString(R.string.permission_denied))
-                .setPermissions(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA)
-                .check()
+            redirectToVideoCallActivity()
         }
         binding.imgChat.setOnClickListener {
             redirectChatActivity()
@@ -334,6 +322,97 @@ class AstrologerEventBookingActivity : BaseActivity() {
                 redirectChatActivity()
             }
         }
+    }
+
+    private fun redirectToVideoCallActivity() {
+        if (!isComeFromNotification)
+            return
+        isComeFromNotification = false
+        Constants.USER_NAME = bookingModel.astrologerName   // if user comes from notification this field is blank so assigning again
+        TedPermission.with(this)
+            .setPermissionListener(object : PermissionListener {
+                override fun onPermissionGranted() {
+
+                    if (bookingModel.endTime!!.time - Date().time <= 0L) {
+                        toast(getString(R.string.meeting_time_over))
+                        binding.btnCall.makeGone()
+                        binding.btnChat.makeGone()
+                    } else {
+                        val intent = Intent(this@AstrologerEventBookingActivity, JitsiCallAstrologerActivity::class.java)
+                        intent.putExtra("RoomId", bookingModel.id)
+//                            intent.putExtra("OpponentUserName", "")
+//                            intent.putExtra("isGroupCall", isGroup)
+                        intent.putExtra(Constants.INTENT_BOOKING_MODEL, bookingModel)
+                        startActivity(intent)
+                        /*var currentUserId =
+                            FirebaseAuth.getInstance().currentUser?.uid.toString()
+                        var userIds = ArrayList<String>()
+                        if (isGroup) {
+                            var selectedMemberIdList = ArrayList<String>()
+                            if (!memberIdList.equals("")) {
+                                val type: Type = object : TypeToken<ArrayList<String>>() {}.type
+                                selectedMemberIdList = Gson().fromJson(memberIdList, type)
+                            }
+                            userIds.addAll(selectedMemberIdList)
+                        } else {
+                            userIds.add(currentUserId)
+                            userIds.add(bookingModel.userId)
+                        }
+
+                        var isCallActive = false
+                        for (i in Constants.listOfActiveCall) {
+                            var isAllAvailable = true
+                            for (j in userIds) {
+                                if ((i.userIds.contains(j + "___Active") || i.userIds.contains(j + "___InActive"))) {
+                                } else {
+                                    isAllAvailable = false
+                                    break
+                                }
+                            }
+
+                            if (isAllAvailable && userIds.size == i.userIds.size) {
+                                isCallActive = true
+                                val intent =
+                                    Intent(
+                                        this@AstrologerEventBookingActivity,
+                                        JitsiCallAstrologerActivity::class.java
+                                    )
+                                intent.putExtra("RoomId", i.docId)
+                                intent.putExtra("OpponentUserName", bookingModel.userName)
+                                intent.putExtra("isGroupCall", isGroup)
+                                intent.putExtra(Constants.INTENT_BOOKING_MODEL, bookingModel)
+                                startActivity(intent)
+                                break
+                            }
+                        }
+
+                        if (!isCallActive) {
+                            setupVideoCall(userIds, currentUserId)
+                        }*/
+
+                    }
+
+                }
+
+                override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                    // onPermissionDenied
+                }
+
+            }).setDeniedMessage(getString(R.string.permission_denied))
+            .setPermissions(Manifest.permission.RECORD_AUDIO, Manifest.permission.CAMERA)
+            .check()
+    }
+
+    /**
+     * Redirect to view image
+     */
+    private fun redirectToImageView(path: String) {
+        startActivity(
+            Intent(
+                this,
+                AstrologerImageViewActivity::class.java
+            ).putExtra(Constants.INTENT_IMAGE_URL, path)
+        )
     }
 
     private fun addUpdateEvent(status: String) {
@@ -382,8 +461,56 @@ class AstrologerEventBookingActivity : BaseActivity() {
             userIdsWithStatus,
             "Active",
             currentUserId,
-            Constants.USER_NAME
+            Constants.USER_NAME,
+            bookingModel.id
         )
 
+    }
+
+    /**
+     * get min from start time and end time
+     */
+    private fun getMin(): Int {
+        val simpleDateFormat = SimpleDateFormat(timeFormat)
+
+        val date1 = simpleDateFormat.parse(startTime)
+        val date2 = simpleDateFormat.parse(endTime)
+        val difference: Long = date2.time - date1.time
+        val min = TimeUnit.MILLISECONDS.toMinutes(difference).toInt()
+        return min
+
+    }
+
+    override fun onBackPressed() {
+        if (checkIsLastActivity()) {
+            //last activity go to Dashboard
+            startActivity(
+                Intent(this, SplashActivity::class.java)
+                    .putExtra(Constants.INTENT_SHOW_TIMER, false)
+                    .putExtra(Constants.INTENT_USER_TYPE, Constants.USER_ASTROLOGER)
+            )
+            finishAffinity()
+        } else {
+            super.onBackPressed()
+        }
+    }
+    /**
+     * manage notification intent
+     */
+    var isComeFromNotification = false    // somehow video screen opening twice if new intent run this will pervert to open video call screen twice
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        // event launch mode is single task it will kill middle screens automatically
+        setIntent(intent)
+        startFromFresh()
+        isComeFromNotification = true
+    }
+
+    /**
+     * manage onResume
+     */
+    override fun onResume() {
+        super.onResume()
+        isComeFromNotification = true
     }
 }

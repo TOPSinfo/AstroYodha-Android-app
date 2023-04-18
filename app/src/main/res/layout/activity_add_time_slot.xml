@@ -10,7 +10,7 @@
         android:id="@+id/toolBarAddTimeSlot"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
-        android:background="@color/astrologer_blue_theme"
+        android:background="@color/astrologer_theme"
         android:orientation="horizontal">
 
         <ImageView

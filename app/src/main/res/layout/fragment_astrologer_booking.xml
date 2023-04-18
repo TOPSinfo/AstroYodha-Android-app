@@ -36,7 +36,7 @@
             android:clickable="true"
             android:padding="@dimen/_9sdp"
             android:src="@drawable/ic_calender"
-            app:tint="@color/grey_dark" />
+            app:tint="@color/edittext_text_color" />
 
         <ImageView
             android:id="@+id/imgNotification"
@@ -48,7 +48,7 @@
             android:clickable="true"
             android:padding="@dimen/_9sdp"
             android:src="@drawable/ic_notification"
-            app:tint="@color/grey_dark" />
+            app:tint="@color/edittext_text_color" />
 
 
         <View
@@ -65,8 +65,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabBackground="@color/white"
-        app:tabIndicatorColor="@color/astrologer_blue_theme"
-        app:tabSelectedTextColor="@color/astrologer_blue_theme"
+        app:tabIndicatorColor="@color/astrologer_theme"
+        app:tabSelectedTextColor="@color/astrologer_theme"
         app:tabTextColor="@color/unselected_tab_text_color" />
 
     <androidx.viewpager2.widget.ViewPager2

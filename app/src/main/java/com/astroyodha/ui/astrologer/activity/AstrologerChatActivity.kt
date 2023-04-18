@@ -50,7 +50,6 @@ import droidninja.filepicker.utils.ContentUriUtils
 import java.io.File
 import java.lang.reflect.Type
 import java.util.*
-import kotlin.collections.ArrayList
 
 class AstrologerChatActivity : BaseActivity() {
 
@@ -281,10 +280,11 @@ class AstrologerChatActivity : BaseActivity() {
      */
     private fun startFromFresh() {
         //chat ended start from fresh
+        // dashboard launch mode is single task it will kill middle screens automatically
         startActivity(
             Intent(this, AstrologerDashboardActivity::class.java)
         )
-        finishAffinity()
+//        finishAffinity()
     }
 
     /**
@@ -311,8 +311,16 @@ class AstrologerChatActivity : BaseActivity() {
                             toast(getString(R.string.meeting_time_over))
                             binding.imgVideoCall.makeGone()
                         } else {
-
-                            var currentUserId =
+                            val intent = Intent(
+                                this@AstrologerChatActivity,
+                                JitsiCallAstrologerActivity::class.java
+                            )
+                            intent.putExtra("RoomId", bookingModel.id)
+//                            intent.putExtra("OpponentUserName", "")
+//                            intent.putExtra("isGroupCall", isGroup)
+                            intent.putExtra(Constants.INTENT_BOOKING_MODEL, bookingModel)
+                            startActivity(intent)
+                            /*var currentUserId =
                                 FirebaseAuth.getInstance().currentUser?.uid.toString()
                             var userIds = ArrayList<String>()
                             if (isGroup) {
@@ -356,11 +364,12 @@ class AstrologerChatActivity : BaseActivity() {
 
                             if (!isCallActive) {
                                 setupVideoCall(userIds, currentUserId)
-                            }
+                            }*/
                         }
                     }
 
                     override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                        // onPermissionDenied
                     }
 
                 }).setDeniedMessage(getString(R.string.permission_denied))
@@ -403,20 +412,20 @@ class AstrologerChatActivity : BaseActivity() {
         btnYes.setBackgroundColor(
             ContextCompat.getColor(
                 this@AstrologerChatActivity,
-                R.color.astrologer_blue_theme
+                R.color.astrologer_theme
             )
         )
         btnYes.setTextColor(ContextCompat.getColor(this@AstrologerChatActivity, R.color.white))
         btnNo.setBackgroundColor(
             ContextCompat.getColor(
                 this@AstrologerChatActivity,
-                R.color.otp_back_blue
+                R.color.otp_back_astrologer
             )
         )
         btnNo.setTextColor(
             ContextCompat.getColor(
                 this@AstrologerChatActivity,
-                R.color.astrologer_blue_theme
+                R.color.astrologer_theme
             )
         )
 
@@ -538,6 +547,7 @@ class AstrologerChatActivity : BaseActivity() {
                 }
 
                 override fun onPermissionDenied(deniedPermissions: MutableList<String>?) {
+                    // onPermissionDenied
                 }
 
             }).setDeniedMessage(getString(R.string.permission_denied))
@@ -621,9 +631,6 @@ class AstrologerChatActivity : BaseActivity() {
         val messagesModel = MessagesModel()
 
         messagesModel.messageId = chatViewModel.getChatDocumentId(otherUserId.toString(), isGroup)
-
-
-
         messagesModel.message = binding.edMessage.text.toString().trim()
         messagesModel.messageType = Constants.TYPE_VIDEO
         messagesModel.receiverId = otherUserId.toString()
@@ -714,7 +721,9 @@ class AstrologerChatActivity : BaseActivity() {
         startActivity(intent)
     }
 
-    private fun openGroupDetailForEdit() {}
+    private fun openGroupDetailForEdit() {
+        // openGroupDetailForEdit
+    }
 
     /**
      * setup video call
@@ -733,7 +742,8 @@ class AstrologerChatActivity : BaseActivity() {
             userIdsWithStatus,
             "Active",
             currentUserId,
-            Constants.USER_NAME
+            Constants.USER_NAME,
+            bookingModel.id
         )
 
     }

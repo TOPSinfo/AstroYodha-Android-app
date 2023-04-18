@@ -1,8 +1,8 @@
 package com.astroyodha.ui.astrologer.model.user
 
 import android.os.Parcelable
-import com.google.firebase.Timestamp
 import com.astroyodha.utils.Constants
+import com.google.firebase.Timestamp
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

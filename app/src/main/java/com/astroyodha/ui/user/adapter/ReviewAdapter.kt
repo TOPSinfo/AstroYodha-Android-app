@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.astroyodha.R
 import com.astroyodha.ui.user.authentication.model.rating.RatingModel
 import com.astroyodha.utils.dateToStringFormat
-import java.util.*
 
 /**
  * Review list adapter : Show Review list.

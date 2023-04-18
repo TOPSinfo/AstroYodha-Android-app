@@ -23,7 +23,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:background="@color/orange_theme" />
+            tools:background="@color/user_theme" />
 
         <ImageView
             android:id="@+id/imgEventType"

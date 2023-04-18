@@ -7,14 +7,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.button.MaterialButton
 import com.astroyodha.R
 import com.astroyodha.ui.astrologer.model.language.LanguageAndSpecialityModel
 import com.astroyodha.ui.user.adapter.SpecialityAdapter
 import com.astroyodha.utils.makeGone
 import com.astroyodha.utils.makeVisible
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.button.MaterialButton
 
 class FilterDialog(
     val mContext: Context,

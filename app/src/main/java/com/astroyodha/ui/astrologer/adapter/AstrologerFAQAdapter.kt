@@ -12,7 +12,6 @@ import com.astroyodha.R
 import com.astroyodha.ui.user.authentication.model.cms.FAQModel
 import com.astroyodha.utils.makeGone
 import com.astroyodha.utils.makeVisible
-import java.util.*
 
 /**
  * FAQ list adapter : Show FAQ list.
@@ -42,10 +41,10 @@ class AstrologerFAQAdapter(
     ) {
         val model = mList[holder.adapterPosition]
         try {
-            holder.imgDown.setColorFilter(mContext.getColor(R.color.astrologer_blue_theme))
+            holder.imgDown.setColorFilter(mContext.getColor(R.color.astrologer_theme))
             if(holder.adapterPosition == mCheckedPosition) {
                 holder.tvAnswer.makeVisible()
-                holder.tvQuestion.setTextColor(mContext.getColor(R.color.astrologer_blue_theme))
+                holder.tvQuestion.setTextColor(mContext.getColor(R.color.astrologer_theme))
                 holder.imgDown.setImageResource(R.drawable.ic_up_arrow)
             } else {
                 holder.tvAnswer.makeGone()

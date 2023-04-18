@@ -1,8 +1,8 @@
 package com.astroyodha.ui.user.model.booking
 
 import android.os.Parcelable
-import com.google.firebase.Timestamp
 import com.astroyodha.utils.Constants
+import com.google.firebase.Timestamp
 import kotlinx.android.parcel.Parcelize
 import java.util.*
 
@@ -30,4 +30,14 @@ data class BookingModel(
     var transactionId: String = "",
     var amount: Int = 0,
     var createdAt: Timestamp? = null,
+    var extendedTimeInMinute: Int = 0,
+    var allowExtendTIme: String = Constants.EXTEND_STATUS_NO,
+    var fullname: String = "",
+    var birthPlace: String = "",
+    var birthDate: String = "",
+    var birthTime: String = "",
+    var photo: String = "",
+    var kundali: String = "",
+
+
 ) : Parcelable

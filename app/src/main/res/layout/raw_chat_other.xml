@@ -26,7 +26,7 @@
             android:paddingStart="@dimen/_20sdp"
             android:paddingTop="@dimen/_5sdp"
             android:paddingEnd="@dimen/_5sdp"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/user_theme"
             android:textSize="@dimen/_11sdp"
             android:visibility="gone" />
 
@@ -74,7 +74,7 @@
             android:paddingStart="@dimen/_20sdp"
             android:paddingTop="@dimen/_3sdp"
             android:paddingEnd="@dimen/_5sdp"
-            android:textColor="@color/purple_700"
+            android:textColor="@color/orange_theme"
             android:textSize="@dimen/_11sdp"
             android:visibility="gone" />-->
 

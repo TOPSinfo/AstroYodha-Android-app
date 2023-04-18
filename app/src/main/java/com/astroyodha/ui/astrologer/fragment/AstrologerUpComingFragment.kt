@@ -23,7 +23,6 @@ import com.astroyodha.utils.Constants
 import com.astroyodha.utils.makeGone
 import com.astroyodha.utils.makeVisible
 import com.astroyodha.utils.showSnackBarToast
-import java.util.*
 
 private const val ARG_PARAM1 = "userId"
 private const val ARG_PARAM2 = "list"
@@ -74,7 +73,6 @@ class AstrologerUpComingFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
         setObserver()
-        setClickListener()
     }
 
     /**
@@ -196,12 +194,5 @@ class AstrologerUpComingFragment : BaseFragment() {
         })
     }
 
-    /**
-     * manage click listener of view
-     */
-    private fun setClickListener() {
-        binding.fabAdd.setOnClickListener {
 
-        }
-    }
 }

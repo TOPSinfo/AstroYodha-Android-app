@@ -1,8 +1,8 @@
 package com.astroyodha.ui.user.model.videocall
 
-import com.google.firebase.firestore.DocumentSnapshot
 import com.astroyodha.ui.user.model.CallListModel
 import com.astroyodha.utils.Constants
+import com.google.firebase.firestore.DocumentSnapshot
 
 object CallList {
 

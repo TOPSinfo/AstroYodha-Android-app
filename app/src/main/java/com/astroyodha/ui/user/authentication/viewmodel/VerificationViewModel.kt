@@ -3,19 +3,18 @@ package com.astroyodha.ui.user.authentication.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.gms.tasks.Task
-import com.google.firebase.FirebaseException
-import com.google.firebase.Timestamp
-import com.google.firebase.auth.*
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.DocumentSnapshot
 import com.astroyodha.data.repository.UserRepository
 import com.astroyodha.network.Resource
 import com.astroyodha.ui.user.authentication.model.user.UserModel
 import com.astroyodha.ui.user.authentication.model.user.UsersList
 import com.astroyodha.ui.user.authentication.navigator.VerificationNavigator
 import com.astroyodha.utils.Constants
-import com.astroyodha.utils.MyLog
+import com.google.android.gms.tasks.Task
+import com.google.firebase.FirebaseException
+import com.google.firebase.Timestamp
+import com.google.firebase.auth.*
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -50,7 +49,7 @@ class VerificationViewModel @Inject constructor(private val userRepository: User
      */
     fun initVerificationCallback() {
 
-        // auth.firebaseAuthSettings.setAppVerificationDisabledForTesting(true)
+         auth.firebaseAuthSettings.setAppVerificationDisabledForTesting(true)
         //Auth.auth().settings.isAppVerificationDisabledForTesting = TRUE
 
 

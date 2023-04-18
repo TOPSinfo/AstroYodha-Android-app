@@ -10,7 +10,7 @@
         android:id="@+id/lnActionBar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/astrologer_blue_theme"
+        android:background="@color/astrologer_theme"
         android:paddingStart="@dimen/_5sdp"
         android:paddingEnd="@dimen/_5sdp">
 
@@ -61,7 +61,6 @@
             android:gravity="center_vertical"
             android:text="@string/update"
             android:textColor="@color/white"
-
             android:textSize="@dimen/header_font_size" />
 
     </RelativeLayout>
@@ -98,7 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:text="@string/name"
                 android:textColor="@color/text_gray"
                 android:textSize="@dimen/_12ssp"
@@ -110,7 +109,7 @@
                 style="@style/fontBold"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/grey_dark"
+                android:textColor="@color/edittext_text_color"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintEnd_toEndOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -127,8 +126,8 @@
 
             <ImageView
                 android:id="@+id/imgDescription"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="?attr/actionBarItemBackground"
                 android:src="@drawable/ic_add_description"
@@ -139,7 +138,7 @@
                 android:id="@+id/edDetails"
                 style="@style/fontRegular"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_50sdp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:background="@null"
                 android:gravity="start"
@@ -164,8 +163,8 @@
 
             <ImageView
                 android:id="@+id/imgDate"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="?attr/actionBarItemBackground"
                 android:src="@drawable/ic_calender"
@@ -182,6 +181,7 @@
                 android:text="@string/select_date"
                 android:textColor="@color/text_gray"
                 android:textSize="@dimen/_12ssp"
+                android:visibility="gone"
                 app:layout_constraintStart_toEndOf="@+id/imgDate"
                 app:layout_constraintTop_toTopOf="@id/imgDate" />
 
@@ -191,13 +191,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:paddingTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:text="@string/select_date"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp"
-                app:layout_constraintEnd_toEndOf="@+id/guideline2"
-                app:layout_constraintStart_toStartOf="@+id/tvAllDay"
-                app:layout_constraintTop_toBottomOf="@id/tvAllDay" />
+                app:layout_constraintStart_toEndOf="@+id/imgDate"
+                app:layout_constraintTop_toTopOf="@id/imgDate" />
 
             <View
                 android:id="@+id/viewDate"
@@ -209,8 +208,8 @@
 
             <ImageView
                 android:id="@+id/imgTime"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="?attr/actionBarItemBackground"
                 android:src="@mipmap/birth_time_inactive"
@@ -252,7 +251,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/end_time"
+                android:text="@string/event_duration"
                 android:textColor="@color/text_gray"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintStart_toStartOf="@+id/tvEndTime"
@@ -285,8 +284,8 @@
 
             <ImageView
                 android:id="@+id/imgNotification"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="?attr/actionBarItemBackground"
                 android:src="@mipmap/notification"
@@ -316,8 +315,8 @@
 
             <ImageView
                 android:id="@+id/imgStatus"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="?attr/actionBarItemBackground"
                 android:src="@drawable/ic_waiting"
@@ -332,7 +331,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:text="@string/event_status"
-                android:textColor="@color/grey_disable"
+                android:textColor="@color/unselected_tab_text_color"
                 android:textSize="@dimen/_12ssp"
                 app:layout_constraintStart_toEndOf="@+id/imgStatus"
                 app:layout_constraintTop_toTopOf="@id/imgStatus" />
@@ -346,15 +345,238 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvStatus" />
 
 
+
+               <TextView
+                android:id="@+id/txtPersonalDetail"
+                style="@style/fontBold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/lighter_gray"
+                android:gravity="center_horizontal"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="@string/personal_detail"
+                android:textColor="@color/edittext_text_color"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintTop_toBottomOf="@+id/viewStatus" />
+
+
+            <ImageView
+                android:id="@+id/imgUploadPhoto"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="?attr/actionBarItemBackground"
+                android:src="@drawable/ic_upload_photo"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/txtPersonalDetail" />
+
+
+            <TextView
+                android:id="@+id/tvUploadPhoto"
+                style="@style/fontRegular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text="@string/upload_your_photo"
+                android:textColor="@color/user_theme"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toEndOf="@+id/imgUploadPhoto"
+                app:layout_constraintTop_toTopOf="@id/imgUploadPhoto" />
+
+            <View
+                android:id="@+id/viewUploadPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/border_gray"
+                app:layout_constraintTop_toBottomOf="@+id/tvUploadPhoto" />
+
+            <ImageView
+                android:id="@+id/imgUserName"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="?attr/actionBarItemBackground"
+                android:src="@mipmap/user_inactive"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/viewUploadPhoto" />
+
+
+            <EditText
+                android:id="@+id/edtUserName"
+                style="@style/fontRegular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:background="@null"
+                android:hint="@string/full_name"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toEndOf="@+id/imgUserName"
+                app:layout_constraintTop_toTopOf="@id/imgUserName" />
+
+            <View
+                android:id="@+id/viewUserName"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/border_gray"
+                app:layout_constraintTop_toBottomOf="@+id/edtUserName" />
+
+            <ImageView
+                android:id="@+id/imgDateOfBirth"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="?attr/actionBarItemBackground"
+                android:src="@mipmap/birthdate_inactive"
+
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/viewUserName" />
+
+            <TextView
+                android:id="@+id/tvDateOfBirth"
+                style="@style/fontRegular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:text="@string/date_of_birth"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toStartOf="@+id/tvEndTime"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imgDateOfBirth"
+                app:layout_constraintTop_toTopOf="@id/imgDateOfBirth" />
+
+            <ImageView
+                android:id="@+id/imgTimeOfBirth"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:background="?attr/actionBarItemBackground"
+                android:src="@mipmap/birth_time_inactive"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/tvDateOfBirth"
+                app:layout_constraintTop_toTopOf="@id/tvDateOfBirth" />
+
+            <TextView
+                android:id="@+id/tvTimeOfBirth"
+                style="@style/fontRegular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text="@string/time_of_birth"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintEnd_toEndOf="@id/guideline2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imgTimeOfBirth"
+                app:layout_constraintTop_toTopOf="@id/imgTimeOfBirth" />
+
+            <View
+                android:id="@+id/viewTimeOfBirth"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/border_gray"
+                app:layout_constraintTop_toBottomOf="@+id/tvTimeOfBirth" />
+
+
+            <ImageView
+                android:id="@+id/imgPlaceOfBirth"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="?attr/actionBarItemBackground"
+                android:src="@mipmap/birth_place_inactive"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/viewTimeOfBirth" />
+
+            <EditText
+                android:id="@+id/edtPlaceOfBirth"
+                style="@style/fontRegular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:background="@null"
+                android:hint="@string/place_of_birth"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toEndOf="@+id/imgUserName"
+                app:layout_constraintTop_toTopOf="@id/imgPlaceOfBirth" />
+
+            <View
+                android:id="@+id/viewPlaceOfBirth"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/border_gray"
+                app:layout_constraintTop_toBottomOf="@+id/edtPlaceOfBirth" />
+
+
+            <ImageView
+                android:id="@+id/imgUploadKundali"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="?attr/actionBarItemBackground"
+                android:src="@drawable/ic_free_kundali"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@id/viewPlaceOfBirth" />
+
+            <TextView
+                android:id="@+id/tvUploadKundali"
+                style="@style/fontRegular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:text="@string/upload_kundali"
+                android:textColor="@color/user_theme"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toEndOf="@+id/imgUploadKundali"
+                app:layout_constraintTop_toTopOf="@id/imgUploadKundali" />
+
+            <View
+                android:id="@+id/viewUploadKundali"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/border_gray"
+                app:layout_constraintTop_toBottomOf="@+id/tvUploadKundali" />
+
+
+            <TextView
+                android:id="@+id/txtPPaymentMode"
+                style="@style/fontBold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/lighter_gray"
+                android:gravity="center_horizontal"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                android:text="@string/payment_mode"
+                android:textColor="@color/edittext_text_color"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintTop_toBottomOf="@+id/viewUploadKundali" />
+
             <ImageView
                 android:id="@+id/imgPaymentMode"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="?attr/actionBarItemBackground"
                 android:src="@drawable/ic_wallet"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@id/viewStatus" />
+                app:layout_constraintTop_toBottomOf="@id/txtPPaymentMode" />
 
             <TextView
                 android:id="@+id/tvPaymentMode"
@@ -362,7 +584,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginStart="12dp"
                 android:text="@string/select_payment_mode"
                 android:textColor="@color/text_gray"
                 android:textSize="@dimen/_12ssp"
@@ -391,7 +613,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvPaymentMode" />
 
 
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnCall"
                 style="@style/fontBold"
@@ -399,7 +620,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
-                android:backgroundTint="@color/astrologer_blue_theme"
+                android:backgroundTint="@color/astrologer_theme"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:letterSpacing="0"
@@ -423,7 +644,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:backgroundTint="@color/astrologer_blue_theme"
+                android:backgroundTint="@color/astrologer_theme"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:letterSpacing="0"

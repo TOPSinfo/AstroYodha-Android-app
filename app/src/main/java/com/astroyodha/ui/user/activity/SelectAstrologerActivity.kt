@@ -9,6 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.astroyodha.R
 import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivitySelectAstrologerBinding
@@ -19,7 +20,10 @@ import com.astroyodha.ui.astrologer.viewmodel.ProfileAstrologerViewModel
 import com.astroyodha.ui.user.adapter.AstrologerAdapter
 import com.astroyodha.ui.user.authentication.model.speciality.SpecialityModel
 import com.astroyodha.ui.user.dialog.FilterDialog
-import com.astroyodha.utils.*
+import com.astroyodha.utils.Constants
+import com.astroyodha.utils.makeGone
+import com.astroyodha.utils.makeVisible
+import com.astroyodha.utils.showSnackBarToast
 
 @SuppressLint("NotifyDataSetChanged")
 class SelectAstrologerActivity : BaseActivity() {
@@ -32,6 +36,7 @@ class SelectAstrologerActivity : BaseActivity() {
 
     var selectedSortBy = ""
     var mSelectedSpeciality: ArrayList<LanguageAndSpecialityModel> = arrayListOf()
+    var paginationSize = 10
 
     private val startBookNowForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -93,15 +98,27 @@ class SelectAstrologerActivity : BaseActivity() {
                     }
                 }
             )
+
+            /*addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    val lastVisible = mLayoutManager.findLastVisibleItemPosition() + 1
+                    val visibleItemCount = mLayoutManager.findLastCompletelyVisibleItemPosition()+1
+                    if (visibleItemCount == mLayoutManager.itemCount) {
+                        viewModel.getAllAstrologer(paginationSize.toLong())
+                    }
+                }
+            })*/
         }
-        viewModel.getAllAstrologer()
+
+        viewModel.getAllAstrologer(paginationSize.toLong())
     }
 
     /**
      * set observer
      */
     private fun setObserver() {
-        viewModel.getAllAstrologerResponse.observe(this, {
+        viewModel.getAllAstrologerResponse.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
                     showProgress(this)
@@ -109,7 +126,7 @@ class SelectAstrologerActivity : BaseActivity() {
                 Status.SUCCESS -> {
                     hideProgress()
                     it.data?.let { result ->
-                        mAstrologerList.clear()
+//                        mAstrologerList.clear()
                         mAstrologerList.addAll(result)
                         binding.rvAstrologer.adapter?.notifyDataSetChanged()
 
@@ -125,7 +142,7 @@ class SelectAstrologerActivity : BaseActivity() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
+        }
 
     }
 
@@ -161,6 +178,7 @@ class SelectAstrologerActivity : BaseActivity() {
                         mSelectedSpeciality = speciality
                         val mList = mSelectedSpeciality.map { it.id }
                         viewModel.getAllAstrologerFilterWise(selectedSortBy, mList)
+                        mAstrologerList.clear()
                         if (selectedSortBy.isBlank()) {
                             selectedSortBy = getString(R.string.experience_high_to_low)
                         }

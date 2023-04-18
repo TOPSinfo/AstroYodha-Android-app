@@ -4,8 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivitySplashBinding
 import com.astroyodha.network.Status
@@ -13,6 +11,8 @@ import com.astroyodha.ui.astrologer.activity.AstrologerDashboardActivity
 import com.astroyodha.ui.user.activity.UserHomeActivity
 import com.astroyodha.ui.user.authentication.viewmodel.SplashViewModel
 import com.astroyodha.utils.*
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -50,7 +50,18 @@ class SplashActivity : BaseActivity() {
                 redirectDashBoardActivity()
             }
         } else {
-            redirectDashBoardActivity()
+            if (intent.getStringExtra(Constants.INTENT_USER_TYPE) == Constants.USER_NORMAL) {
+                startActivity(
+                    Intent(this, UserHomeActivity::class.java)
+                        .putExtra(Constants.INTENT_INDEX, Constants.BOOKING_USER_INDEX)
+                )
+            } else {
+                startActivity(
+                    Intent(this, AstrologerDashboardActivity::class.java)
+                        .putExtra(Constants.INTENT_INDEX, Constants.BOOKING_ASTROLOGER_INDEX)
+                )
+            }
+            finish()
         }
     }
 
@@ -59,7 +70,7 @@ class SplashActivity : BaseActivity() {
      */
     private fun setObserver() {
 
-        viewModel.userDataResponse.observe(this, {
+        viewModel.userDataResponse.observe(this) {
             when (it.status) {
                 Status.LOADING -> {
                     showProgress(this)
@@ -86,7 +97,7 @@ class SplashActivity : BaseActivity() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
+        }
     }
 
     /**

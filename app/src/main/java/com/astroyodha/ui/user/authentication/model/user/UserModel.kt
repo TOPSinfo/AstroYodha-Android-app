@@ -1,7 +1,7 @@
 package com.astroyodha.ui.user.authentication.model.user
 
-import com.google.firebase.Timestamp
 import com.astroyodha.utils.Constants
+import com.google.firebase.Timestamp
 import java.io.Serializable
 
 data class UserModel(

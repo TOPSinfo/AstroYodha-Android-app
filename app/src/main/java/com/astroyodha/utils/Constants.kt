@@ -38,6 +38,9 @@ object Constants {
 
     const val PROFILE_IMAGE_PATH = "/images/users"
 
+    const val BOOKING_IMAGE_PATH = "/images/bookings"
+
+
     /*******User type********/
     const val USER_ASTROLOGER = "astrologer"
     const val USER_NORMAL = "user"
@@ -55,6 +58,7 @@ object Constants {
     const val BOOKING_UPCOMING="upcoming"
     const val BOOKING_ONGOING="ongoing"
     const val BOOKING_PAST="past"
+    const val VIDEO_CALL_NOTIFICATION = "videocallnotification"
 
     /**Transaction Type*******/
     const val TRANSACTION_TYPE_DEBIT="debit"
@@ -71,6 +75,15 @@ object Constants {
     /**Notification Type*******/
     const val NOTIFICATION_REMINDER = "1"
     const val NOTIFICATION_REQUEST_ADDED_ACCEPTED = "2"
+    const val NOTIFICATION_MEETING_CALL = "3"
+
+
+    /**Call Extend status*******/
+    const val EXTEND_STATUS_YES="yes"
+    const val EXTEND_STATUS_NO="no"
+    const val EXTEND_STATUS_COMPLETE="complete"
+    const val EXTEND_STATUS_CANCEL="cancelled"
+
 
     /*******Table********/
     const val TABLE_CMS = "cms"
@@ -78,6 +91,7 @@ object Constants {
     const val TABLE_USER = "user"
     const val TABLE_BOOKING = "bookinghistory"
     const val TABLE_TRANSACTION = "transactionhistory"
+    const val TABLE_CALL_LOG = "calllog"
     const val TABLE_TIMESLOT = "timeslot"
     const val TABLE_PRICE = "price"
     const val TABLE_GROUPCALL = "groupcall"
@@ -112,6 +126,8 @@ object Constants {
     const val FIELD_EXPERIENCE = "experience"
     const val FIELD_ABOUT = "aboutyou"
     const val FIELD_TOKEN = "token"
+    const val FIELD_DEVICE_DETAILS = "devicedetails"
+    const val FIELD_LAST_UPDATE_TIME = "lastupdatetime"
 
 
     const val FIELD_MESSAGE = "messagetext"
@@ -143,6 +159,14 @@ object Constants {
     const val FIELD_USER_NAME = "username"
     const val FIELD_USER_BIRTH_DATE = "userbirthdate"
     const val FIELD_USER_PROFILE_IMAGE = "userprofileimage"
+    const val FIELD_TIME_EXTEND = "extendtime"
+    const val FIELD_ALLOW_EXTEND = "allowextend"
+    const val FIELD_PHOTO = "photo"
+    const val FIELD_KUNDALI = "kundali"
+
+    const val FIELD_EXTEND_COUNT = "extendcount"
+    const val FIELD_EXTEND_MIN = "extendmin"
+
     //status
     const val PENDING_STATUS = "pending"
     const val APPROVE_STATUS = "approve"
@@ -170,6 +194,7 @@ object Constants {
     const val FIELD_HOST_NAME = "HostName"
 
     const val FIELD_ID = "id"
+    const val FIELD_ORDER_ID = "orderid"
     const val FIELD_TRANSACTION_ID = "transactionid"
     const val FIELD_AMOUNT = "amount"
     const val FIELD_TRANSACTION_TYPE = "transactiontype"
@@ -229,7 +254,11 @@ object Constants {
     const val INTENT_INDEX="index"
     const val INTENT_USER_TYPE="usertype"
     const val INTENT_BOOKING_ID = "bookingid"
-
+    const val INTENT_PHOTO_URI = "photouri"
+    const val INTENT_KUNDALI_URI = "kundaliuri"
+    const val INTENT_IMAGE_URL = "ImageUrl"
+    const val INTENT_NOTIFICATION_ID = "notificationid"
+    const val INTENT_CALL_REJECT = "callreject"
 
     const val TYPE_MESSAGE = "TEXT"
     const val TYPE_IMAGE = "IMAGE"
@@ -249,5 +278,13 @@ object Constants {
 
     var USER_NAME = ""
     var USER_PROFILE_IMAGE = ""
+    var BOOKING_USER_INDEX = 1
+    var BOOKING_ASTROLOGER_INDEX = 0
+
+    var DEVICE_TYPE = "Android"
+
+    var USER_VIDEO_SCREEN = "normaluservideoscreen"
+    var ASTROLOGER_VIDEO_SCREEN = "astrologeruservideoscreen"
+    var IS_VIDEO_SCREEN_ACTIVE = ""
 
 }

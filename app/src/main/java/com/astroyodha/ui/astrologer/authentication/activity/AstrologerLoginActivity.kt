@@ -15,7 +15,6 @@ import com.astroyodha.network.Status
 import com.astroyodha.ui.astrologer.activity.AstrologerDashboardActivity
 import com.astroyodha.ui.user.authentication.viewmodel.SplashViewModel
 import com.astroyodha.utils.Constants
-import com.astroyodha.utils.MyLog
 import com.astroyodha.utils.showSnackBarToast
 import com.facebook.*
 import com.facebook.login.LoginManager
@@ -97,9 +96,11 @@ class AstrologerLoginActivity : BaseActivity() {
             }
 
             override fun onCancel() {
+                // onCancel
             }
 
             override fun onError(error: FacebookException) {
+                // onError
             }
         })
     }
@@ -147,11 +148,11 @@ class AstrologerLoginActivity : BaseActivity() {
             onBackPressed()
         }
 
-        binding.edPhoneNumber.setOnFocusChangeListener { view, b ->
+        binding.edPhoneNumber.setOnFocusChangeListener { _, b ->
             changeLayoutOnFocusChange(b)
 
         }
-        binding.countryPicker.setOnFocusChangeListener { view, b ->
+        binding.countryPicker.setOnFocusChangeListener { _, b ->
             changeLayoutOnFocusChange(b)
         }
 
@@ -182,12 +183,12 @@ class AstrologerLoginActivity : BaseActivity() {
     fun changeLayoutOnFocusChange(b: Boolean) {
         if (b) {
             binding.imgMobile.setColorFilter(
-                ContextCompat.getColor(this, R.color.orange_theme),
+                ContextCompat.getColor(this, R.color.user_theme),
                 android.graphics.PorterDuff.Mode.SRC_IN
             )
             binding.lnMobile.setBackgroundResource(R.drawable.background_edit_text_orange_line_background)
-            binding.edPhoneNumber.setTextColor(ContextCompat.getColor(this, R.color.orange_theme))
-            binding.countryPicker.textColor = ContextCompat.getColor(this, R.color.orange_theme)
+            binding.edPhoneNumber.setTextColor(ContextCompat.getColor(this, R.color.user_theme))
+            binding.countryPicker.textColor = ContextCompat.getColor(this, R.color.user_theme)
         } else {
             binding.imgMobile.setColorFilter(
                 ContextCompat.getColor(this, R.color.text_gray),

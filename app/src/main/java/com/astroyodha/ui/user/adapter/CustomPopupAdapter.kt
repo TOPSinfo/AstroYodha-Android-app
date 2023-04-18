@@ -64,8 +64,11 @@ class CustomPopupAdapter(
         val model = this.customItems[position]
         //for default check in first item
         if (holder is RadioViewHolder) {
+            // RadioViewHolder
         } else if (holder is TextViewHolder) {
+            // TextViewHolder
         } else if (holder is CheckBoxViewHolder) {
+            // CheckBoxViewHolder
         } else if (holder is CustomViewHolder) {
             holder.tvTitle.text = model
 

@@ -3,14 +3,13 @@ package com.astroyodha.ui.astrologer.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.Timestamp
 import com.astroyodha.data.repository.UserRepository
 import com.astroyodha.network.NetworkHelper
 import com.astroyodha.network.Resource
 import com.astroyodha.ui.astrologer.model.timeslot.TimeSlotList
 import com.astroyodha.ui.astrologer.model.timeslot.TimeSlotModel
 import com.astroyodha.utils.Constants
-import com.astroyodha.utils.MyLog
+import com.google.firebase.Timestamp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

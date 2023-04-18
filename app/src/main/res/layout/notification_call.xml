@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?><!--This xml is used in call notification RemoteViews do not change
+ and views because RemoteViews only supported limited widgets/views-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvAppName"
+        style="@style/fontRegular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:drawablePadding="@dimen/_5sdp"
+        android:text="@string/app_name"
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/_12ssp"
+        android:visibility="gone"
+        app:drawableStartCompat="@mipmap/ic_logo_transparent" />
+
+    <TextView
+        android:id="@+id/tvIncomingCall"
+        style="@style/fontRegular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvAppName"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/notification_label"
+        android:textSize="@dimen/_12ssp"
+        android:text="@string/incoming_call" />
+
+    <TextView
+        android:id="@+id/tvUserName"
+        style="@style/fontBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvIncomingCall"
+        android:layout_gravity="center_horizontal"
+        tools:text="Mitesh Makwana"
+        android:textColor="@color/notification_name"
+        android:textSize="@dimen/_12ssp" />
+
+    <LinearLayout
+        android:id="@+id/lnOperation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUserName"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnReject"
+            style="@style/fontBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/user_theme"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:letterSpacing="0"
+            android:padding="@dimen/_9sdp"
+            android:text="@string/reject"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text_color"
+            android:textSize="@dimen/button_text_size"
+            android:visibility="visible"
+            app:cornerRadius="@dimen/edittext_radious" />
+
+        <Button
+            android:id="@+id/btnAccept"
+            style="@style/fontBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/completed_color"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:letterSpacing="0"
+            android:padding="@dimen/_9sdp"
+            android:text="@string/accept"
+            android:textAllCaps="false"
+            android:textColor="@color/button_text_color"
+            android:textSize="@dimen/button_text_size"
+            app:cornerRadius="@dimen/edittext_radious" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvTemp"
+        style="@style/fontBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lnOperation"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_5ssp"
+        android:visibility="gone"
+        tools:text="Mitesh Makwana" />
+
+</RelativeLayout>

@@ -13,7 +13,10 @@ import com.astroyodha.network.Status
 import com.astroyodha.ui.astrologer.adapter.BookingAstrologerAdapter
 import com.astroyodha.ui.astrologer.viewmodel.AstrologerBookingViewModel
 import com.astroyodha.ui.user.model.booking.BookingModel
-import com.astroyodha.utils.*
+import com.astroyodha.utils.Constants
+import com.astroyodha.utils.makeGone
+import com.astroyodha.utils.makeVisible
+import com.astroyodha.utils.showSnackBarToast
 import com.google.firebase.auth.FirebaseAuth
 
 class PendingBookingListActivity : BaseActivity() {
@@ -138,6 +141,8 @@ class PendingBookingListActivity : BaseActivity() {
                                     .putExtra(Constants.INTENT_USER_ID,model.userId)
                                     .putExtra(Constants.INTENT_BOOKING_ID,model.id)
                                     .putExtra(Constants.INTENT_BOOKING_MODEL,model)
+                                    .putExtra(Constants.INTENT_ISEDIT, true)
+
                             )
                         }
                         else {

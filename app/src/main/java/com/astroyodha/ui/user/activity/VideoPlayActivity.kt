@@ -6,8 +6,6 @@ import android.view.View
 import android.widget.MediaController
 import com.astroyodha.core.BaseActivity
 import com.astroyodha.databinding.ActivityVideoPlayBinding
-import com.astroyodha.utils.MyLog
-
 
 class VideoPlayActivity : BaseActivity() {
 
@@ -32,7 +30,7 @@ class VideoPlayActivity : BaseActivity() {
 
         mediaController = MediaController(this, true)
 
-        binding.videoView.setOnPreparedListener { mp: MediaPlayer? ->
+        binding.videoView.setOnPreparedListener {
             mediaController!!.show()
             binding.videoView.start()
             binding.progressBar.setVisibility(View.GONE)
@@ -45,11 +43,10 @@ class VideoPlayActivity : BaseActivity() {
         mediaController!!.setMediaPlayer(binding.videoView)
         binding.videoView.requestFocus()
 
-        binding.videoView.setOnErrorListener { mp: MediaPlayer?, what: Int, extra: Int ->
+        binding.videoView.setOnErrorListener { mp: MediaPlayer?, _: Int, _: Int ->
             true
         }
 
     }
 
 }
-

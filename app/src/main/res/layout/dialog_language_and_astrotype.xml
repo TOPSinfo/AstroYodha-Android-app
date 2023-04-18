@@ -27,7 +27,7 @@
             android:background="@drawable/round_light_blue_bg"
             android:text="@string/txt_cancel"
             android:gravity="center"
-            android:textColor="@color/astrologer_blue_theme"
+            android:textColor="@color/astrologer_theme"
             style="@style/fontBold"
             android:paddingTop="@dimen/_5sdp"
             android:paddingBottom="@dimen/_5sdp"

@@ -4,14 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.auth.FirebaseAuth
 import com.astroyodha.data.repository.ChatRepository
 import com.astroyodha.network.NetworkHelper
 import com.astroyodha.network.Resource
 import com.astroyodha.ui.user.model.CallListModel
 import com.astroyodha.ui.user.model.videocall.CallList
 import com.astroyodha.utils.Constants
-import com.astroyodha.utils.MyLog
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -78,6 +77,7 @@ class JitsiViewModel @Inject constructor(
             }
 
         } else {
+            // else
         }
     }
 

@@ -23,7 +23,6 @@ import com.astroyodha.utils.Constants
 import com.astroyodha.utils.makeGone
 import com.astroyodha.utils.makeVisible
 import com.astroyodha.utils.showSnackBarToast
-import java.util.*
 
 private const val ARG_PARAM1 = "userId"
 private const val ARG_PARAM2 = "list"
@@ -74,7 +73,6 @@ class OnGoingFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
         setObserver()
-        setClickListener()
     }
 
     /**
@@ -108,7 +106,7 @@ class OnGoingFragment : BaseFragment() {
                         //click of recyclerview item
                         bookingModel = model
                         mPositionEdit = position
-                        profileViewModel.getUserDetail(model.astrologerID)
+                        profileViewModel.getUserDetail(model.astrologerID, true)
                     }
                 }
             )
@@ -118,20 +116,12 @@ class OnGoingFragment : BaseFragment() {
     }
 
 
-    /**
-     * manage click listener of view
-     */
-    private fun setClickListener() {
-        binding.fabAdd.setOnClickListener {
-
-        }
-    }
 
     /**
      * set observer
      */
     private fun setObserver() {
-        bookingViewModel.bookingList.observe(viewLifecycleOwner, { updatedData ->
+        bookingViewModel.bookingList.observe(viewLifecycleOwner) { updatedData ->
             updatedData.forEach {
                 mList.mapIndexed { index, bookingModel ->
                     if (bookingModel.id == it.id /*&& bookingModel.status != it.status*/) {
@@ -143,9 +133,9 @@ class OnGoingFragment : BaseFragment() {
                 }
             }
 
-        })
+        }
 
-        bookingViewModel.getBookingListDataResponse.observe(viewLifecycleOwner, {
+        bookingViewModel.getBookingListDataResponse.observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.LOADING -> {
                     showProgress(requireContext())
@@ -170,9 +160,9 @@ class OnGoingFragment : BaseFragment() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
+        }
 
-        profileViewModel.userDetailResponse.observe(viewLifecycleOwner, {
+        profileViewModel.userDetailResponse.observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.LOADING -> {
                     showProgress(requireContext())
@@ -194,6 +184,6 @@ class OnGoingFragment : BaseFragment() {
                     it.message?.let { it1 -> binding.root.showSnackBarToast(it1) }
                 }
             }
-        })
+        }
     }
 }

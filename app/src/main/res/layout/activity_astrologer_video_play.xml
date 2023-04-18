@@ -37,6 +37,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:progressTint="@color/astrologer_blue_theme"/>
+        android:progressTint="@color/astrologer_theme"/>
 
 </RelativeLayout>
