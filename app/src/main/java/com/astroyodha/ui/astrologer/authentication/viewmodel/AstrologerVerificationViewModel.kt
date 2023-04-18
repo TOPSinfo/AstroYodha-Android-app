@@ -50,7 +50,7 @@ class AstrologerVerificationViewModel @Inject constructor(private val userReposi
      */
     fun initVerificationCallback() {
 
-         auth.firebaseAuthSettings.setAppVerificationDisabledForTesting(true)
+//         auth.firebaseAuthSettings.setAppVerificationDisabledForTesting(false)
         //Auth.auth().settings.isAppVerificationDisabledForTesting = TRUE
 
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {

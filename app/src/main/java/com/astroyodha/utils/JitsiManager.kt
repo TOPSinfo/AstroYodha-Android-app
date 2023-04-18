@@ -55,6 +55,7 @@ class JitsiManager(var context: Context) {
             .setFeatureFlag("meeting-name.enabled", false)
             .setFeatureFlag("android.screensharing.enabled",false)
             .setFeatureFlag("conference-timer.enabled",false)
+            .setFeatureFlag("conference-timer.enabled",false)
 
     }
 
