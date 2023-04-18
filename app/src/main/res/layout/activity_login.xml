@@ -188,6 +188,7 @@
                     android:background="@drawable/background_edit_text_grey_line_background"
                     android:gravity="center_vertical|center_horizontal"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     android:padding="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="@id/guideline2"
                     app:layout_constraintStart_toStartOf="@id/guideline"
@@ -221,6 +222,7 @@
                     android:background="@drawable/background_edit_text_grey_line_background"
                     android:gravity="center_vertical|center_horizontal"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@id/guideline2"
                     app:layout_constraintStart_toStartOf="@id/guideline"
                     android:padding="@dimen/_10sdp">

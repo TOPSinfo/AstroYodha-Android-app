@@ -1,6 +1,7 @@
 package com.astroyodha.ui.user.viewmodel
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -370,7 +371,6 @@ class BookingViewModel @Inject constructor(
                     )
                 )
             }.addOnFailureListener {
-
                 _getBookingListDataResponse.postValue(
                     Resource.error(
                         Constants.VALIDATION_ERROR,

@@ -239,7 +239,6 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:gravity="center_horizontal"
-
                 android:orientation="vertical">
 
                 <LinearLayout

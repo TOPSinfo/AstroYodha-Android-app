@@ -136,7 +136,7 @@ object BookingList {
             val bookingModel = BookingModel()
 
             doc.get(Constants.FIELD_BOOKING_ID)?.let {
-                bookingModel.id = it.toString()
+                bookingModel.id = it.toString()//substring(it.toString().length-4,it.toString().length)
             }
             doc.get(Constants.FIELD_ASTROLOGER_ID)?.let {
                 bookingModel.astrologerID = it.toString()
