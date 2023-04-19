@@ -50,6 +50,7 @@ class VerificationViewModel @Inject constructor(private val userRepository: User
     fun initVerificationCallback() {
 
          auth.firebaseAuthSettings.setAppVerificationDisabledForTesting(false)
+        
         //Auth.auth().settings.isAppVerificationDisabledForTesting = TRUE
 
 
